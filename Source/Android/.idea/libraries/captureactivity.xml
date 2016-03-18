@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="captureactivity">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../CaptureActivity/bin/captureactivity.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
