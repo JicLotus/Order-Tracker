@@ -25,4 +25,4 @@
         android:icon="@android:drawable/ic_menu_delete"
         android:orderInCategory="2"
         android:showAsAction="withText|ifRoom"/>
-</menu><!-- From: file:/home/lotus/Escritorio/OrderTracker/libs/CaptureActivity/res/menu/history.xml --><!-- From: file:/home/lotus/Escritorio/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/menu/history.xml -->
+</menu><!-- From: file:/home/lotus/Escritorio/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/menu/history.xml --><!-- From: file:/home/lotus/Escritorio/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/menu/history.xml -->
