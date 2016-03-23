@@ -1,0 +1,210 @@
+/** START LOGIN **/
+
+@media (min-width:979px){
+    #login body{padding-top:0px;}
+}
+
+html#login, #login body {
+    background-color: #eee;
+}
+#login body {
+    padding-top:40px;
+}
+
+#login .login-form {
+    max-width: 300px;
+    margin:0 auto;
+    padding-top:15px;
+}
+
+#login .login-form h2{
+    font-size: 25px;
+    margin-top: 60px;
+}
+
+#login .form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#login legend {
+    margin-right: -50px;
+    font-weight: bold;
+    color: #404040;
+}
+
+#login .form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#login .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#login img.logo {
+    float: right;width: 100px;
+    margin-top: -10px;
+    margin-bottom:10px
+}
+
+#login h2.login-info {
+    margin-bottom:10px;
+}
+
+/** END LOGIN **/
+
+/** START BASE HEADER **/
+
+#base-header .navbar-toggle {
+    padding: 7px 10px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+#base-header a.navbar-brand{
+    color: white;
+    padding: 3px 20px 0 6px;
+    display: inline-block;
+    margin-left: -5px;
+}
+
+#base-header img.logo {
+    height: 50px;
+}
+
+@media (min-width: 1580px){
+    #base-header{margin:0 auto;}
+    .container{
+        width:100%;
+        max-width:100% !important;
+    }
+}
+
+@media (max-width: 1580px){
+    .container{
+        max-width:100% !important;
+    }
+}
+
+.container-responsive {
+    margin-top: 44px;
+}
+
+@media (max-width: 950px){
+    .container-responsive {
+        margin-top: 71px;
+    }
+}
+
+
+
+/** END BASE HEADER **/
+
+.page-header{
+    padding-bottom:0px;
+    margin:12px 0 14px;
+}
+
+.page-header h4{
+    color:#308CCF; margin: 0px;
+}
+
+.navbar-default {
+    background-color: #f5f5f5;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 6px;
+    margin: 2px 2px 0px 2px;
+}
+
+table tbody tr td.adjust-to-content {
+    width: 5px;
+    white-space: nowrap;
+}
+
+table {
+    font-size: 10pt;
+}
+
+.navbar-form .form-control {
+    display: inline-block;
+    height: 30px;
+    font-size: 10pt;
+}
+
+table.table thead tr th {
+    background-color: #D9EDF7;
+}
+
+.table tbody tr td {
+    padding: 2px 5px;
+}
+
+table tbody tr td a.btn-edit, .table tbody tr td a.btn-view, .table tbody tr td a.btn-delete {
+    line-height: 16px;
+    margin: 0 2px;
+}
+
+.input-append.date .add-on i, .input-prepend.date .add-on i {
+    display: block;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+h5 {
+    font-weight: bold;
+}
+
+
+/** START PAGINATION **/
+
+ul.pagination li.disabled span {
+    padding: 3px 5px;
+}
+
+ul.pagination li a {
+    padding: 3px 5px;
+}
+
+ul.pagination li.active span {
+    padding: 3px 5px;
+}
+
+.pagination {
+    margin-bottom: 5px;
+    margin-top: 0px;
+    float: right;
+}
+
+/** END PAGINATION **/
+
+input[type=checkbox]{margin: 3px 5px 5px;}
+input[type=text], input[type=password]{margin-bottom: 2px;padding: 2px;font-size:10pt;}
+input[type=text].xsmall,input[type=password].xsmall{width:50px;}
+input[type=text].small,input[type=password].small{width:80px;}
+input[type=text].medium,input[type=password].medium{width:100px;}
+input[type=text].large,input[type=password].large{width:140px;}
+input[type=text].xlarge,input[type=password].xlarge{width:200px;}
+input[type=text].xxlarge,input[type=password].xxlarge{width:300px;}
+
+select{margin-bottom: 2px;padding: 2px;font-size:10pt;height:24px;}
+select.mini{width:50px;}
+select.xsmall{width:60px;}
+select.small{width:80px;}
+select.medium{width:100px;}
+select.large{width:140px;}
+select.xlarge{width:205px;}
+select.xxlarge{width:300px;}
+
+textarea{font-size:10pt;}
+textarea.xxlarge{width:350px;height:150px;}
+textarea.full-width{width:100%;}
