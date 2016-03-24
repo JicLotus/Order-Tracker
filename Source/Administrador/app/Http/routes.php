@@ -18,6 +18,7 @@ use \Session as Session;
 
 Route::get('/', "HomeController@index");
 Route::get('help', "HelpController@index");
+Route::get('productos', "ProductosController@index");
 
 
 Route::group(array('middleware' => 'auth'), function() {

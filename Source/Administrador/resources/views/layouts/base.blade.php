@@ -46,6 +46,16 @@
             <div class="container">
                 <div class="row">
                     
+                  <div class="col-md-8 col-sm-8">
+                    
+                    <a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-primary">Productos</a>
+                    <a href="{{app()->make('urls')->getUrlClientes()}}" class="btn btn-primary">Clientes</a>
+                    <a href="{{app()->make('urls')->getUrlUsuarios()}}" class="btn btn-primary">Usuarios</a>
+                    <a href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary">Pedidos</a>
+                    <a href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary">Agendas</a>
+                                        
+						</div>                    
+                    
                     <div class="col-md-3 col-sm-3">
                         
                         @if(app()->make("currentUser") != null)
@@ -60,10 +70,11 @@
                             </button>
                         @endif
                         
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+               			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="fa fa-bars"></i>
                         </button>
-                        <ul class="dropdown-menu">
+								
+								<ul class="dropdown-menu">
                             @if(app()->make("currentUser") != null)
                                 <li>
                                     <a href="{{app()->make('urls')->getUrlPublish()}}">Publicar</a>
@@ -73,7 +84,11 @@
                                 <a href="{{app()->make('urls')->getUrlHelp()}}">Ayuda</a>
                             </li>
                         </ul>
+
+
                     </div>
+                    
+                    
                 </div>
             </div>
         </header>
