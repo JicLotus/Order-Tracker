@@ -19,9 +19,17 @@ class ProductosController extends Controller
      */
     public function index()
     {
+    	/*
+DB::table('productos')->insert(
+    ['nombre' => 'El producto2', 'codigo' => 'asd']
+);*/
+
+    	  $productos = DB::table('productos')->get();
 
         return view('productos.productos', ['title' => 'Home',
-                                'page' => 'home']
+                                'page' => 'home','productos' => $productos]
         );
+        
+        
     }
 }
