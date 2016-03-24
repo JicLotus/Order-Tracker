@@ -19,4 +19,4 @@
             android:padding="@dimen/half_padding"/>
   
 </LinearLayout>
-<!-- From: file:/home/lotus/Escritorio/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/layout/app_picker_list_item.xml --><!-- From: file:/home/lotus/Escritorio/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/layout/app_picker_list_item.xml -->
+<!-- From: file:/home/lotus/Escritorio/order-tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/layout/app_picker_list_item.xml --><!-- From: file:/home/lotus/Escritorio/order-tracker/Source/Android/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/layout/app_picker_list_item.xml -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/lotus/Escritorio/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values-ja/strings.xml -->
+    <!-- From: file:/home/lotus/Escritorio/order-tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values-ja/strings.xml -->
     <eat-comment/>
     <string name="app_name">QRコードスキャナー</string>
     <string name="app_picker_name">アプリケーション</string>

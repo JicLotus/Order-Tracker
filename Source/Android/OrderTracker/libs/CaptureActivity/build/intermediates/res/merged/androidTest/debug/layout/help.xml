@@ -18,4 +18,4 @@
          android:id="@+id/help_contents"
          android:layout_width="fill_parent"
          android:layout_height="fill_parent"
-         android:layout_weight="1"/><!-- From: file:/home/lotus/Escritorio/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/layout/help.xml --><!-- From: file:/home/lotus/Escritorio/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/layout/help.xml -->
+         android:layout_weight="1"/><!-- From: file:/home/lotus/Escritorio/order-tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/layout/help.xml --><!-- From: file:/home/lotus/Escritorio/order-tracker/Source/Android/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/layout/help.xml -->
