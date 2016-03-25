@@ -12,13 +12,15 @@
 <div class="row">
   <div class="col-md-12">
     
-  
-<form action="{{app()->make('urls')->getUrlGuardarProducto($producto->id)}}" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
+ 
+<form action="guardarproducto" method="POST" class="form-horizontal" enctype="multipart/form-data">
+	{{ csrf_field() }}
+	<input type="hidden" name="idProducto" value="{{$producto->id}}">
 	
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="nombre">Nombre</label>
           <div class="col-sm-8">
-			<input type="Text" name="nombre" value={{$producto->nombre}} ><br>
+			<input type="Text" name="nombre" value="{{$producto->nombre}}" ><br>
 		  </div>
     </div>
     
@@ -64,11 +66,15 @@
 		  </div>
     </div>	
 	
-	<div class="form-group">
-          <div class="col-sm-8">     
-			 <a type="Submit" href="{{app()->make('urls')->getUrlGuardarProducto($producto->id)}}" class="btn btn-primary">Guardar</a>              
-		  </div>
-    </div>	   		
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-8">
+                <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+
+                <button type="submit" class="col-sm-offset-5 btn btn-default">Publicar
+                </button>
+
+            </div>
+        </div> 		
 			
 	
 </form>

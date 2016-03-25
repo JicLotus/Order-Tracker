@@ -34,16 +34,12 @@ class GuardarProductoController extends Controller
     }
     */
     
-    public function index($id)
+    public function index(Request $request)
     {
-    	/*
-DB::table('productos')->insert(
-    ['nombre' => 'El producto2', 'codigo' => 'asd']
-);*/
-    	 	
-		DB::table('productos')->where('id', $id)->update(array('nombre' => (htmlspecialchars($_POST["nombre"])))); //$input[name="nombre"]
+  
+		DB::table('productos')->where('id', $request->idProducto)->update(array('nombre' => ($request->nombre))); 
 		
-		$producto = DB::table('productos')->where('id', $id)->first();
+		$producto = DB::table('productos')->where('id', $request->idProducto)->first();
 		
         return view('productos.edit', ['title' => 'Home',
                                 'page' => 'home','producto'=>$producto]
