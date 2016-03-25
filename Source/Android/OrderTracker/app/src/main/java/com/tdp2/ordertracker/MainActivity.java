@@ -6,20 +6,56 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import Model.Request;
+import Model.RequestHandler;
+import Model.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText username;
+    private EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
     }
 
-    public void login(View view)
-    {
+
+
+    public void login(View view) {
+        try {
+
+            if (username.getText().toString().matches("") || password.getText().toString().matches("")) {
+                Toast.makeText(this, "Usuario a contraseña invalida", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            Request request = new Request("GET", "GetUsuarios.php?nombre="+username.getText().toString()+"&pass="+password.getText().toString());
+            Response resp = new RequestHandler().sendRequest(request);
+
+            if (resp.getStatus()) {
+                Intent documentsActivity = new Intent(this, MenuInicial.class);
+                startActivity(documentsActivity);
+            } else {
+                Toast.makeText(this, "Contraseña o usuario invalido", Toast.LENGTH_LONG).show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
     }
+
+
 
     public void testQr(View view) {
         Intent intent = new Intent("com.google.zxing.client.android.SCAN");

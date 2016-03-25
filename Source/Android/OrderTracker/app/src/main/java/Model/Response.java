@@ -1,33 +1,21 @@
 package Model;
 
-import org.json.JSONObject;
-
+import org.json.JSONArray;
 
 public class Response {
-    private boolean status;
-    private JSONObject jsonResponse;
+    private JSONArray jsonResponse;
 
-    public Response(JSONObject response) {
+    public Response(JSONArray response) {
         this.jsonResponse = response;
-        try {
-            this.status = response.getString("result").equals("OK");
-        } catch (Exception e) {
-            this.status = false;
-        }
+
     }
 
     public boolean getStatus() {
-        return status;
+        if (jsonResponse==null)return false;
+        return true;
     }
 
-    public String get(String key) {
-        try {
-            return (String) jsonResponse.get(key);
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
-    public JSONObject getJsonObject(){return jsonResponse;}
+    public JSONArray getJsonArray(){return jsonResponse;}
 
 }

@@ -1,5 +1,7 @@
 package Model;
 
+import android.widget.Toast;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
 import org.apache.http.HttpResponse;
@@ -9,6 +11,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -16,22 +22,21 @@ import org.json.JSONTokener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * Created by kevin on 26/08/15.
- */
+
 public class RequestHandler {
     private Model.Response response;
 
-    private String ip = "http://127.0.0.5:8080/";
+    private String ip = "http://192.168.0.21:8080/";
 
     public Model.Response sendRequest(final Request request) {
         Thread thread = new Thread(new Runnable(){
             public void run() {
                 try {
                     HttpClient httpclient = new DefaultHttpClient();
+                    HttpContext contexto = new BasicHttpContext();
                     HttpResponse resp = null;
                     if (request.getMethod().equals("GET")) {
-                        resp = httpclient.execute(new HttpGet(ip + request.getPath()));
+                        resp = httpclient.execute(new HttpGet(ip + request.getPath()),contexto);
 
                     } else {
                         if (request.getMethod().equals("DELETE")) {
@@ -58,27 +63,12 @@ public class RequestHandler {
 
                     }
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(resp.getEntity().getContent(), "UTF-8"));
-
-                    String json,line="";
-                    StringBuilder builder = new StringBuilder();
-
-                    while ((line= reader.readLine()) != null) {
-                        builder.append(line);
-                    }
-
-                    json=builder.toString();
-
-                    JSONTokener tokener = new JSONTokener(json);
-                    JSONObject finalResult = new JSONObject(tokener);
+                    String respuesta = EntityUtils.toString(resp.getEntity(),"UTF-8");
+                    JSONArray finalResult = new JSONArray(respuesta);
                     response = new Response(finalResult);
 
                 } catch (Exception e) {
-                    try {
-                        response =  new Response(new JSONObject("{\"result\":\"ERROR\", \"message\":\"Could not connect to server.\"}"));
-                    } catch (JSONException exc) {
-                        exc.printStackTrace();
-                    }
+                    response =  new Response(null);
                 }
             }
         });
