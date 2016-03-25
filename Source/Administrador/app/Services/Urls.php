@@ -46,8 +46,12 @@ class Urls {
     return url("productos" . $this->appendQuery($inputData));
   }
   
-  public function getUrlEditarProducto($inputData = []) {
-    return url("editarproductos" . $this->appendQuery($inputData));
+  public function getUrlEditarProducto($id,$inputData = []) {
+    return url("editarproducto/". $id . $this->appendQuery($inputData));
+  }
+  
+  public function getUrlGuardarProducto($id,$inputData = []) {
+    return url("guardarproducto/". $id . $this->appendQuery($inputData));
   }
 
   /**

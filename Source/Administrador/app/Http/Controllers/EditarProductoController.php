@@ -19,8 +19,10 @@ class EditarProductoController extends Controller
 
     public function index($id)
     {
-    		$producto = DB::table('productos')->where('id', $id)->get(); 
-        return view('productos.edit', ['producto'=>$producto]
+    		$producto = DB::table('productos')->where('id', $id)->first(); 
+    		
+        return view('productos.edit', ['title' => 'Home',
+                                'page' => 'home','producto'=>$producto]
         );
     }
 

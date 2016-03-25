@@ -20,6 +20,7 @@ Route::get('/', "HomeController@index");
 Route::get('help', "HelpController@index");
 Route::get('productos', "ProductosController@index");
 Route::get('editarproducto/{id}', "EditarProductoController@index");
+Route::get('guardarproducto/{id}', "GuardarProductoController@index");
 
 
 Route::group(array('middleware' => 'auth'), function() {

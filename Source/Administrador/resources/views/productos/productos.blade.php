@@ -34,7 +34,7 @@
                                 <div class="control-group">
                                     <span class="control-label dimgray">Codigo: {{$producto->codigo}}</span>
                                 </div>
-											<a href="" class="btn btn-primary">Editar</a>                                
+											<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="btn btn-primary">Editar</a>                                
                                 
                             </div>
                         </p>
