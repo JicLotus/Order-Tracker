@@ -6,6 +6,16 @@
 <div class="row row-head">
   <div class="col-md-12">
     <h2><strong>Nuevo Producto</strong></h2>
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+	@endif
+
   </div>
 </div>
 

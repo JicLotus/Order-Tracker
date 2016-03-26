@@ -35,6 +35,7 @@ class NuevoProductoController extends Controller
 		#entonces el codigo siguiente no se ejecuta y se vuelve al formulario (se hace automaticamente
 		$this->validate($request, [
         'imagen' => 'image|required',
+        'nombre' => 'required'
 		]);
 
 		$id = DB::table('productos')->insertGetId(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
