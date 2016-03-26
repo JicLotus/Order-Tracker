@@ -29,20 +29,25 @@ class NuevoProductoController extends Controller
         public function guardar(Request $request)
     {
 
-		if ($request->hasFile('imagen'))
-		{
-			$id = DB::table('productos')->insertGetId(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
+		#este validation valida que se haya cargado una imagen
+		#Si la imagen se cargo entonces se ejecuta el codigo que sigue
+		#Si la imagen no se cargo, o el archivo que se cargo no es una imagen
+		#entonces el codigo siguiente no se ejecuta y se vuelve al formulario (se hace automaticamente
+		$this->validate($request, [
+        'imagen' => 'image|required',
+		]);
+
+		$id = DB::table('productos')->insertGetId(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
 							'stock' => ($request->stock), 'marca' => ($request->marca), 'categoria' => ($request->categoria),
 							'precio' => ($request->precio)));
 
-			$file= $request->file('imagen');
-			$destinationPath = public_path().'/img/';
-			$filename        = $id. '_' . date('Y-m-d H:i:s');
-			$uploadSuccess   = $file->move($destinationPath, $filename);
+		$file= $request->file('imagen');
+		$destinationPath = public_path().'/img/';
+		$filename        = $id. '_' . date('Y-m-d H:i:s');
+		$uploadSuccess   = $file->move($destinationPath, $filename);
+		
+		DB::table('imagenes')->insert(array('id_producto' => $id, 'ruta_imagen' => '/img/'.$filename));
 			
-			DB::table('imagenes')->insert(array('id_producto' => $id, 'ruta_imagen' => '/img/'.$filename));
-			
-		}
   
 		$url = "{{app()->make('urls')->getUrlProductos()}";
 
