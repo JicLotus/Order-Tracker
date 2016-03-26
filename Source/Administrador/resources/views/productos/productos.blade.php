@@ -22,7 +22,7 @@
 
 
     <section id="search-section">
-					<a href="" class="btn btn-primary">Agregar</a>            
+					<a href="{{app()->make('urls')->getUrlAgregarProducto()}}" class="btn btn-primary">Agregar</a>            
                 @foreach($productos as $producto)
                         <p>
                             <div class="well">
