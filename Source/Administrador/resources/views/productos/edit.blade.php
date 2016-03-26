@@ -12,6 +12,7 @@
 <div class="row">
   <div class="col-md-12">
     
+
  
 <form action="guardarproducto" method="POST" class="form-horizontal" enctype="multipart/form-data">
 	{{ csrf_field() }}
@@ -68,9 +69,9 @@
 	
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
-                <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+                <a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-default">Volver a Productos</a>
 
-                <button type="submit" class="col-sm-offset-5 btn btn-default">Publicar
+                <button type="submit" class="col-sm-offset-5 btn btn-default" onclick="window.open('checker','nuevaVentana','width=300, height=200')">Publicar
                 </button>
 
             </div>
