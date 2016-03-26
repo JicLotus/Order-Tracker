@@ -29,17 +29,12 @@ class NuevoProductoController extends Controller
         public function guardar(Request $request)
     {
   
-		#DB::table('productos')->where('id', $request->idProducto)->update(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
-		#					'stock' => ($request->stock), 'marca' => ($request->marca), 'categoria' => ($request->categoria),
-		#					'precio' => ($request->precio))); 
-		
-		#$producto = DB::table('productos')->where('id', $request->idProducto)->first();
-		
-		return Redirect::to('http://www.google.com');
-#        return view('productos.productos', ['title' => 'Home',
- #                               'page' => 'home']
-  #      );
-        
+		DB::table('productos')->insert(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
+							'stock' => ($request->stock), 'marca' => ($request->marca), 'categoria' => ($request->categoria),
+							'precio' => ($request->precio)));
+		$url = "{{app()->make('urls')->getUrlProductos()}";
+		return redirect()->action('ProductosController@index');
+
         
     }
 
