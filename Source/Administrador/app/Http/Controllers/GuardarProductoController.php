@@ -20,6 +20,7 @@ class GuardarProductoController extends Controller
 							'stock' => ($request->stock), 'marca' => ($request->marca), 'categoria' => ($request->categoria),
 							'precio' => ($request->precio))); 
 		
+#		$producto = DB::select('select * from productos, imagenes', array(1));
 		$producto = DB::table('productos')->where('id', $request->idProducto)->first();
 		
         return view('productos.edit', ['title' => 'Home',

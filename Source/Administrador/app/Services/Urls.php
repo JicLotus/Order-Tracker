@@ -37,6 +37,10 @@ class Urls {
     return url("help" . $this->appendQuery($inputData));
   }
 
+  public function getUrlImagen($inputData = []) {
+    return url("img/prueba.jpg" . $this->appendQuery($inputData));
+  }
+
 
   public function getUrlAgregarProducto($inputData = []) {
     return url("agregarproducto" . $this->appendQuery($inputData));

@@ -65,7 +65,14 @@
 			<input type="Text" name="precio" value=""><br>
 		  </div>
     </div>	
-	
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="imagen">Imagen</label>
+          <div class="col-sm-8">
+			<input type="file" name="imagen" id="imagen">
+    	  </div>
+    </div>	
+
+    	
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-8">
                 <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>

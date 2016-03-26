@@ -28,11 +28,24 @@ class NuevoProductoController extends Controller
     
         public function guardar(Request $request)
     {
-  
-		DB::table('productos')->insert(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
+
+		if ($request->hasFile('imagen'))
+		{
+			$id = DB::table('productos')->insertGetId(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
 							'stock' => ($request->stock), 'marca' => ($request->marca), 'categoria' => ($request->categoria),
 							'precio' => ($request->precio)));
+
+			$file= $request->file('imagen');
+			$destinationPath = public_path().'/img/';
+			$filename        = $id. '_' . date('Y-m-d H:i:s');
+			$uploadSuccess   = $file->move($destinationPath, $filename);
+			
+			DB::table('imagenes')->insert(array('id_producto' => $id, 'ruta_imagen' => '/img/'.$filename));
+			
+		}
+  
 		$url = "{{app()->make('urls')->getUrlProductos()}";
+
 		return redirect()->action('ProductosController@index');
 
         
