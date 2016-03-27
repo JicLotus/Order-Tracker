@@ -2,8 +2,14 @@ package com.tdp2.ordertracker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListadoClientes extends AppCompatActivity {
 
@@ -11,7 +17,17 @@ public class ListadoClientes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_clientes);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.appToolbar);
+        setSupportActionBar(myToolbar);
+
+        RecyclerView rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerClientes());
+        rv.setAdapter(adapter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,4 +50,14 @@ public class ListadoClientes extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private List<InformacionItem> obtenerClientes() {
+        //TODO: cambiar a get php
+        List<InformacionItem> items = new ArrayList<>();
+        items.add(new InformacionItem("Cliente1", "Desc1", R.drawable.launcher_icon));
+        items.add(new InformacionItem("Cliente2", "Desc2", R.drawable.launcher_icon));
+        items.add(new InformacionItem("Cliente3", "Desc3", R.drawable.launcher_icon));
+        return items;
+    }
+
 }

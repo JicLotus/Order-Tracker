@@ -35,4 +35,4 @@
         android:icon="@android:drawable/ic_menu_help"
         android:orderInCategory="4"
         android:showAsAction="withText"/>
-</menu><!-- From: file:/home/lotus/Escritorio/order-tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/menu/capture.xml -->
+</menu><!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/menu/capture.xml -->
