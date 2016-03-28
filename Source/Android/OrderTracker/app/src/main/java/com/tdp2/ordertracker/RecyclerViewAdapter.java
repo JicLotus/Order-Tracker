@@ -1,6 +1,7 @@
 package com.tdp2.ordertracker;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.GpsStatus;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,26 +34,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         InformacionItem datoActual = datos.get(position);
         holder.titulo.setText(datoActual.titulo);
         holder.icono.setImageResource(datoActual.idIcono);
         holder.descripcion.setText(datoActual.descripcion);
-
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                //TODO: cambiar a detalle
-                Toast.makeText(v.getContext(), "Click en el item "+position, Toast.LENGTH_SHORT).show();
-            }
-        };
-        holder.titulo.setOnClickListener(listener);
-        holder.icono.setOnClickListener(listener);
-        holder.descripcion.setOnClickListener(listener);
-
-        holder.titulo.setTag(holder);
-        holder.icono.setTag(holder);
-        holder.descripcion.setTag(holder);
     }
 
     @Override
@@ -60,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return datos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView icono;
         TextView titulo;
         TextView descripcion;
@@ -70,6 +56,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             icono = (ImageView) itemView.findViewById(R.id.iconoItem);
             titulo = (TextView) itemView.findViewById(R.id.tituloItem);
             descripcion = (TextView) itemView.findViewById(R.id.descripcionItem);
+
+            icono.setOnClickListener(this);
+            titulo.setOnClickListener(this);
+            descripcion.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            //TODO: cambiar a detalle
+            Toast.makeText(v.getContext(), "Click en el item "+getAdapterPosition(), Toast.LENGTH_SHORT).show();
         }
     }
 }
