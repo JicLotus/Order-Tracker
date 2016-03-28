@@ -1,5 +1,6 @@
 package com.tdp2.ordertracker;
 
+import android.content.Context;
 import android.location.GpsStatus;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v){
                 //TODO: cambiar a detalle
-                Toast.makeText(getApplicationContext(), "Item clicked at "+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Click en el item "+position, Toast.LENGTH_SHORT).show();
             }
         };
         holder.titulo.setOnClickListener(listener);
