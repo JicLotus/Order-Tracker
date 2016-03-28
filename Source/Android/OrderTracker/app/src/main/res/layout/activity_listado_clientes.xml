@@ -6,7 +6,7 @@
     tools:context="com.tdp2.ordertracker.ListadoClientes">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/appToolbar"
+        android:id="@+id/app_toolbar_clientes"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#00a"
@@ -20,7 +20,7 @@
         android:id="@+id/recycler_view_clientes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appToolbar">
+        android:layout_below="@id/app_toolbar_clientes">
     </android.support.v7.widget.RecyclerView>
 
     <ProgressBar

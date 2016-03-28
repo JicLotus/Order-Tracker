@@ -12,15 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListadoClientes extends AppCompatActivity {
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_clientes);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.appToolbar);
-        setSupportActionBar(myToolbar);
 
-        RecyclerView rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_clientes);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Listado de clientes"); //TODO: cambiar a string
+
+        rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
