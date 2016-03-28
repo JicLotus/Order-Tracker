@@ -51,12 +51,12 @@ public class ListadoClientes extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<InformacionItem> obtenerClientes() {
+    private List<RecyclerViewItem> obtenerClientes() {
         //TODO: cambiar a get php
-        List<InformacionItem> items = new ArrayList<>();
-        items.add(new InformacionItem("Cliente1", "Desc1", R.drawable.launcher_icon));
-        items.add(new InformacionItem("Cliente2", "Desc2", R.drawable.launcher_icon));
-        items.add(new InformacionItem("Cliente3", "Desc3", R.drawable.launcher_icon));
+        List<RecyclerViewItem> items = new ArrayList<>();
+        items.add(new RecyclerViewItem("Cliente1", "Desc1", R.drawable.launcher_icon));
+        items.add(new RecyclerViewItem("Cliente2", "Desc2", R.drawable.launcher_icon));
+        items.add(new RecyclerViewItem("Cliente3", "Desc3", R.drawable.launcher_icon));
         return items;
     }
 

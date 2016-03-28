@@ -50,12 +50,12 @@ public class ListadoProductos extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public List<InformacionItem> obtenerProductos() {
+    public List<RecyclerViewItem> obtenerProductos() {
         //TODO: cambiar a get php
-        List<InformacionItem> items = new ArrayList<>();
-        items.add(new InformacionItem("Prod1", "Desc1", R.drawable.launcher_icon));
-        items.add(new InformacionItem("Prod2", "Desc2", R.drawable.launcher_icon));
-        items.add(new InformacionItem("Prod3", "Desc3", R.drawable.launcher_icon));
+        List<RecyclerViewItem> items = new ArrayList<>();
+        items.add(new RecyclerViewItem("Prod1", "Desc1", R.drawable.launcher_icon));
+        items.add(new RecyclerViewItem("Prod2", "Desc2", R.drawable.launcher_icon));
+        items.add(new RecyclerViewItem("Prod3", "Desc3", R.drawable.launcher_icon));
         return items;
     }
 

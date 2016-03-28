@@ -1,8 +1,5 @@
 package com.tdp2.ordertracker;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.location.GpsStatus;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Collections;
 import java.util.List;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private List<InformacionItem> datos;
+    private List<RecyclerViewItem> datos;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecyclerViewAdapter(List<InformacionItem> datos) {
+    public RecyclerViewAdapter(List<RecyclerViewItem> datos) {
         this.datos = datos;
     }
 
@@ -35,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        InformacionItem datoActual = datos.get(position);
+        RecyclerViewItem datoActual = datos.get(position);
         holder.titulo.setText(datoActual.titulo);
         holder.icono.setImageResource(datoActual.idIcono);
         holder.descripcion.setText(datoActual.descripcion);
