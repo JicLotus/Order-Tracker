@@ -11,7 +11,7 @@
 
             android:layout_width="fill_parent"
             android:layout_height="70dp"
-            android:text="Inicio de sesion OrderTracker"
+            android:text="OrderTracker"
             android:gravity="center"
             android:id="@+id/title"
             android:textColor="#fff"

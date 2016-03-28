@@ -1,11 +1,13 @@
 package com.tdp2.ordertracker;
 
+import android.location.GpsStatus;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,11 +32,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         InformacionItem datoActual = datos.get(position);
         holder.titulo.setText(datoActual.titulo);
         holder.icono.setImageResource(datoActual.idIcono);
         holder.descripcion.setText(datoActual.descripcion);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //TODO: cambiar a detalle
+                Toast.makeText(getApplicationContext(), "Item clicked at "+position, Toast.LENGTH_SHORT).show();
+            }
+        };
+        holder.titulo.setOnClickListener(listener);
+        holder.icono.setOnClickListener(listener);
+        holder.descripcion.setOnClickListener(listener);
+
+        holder.titulo.setTag(holder);
+        holder.icono.setTag(holder);
+        holder.descripcion.setTag(holder);
     }
 
     @Override
