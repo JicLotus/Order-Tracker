@@ -31,7 +31,7 @@ public class DetallesProducto extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(llm);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerDetalles());
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerDetalles(), null);
         recyclerView.setAdapter(adapter);
     }
 

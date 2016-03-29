@@ -23,11 +23,11 @@ public class ListadoClientes extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Listado de clientes"); //TODO: cambiar a string
 
-        rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
+        rv = (RecyclerView)findViewById(R.id.recycler_view_clientes);
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerClientes());
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerClientes(), DetallesCliente.class);
         rv.setAdapter(adapter);
     }
 

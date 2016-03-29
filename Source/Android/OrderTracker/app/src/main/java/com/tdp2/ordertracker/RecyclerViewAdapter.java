@@ -1,5 +1,8 @@
 package com.tdp2.ordertracker;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +16,12 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private List<RecyclerViewItem> datos;
+    Class claseOnClick;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecyclerViewAdapter(List<RecyclerViewItem> datos) {
+    public RecyclerViewAdapter(List<RecyclerViewItem> datos, Class claseOnClick) {
         this.datos = datos;
+        this.claseOnClick = claseOnClick;
     }
 
     // Create new views (invoked by the layout manager)
@@ -60,8 +65,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         public void onClick(View v) {
-            //TODO: cambiar a detalle
-            Toast.makeText(v.getContext(), "Click en el item "+getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            if (claseOnClick == null) return;
+
+            Context contexto = v.getContext();
+            Intent documentsActivity = new Intent(contexto, claseOnClick);
+            contexto.startActivity(documentsActivity);
         }
     }
 }

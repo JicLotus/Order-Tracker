@@ -23,12 +23,11 @@ public class ListadoProductos extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Listado de Productos"); //TODO: cambiar a string
 
-
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerProductos());
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerProductos(), DetallesProducto.class);
         rv.setAdapter(adapter);
     }
 
@@ -57,9 +56,9 @@ public class ListadoProductos extends AppCompatActivity {
     public List<RecyclerViewItem> obtenerProductos() {
         //TODO: cambiar a get php
         List<RecyclerViewItem> items = new ArrayList<>();
-        items.add(new RecyclerViewItem("Prod1", "Desc1", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("Prod2", "Desc2", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("Prod3", "Desc3", R.drawable.launcher_icon));
+        items.add(new RecyclerViewItem("$300", "Nombre1", R.drawable.launcher_icon));
+        items.add(new RecyclerViewItem("$500", "Nombre2", R.drawable.launcher_icon));
+        items.add(new RecyclerViewItem("$20", "Nombre3", R.drawable.launcher_icon));
         return items;
     }
 
