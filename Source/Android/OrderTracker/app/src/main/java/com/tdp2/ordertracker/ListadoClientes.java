@@ -21,7 +21,6 @@ public class ListadoClientes extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_clientes);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Listado de clientes"); //TODO: cambiar a string
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_clientes);
         rv.setHasFixedSize(true);

@@ -21,7 +21,6 @@ public class ListadoProductos extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_productos);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Listado de Productos"); //TODO: cambiar a string
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
         rv.setHasFixedSize(true);
