@@ -1,5 +1,6 @@
 package com.tdp2.ordertracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,12 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Request;
+import Model.RequestHandler;
+import Model.Response;
+
 public class ListadoProductos extends AppCompatActivity {
     private RecyclerView rv;
+    private JSONArray productos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +30,7 @@ public class ListadoProductos extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_productos);
         setSupportActionBar(toolbar);
+        this.pedirProductos();
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
         rv.setHasFixedSize(true);
@@ -28,6 +38,19 @@ public class ListadoProductos extends AppCompatActivity {
         rv.setLayoutManager(llm);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerProductos(), DetallesProducto.class);
         rv.setAdapter(adapter);
+    }
+
+
+    private void pedirProductos()
+    {
+        Request request = new Request("GET", "GetProductos.php");
+        Response resp = new RequestHandler().sendRequest(request);
+
+        if (resp.getStatus())
+            productos = resp.getJsonArray();
+        else
+            productos = new JSONArray();
+
     }
 
     @Override
@@ -55,9 +78,16 @@ public class ListadoProductos extends AppCompatActivity {
     public List<RecyclerViewItem> obtenerProductos() {
         //TODO: cambiar a get php
         List<RecyclerViewItem> items = new ArrayList<>();
-        items.add(new RecyclerViewItem("$300", "Nombre1", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("$500", "Nombre2", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("$20", "Nombre3", R.drawable.launcher_icon));
+        try {
+            for (int i = 0; i < productos.length(); i++) {
+                items.add(new RecyclerViewItem(productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"), R.drawable.launcher_icon));
+            }
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+
         return items;
     }
 

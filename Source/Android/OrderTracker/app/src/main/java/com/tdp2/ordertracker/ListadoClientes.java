@@ -8,19 +8,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Request;
+import Model.RequestHandler;
+import Model.Response;
+
 public class ListadoClientes extends AppCompatActivity {
     private RecyclerView rv;
+    private JSONArray clientes;
+    private String idVendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        idVendedor = getIntent().getStringExtra("id");
+
         setContentView(R.layout.activity_listado_clientes);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_clientes);
         setSupportActionBar(toolbar);
+
+        this.pedirClientes();
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_clientes);
         rv.setHasFixedSize(true);
@@ -30,6 +42,18 @@ public class ListadoClientes extends AppCompatActivity {
         rv.setAdapter(adapter);
     }
 
+
+    private void pedirClientes()
+    {
+        Request request = new Request("GET", "GetClientes.php?idVendedor="+idVendedor);
+        Response resp = new RequestHandler().sendRequest(request);
+
+        if (resp.getStatus())
+            clientes = resp.getJsonArray();
+        else
+            clientes = new JSONArray();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,9 +80,16 @@ public class ListadoClientes extends AppCompatActivity {
     private List<RecyclerViewItem> obtenerClientes() {
         //TODO: cambiar a get php
         List<RecyclerViewItem> items = new ArrayList<>();
-        items.add(new RecyclerViewItem("Cliente1", "Desc1", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("Cliente2", "Desc2", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("Cliente3", "Desc3", R.drawable.launcher_icon));
+        try {
+            for (int i = 0; i < clientes.length(); i++) {
+                items.add(new RecyclerViewItem(clientes.getJSONObject(i).getString("nombre"),clientes.getJSONObject(i).getString("direccion"), R.drawable.launcher_icon));
+            }
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+
         return items;
     }
 

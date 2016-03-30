@@ -9,20 +9,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import Model.Request;
 import Model.RequestHandler;
 import Model.Response;
 
 public class MenuInicial extends AppCompatActivity {
 
+    JSONArray vendedor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            vendedor = new JSONArray(getIntent().getStringExtra("vendedor"));
+        }catch(Exception e){}
+
         setContentView(R.layout.activity_menu_inicial);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
         setSupportActionBar(toolbar);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,6 +64,9 @@ public class MenuInicial extends AppCompatActivity {
 
     public void verClientes(View view) {
         Intent documentsActivity = new Intent(this, ListadoClientes.class);
+        try {
+            documentsActivity.putExtra("id", vendedor.getJSONObject(0).get("id").toString());
+        }catch(Exception e){}
         startActivity(documentsActivity);
     }
 }
