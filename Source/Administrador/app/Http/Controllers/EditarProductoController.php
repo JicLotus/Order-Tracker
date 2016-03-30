@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
 class EditarProductoController extends Controller
 {
@@ -19,7 +20,9 @@ class EditarProductoController extends Controller
 
     public function index($id)
     {
-    		$producto = DB::table('productos')->where('id', $id)->first(); 
+		
+		$producto = DB::table(Config::get('constants.TABLA_PRODUCTOS'))
+						->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $id)->first(); 
     		
         return view('productos.edit', ['title' => 'Home',
                                 'page' => 'home','producto'=>$producto]

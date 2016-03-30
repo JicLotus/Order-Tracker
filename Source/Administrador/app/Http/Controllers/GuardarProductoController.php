@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 use App\Models\Property as Property;
 
 class GuardarProductoController extends Controller
@@ -16,12 +17,17 @@ class GuardarProductoController extends Controller
     public function index(Request $request)
     {
   
-		DB::table('productos')->where('id', $request->idProducto)->update(array('nombre' => ($request->nombre),'codigo' => ($request->codigo),'caracteristicas' => ($request->caracteristicas),
-							'stock' => ($request->stock), 'marca' => ($request->marca), 'categoria' => ($request->categoria),
-							'precio' => ($request->precio))); 
+		DB::table(Config::get('constants.TABLA_PRODUCTOS'))->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $request->idProducto)
+				->update(array(Config::get('constants.TABLA_PRODUCTOS_NOMBRE') => ($request->nombre),
+				Config::get('constants.TABLA_PRODUCTOS_CODIGO') => ($request->codigo),
+				Config::get('constants.TABLA_PRODUCTOS_CARACTERISTICAS') => ($request->caracteristicas),
+				Config::get('constants.TABLA_PRODUCTOS_STOCK') => ($request->stock),
+				Config::get('constants.TABLA_PRODUCTOS_MARCA') => ($request->marca), 
+				Config::get('constants.TABLA_PRODUCTOS_CATEGORIA') => ($request->categoria),
+				Config::get('constants.TABLA_PRODUCTOS_PRECIO') => ($request->precio))); 
 		
-#		$producto = DB::select('select * from productos, imagenes', array(1));
-		$producto = DB::table('productos')->where('id', $request->idProducto)->first();
+		$producto = DB::table(Config::get('constants.TABLA_PRODUCTOS'))
+					->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $request->idProducto)->first();
 		
         return view('productos.edit', ['title' => 'Home',
                                 'page' => 'home','producto'=>$producto]
