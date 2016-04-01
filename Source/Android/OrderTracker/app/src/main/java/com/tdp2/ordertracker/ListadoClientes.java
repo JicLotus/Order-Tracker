@@ -46,7 +46,7 @@ public class ListadoClientes extends AppCompatActivity {
 
     private void pedirClientes()
     {
-        Request request = new Request("GET", "GetClientes.php?idVendedor="+idVendedor);
+        Request request = new Request("GET", "GetClientes.php?id="+idVendedor);
         Response resp = new RequestHandler().sendRequest(request);
 
         if (resp.getStatus())

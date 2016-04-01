@@ -7,4 +7,5 @@
     <string name="title_activity_listado_productos">ListadoProductos</string>
     <string name="title_activity_listado_clientes">ListadoClientes</string>
     <string name="title_activity_detalles_producto">DetallesProducto</string>
+    <string name="title_activity_detalles_cliente">DetallesCliente</string>
 </resources>

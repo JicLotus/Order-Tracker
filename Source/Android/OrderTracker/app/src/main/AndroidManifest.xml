@@ -67,6 +67,10 @@
             android:name=".DetallesProducto"
             android:label="@string/title_activity_detalles_producto" >
         </activity>
+        <activity
+            android:name=".DetallesCliente"
+            android:label="@string/title_activity_detalles_cliente" >
+        </activity>
     </application>
 
 </manifest>
