@@ -30,6 +30,7 @@ public class ListadoProductos extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_productos);
         setSupportActionBar(toolbar);
+
         this.pedirProductos();
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
@@ -37,6 +38,7 @@ public class ListadoProductos extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerProductos(), DetallesProducto.class);
+        adapter.setJsonArray(productos);
         rv.setAdapter(adapter);
     }
 
@@ -80,7 +82,8 @@ public class ListadoProductos extends AppCompatActivity {
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < productos.length(); i++) {
-                items.add(new RecyclerViewItem(productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"), R.drawable.launcher_icon));
+                //En vez de la imagen harcodeada es simplemente buscar por el indice del json y levantar la imagen.
+                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"), R.drawable.monitor));
             }
         }
         catch(Exception e)

@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 public class RequestHandler {
     private Model.Response response;
 
-    private String ip = "http://192.168.100.104:8080/";
+    private String ip = "http://192.168.0.22:8080/";
 
     public Model.Response sendRequest(final Request request) {
         Thread thread = new Thread(new Runnable(){
@@ -38,8 +38,7 @@ public class RequestHandler {
                     if (request.getMethod().equals("GET")) {
                         resp = httpclient.execute(new HttpGet(ip + request.getPath()),contexto);
 
-                    } else {
-                        if (request.getMethod().equals("DELETE")) {
+                    } else {                        if (request.getMethod().equals("DELETE")) {
                             resp = httpclient.execute(new HttpDelete(ip + request.getPath()));
 
                         }else if (request.getMethod().equals("POST")) {

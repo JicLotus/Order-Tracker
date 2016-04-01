@@ -11,17 +11,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private List<RecyclerViewItem> datos;
+    private JSONArray jsonArray;
     Class claseOnClick;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public RecyclerViewAdapter(List<RecyclerViewItem> datos, Class claseOnClick) {
         this.datos = datos;
         this.claseOnClick = claseOnClick;
+    }
+
+    public void setJsonArray(JSONArray jsonArrayParam)
+    {
+        jsonArray = jsonArrayParam;
     }
 
     // Create new views (invoked by the layout manager)
@@ -37,6 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         RecyclerViewItem datoActual = datos.get(position);
+        holder.posicion = position;
         holder.titulo.setText(datoActual.titulo);
         holder.icono.setImageResource(datoActual.idIcono);
         holder.descripcion.setText(datoActual.descripcion);
@@ -51,6 +60,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ImageView icono;
         TextView titulo;
         TextView descripcion;
+        int posicion;
 
         public ViewHolder(View view) {
             super(view);
@@ -69,6 +79,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             Context contexto = v.getContext();
             Intent documentsActivity = new Intent(contexto, claseOnClick);
+            try {
+                documentsActivity.putExtra("jsonArray", jsonArray.getJSONObject(posicion).toString());
+            }
+            catch(Exception e)
+            {   return;
+            }
+
             contexto.startActivity(documentsActivity);
         }
     }

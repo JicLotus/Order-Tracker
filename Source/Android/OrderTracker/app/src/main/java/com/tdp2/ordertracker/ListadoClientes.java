@@ -39,6 +39,7 @@ public class ListadoClientes extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerClientes(), DetallesCliente.class);
+        adapter.setJsonArray(clientes);
         rv.setAdapter(adapter);
     }
 
@@ -78,11 +79,11 @@ public class ListadoClientes extends AppCompatActivity {
     }
 
     private List<RecyclerViewItem> obtenerClientes() {
-        //TODO: cambiar a get php
+
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < clientes.length(); i++) {
-                items.add(new RecyclerViewItem(clientes.getJSONObject(i).getString("nombre"),clientes.getJSONObject(i).getString("direccion"), R.drawable.launcher_icon));
+                items.add(new RecyclerViewItem(clientes.getJSONObject(i).getString("nombre"),clientes.getJSONObject(i).getString("direccion"), R.drawable.perfil_vacio));
             }
         }
         catch(Exception e)

@@ -8,31 +8,59 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetallesCliente extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private CollapsingToolbarLayout ctlLayout;
+
+
+    private JSONObject cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar_layout);
+        try {
+            cliente = new JSONObject(getIntent().getStringExtra("jsonArray"));
+        }catch(Exception e){}
+
+
+        this.setAdaptador(this.getListaDetalles());
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_producto);
+        try {
+            toolbar.setTitle(cliente.getString("nombre"));
+        }
+        catch(Exception e){}
+
         setSupportActionBar(toolbar);
 
-        ctlLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
-        ctlLayout.setTitle("Nombre Cliente");  //TODO: cambiar por el nombre del cliente
+    }
 
-        recyclerView = (RecyclerView)findViewById(R.id.detalles_producto_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(llm);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerDetalles(), null);
-        recyclerView.setAdapter(adapter);
+    public ArrayList<String> getListaDetalles()
+    {
+        ArrayList<String> datos = new ArrayList<String>();
+
+        try {
+            datos.add("Direccion: " + cliente.getString("direccion"));
+            datos.add("E-mail: " + cliente.getString("email"));
+        }
+        catch(Exception e){}
+
+        return datos;
+    }
+
+    public void setAdaptador(ArrayList<String> datos)
+    {
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
+        ListView listado = (ListView) findViewById(R.id.list);
+        listado.setAdapter(adaptador);
     }
 
     @Override
@@ -57,12 +85,5 @@ public class DetallesCliente extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<RecyclerViewItem> obtenerDetalles() {
-        //TODO: cambiar a get php
-        List<RecyclerViewItem> items = new ArrayList<>();
-        items.add(new RecyclerViewItem("Marca", "Desc1", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("Precio", "Desc2", R.drawable.launcher_icon));
-        items.add(new RecyclerViewItem("Codigo", "Desc3", R.drawable.launcher_icon));
-        return items;
-    }
+
 }
