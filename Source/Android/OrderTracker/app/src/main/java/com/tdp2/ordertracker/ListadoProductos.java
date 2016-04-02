@@ -24,6 +24,7 @@ import Model.Response;
 public class ListadoProductos extends AppCompatActivity {
     private RecyclerView rv;
     private JSONArray productos;
+    private FileHandler fileHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +79,17 @@ public class ListadoProductos extends AppCompatActivity {
 
     public void downloadImagenesProductos()
     {
-        FileHandler fileHandler = new FileHandler();
+        fileHandler = new FileHandler();
 
         for (int i=0;i<productos.length();i++) {
 
-
             try {
                 String idProducto = productos.getJSONObject(i).getString("id");
-                File file = new File("/mnt/sdcard/Download/" + idProducto + ".jpg");
-                if (!file.exists())
-                    fileHandler.downloadFile("/mnt/sdcard/Download/"+idProducto+".jpg", idProducto);
+                fileHandler.downloadFile("/mnt/sdcard/Download/", idProducto);
             }catch(Exception e){}
 
         }
+
 
     }
 
@@ -101,8 +100,7 @@ public class ListadoProductos extends AppCompatActivity {
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < productos.length(); i++) {
-                //En vez de la imagen harcodeada es simplemente buscar por el indice del json y levantar la imagen.
-                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),productos.getJSONObject(i).getInt("id")));
+                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),fileHandler.getFirstImageId()));
             }
         }
         catch(Exception e)

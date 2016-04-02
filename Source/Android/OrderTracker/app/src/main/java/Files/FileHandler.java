@@ -15,18 +15,32 @@ import Model.Response;
  */
 public class FileHandler {
 
+    private int firstImageId;
+
     public FileHandler()
     {
+    }
+
+    public int getFirstImageId()
+    {
+        return firstImageId;
     }
 
     public void downloadFile(String path,String indentifierFile)
     {
         try {
-            File file = new File(path);
+
             Request request = new Request("GET", "GetImagen.php?id_producto=" + indentifierFile);
             Response resp = new RequestHandler().sendRequest(request);
 
-            saveFile(file,resp.getJsonArray().getJSONObject(0).getString("imagen_base64"));
+            firstImageId = resp.getJsonArray().getJSONObject(0).getInt("id");
+
+            for (int i=0;i<resp.getJsonArray().length();i++) {
+                File file = new File("/mnt/sdcard/Download/" + resp.getJsonArray().getJSONObject(i).getString("id") + ".jpg");
+                if (!file.exists())
+                    saveFile(file, resp.getJsonArray().getJSONObject(i).getString("imagen_base64"));
+            }
+
         }
         catch(Exception e)
         {
