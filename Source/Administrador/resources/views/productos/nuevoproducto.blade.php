@@ -81,6 +81,24 @@
 			<input type="file" name="imagen" id="imagen">
     	  </div>
     </div>	
+<div class="form-group">
+		<label class="control-label col-sm-2" for="imagen2">Imagen</label>
+          <div class="col-sm-8">
+			<input type="file" name="imagen2" id="imagen2">
+    	  </div>
+    </div>	
+<div class="form-group">
+		<label class="control-label col-sm-2" for="imagen3">Imagen</label>
+          <div class="col-sm-8">
+			<input type="file" name="imagen3" id="imagen3">
+    	  </div>
+    </div>	
+<div class="form-group">
+		<label class="control-label col-sm-2" for="imagen4">Imagen</label>
+          <div class="col-sm-8">
+			<input type="file" name="imagen4" id="imagen4">
+    	  </div>
+    </div>	
 
     	
         <div class="form-group">

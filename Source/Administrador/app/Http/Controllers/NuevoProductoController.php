@@ -55,9 +55,25 @@ class NuevoProductoController extends Controller
 		
 		#se guarda la imagen en base64 en la BBDD
 		DB::table('imagenes')->insert(array('id_producto' => $id, 'imagen_base64' => $codificacion));		
-    	
+		
+		$imagen2 = $request->file('imagen2');
+		$imagen3 = $request->file('imagen3');
+		$imagen4 = $request->file('imagen4');
+			
+		if ($imagen2 != null){
+			$codificacion = base64_encode(file_get_contents($imagen2));
+			DB::table('imagenes')->insert(array('id_producto' => $id, 'imagen_base64' => $codificacion));					
+		}
+		if ($imagen3 != null){
+			$codificacion = base64_encode(file_get_contents($imagen3));
+			DB::table('imagenes')->insert(array('id_producto' => $id, 'imagen_base64' => $codificacion));					
+		}
+		if ($imagen4 != null){
+			$codificacion = base64_encode(file_get_contents($imagen4));
+			DB::table('imagenes')->insert(array('id_producto' => $id, 'imagen_base64' => $codificacion));					
+		}
+		
 		$url = app()->make('urls')->getUrlProductos();
-
 		return redirect($url);
         
     }
