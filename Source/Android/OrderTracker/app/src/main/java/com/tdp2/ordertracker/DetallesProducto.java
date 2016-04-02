@@ -1,10 +1,13 @@
 package com.tdp2.ordertracker;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -27,14 +30,16 @@ public class DetallesProducto extends AppCompatActivity {
 
         this.setAdaptador(this.getListaDetalles());
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_producto);
-//        try {
-//            toolbar.setTitle(producto.getString("nombre"));
-//        }
-//        catch(Exception e){}
-//
-//        setSupportActionBar(toolbar);
-
+        LinearLayout layout = (LinearLayout) findViewById(R.id.linear_imagenes);
+        for (int i = 0; i < 3; i++) {       //TODO: cambiar por imagenes reales
+            ImageView imageView = new ImageView(this);
+            imageView.setId(i);
+            imageView.setPadding(2, 2, 2, 2);
+            imageView.setImageBitmap(BitmapFactory.decodeResource(
+                    getResources(), R.drawable.monitor));
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            layout.addView(imageView);
+        }
     }
 
     public ArrayList<String> getListaDetalles()
