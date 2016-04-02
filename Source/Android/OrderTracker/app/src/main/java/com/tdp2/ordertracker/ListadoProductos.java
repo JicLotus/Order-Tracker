@@ -25,6 +25,7 @@ public class ListadoProductos extends AppCompatActivity {
     private RecyclerView rv;
     private JSONArray productos;
     private FileHandler fileHandler;
+    private List<String> firstIdImagenes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +81,16 @@ public class ListadoProductos extends AppCompatActivity {
     public void downloadImagenesProductos()
     {
         fileHandler = new FileHandler();
+        firstIdImagenes = new ArrayList<>();
 
         for (int i=0;i<productos.length();i++) {
 
             try {
                 String idProducto = productos.getJSONObject(i).getString("id");
-                fileHandler.downloadFile("/mnt/sdcard/Download/", idProducto);
+                String idFirstImagen = fileHandler.downloadFile("/mnt/sdcard/Download/", idProducto);
+
+                firstIdImagenes.add(idFirstImagen);
+
             }catch(Exception e){}
 
         }
@@ -96,11 +101,20 @@ public class ListadoProductos extends AppCompatActivity {
     public List<RecyclerViewItem> obtenerProductos() {
 
         downloadImagenesProductos();
-
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < productos.length(); i++) {
-                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),fileHandler.getFirstImageId()));
+                int idProducto = productos.getJSONObject(i).getInt("id");
+                int idImagen;
+                try {
+                    if (firstIdImagenes.get(i)=="") idImagen=0;
+                    else idImagen = Integer.parseInt(firstIdImagenes.get(i));
+                }catch(Exception e)
+                {
+                    idImagen = 0;
+                }
+
+                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),idImagen));
             }
         }
         catch(Exception e)

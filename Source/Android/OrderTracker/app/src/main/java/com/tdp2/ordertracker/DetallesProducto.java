@@ -71,7 +71,7 @@ public class DetallesProducto extends AppCompatActivity {
             Request request = new Request("GET", "GetListaImagenes.php?id_producto=" + producto.getString("id"));
             Response resp = new RequestHandler().sendRequest(request);
             for (int i=0;i<resp.getJsonArray().length();i++)
-                listaImagenes.add(resp.getJsonArray().getJSONObject(i).getString("id"));
+                listaImagenes.add(resp.getJsonArray().getJSONObject(i).getString("id_mapeo"));
         }
         catch(Exception e){}
 
