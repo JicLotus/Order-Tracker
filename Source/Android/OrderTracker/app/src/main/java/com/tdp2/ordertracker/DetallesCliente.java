@@ -1,30 +1,36 @@
 package com.tdp2.ordertracker;
 
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetallesCliente extends AppCompatActivity {
-
+public class DetallesCliente extends AppCompatActivity implements OnMapReadyCallback{
 
     private JSONObject cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalles);
+        setContentView(R.layout.activity_detalles_cliente);
 
         try {
             cliente = new JSONObject(getIntent().getStringExtra("jsonArray"));
@@ -33,14 +39,9 @@ public class DetallesCliente extends AppCompatActivity {
 
         this.setAdaptador(this.getListaDetalles());
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_producto);
-//        try {
-//            toolbar.setTitle(cliente.getString("nombre"));
-//        }
-//        catch(Exception e){}
-//
-//        setSupportActionBar(toolbar);
-
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.mapa_fragmento);
+        mapFragment.getMapAsync(this);
     }
 
     public ArrayList<String> getListaDetalles()
@@ -86,4 +87,30 @@ public class DetallesCliente extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker")); //TODO: cuando este segura de que anda, borrar esto y descomentar lo de abajo
+
+//        String direccionStr = null, nombreCliente = null;
+//        try {
+//            direccionStr = cliente.getString("direccion");
+//            nombreCliente = cliente.getString("nombre");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        Geocoder geoCoder = new Geocoder(this);
+//        List<Address> direcciones = null;
+//
+//        try {
+//            direcciones = geoCoder.getFromLocationName(direccionStr, 1);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Address direccion = direcciones.get(0);
+//        LatLng latLng = new LatLng(direccion.getLatitude(), direccion.getLongitude());
+//
+//        googleMap.addMarker(new MarkerOptions().position(latLng).title(nombreCliente));
+//        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+    }
 }

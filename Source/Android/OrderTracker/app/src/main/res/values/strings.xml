@@ -8,4 +8,5 @@
     <string name="title_activity_listado_clientes">Listado de Clientes</string>
     <string name="title_activity_detalles_producto">Producto</string>
     <string name="title_activity_detalles_cliente">Cliente</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

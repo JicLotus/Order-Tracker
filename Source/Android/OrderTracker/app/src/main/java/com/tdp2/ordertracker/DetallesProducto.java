@@ -1,21 +1,15 @@
 package com.tdp2.ordertracker;
 
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DetallesProducto extends AppCompatActivity {
 
@@ -24,7 +18,7 @@ public class DetallesProducto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalles);
+        setContentView(R.layout.activity_detalles_productos);
 
         try {
             producto = new JSONObject(getIntent().getStringExtra("jsonArray"));
