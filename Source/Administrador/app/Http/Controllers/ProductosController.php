@@ -29,6 +29,7 @@ DB::table('productos')->insert(
 		  $productos = DB::table('productos')
             ->leftJoin('imagenes', 'productos.id', '=', 'imagenes.id_producto')
             ->get();
+                        
         return view('productos.productos', ['title' => 'Home',
                                 'page' => 'home','productos' => $productos]
         );
