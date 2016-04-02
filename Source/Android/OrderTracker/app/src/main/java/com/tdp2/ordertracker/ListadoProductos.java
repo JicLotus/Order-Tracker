@@ -95,7 +95,9 @@ public class ListadoProductos extends AppCompatActivity {
     }
 
     public List<RecyclerViewItem> obtenerProductos() {
-        //TODO: cambiar a get php
+
+        downloadImagenesProductos();
+
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < productos.length(); i++) {
