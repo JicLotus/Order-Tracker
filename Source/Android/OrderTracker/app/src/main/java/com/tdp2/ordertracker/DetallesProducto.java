@@ -1,10 +1,12 @@
 package com.tdp2.ordertracker;
 
+import android.app.ActionBar;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,8 +38,8 @@ public class DetallesProducto extends AppCompatActivity {
             imageView.setId(i);
             imageView.setPadding(2, 2, 2, 2);
             imageView.setImageBitmap(BitmapFactory.decodeResource(
-                    getResources(), R.drawable.monitor));
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    getResources(), R.drawable.alice));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             layout.addView(imageView);
         }
     }
