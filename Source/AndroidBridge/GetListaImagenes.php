@@ -4,9 +4,9 @@
 
 	$id_producto = $_REQUEST['id_producto'];
 
-	$sql= "select id_mapeo, imagen_base64 from imagenes where id_producto='$id_producto'";
+	$sql= "select id_mapeo from imagenes where id_producto='$id_producto'";
 
-	
+		
 	$rs = mysql_query($sql,$con);
 	
 	while($row=mysql_fetch_object($rs)){
