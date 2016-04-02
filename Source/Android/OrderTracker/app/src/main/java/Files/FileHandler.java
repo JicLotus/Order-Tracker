@@ -23,10 +23,10 @@ public class FileHandler {
     {
         try {
             File file = new File(path);
-            Request request = new Request("GET", "GetImagen.php?id=" + indentifierFile);
+            Request request = new Request("GET", "GetImagen.php?id_producto=" + indentifierFile);
             Response resp = new RequestHandler().sendRequest(request);
 
-            saveFile(file,resp.getJsonArray().getJSONObject(0).getString("imagen"));
+            saveFile(file,resp.getJsonArray().getJSONObject(0).getString("imagen_base64"));
         }
         catch(Exception e)
         {

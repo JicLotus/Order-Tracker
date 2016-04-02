@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +31,6 @@ public class ListadoProductos extends AppCompatActivity {
         setContentView(R.layout.activity_listado_productos);
 
         this.pedirProductos();
-
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.downloadFile("/mnt/sdcard/Download/asd.jpg","1");
-
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
         rv.setHasFixedSize(true);
@@ -79,13 +76,33 @@ public class ListadoProductos extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void downloadImagenesProductos()
+    {
+        FileHandler fileHandler = new FileHandler();
+
+        for (int i=0;i<productos.length();i++) {
+
+
+            try {
+                String idProducto = productos.getJSONObject(i).getString("id");
+                File file = new File("/mnt/sdcard/Download/" + idProducto + ".jpg");
+                if (!file.exists())
+                    fileHandler.downloadFile("/mnt/sdcard/Download/"+idProducto+".jpg", idProducto);
+            }catch(Exception e){}
+
+        }
+
+    }
+
     public List<RecyclerViewItem> obtenerProductos() {
-        //TODO: cambiar a get php
+
+        downloadImagenesProductos();
+
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < productos.length(); i++) {
                 //En vez de la imagen harcodeada es simplemente buscar por el indice del json y levantar la imagen.
-                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"), R.drawable.monitor));
+                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),productos.getJSONObject(i).getInt("id")));
             }
         }
         catch(Exception e)
