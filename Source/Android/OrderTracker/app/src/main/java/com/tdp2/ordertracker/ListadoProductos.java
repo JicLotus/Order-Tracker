@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+import Files.FileHandler;
 import Model.Request;
 import Model.RequestHandler;
 import Model.Response;
@@ -29,6 +30,10 @@ public class ListadoProductos extends AppCompatActivity {
         setContentView(R.layout.activity_listado_productos);
 
         this.pedirProductos();
+
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.downloadFile("/mnt/sdcard/Download/asd.jpg","1");
+
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
         rv.setHasFixedSize(true);
