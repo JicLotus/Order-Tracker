@@ -33,13 +33,13 @@ public class DetallesProducto extends AppCompatActivity {
 
         this.setAdaptador(this.getListaDetalles());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_producto);
-        try {
-            toolbar.setTitle(producto.getString("nombre"));
-        }
-        catch(Exception e){}
-
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_producto);
+//        try {
+//            toolbar.setTitle(producto.getString("nombre"));
+//        }
+//        catch(Exception e){}
+//
+//        setSupportActionBar(toolbar);
 
     }
 

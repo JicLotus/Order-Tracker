@@ -33,13 +33,13 @@ public class DetallesCliente extends AppCompatActivity {
 
         this.setAdaptador(this.getListaDetalles());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_producto);
-        try {
-            toolbar.setTitle(cliente.getString("nombre"));
-        }
-        catch(Exception e){}
-
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_producto);
+//        try {
+//            toolbar.setTitle(cliente.getString("nombre"));
+//        }
+//        catch(Exception e){}
+//
+//        setSupportActionBar(toolbar);
 
     }
 

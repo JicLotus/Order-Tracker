@@ -29,9 +29,6 @@ public class ListadoClientes extends AppCompatActivity {
 
         setContentView(R.layout.activity_listado_clientes);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_clientes);
-        setSupportActionBar(toolbar);
-
         this.pedirClientes();
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_clientes);

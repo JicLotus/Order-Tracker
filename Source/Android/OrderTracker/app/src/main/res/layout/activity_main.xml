@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#00a">
+    android:background="@color/primary">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +19,6 @@
             android:textSize="31dp"
             android:linksClickable="true"
             android:layout_marginTop="70dp"
-
             android:layout_centerHorizontal="true"
             android:padding="@dimen/standard_padding"
             />
@@ -29,7 +28,6 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:textColor="#fff"
-            android:ems="10"
             android:layout_marginTop="50dp"
             android:id="@+id/username"
             android:layout_below="@+id/title"
@@ -46,7 +44,6 @@
             android:textColor="#fff"
             android:layout_marginTop="20dp"
             android:inputType="textPassword"
-            android:ems="10"
             android:id="@+id/password"
             android:layout_below="@+id/username"
             android:hint="Contraseña"
@@ -65,8 +62,8 @@
             android:onClick="login"
             android:layout_below="@+id/password"
             android:layout_centerHorizontal="true"
-            android:background="#2196F3"
-            android:textColor="#fff"
+            android:background="@color/accent"
+            android:textColor="@color/primary_text_material_light"
             />
 
     </RelativeLayout>

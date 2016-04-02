@@ -28,9 +28,6 @@ public class MenuInicial extends AppCompatActivity {
         }catch(Exception e){}
 
         setContentView(R.layout.activity_menu_inicial);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
-        setSupportActionBar(toolbar);
     }
 
 

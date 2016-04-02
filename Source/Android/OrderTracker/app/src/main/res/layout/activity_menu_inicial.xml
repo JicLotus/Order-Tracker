@@ -2,31 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.tdp2.ordertracker.MenuInicial">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/app_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#00a"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_marginBottom="50dp"
-        android:textColor="#fff"
-        />
-    
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Productos"
         android:id="@+id/button"
-        android:background="#00f"
-        android:textColor="#fff"
+        android:background="@color/primary"
+        android:textColor="@color/primary_text_material_dark"
         android:layout_centerHorizontal="true"
         android:onClick="verProductos"
-        android:layout_below="@id/app_toolbar"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"/>
 
     <Button
@@ -34,8 +21,8 @@
         android:layout_height="wrap_content"
         android:text="Clientes"
         android:id="@+id/button2"
-        android:background="#00f"
-        android:textColor="#fff"
+        android:background="@color/primary"
+        android:textColor="@color/primary_text_material_dark"
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
         android:onClick="verClientes"/>

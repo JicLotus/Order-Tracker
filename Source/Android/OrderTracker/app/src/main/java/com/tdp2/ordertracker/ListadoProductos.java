@@ -28,9 +28,6 @@ public class ListadoProductos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_productos);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar_productos);
-        setSupportActionBar(toolbar);
-
         this.pedirProductos();
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
