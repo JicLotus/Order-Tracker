@@ -24,6 +24,8 @@ import Model.Response;
 public class ListadoProductos extends AppCompatActivity {
     private RecyclerView rv;
     private JSONArray productos;
+    private FileHandler fileHandler;
+    private List<String> firstIdImagenes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,31 +80,41 @@ public class ListadoProductos extends AppCompatActivity {
 
     public void downloadImagenesProductos()
     {
-        FileHandler fileHandler = new FileHandler();
+        fileHandler = new FileHandler();
+        firstIdImagenes = new ArrayList<>();
 
         for (int i=0;i<productos.length();i++) {
 
-
             try {
                 String idProducto = productos.getJSONObject(i).getString("id");
-                File file = new File("/mnt/sdcard/Download/" + idProducto + ".jpg");
-                if (!file.exists())
-                    fileHandler.downloadFile("/mnt/sdcard/Download/"+idProducto+".jpg", idProducto);
+                String idFirstImagen = fileHandler.downloadFile("/mnt/sdcard/Download/", idProducto);
+
+                firstIdImagenes.add(idFirstImagen);
+
             }catch(Exception e){}
 
         }
+
 
     }
 
     public List<RecyclerViewItem> obtenerProductos() {
 
         downloadImagenesProductos();
-
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < productos.length(); i++) {
-                //En vez de la imagen harcodeada es simplemente buscar por el indice del json y levantar la imagen.
-                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),productos.getJSONObject(i).getInt("id")));
+                int idProducto = productos.getJSONObject(i).getInt("id");
+                int idImagen;
+                try {
+                    if (firstIdImagenes.get(i)=="") idImagen=0;
+                    else idImagen = Integer.parseInt(firstIdImagenes.get(i));
+                }catch(Exception e)
+                {
+                    idImagen = 0;
+                }
+
+                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),idImagen));
             }
         }
         catch(Exception e)
