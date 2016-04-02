@@ -37,7 +37,7 @@
                                 </div>
 
                                 <div class="control-group">
-									 	<img src="{{$producto->ruta_imagen}}" alt="Pulpit Rock" style="width:150px;height:150px">
+									 	<img src="data:image/png;base64, {{$producto->imagen_base64}}" alt="Pulpit Rock" style="width:150px;height:150px">
 										
                                 </div>
 

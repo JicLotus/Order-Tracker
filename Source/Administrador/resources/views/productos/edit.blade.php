@@ -71,7 +71,7 @@
             <div class="col-sm-offset-3 col-sm-8">
                 <a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-default">Volver a Productos</a>
 
-                <button type="submit" class="col-sm-offset-5 btn btn-default" onclick="window.open('checker','nuevaVentana','width=300, height=200')">Publicar
+                <button type="submit" class="col-sm-offset-5 btn btn-default">Publicar
                 </button>
 
             </div>

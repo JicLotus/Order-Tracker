@@ -15,8 +15,7 @@ class CrearTablaImagen extends Migration
         Schema::create('imagenes', function (Blueprint $table) {
             $table->integer('id_producto')->unsigned()->unique();
             $table->foreign('id_producto')->references('id')->on('productos');
-            
-			$table->string('imagen_base64');
+            $table->mediumText('imagen_base64');
         });
     }
 
