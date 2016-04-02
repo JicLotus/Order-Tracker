@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 public class RequestHandler {
     private Model.Response response;
 
-    private String ip = "http://192.168.1.41:8080/";
+    private String ip = "http://192.168.100.104:8080/";
 
     public Model.Response sendRequest(final Request request) {
         Thread thread = new Thread(new Runnable(){

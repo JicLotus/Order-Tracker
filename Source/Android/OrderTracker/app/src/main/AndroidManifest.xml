@@ -71,19 +71,19 @@
         </activity>
         <activity
             android:name=".MenuInicial"
-            android:label="@string/title_activity_menu_inicial"></activity>
+            android:label="@string/title_activity_menu_inicial" />
         <activity
             android:name=".ListadoProductos"
-            android:label="@string/title_activity_listado_productos"></activity>
+            android:label="@string/title_activity_listado_productos" />
         <activity
             android:name=".ListadoClientes"
-            android:label="@string/title_activity_listado_clientes"></activity>
+            android:label="@string/title_activity_listado_clientes" />
         <activity
             android:name=".DetallesProducto"
-            android:label="@string/title_activity_detalles_producto"></activity>
+            android:label="@string/title_activity_detalles_producto" />
         <activity
             android:name=".DetallesCliente"
-            android:label="@string/title_activity_detalles_cliente"></activity>
+            android:label="@string/title_activity_detalles_cliente" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -93,7 +93,13 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
 
-
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tdp2.ordertracker.DetallesCliente" />
+        </activity>
     </application>
 
 </manifest>

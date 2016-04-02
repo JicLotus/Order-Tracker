@@ -1,11 +1,14 @@
 package com.tdp2.ordertracker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,7 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetallesCliente extends AppCompatActivity implements OnMapReadyCallback{
+public class DetallesCliente extends AppCompatActivity{
 
     private JSONObject cliente;
 
@@ -39,9 +42,9 @@ public class DetallesCliente extends AppCompatActivity implements OnMapReadyCall
 
         this.setAdaptador(this.getListaDetalles());
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.mapa_fragmento);
-        mapFragment.getMapAsync(this);
+//        MapFragment mapFragment = (MapFragment) getFragmentManager()
+//                .findFragmentById(R.id.mapa_fragmento);
+//        mapFragment.getMapAsync(this);
     }
 
     public ArrayList<String> getListaDetalles()
@@ -87,9 +90,9 @@ public class DetallesCliente extends AppCompatActivity implements OnMapReadyCall
     }
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker")); //TODO: cuando este segura de que anda, borrar esto y descomentar lo de abajo
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker")); //TODO: cuando este segura de que anda, borrar esto y descomentar lo de abajo
 
 //        String direccionStr = null, nombreCliente = null;
 //        try {
@@ -112,5 +115,19 @@ public class DetallesCliente extends AppCompatActivity implements OnMapReadyCall
 //        googleMap.addMarker(new MarkerOptions().position(latLng).title(nombreCliente));
 //        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
+//    }
+
+    public void verMapa(View v) {
+        Context contexto = v.getContext();
+        Intent mapActivity = new Intent(contexto, MapsActivity.class);
+        try {
+            String direccion = cliente.getString("direccion"), nombre = cliente.getString("nombre");
+            mapActivity.putExtra("direccion", direccion);
+            mapActivity.putExtra("nombre", nombre);
+        } catch(Exception e) {
+            return;
+        }
+
+        contexto.startActivity(mapActivity);
     }
 }

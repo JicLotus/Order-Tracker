@@ -3,17 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <Button
+        android:id="@+id/boton_mapa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Ver en el mapa"
+        android:onClick="verMapa"/>
+
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:drawSelectorOnTop="false" />
-
-    <fragment
-        class="com.google.android.gms.maps.MapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mapa_fragmento"
-        android:layout_below="@id/list"/>
+        android:drawSelectorOnTop="false"
+        android:layout_below="@id/boton_mapa"/>
 
 </RelativeLayout>
