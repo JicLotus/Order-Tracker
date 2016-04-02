@@ -1,17 +1,36 @@
 package com.tdp2.ordertracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+
+import Model.Request;
+import Model.RequestHandler;
+import Model.Response;
 
 public class MenuInicial extends AppCompatActivity {
+
+    JSONArray vendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            vendedor = new JSONArray(getIntent().getStringExtra("vendedor"));
+        }catch(Exception e){}
+
         setContentView(R.layout.activity_menu_inicial);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -33,5 +52,18 @@ public class MenuInicial extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void verProductos(View view) {
+        Intent documentsActivity = new Intent(this, ListadoProductos.class);
+        startActivity(documentsActivity);
+    }
+
+    public void verClientes(View view) {
+        Intent documentsActivity = new Intent(this, ListadoClientes.class);
+        try {
+            documentsActivity.putExtra("id", vendedor.getJSONObject(0).get("id").toString());
+        }catch(Exception e){}
+        startActivity(documentsActivity);
     }
 }

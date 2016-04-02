@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import Model.Request;
 import Model.RequestHandler;
 import Model.Response;
@@ -41,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
             Response resp = new RequestHandler().sendRequest(request);
 
             if (resp.getStatus()) {
+                JSONArray vendedor = resp.getJsonArray();
                 Intent documentsActivity = new Intent(this, MenuInicial.class);
+                documentsActivity.putExtra("vendedor",vendedor.toString());
                 startActivity(documentsActivity);
             } else {
                 Toast.makeText(this, "Contraseña o usuario invalido", Toast.LENGTH_LONG).show();
