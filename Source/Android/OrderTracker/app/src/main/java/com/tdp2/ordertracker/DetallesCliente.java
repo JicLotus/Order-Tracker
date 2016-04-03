@@ -52,7 +52,10 @@ public class DetallesCliente extends AppCompatActivity{
         ArrayList<String> datos = new ArrayList<String>();
 
         try {
-            datos.add("Direccion: " + cliente.getString("direccion"));
+            datos.add("Dirección: " + cliente.getString("direccion"));
+            datos.add("Razón Social: " + cliente.getString("razon_social"));
+            datos.add("Teléfono Móvil: " + cliente.getString("telefono_movil"));
+            datos.add("Teléfono Laboral: " + cliente.getString("telefono_laboral"));
             datos.add("E-mail: " + cliente.getString("email"));
         }
         catch(Exception e){}

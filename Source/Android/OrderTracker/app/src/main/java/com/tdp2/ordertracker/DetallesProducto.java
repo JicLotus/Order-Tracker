@@ -84,12 +84,13 @@ public class DetallesProducto extends AppCompatActivity {
 
         try {
             datos.add("Precio: " + producto.getString("precio"));
-            datos.add("Codigo: " + producto.getString("codigo"));
             datos.add("Caracteristicas: " + producto.getString("caracteristicas"));
             datos.add("Stock: " + producto.getString("stock"));
             datos.add("Marca: " + producto.getString("marca"));
-            datos.add("Estado: " + producto.getString("estado"));
             datos.add("Categoria: " + producto.getString("categoria"));
+            datos.add("Codigo: " + producto.getString("codigo"));
+            //datos.add("Estado: " + producto.getString("estado"));
+
         }
         catch(Exception e){}
 
