@@ -17,6 +17,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:drawSelectorOnTop="false"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         android:layout_below="@id/boton_mapa"/>
 
 </RelativeLayout>
