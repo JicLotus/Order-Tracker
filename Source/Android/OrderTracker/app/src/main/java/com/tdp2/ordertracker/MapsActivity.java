@@ -62,9 +62,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
         Address direccion = direcciones.get(0);
-        LatLng latLng = new LatLng(direccion.getLatitude(), direccion.getLongitude());
-
+        LatLng latLng = new LatLng(direccion.getLatitude(),  direccion.getLongitude());
         googleMap.addMarker(new MarkerOptions().position(latLng).title(nombre));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+
     }
 }
