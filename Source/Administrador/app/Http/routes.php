@@ -18,11 +18,18 @@ use \Session as Session;
 
 Route::get('/', "HomeController@index");
 Route::get('help', "HelpController@index");
+
 Route::get('productos', "ProductosController@index");
 Route::get('agregarproducto', "NuevoProductoController@index");
 Route::post('guardarnuevoproducto', "NuevoProductoController@guardar");
 Route::get('editarproducto/{id}', "EditarProductoController@index");
 Route::post('editarproducto/guardarproducto', "GuardarProductoController@index");
+
+Route::get('pedidos', "PedidosController@index");
+
+Route::get('agendas', "AgendasController@index");
+Route::get('agregaragenda', "NuevaAgendaController@index");
+Route::post('guardarnuevaagenda', "NuevaAgendaController@guardar");
 
 
 Route::group(array('middleware' => 'auth'), function() {
