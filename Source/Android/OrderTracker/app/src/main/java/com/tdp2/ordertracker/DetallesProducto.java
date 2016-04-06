@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import Model.Request;
 import Model.RequestHandler;
@@ -27,6 +29,7 @@ public class DetallesProducto extends AppCompatActivity {
 
     private JSONObject producto;
 
+    boolean isImageFitToScreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +46,26 @@ public class DetallesProducto extends AppCompatActivity {
 
         ArrayList<String> imagenes = getListaImagenes();
 
+
+
         for (int i = 0; i < imagenes.size(); i++) {
             ImageView imageView = new ImageView(this);
+            /*
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(isImageFitToScreen) {
+                        isImageFitToScreen=false;
+                        imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                        imageView.setAdjustViewBounds(true);
+                    }else{
+                        isImageFitToScreen=true;
+                        imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    }
+                }
+            });
+            */
             imageView.setId(i);
             imageView.setPadding(2, 2, 2, 2);
             //imageView.setImageBitmap(BitmapFactory.decodeResource(
@@ -52,7 +73,8 @@ public class DetallesProducto extends AppCompatActivity {
             try {
                 File f = new File("/mnt/sdcard/Download/", imagenes.get(i) + ".jpg");
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                imageView.setImageBitmap(b);
+                agregarImagen(imageView, b);
+//                imageView.setImageBitmap(b);
             }
             catch(Exception e){}
 
@@ -64,6 +86,25 @@ public class DetallesProducto extends AppCompatActivity {
 
 
     }
+
+    private void agregarImagen(ImageView imageView, Bitmap bitMap){
+
+        int currentBitmapWidth = bitMap.getWidth();
+        int currentBitmapHeight = bitMap.getHeight();
+
+        int ivWidth = imageView.getWidth();
+        int ivHeight = imageView.getHeight();
+        System.out.print(ivHeight);
+        int newHeigth = 90;
+
+        int newWidth = (int) Math.floor((double) currentBitmapWidth *( (double) newHeigth / (double) currentBitmapHeight));
+
+        Bitmap newbitMap = Bitmap.createScaledBitmap(bitMap, newWidth, newHeigth, true);
+
+        imageView.setImageBitmap(newbitMap);
+
+    }
+
 
     public ArrayList<String> getListaImagenes(){
         ArrayList<String> listaImagenes = new ArrayList<String>();
@@ -84,6 +125,7 @@ public class DetallesProducto extends AppCompatActivity {
 
         try {
             datos.add("Precio: " + producto.getString("precio"));
+            datos.add("Nombre: " + producto.get("nombre"));
             datos.add("Caracteristicas: " + producto.getString("caracteristicas"));
             datos.add("Stock: " + producto.getString("stock"));
             datos.add("Marca: " + producto.getString("marca"));

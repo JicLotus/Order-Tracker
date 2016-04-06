@@ -1,6 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/primary">
+    android:scrollbars="none"
+
+    >
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +17,7 @@
             android:text="OrderTracker"
             android:gravity="center"
             android:id="@+id/title"
-            android:textColor="#fff"
+            android:textColor="@color/primary"
             android:textSize="31dp"
             android:linksClickable="true"
             android:layout_marginTop="70dp"
@@ -27,29 +29,29 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:textColor="#fff"
-            android:layout_marginTop="50dp"
+            android:textColor="@color/primary"
+            android:layout_marginTop="30dp"
             android:id="@+id/username"
             android:layout_below="@+id/title"
             android:hint="Nombre de usuario"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            android:textColorHint="#fff"
+            android:textColorHint="@color/primary"
             />
 
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:layout_marginTop="20dp"
             android:inputType="textPassword"
             android:id="@+id/password"
             android:layout_below="@+id/username"
             android:hint="Contraseña"
+            android:textColor="@color/primary"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            android:textColorHint="#fff"
+            android:textColorHint="@color/primary"
             />
 
         <Button
@@ -58,12 +60,12 @@
             android:text="INICIAR SESION"
             android:padding="@dimen/standard_padding"
             android:id="@+id/logInBtn"
+            android:textColor="@color/primary_text_material_dark"
+            android:background="@color/primary"
             android:layout_marginTop="60dp"
             android:onClick="login"
             android:layout_below="@+id/password"
             android:layout_centerHorizontal="true"
-            android:background="@color/accent"
-            android:textColor="@color/primary_text_material_light"
             />
 
     </RelativeLayout>
