@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaAgendas extends Migration
+class ModifyIdClienteAgendasField extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,10 @@ class CrearTablaAgendas extends Migration
      */
     public function up()
     {
-        Schema::create('agendas', function (Blueprint $table) {
-            $table->increments('id')->unique();
-            $table->integer('id_usuario');
+        Schema::table('agendas', function (Blueprint $table) {
+				$table->increments('id')->unique();
         		$table->integer('id_cliente');
             $table->unique(array('id_usuario', 'id_cliente'));
-            $table->dateTime('fecha');
         });
     }
 
@@ -28,6 +26,10 @@ class CrearTablaAgendas extends Migration
      */
     public function down()
     {
-        Schema::drop('agendas');
+        Schema::table('agendas', function (Blueprint $table) {
+				$table->increments('id')->unique();
+        		$table->integer('id_cliente');
+            $table->unique(array('id_usuario', 'id_cliente'));
+        });
     }
 }
