@@ -3,22 +3,28 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <Button
         android:id="@+id/boton_mapa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:elevation="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/textColorPrimary"
         android:layout_centerHorizontal="true"
         android:text="Ver en el mapa"
         android:onClick="verMapa"/>
 
+
     <ListView
         android:id="@+id/list"
+        android:layout_below="@id/boton_mapa"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:drawSelectorOnTop="false"
         android:divider="@null"
         android:dividerHeight="0dp"
-        android:layout_below="@id/boton_mapa"/>
+        />
+
 
 </RelativeLayout>

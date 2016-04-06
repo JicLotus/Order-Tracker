@@ -25,7 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
             android:text="Large Text"
+            android:textColor="@color/primary"
+
             android:id="@+id/tituloItem"
             android:layout_alignParentTop="true"
             />
@@ -38,6 +41,7 @@
             android:id="@+id/descripcionItem"
             android:layout_below="@+id/tituloItem"
             android:layout_alignLeft="@+id/tituloItem" />
+
 
     </RelativeLayout>
 

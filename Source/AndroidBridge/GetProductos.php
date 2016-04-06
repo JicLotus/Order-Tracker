@@ -1,5 +1,9 @@
+
 <?php
+
+	
 	$con = mysql_connect("localhost", "root","123456") or die("Sin conexion");
+	mysql_query("SET NAMES 'utf8'");
 	mysql_select_db("orderTracker");
 
 	//Selecciona todos los productos
