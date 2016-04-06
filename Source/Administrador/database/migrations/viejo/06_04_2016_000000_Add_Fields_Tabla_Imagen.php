@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaImagen extends Migration
+class AddFieldsTablaImagen extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,9 @@ class CrearTablaImagen extends Migration
      */
     public function up()
     {
-        Schema::create('imagenes', function (Blueprint $table) {
-            $table->increments('id_mapeo');
-            $table->integer('id_producto')->references('id')->on('productos');
-
-            $table->mediumText('imagen_base64');
+    	Schema::table('imagenes', function (Blueprint $table) {
+            $table->increments('id_mapeo')->unsigned()->unique();
+            $table->integer('id_producto');
         });
     }
 
@@ -27,6 +25,7 @@ class CrearTablaImagen extends Migration
      */
     public function down()
     {
-        Schema::drop('agendas');
+		$table->increments('id_mapeo')->unsigned()->unique();
+		$table->integer('id_producto');
     }
 }

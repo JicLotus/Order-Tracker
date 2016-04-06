@@ -80,6 +80,10 @@ class Urls {
     return url("agendas" . $this->appendQuery($inputData));
   }
 
+  public function getUrlAgregarAgenda($inputData = []) {
+    return url("agregaragenda" . $this->appendQuery($inputData));
+  }
+
   /**
    * @param array $inputData
    *
