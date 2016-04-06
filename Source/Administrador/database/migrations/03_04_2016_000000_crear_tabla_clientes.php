@@ -16,7 +16,10 @@ class CrearTablaClientes extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('direccion', 60);            
-				$table->string('email')->unique();
+            $table->string('razon_social', 100);            
+            $table->string('telefono_movil', 60);            
+            $table->string('telefono_laboral', 60);            
+			$table->string('email')->unique();
         });
     }
 

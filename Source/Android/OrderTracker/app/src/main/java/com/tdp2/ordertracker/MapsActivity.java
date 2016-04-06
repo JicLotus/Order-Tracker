@@ -61,10 +61,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Address direccion = direcciones.get(0);
-        LatLng latLng = new LatLng(direccion.getLatitude(), direccion.getLongitude());
+
+        LatLng latLng = new LatLng(-34.55343001093603, -58.47850725000001);
+        if (direcciones != null){
+            Address direccion = direcciones.get(0);
+            latLng = new LatLng(direccion.getLatitude(),  direccion.getLongitude());
+        }
 
         googleMap.addMarker(new MarkerOptions().position(latLng).title(nombre));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+
     }
 }
