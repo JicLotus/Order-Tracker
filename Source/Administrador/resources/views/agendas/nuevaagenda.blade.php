@@ -23,7 +23,7 @@
 <div class="container">
 <div class="row row-head">
   <div class="col-md-12">
-    <h2><strong>Nuevo Agenda</strong></h2>
+    <h2><strong>Nueva Agenda</strong></h2>
     @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -42,21 +42,30 @@
     
 <form action="guardarnuevaagenda" method="POST" class="form-horizontal"   enctype="multipart/form-data">
 	{{ csrf_field() }}
-
-	<select onclick="reload();" multiple id="selectVendedor">
-	@foreach($vendedores as $vendedor)
-		<option>{{$vendedor->id}}){{$vendedor->nombre}}</option>  
-	@endforeach 
-	</select>
-	<input type="hidden" id="idVendedorr" name="idVendedor" >
-  
-  
-    <select onclick="reload();" multiple id="selectCliente">
-	@foreach($clientes as $cliente)   
-		<option>{{$cliente->id}}){{$cliente->nombre}}</option>
-	@endforeach
-	</select> 
-	<input type="hidden" id="idclientee" name="idCliente" >  
+	
+	
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="Vendedor">Vendedor</label>
+          <div class="col-sm-8">
+			<select onclick="reload();" id="selectVendedor">
+				@foreach($vendedores as $vendedor)
+				<option>{{$vendedor->id}}){{$vendedor->nombre}}</option>  
+				@endforeach 
+			</select>
+			<input type="hidden" id="idVendedorr" name="idVendedor" value= "1"; >
+		  </div> 
+    </div>	
+	
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="Clientes">Clientes</label>
+			<div class="col-sm-8">
+			<select id="idClientee" name="idCliente[]" multiple >
+				@foreach($clientes as $cliente)   
+				<option>{{$cliente->id}}){{$cliente->nombre}}</option>
+				@endforeach
+			</select> 
+			</div>
+	</div>	
 
 
 	<div class="form-group">
