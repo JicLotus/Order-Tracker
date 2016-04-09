@@ -71,6 +71,18 @@ class Urls {
     return url("clientes" . $this->appendQuery($inputData));
   }
   
+  public function getUrlAgregarCliente($inputData = []) {
+    return url("agregarcliente" . $this->appendQuery($inputData));
+  }
+  
+  public function getUrlEditarCliente($id,$inputData = []) {
+    return url("editarcliente/" . $id . $this->appendQuery($inputData));
+  }
+  
+  public function getUrlGuardarCliente($id,$inputData = []) {
+    return url("guardarcliente/". $id . $this->appendQuery($inputData));
+  }
+  
     /**
    * @param array $inputData
    *
@@ -96,6 +108,8 @@ class Urls {
   public function getUrlUsuarios($inputData = []) {
     return url("usuarios" . $this->appendQuery($inputData));
   }
+  
+
 
 }
 
