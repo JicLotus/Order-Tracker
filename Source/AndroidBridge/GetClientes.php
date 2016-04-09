@@ -6,7 +6,7 @@
 
 	$fecha  = $_REQUEST['fecha'];
 	
-	$sql= "Select * from clientes where id in (Select id_cliente from agendas where id_usuario=$vendedor";
+	$sql= "(select * from clientes, agendas where clientes.id = agendas.id_cliente and id_usuario = $vendedor";
 	
 	if ($fecha){
 		 $y= date("Y", strtotime($fecha));
@@ -25,4 +25,5 @@
 	}
 
 	echo json_encode($datos);
+	
 ?>

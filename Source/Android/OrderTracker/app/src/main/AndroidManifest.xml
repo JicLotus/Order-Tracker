@@ -72,6 +72,9 @@
             android:name=".MenuInicial"
             android:label="@string/title_activity_menu_inicial" />
         <activity
+            android:name=".AgendaActivity"
+            android:label="@string/title_activity_agenda" />
+        <activity
             android:name=".ListadoProductos"
             android:label="@string/title_activity_listado_productos" />
         <activity

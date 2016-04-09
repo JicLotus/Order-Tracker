@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (resp.getStatus()) {
                 JSONArray vendedor = resp.getJsonArray();
-                Intent documentsActivity = new Intent(this, MenuInicial.class);
+                Intent documentsActivity = new Intent(this, AgendaActivity.class);
                 documentsActivity.putExtra("vendedor",vendedor.toString());
                 startActivity(documentsActivity);
             } else {
@@ -67,12 +67,6 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
