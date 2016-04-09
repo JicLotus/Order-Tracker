@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (resp.getStatus()) {
                 JSONArray vendedor = resp.getJsonArray();
-                Intent documentsActivity = new Intent(this, AgendaActivity.class);
+                Intent documentsActivity = new Intent(this, MenuInicial.class);
                 documentsActivity.putExtra("vendedor",vendedor.toString());
                 startActivity(documentsActivity);
             } else {

@@ -4,5 +4,8 @@
     <color name="primaryDark">#B43104</color>
     <color name="accent">#01DFD7</color>
     <color name="amarillo">#F3F781</color>
+    <color name="verde">#00FF00</color>
+    <color name="negro">#000000</color>
+
     <color name="textColorPrimary">@color/primary_text_material_dark</color>
 </resources>

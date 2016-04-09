@@ -26,4 +26,16 @@
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
         android:onClick="verClientes"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Agenda"
+        android:id="@+id/button3"
+        android:background="@color/primary"
+        android:textColor="@color/primary_text_material_dark"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:onClick="verAgenda"/>
+
 </RelativeLayout>

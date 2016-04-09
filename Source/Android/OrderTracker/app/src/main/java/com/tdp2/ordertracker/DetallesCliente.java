@@ -52,6 +52,8 @@ public class DetallesCliente extends AppCompatActivity{
         ArrayList<String> datos = new ArrayList<String>();
 
         try {
+
+            datos.add("Nombre: " + cliente.getString("nombre"));
             datos.add("Dirección: " + cliente.getString("direccion"));
             datos.add("Razón Social: " + cliente.getString("razon_social"));
             datos.add("Teléfono Móvil: " + cliente.getString("telefono_movil"));

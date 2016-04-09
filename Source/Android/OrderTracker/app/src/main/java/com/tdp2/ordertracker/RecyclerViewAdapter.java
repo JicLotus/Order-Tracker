@@ -51,14 +51,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RecyclerViewItem datoActual = datos.get(position);
         holder.posicion = position;
         holder.titulo.setText(datoActual.titulo);
-        //holder.icono.setImageResource(datoActual.idIcono);
 
         try {
             File f = new File("/mnt/sdcard/Download/", datoActual.idIcono + ".jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             holder.icono.setImageBitmap(b);
+
         }
-        catch(Exception e){}
+        catch(Exception e){
+            holder.icono.setImageResource(R.drawable.perfil_vacio);
+        }
 
 
         holder.descripcion.setText(datoActual.descripcion);

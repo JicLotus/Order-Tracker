@@ -8,10 +8,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:text="Lunes"
-        android:textColor="@color/primary"
+        android:textColor="@color/negro"
         android:id="@+id/dia_agenda"
         android:layout_alignParentTop="true"
         />

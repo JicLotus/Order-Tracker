@@ -1,11 +1,13 @@
 package com.tdp2.ordertracker;
 
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.plus.model.people.Person;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaViewHolder> {
 
+    int contador = 0;
 
 
     List<Agenda> usuarios;
@@ -40,6 +43,10 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         holder.nombre.setText(usuarios.get(position).nombre);
         holder.direccion.setText(usuarios.get(position).direccion);
         holder.horario.setText(usuarios.get(position).hora);
+        if (contador==1){
+            holder.holder_agenda.setBackgroundColor(Color.parseColor("#00FF00"));
+        }
+        contador++;
 
     }
 
@@ -53,12 +60,14 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         TextView nombre;
         TextView direccion;
         TextView horario;
+        RelativeLayout holder_agenda;
 
         AgendaViewHolder(View itemView) {
             super(itemView);
             nombre = (TextView)itemView.findViewById(R.id.nombre_agenda);
             direccion = (TextView)itemView.findViewById(R.id.direccion_agenda);
             horario = (TextView)itemView.findViewById(R.id.hora_agenda);
+            holder_agenda = (RelativeLayout)itemView.findViewById(R.id.holder_agenda);
         }
     }
 

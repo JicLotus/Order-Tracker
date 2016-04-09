@@ -58,6 +58,10 @@ public class MenuInicial extends AppCompatActivity {
         Intent documentsActivity = new Intent(this, ListadoProductos.class);
         startActivity(documentsActivity);
     }
+    public void verAgenda(View view) {
+        Intent documentsActivity = new Intent(this, AgendaActivity.class);
+        startActivity(documentsActivity);
+    }
 
     public void verClientes(View view) {
         Intent documentsActivity = new Intent(this, ListadoClientes.class);

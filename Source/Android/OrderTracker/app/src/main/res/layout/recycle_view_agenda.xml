@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:background="@color/amarillo"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
 
+    >
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/iconoItem"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin">
+        card_view:cardElevation="4dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="2dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardUseCompatPadding="true"
+        android:id="@+id/cv"
+        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold"
-            android:text="Juan Perez"
-            android:textColor="@color/primary"
-
-            android:id="@+id/nombre_agenda"
-            android:layout_alignParentTop="true"
-            />
-
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold"
-            android:gravity="right"
-            android:layout_below="@+id/direccion_agenda"
-            android:text="19:00 PM"
-            android:textColor="@color/primary"
-            android:id="@+id/hora_agenda"
-            android:layout_alignParentTop="true"
-            />
+            android:id="@+id/holder_agenda"
+            android:background="@color/amarillo"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Superi 3683"
-            android:id="@+id/direccion_agenda"
-            android:layout_below="@+id/nombre_agenda"
-            android:layout_alignLeft="@+id/tituloItem" />
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="Juan Perez"
+                android:textColor="@color/negro"
+                android:id="@+id/nombre_agenda"
+
+                android:layout_alignParentTop="true"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:layout_below="@+id/direccion_agenda"
+                android:text="19:00 PM"
+                android:textColor="@color/negro"
+                android:id="@+id/hora_agenda"
+                android:layout_alignParentTop="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="Superi 3683"
+                android:id="@+id/direccion_agenda"
+                android:layout_below="@+id/nombre_agenda"
+                android:layout_alignLeft="@+id/tituloItem" />
 
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <View style="@style/LineaDivisoria"
-        android:layout_marginTop="@dimen/standard_padding"
-        android:layout_alignParentBottom="true"/>
+    </android.support.v7.widget.CardView>
+
 
 
 </LinearLayout>
+

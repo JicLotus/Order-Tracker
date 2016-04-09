@@ -45,16 +45,17 @@ public class AgendaActivity extends AppCompatActivity{
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        AgendaAdapter adapter = new AgendaAdapter(getUsuariosAgenda());
+        //AgendaAdapter adapter = new AgendaAdapter(getUsuariosAgenda());
+        AgendaAdapter adapter = new AgendaAdapter(initializeData());
         //adapter.setJsonArray(clientes);
         rv.setAdapter(adapter);
     }
 
     private ArrayList<Agenda> initializeData(){
         ArrayList<Agenda> usuarios = new ArrayList<>();
-        usuarios.add(new Agenda("Emma Wilson", "Superi 3683", "19.00pm"));
-        usuarios.add(new Agenda("Lavery Maiss", "Superi 3683", "19.00pm"));
-        usuarios.add(new Agenda("Lillie Watts", "Superi 3683", "19.00pm"));
+        usuarios.add(new Agenda("Emma Wilson", "Superi 3683, CABA", "19.00pm"));
+        usuarios.add(new Agenda("Lavery Maiss", "Madero 205, Vicente Lopez", "17.00pm"));
+        usuarios.add(new Agenda("Lillie Watts", "Libertador 2430, CABA", "19.00pm"));
         return usuarios;
 
     }
