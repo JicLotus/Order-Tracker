@@ -31,6 +31,13 @@ Route::get('agendas', "AgendasController@index");
 Route::get('agregaragenda', "NuevaAgendaController@index");
 Route::post('guardarnuevaagenda', "NuevaAgendaController@guardar");
 
+Route::get('clientes', "ClientesController@index");
+Route::get('agregarcliente', "NuevoClienteController@index");
+Route::post('guardarcliente', "NuevoClienteController@guardar");
+Route::get('editarcliente/{id}', "EditarClienteController@index");
+Route::post('editarcliente/guardarcliente', "GuardarClienteController@index");
+
+
 
 Route::group(array('middleware' => 'auth'), function() {
 
