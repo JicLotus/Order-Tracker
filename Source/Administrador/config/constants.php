@@ -22,4 +22,12 @@ return [
     'TABLA_CLIENTES_RAZON_SOCIAL' => 'razon_social',
     'TABLA_CLIENTES_TELEFONO_1' => 'telefono_movil',
     'TABLA_CLIENTES_TELEFONO_2' => 'telefono_laboral',
+    
+    'TABLA_USUARIOS' => 'usuarios',
+    'TABLA_USUARIOS_ID' => 'id',
+    'TABLA_USUARIOS_NOMBRE' => 'nombre',
+    'TABLA_USUARIOS_EMAIL' => 'email',
+    'TABLA_USUARIOS_PASSWORD' => 'password',
+    'TABLA_USUARIOS_PRIVILEGIO' => 'privilegio',
+
 ];

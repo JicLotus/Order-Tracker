@@ -23,24 +23,26 @@
 
 
     <section id="search-section">
-					<a href="{{app()->make('urls')->getUrlAgregarCliente()}}" class="btn btn-primary">Agregar</a>            
-                @foreach($clientes as $cliente)
+					<a href="{{app()->make('urls')->getUrlAgregarUsuario()}}" class="btn btn-primary">Agregar</a>            
+                @foreach($usuarios as $usuario)
                         <p>
                             <div class="well">
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Nombre: {{$cliente->nombre}}</span>
+                                    <span class="control-label dimgray">Nombre: {{$usuario->nombre}}</span>
                                 </div>
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Dirección: {{$cliente->direccion}}</span>
+                                    <span class="control-label dimgray">Email: {{$usuario->email}}</span>
                                 </div>
-									
+                                
                                 <div class="control-group">
-									<span class="control-label dimgray">Razón Social: {{$cliente->razon_social}}</span>
-								</div>
+									<span class="control-label dimgray">Privilegio: {{$usuario->privilegio}}</span>
+                                </div>
+									 	
+								
 
-								<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn btn-primary">Editar</a>                                
+								<a href="{{app()->make('urls')->getUrlEditarUsuario($usuario->id)}}" class="btn btn-primary">Editar</a>                                
 
 
                                 
