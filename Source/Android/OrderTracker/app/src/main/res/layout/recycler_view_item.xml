@@ -44,7 +44,7 @@
                 android:id="@+id/descripcionItem"
                 android:layout_toRightOf="@+id/iconoItem"
                 android:textSize="10sp"
-                android:layout_below="@+id/tituloItem"
+                android:layout_below="@id/tituloItem"
                 />
 
         </RelativeLayout>
