@@ -28,7 +28,7 @@ import Model.Response;
 public class AgendaActivity extends AppCompatActivity{
 
     RecyclerView rv;
-    JSONArray vendedor;
+    String vendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +36,15 @@ public class AgendaActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_agenda);
 
-        try {
-            vendedor = new JSONArray(getIntent().getStringExtra("vendedor"));
-        }catch(Exception e){}
+        this.vendedor = ManejadorPersistencia.obtenerVendedor(this);
 
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_agenda);
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        //AgendaAdapter adapter = new AgendaAdapter(getUsuariosAgenda());
-        AgendaAdapter adapter = new AgendaAdapter(initializeData());
+        AgendaAdapter adapter = new AgendaAdapter(getUsuariosAgenda());
+        //AgendaAdapter adapter = new AgendaAdapter(initializeData());
         //adapter.setJsonArray(clientes);
         rv.setAdapter(adapter);
     }
@@ -69,7 +67,7 @@ public class AgendaActivity extends AppCompatActivity{
 
 
         try {
-            Request request = new Request("GET", "GetClientes.php?id="+vendedor.getJSONObject(0).getString("id"));
+            Request request = new Request("GET", "GetClientes.php?id="+vendedor);
             Response resp = new RequestHandler().sendRequest(request);
             for (int i=0;i<resp.getJsonArray().length();i++){
                 JSONObject agenda = resp.getJsonArray().getJSONObject(i);

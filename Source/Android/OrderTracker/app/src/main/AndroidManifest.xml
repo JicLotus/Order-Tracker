@@ -84,6 +84,9 @@
             android:name=".DetallesProducto"
             android:label="@string/title_activity_detalles_producto" />
         <activity
+            android:name=".NumberPickerActivity"
+            android:label="@string/title_activity_number_picker" />
+        <activity
             android:name=".DetallesCliente"
             android:label="@string/title_activity_detalles_cliente" />
         <!--

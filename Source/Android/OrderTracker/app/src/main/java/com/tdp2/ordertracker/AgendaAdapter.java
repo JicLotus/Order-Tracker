@@ -1,19 +1,12 @@
 package com.tdp2.ordertracker;
 
-import android.graphics.Color;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.google.android.gms.plus.model.people.Person;
-
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +14,6 @@ import java.util.List;
  * Created by juan on 06/04/16.
  */
 public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaViewHolder> {
-
-    int contador = 0;
-
 
     List<Agenda> usuarios;
 
@@ -43,11 +33,6 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         holder.nombre.setText(usuarios.get(position).nombre);
         holder.direccion.setText(usuarios.get(position).direccion);
         holder.horario.setText(usuarios.get(position).hora);
-        if (contador==1){
-            holder.holder_agenda.setBackgroundColor(Color.parseColor("#00FF00"));
-        }
-        contador++;
-
     }
 
     @Override

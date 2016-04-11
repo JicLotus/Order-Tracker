@@ -1,55 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:padding="4dp"
-
     >
 
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cv"
+        android:layout_weight=".75"
+        android:id="@+id/cv_producto"
         >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/iconoCarro">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/iconoItem"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/imagenProducto"
                 android:scaleType="fitXY"
+                android:src="@drawable/monitor"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
+
                 />
+
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre"
+                android:text="Dados de 6 numeros"
                 android:textColor="@color/negro"
-                android:id="@+id/tituloItem"
-                android:layout_toRightOf="@+id/iconoItem"
+                android:id="@+id/nombreProducto"
+                android:layout_toRightOf="@+id/imagenProducto"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="12sp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edad"
-                android:id="@+id/descripcionItem"
-                android:layout_toRightOf="@+id/iconoItem"
+                android:text="$300"
+                android:id="@+id/caracteristicasProductos"
+                android:layout_toRightOf="@+id/imagenProducto"
                 android:textSize="10sp"
-                android:layout_below="@+id/tituloItem"
+                android:layout_below="@+id/nombreProducto"
                 />
+
+
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+
+        >
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/iconoCarro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fabSize="mini"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_add_shopping_cart_white_24dp" />
+
+    </RelativeLayout>
 
 
 

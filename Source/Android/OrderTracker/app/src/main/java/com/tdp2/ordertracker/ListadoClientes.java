@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,7 +24,10 @@ public class ListadoClientes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        idVendedor = getIntent().getStringExtra("id");
+
+        idVendedor = ManejadorPersistencia.obtenerVendedor(this);
+
+
 
         setContentView(R.layout.activity_listado_clientes);
 
@@ -35,7 +37,7 @@ public class ListadoClientes extends AppCompatActivity {
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerClientes(), DetallesCliente.class);
+        ClienteAdapter adapter = new ClienteAdapter(obtenerClientes(), DetallesCliente.class);
         adapter.setJsonArray(clientes);
         rv.setAdapter(adapter);
     }

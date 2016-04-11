@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (resp.getStatus()) {
                 JSONArray vendedor = resp.getJsonArray();
+                ManejadorPersistencia.persistirVendedor(this,  vendedor.getJSONObject(0).get("id").toString());
                 Intent documentsActivity = new Intent(this, MenuInicial.class);
-                documentsActivity.putExtra("vendedor",vendedor.toString());
-                startActivity(documentsActivity);
+                 startActivity(documentsActivity);
             } else {
                 Toast.makeText(this, "Contraseña o usuario invalido", Toast.LENGTH_LONG).show();
             }
