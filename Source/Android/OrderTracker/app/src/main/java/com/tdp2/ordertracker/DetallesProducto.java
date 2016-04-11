@@ -124,8 +124,8 @@ public class DetallesProducto extends AppCompatActivity {
         ArrayList<String> datos = new ArrayList<String>();
 
         try {
-            datos.add("Precio: " + producto.getString("precio"));
-            datos.add("Nombre: " + producto.get("nombre"));
+            datos.add("$" + producto.getString("precio"));
+            datos.add(producto.getString("nombre"));
             datos.add("Caracteristicas: " + producto.getString("caracteristicas"));
             datos.add("Stock: " + producto.getString("stock"));
             datos.add("Marca: " + producto.getString("marca"));

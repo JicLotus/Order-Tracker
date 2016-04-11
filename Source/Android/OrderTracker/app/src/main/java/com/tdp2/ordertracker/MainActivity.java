@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (resp.getStatus()) {
                 JSONArray vendedor = resp.getJsonArray();
+                ManejadorPersistencia.persistirVendedor(this,  vendedor.getJSONObject(0).get("id").toString());
                 Intent documentsActivity = new Intent(this, MenuInicial.class);
-                documentsActivity.putExtra("vendedor",vendedor.toString());
-                startActivity(documentsActivity);
+                 startActivity(documentsActivity);
             } else {
                 Toast.makeText(this, "Contraseña o usuario invalido", Toast.LENGTH_LONG).show();
             }
@@ -67,12 +67,6 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

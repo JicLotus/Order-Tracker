@@ -17,16 +17,13 @@ import Model.Response;
 
 public class MenuInicial extends AppCompatActivity {
 
-    JSONArray vendedor;
+    //JSONArray vendedor;
+    String vendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            vendedor = new JSONArray(getIntent().getStringExtra("vendedor"));
-        }catch(Exception e){}
-
+        this.vendedor = ManejadorPersistencia.obtenerVendedor(this);
         setContentView(R.layout.activity_menu_inicial);
     }
 
@@ -58,12 +55,13 @@ public class MenuInicial extends AppCompatActivity {
         Intent documentsActivity = new Intent(this, ListadoProductos.class);
         startActivity(documentsActivity);
     }
+    public void verAgenda(View view) {
+        Intent documentsActivity = new Intent(this, AgendaActivity.class);
+        startActivity(documentsActivity);
+    }
 
     public void verClientes(View view) {
         Intent documentsActivity = new Intent(this, ListadoClientes.class);
-        try {
-            documentsActivity.putExtra("id", vendedor.getJSONObject(0).get("id").toString());
-        }catch(Exception e){}
         startActivity(documentsActivity);
     }
 }

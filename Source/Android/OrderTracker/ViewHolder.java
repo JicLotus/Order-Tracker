@@ -1,26 +1,3 @@
-package com.tdp2.ordertracker;
-
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.List;
-
-
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private List<RecyclerViewItem> datos;
     private JSONArray jsonArray;
     Class claseOnClick;
@@ -51,14 +28,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RecyclerViewItem datoActual = datos.get(position);
         holder.posicion = position;
         holder.titulo.setText(datoActual.titulo);
-        //holder.icono.setImageResource(datoActual.idIcono);
 
         try {
             File f = new File("/mnt/sdcard/Download/", datoActual.idIcono + ".jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             holder.icono.setImageBitmap(b);
+
         }
-        catch(Exception e){}
+        catch(Exception e){
+            holder.icono.setImageResource(R.drawable.perfil_vacio);
+        }
 
 
         holder.descripcion.setText(datoActual.descripcion);
@@ -102,4 +81,3 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             contexto.startActivity(documentsActivity);
         }
     }
-}

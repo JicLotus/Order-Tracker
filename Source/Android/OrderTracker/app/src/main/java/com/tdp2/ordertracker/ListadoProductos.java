@@ -1,18 +1,19 @@
 package com.tdp2.ordertracker;
 
-import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.NumberPicker;
 
 import org.json.JSONArray;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import Model.Request;
 import Model.RequestHandler;
 import Model.Response;
 
-public class ListadoProductos extends AppCompatActivity {
+public class ListadoProductos extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
     private RecyclerView rv;
     private JSONArray productos;
     private FileHandler fileHandler;
@@ -35,15 +36,17 @@ public class ListadoProductos extends AppCompatActivity {
         this.pedirProductos();
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
+
         rv.setHasFixedSize(true);
+
+
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(obtenerProductos(), DetallesProducto.class);
+        ProductoAdapter adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
         adapter.setJsonArray(productos);
         rv.setAdapter(adapter);
+
     }
-
-
     private void pedirProductos()
     {
         Request request = new Request("GET", "GetProductos.php");
@@ -114,7 +117,7 @@ public class ListadoProductos extends AppCompatActivity {
                     idImagen = 0;
                 }
 
-                items.add(new RecyclerViewItem("$ " + productos.getJSONObject(i).getString("precio"),productos.getJSONObject(i).getString("nombre"),idImagen));
+                items.add(new RecyclerViewItem(productos.getJSONObject(i).getString("nombre"),"$ " + productos.getJSONObject(i).getString("precio"),idImagen));
             }
         }
         catch(Exception e)
@@ -125,4 +128,8 @@ public class ListadoProductos extends AppCompatActivity {
         return items;
     }
 
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+
+    }
 }
