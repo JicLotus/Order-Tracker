@@ -35,8 +35,11 @@ public class DetallesCliente extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_cliente);
 
+
+
         try {
             cliente = new JSONObject(getIntent().getStringExtra("jsonArray"));
+            setTitle(cliente.getString("nombre"));
         }catch(Exception e){}
 
 
