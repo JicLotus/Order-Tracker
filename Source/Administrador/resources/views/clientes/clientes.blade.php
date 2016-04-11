@@ -35,9 +35,9 @@
                                 <div class="control-group">
                                     <span class="control-label dimgray">Dirección: {{$cliente->direccion}}</span>
                                 </div>
-									<span class="control-label dimgray">Razón Social: {{$cliente->razon_social}}</span>
+									
                                 <div class="control-group">
-									 	
+									<span class="control-label dimgray">Razón Social: {{$cliente->razon_social}}</span>
 								</div>
 
 								<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn btn-primary">Editar</a>                                

@@ -37,7 +37,7 @@ class NuevaAgendaController extends Controller
 		$middle = strtotime($old_date);             
 		$fecha = date('Y-m-d H:i:s', $middle); 
 		
-    	$idCliente= $request->idCliente[1];
+    	$idCliente= $request->idCliente[0];
     	
     	foreach ($request->idCliente as $cliente){
 			$id = DB::table('agendas')->insertGetId(array('id_usuario' => ($idVendedor),'id_cliente' => ($cliente), 'fecha' => ($fecha)));

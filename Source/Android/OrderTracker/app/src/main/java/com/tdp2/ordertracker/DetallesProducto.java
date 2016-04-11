@@ -1,18 +1,30 @@
 package com.tdp2.ordertracker;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.tdp2.ordertracker.R;
 
 import org.json.JSONObject;
 
@@ -24,10 +36,14 @@ import java.util.logging.Logger;
 import Model.Request;
 import Model.RequestHandler;
 import Model.Response;
+import DialogImage.DialogImage;
+import DialogImage.DialogImageListener;
 
 public class DetallesProducto extends AppCompatActivity {
 
     private JSONObject producto;
+    private DialogImage dialogImage;
+    private DialogImageListener dialogImageListener;
 
     boolean isImageFitToScreen;
     @Override
@@ -37,54 +53,54 @@ public class DetallesProducto extends AppCompatActivity {
 
         try {
             producto = new JSONObject(getIntent().getStringExtra("jsonArray"));
+            setTitle(producto.getString("nombre"));
         }catch(Exception e){}
 
 
         this.setAdaptador(this.getListaDetalles());
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.linear_imagenes);
-
         ArrayList<String> imagenes = getListaImagenes();
 
+        this.createDialogImage(imagenes);
+        this.createListImages(imagenes);
 
+    }
+
+    private void createListImages(ArrayList<String> imagenes)
+    {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.linear_imagenes);
 
         for (int i = 0; i < imagenes.size(); i++) {
+
             ImageView imageView = new ImageView(this);
-            /*
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(isImageFitToScreen) {
-                        isImageFitToScreen=false;
-                        imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                        imageView.setAdjustViewBounds(true);
-                    }else{
-                        isImageFitToScreen=true;
-                        imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-                        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    }
-                }
-            });
-            */
+
+            imageView.setTag(i);
+            imageView.setOnClickListener(dialogImageListener);
+
             imageView.setId(i);
             imageView.setPadding(2, 2, 2, 2);
-            //imageView.setImageBitmap(BitmapFactory.decodeResource(
-              //      getResources(), R.drawable.alice));
+
             try {
                 File f = new File("/mnt/sdcard/Download/", imagenes.get(i) + ".jpg");
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
                 agregarImagen(imageView, b);
-//                imageView.setImageBitmap(b);
             }
-            catch(Exception e){}
-
-
-
+            catch(Exception e){
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             layout.addView(imageView);
         }
+    }
 
 
+    private void createDialogImage(ArrayList<String> imagenes)
+    {
+        dialogImage = new DialogImage(DetallesProducto.this);
+        dialogImage.setLayoutInflater(this.getLayoutInflater());
+        dialogImage.setImagenes(imagenes);
+        dialogImageListener = new DialogImageListener();
+        dialogImageListener.setDialogImage(dialogImage);
     }
 
     private void agregarImagen(ImageView imageView, Bitmap bitMap){
@@ -97,7 +113,7 @@ public class DetallesProducto extends AppCompatActivity {
         System.out.print(ivHeight);
         int newHeigth = 90;
 
-        int newWidth = (int) Math.floor((double) currentBitmapWidth *( (double) newHeigth / (double) currentBitmapHeight));
+        int newWidth = (int) Math.floor((double) currentBitmapWidth * ((double) newHeigth / (double) currentBitmapHeight));
 
         Bitmap newbitMap = Bitmap.createScaledBitmap(bitMap, newWidth, newHeigth, true);
 
@@ -167,5 +183,6 @@ public class DetallesProducto extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

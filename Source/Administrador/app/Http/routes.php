@@ -25,17 +25,24 @@ Route::post('guardarnuevoproducto', "NuevoProductoController@guardar");
 Route::get('editarproducto/{id}', "EditarProductoController@index");
 Route::post('editarproducto/guardarproducto', "GuardarProductoController@index");
 
+Route::get('clientes', "ClientesController@index");
+Route::get('agregarcliente', "NuevoClienteController@index");
+Route::post('guardarcliente', "NuevoClienteController@guardar");
+Route::get('editarcliente/{id}', "EditarClienteController@index");
+Route::post('editarcliente/guardarcliente', "GuardarClienteController@index");
+
+Route::get('usuarios', "UsuariosController@index");
+Route::get('agregarusuario', "NuevoUsuarioController@index");
+Route::post('guardarusuario', "NuevoUsuarioController@guardar");
+Route::get('editarusuario/{id}', "EditarUsuarioController@index");
+Route::post('editarusuario/guardarusuario', "GuardarUsuarioController@index");
+
 Route::get('pedidos', "PedidosController@index");
 
 Route::get('agendas', "AgendasController@index");
 Route::get('agregaragenda', "NuevaAgendaController@index");
 Route::post('guardarnuevaagenda', "NuevaAgendaController@guardar");
 
-Route::get('clientes', "ClientesController@index");
-Route::get('agregarcliente', "NuevoClienteController@index");
-Route::post('guardarcliente', "NuevoClienteController@guardar");
-Route::get('editarcliente/{id}', "EditarClienteController@index");
-Route::post('editarcliente/guardarcliente', "GuardarClienteController@index");
 
 
 

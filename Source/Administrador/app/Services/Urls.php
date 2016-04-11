@@ -109,7 +109,16 @@ class Urls {
     return url("usuarios" . $this->appendQuery($inputData));
   }
   
-
+  public function getUrlAgregarUsuario($inputData = []) {
+    return url("agregarusuario" . $this->appendQuery($inputData));
+  }
+  public function getUrlEditarUsuario($id,$inputData = []) {
+    return url("editarusuario/" . $id . $this->appendQuery($inputData));
+  }
+  
+  public function getUrlGuardarUsuario($id,$inputData = []) {
+    return url("guardarusuario/". $id . $this->appendQuery($inputData));
+  }
 
 }
 
