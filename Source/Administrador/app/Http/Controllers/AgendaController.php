@@ -24,7 +24,7 @@ class AgendaController extends Controller
 			$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
 			$sql .= " left join clientes on agendas.id_cliente = clientes.id where usuarios.id = " .$request->idVendedor;
 			$agendas = DB::select($sql);
-			$nombre =  DB::select("select nombre from usuarios where id = " .$request->idVendedor);
+			$nombre =  DB::select("select nombre,id from usuarios where id = " .$request->idVendedor);
                         
         return view('agendas.agenda', ['title' => 'Home',
                                 'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre]

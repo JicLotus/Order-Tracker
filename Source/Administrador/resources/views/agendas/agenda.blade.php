@@ -26,11 +26,11 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
 			  <div class="col-sm-8">
-				<select id="idVende" name="idVendedor" selected = "selected" >
+				<select id="idVende" name="idVendedor"  >
 					@foreach($vendedores as $vendedor)
 					<option>{{$vendedor->id}}</option>  
 					@endforeach
-					                          
+					 <option selected = "selected">{{$nombre[0]->id}}   </option>                   
 					<input type="submit" value= "Ver" />
 				</select>
 			  </div> 
@@ -64,7 +64,9 @@
                         </p>
                 @endforeach
         <a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a>     
-    
+		<a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Asiginar Horarios</a> 
+		<a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Asiginar Horarios</a> 
+
     </section>
 
 @endsection
