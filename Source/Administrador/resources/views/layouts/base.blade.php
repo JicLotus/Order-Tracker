@@ -64,7 +64,7 @@
                         
                         @if(app()->make("currentUser") != null)
                             <a href="{{app()->make('urls')->getUrlMyAccount()}}" class="btn btn-primary">Mi cuenta</a>
-                            <a href="{{app()->make("urls")->getUrlLogout()}}" class="btn btn-default">Cerrar sesión</a>
+                            <a href="{{app()->make('urls')->getUrlLogout()}}" class="btn btn-default" >Cerrar sesión</a>
                         @else
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">
                               Ingresar

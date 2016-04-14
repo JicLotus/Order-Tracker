@@ -39,6 +39,7 @@ Route::post('editarusuario/guardarusuario', "GuardarUsuarioController@index");
 
 Route::get('pedidos', "PedidosController@index");
 
+Route::get('agenda', "AgendaController@index");
 Route::get('agendas', "AgendasController@index");
 Route::get('agregaragenda', "NuevaAgendaController@index");
 Route::post('guardarnuevaagenda', "NuevaAgendaController@guardar");
