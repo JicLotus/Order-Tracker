@@ -93,11 +93,14 @@ class Urls {
   }
   
    public function getUrlAgenda($inputData = []) {
-    return url("agendas" .  $this->appendQuery($inputData));
+    return url("agenda" .  $this->appendQuery($inputData));
   }
 
   public function getUrlAgregarAgenda($inputData = []) {
     return url("agregaragenda" . $this->appendQuery($inputData));
+  }
+  public function getUrlAsignarHorarios($id,$inputData = []) {
+    return url("asignarhorarios/". $id. $this->appendQuery($inputData));
   }
 
   /**
