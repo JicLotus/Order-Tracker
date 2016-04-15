@@ -38,6 +38,8 @@ Route::get('editarusuario/{id}', "EditarUsuarioController@index");
 Route::post('editarusuario/guardarusuario', "GuardarUsuarioController@index");
 
 Route::get('pedidos', "PedidosController@index");
+Route::get('pedidovendedor', "PedidoVendedorController@index");
+Route::get('editarpedido/{id}', "EditarPedidoController@index");
 
 Route::get('agenda', "AgendaController@index");
 Route::get('agendas', "AgendasController@index");

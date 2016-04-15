@@ -20,36 +20,26 @@
 
 @section("content")
 
-    <section id="search-section">     
     
-                @foreach($pedidos as $pedido)
-                        <p>
-                            <div class="well">
+@section("content")
+    <section id="search-section">
+		
+		<form action="pedidovendedor" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+				{{ csrf_field() }}
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
+					  <div class="col-sm-8">
+						<select id="idVende" name="idVendedor">
+							@foreach($vendedores as $vendedor)
+							<option>{{$vendedor->id}}</option>  
+							@endforeach
+													  
+							<input type="submit" value= "Ver" />
+						</select>
+					  </div> 
+				</div>	
+		</form>
 
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Producto: {{$pedido->nombreProducto}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cantidad: {{$pedido->id}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Precio: {{$pedido->precio}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Usuario: {{$pedido->nombreUsuario}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cliente: {{$pedido->id_cliente}}</span>
-                                </div>
-                                
-                            </div>
-                        </p>
-                @endforeach
-        
     </section>
 
 @endsection

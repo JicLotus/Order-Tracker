@@ -22,7 +22,6 @@
 
 
 
-    <section id="search-section">
 					<a href="{{app()->make('urls')->getUrlAgregarUsuario()}}" class="btn btn-primary">Agregar</a>            
                 @foreach($usuarios as $usuario)
                         <p>
@@ -40,8 +39,6 @@
 									<span class="control-label dimgray">Privilegio: {{$usuario->privilegio}}</span>
                                 </div>
 									 	
-								
-
 								<a href="{{app()->make('urls')->getUrlEditarUsuario($usuario->id)}}" class="btn btn-primary">Editar</a>                                
 
 
@@ -49,8 +46,6 @@
                             </div>
                         </p>
                 @endforeach
-        
-    </section>
 
 @endsection
 

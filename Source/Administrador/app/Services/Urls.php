@@ -111,6 +111,13 @@ class Urls {
   public function getUrlPedidos($inputData = []) {
     return url("pedidos" . $this->appendQuery($inputData));
   }
+  
+  public function getUrlPedidoVendedor($inputData = []) {
+    return url("pedidovendedor" .  $this->appendQuery($inputData));
+  }
+  public function getUrlEditarPedido($id,$inputData = []) {
+    return url("editarpedido/". $id . $this->appendQuery($inputData));
+  }
 
   public function getUrlUsuarios($inputData = []) {
     return url("usuarios" . $this->appendQuery($inputData));
