@@ -74,15 +74,7 @@
 			<input type="text" id="datepicker" name = "datepicker">
 		</div>
 	</div>	
-
-	<div class="form-group">
-		<label class="control-label col-sm-2" for="Hora">Hora</label>
-          <div class="col-sm-8">
-			<input type="text" name="hora" value="07:00" />
-		  </div>
-		  
-    </div>	
-
+	
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
                 <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>

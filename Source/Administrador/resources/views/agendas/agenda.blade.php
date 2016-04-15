@@ -55,6 +55,10 @@
                                 <div class="control-group">
                                     <span class="control-label dimgray">Cliente: 	{{$agenda->nombreCliente}}</span>
                                 </div>
+                                
+                                <div class="control-group">
+                                    <span class="control-label dimgray">Dirección: {{$agenda->direccion}}</span>
+                                </div>
 
                                 <div class="control-group">
                                     <span class="control-label dimgray">Fecha/Hora: {{$agenda->fecha}}</span>

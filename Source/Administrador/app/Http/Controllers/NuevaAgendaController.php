@@ -19,7 +19,7 @@ class NuevaAgendaController extends Controller
     public function index()
     {
     		$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
-			$clientes = DB::select("select nombre,id from clientes")			;
+			$clientes = DB::select("select nombre,id from clientes");
 			
     	
         return view('agendas.nuevaagenda', ['title' => 'Home',
@@ -31,7 +31,7 @@ class NuevaAgendaController extends Controller
     {
 		$idVendedor= $request->idVendedor;    	
 
-    	$hora = $request->hora;
+    	$hora = "00:00";
     	
     	$old_date = date($request->datepicker. $hora);           
 		$middle = strtotime($old_date);             
