@@ -42,7 +42,7 @@
 
 	
 	<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a>     
-        
+       
     </section>
 
 @endsection

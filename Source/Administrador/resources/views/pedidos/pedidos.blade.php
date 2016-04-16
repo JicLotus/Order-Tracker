@@ -31,7 +31,7 @@
 					  <div class="col-sm-8">
 						<select id="idVende" name="idVendedor">
 							@foreach($vendedores as $vendedor)
-							<option>{{$vendedor->id}}</option>  
+							<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
 							@endforeach
 													  
 							<input type="submit" value= "Ver" />

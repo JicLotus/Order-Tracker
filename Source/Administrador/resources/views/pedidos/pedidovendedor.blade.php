@@ -50,16 +50,21 @@
                         <p>
                             <div class="well">
 								
-								<form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+								<form action="{{app()->make('urls')->getUrlEditarPedido($pedido->id)}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 								{{ csrf_field() }}
 									<div class="form-group">
 										<label class="control-label" for="Estado">Estado del pedido:</label>
-											<select id="idVende" name="idVendedor" onchange= "this.form.submit()" >
-												<option value="entregado">Entregado</option>
-												<option value="en_proceso">En Proceso</option>
-												 <option selected = "selected">{{$nombre[0]->nombre}} </option>                   
+											<select id="estado" name="estado" onchange= "this.form.submit()" >
+												
+												
+												<option value="entregado"  <?php If ($pedido->estado == "entregado"){?> selected = 'selected'<?php } ?> >Entregado</option>
+												<option value="en_proceso" <?php If ($pedido->estado == "en_proceso"){?> selected = 'selected'<?php } ?>>En Proceso</option>
+												<option value="cancelado" <?php If ($pedido->estado == "cancelado"){?> selected = 'selected'<?php } ?>>Cancelado</option>
+            
 											</select>
 									</div>	
+									<input type="hidden" name="idVendedor" value={{$nombre[0]->id}}>
+									
 								</form>
 
                                 <div class="control-group">

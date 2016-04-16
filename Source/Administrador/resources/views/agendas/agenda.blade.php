@@ -44,7 +44,9 @@
          </div>
               
 			</div>	
-		
+		     <a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a> 
+         	<a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Reasignar Recorrido</a>     
+
     
                 @foreach($agendas as $agenda)
                         <p>
@@ -65,8 +67,7 @@
                             </div>
                         </p>
                 @endforeach
-        
-    </section>
+            </section>
 
 @endsection
 
