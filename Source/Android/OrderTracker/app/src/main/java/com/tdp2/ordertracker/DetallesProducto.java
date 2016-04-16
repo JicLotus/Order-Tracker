@@ -111,7 +111,7 @@ public class DetallesProducto extends AppCompatActivity {
         int ivWidth = imageView.getWidth();
         int ivHeight = imageView.getHeight();
         System.out.print(ivHeight);
-        int newHeigth = 90;
+        int newHeigth = 150;
 
         int newWidth = (int) Math.floor((double) currentBitmapWidth * ((double) newHeigth / (double) currentBitmapHeight));
 
