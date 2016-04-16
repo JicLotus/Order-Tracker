@@ -4,9 +4,10 @@
     android:id="@+id/drawer_layout"
     android:clickable="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:onClick="verDia">
 
-    <ListView
+    <RelativeLayout
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
         android:layout_height="match_parent"
@@ -17,10 +18,91 @@
         android:dividerHeight="0dp"
         android:descendantFocusability="blocksDescendants"
         android:background="#fff"
-        />
+        >
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FUERA DE RUTA"
+            android:textColor="@color/primary"
+            android:layout_margin="10dp"
+            android:layout_above="@+id/lunes"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="verDia"
+            android:id="@+id/fueraDeRuta" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LUNES"
+            android:textColor="@color/primary"
+            android:layout_margin="10dp"
+            android:layout_above="@+id/martes"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="verDia"
+            android:id="@+id/lunes" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            android:layout_margin="10dp"
+            android:text="MARTES"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+
+            android:onClick="verDia"
+            android:layout_above="@+id/miercoles"
+            android:id="@+id/martes" />
+        <TextView
+
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/primary"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:onClick="verDia"
+            android:clickable="true"
+            android:text="MIÉRCOLES"
+            android:id="@+id/miercoles" />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/miercoles"
+            android:layout_centerVertical="true"
+            android:textColor="@color/primary"
+            android:layout_margin="10dp"
+            android:onClick="verDia"
+            android:clickable="true"
+            android:text="JUEVES"
+            android:id="@+id/jueves" />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jueves"
+            android:layout_centerVertical="true"
+            android:textColor="@color/primary"
+            android:onClick="verDia"
+            android:clickable="true"
+            android:text="VIERNES"
+            android:layout_margin="10dp"
+            android:id="@+id/viernes" />
+
+    </RelativeLayout>
+
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         tools:context="com.tdp2.ordertracker.MenuInicial"   >
 
@@ -36,9 +118,10 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_agenda"
             android:layout_width="match_parent"
-            android:layout_below="@+id/map"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true">
+            android:layout_below="@+id/map"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
         </android.support.v7.widget.RecyclerView>
 
 
