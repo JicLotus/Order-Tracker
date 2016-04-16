@@ -11,4 +11,15 @@
     <string name="title_activity_number_picker">Agregar Al Carro</string>
     <string name="title_activity_maps">Map</string>
     <string name="json_nombre">nombre</string>
+
+    <string-array name="dias_array">
+        <item>Fuera de ruta</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+    </string-array>
+    <string name="title_activity_detalles_pedido">DetallesPedido</string>
+
 </resources>

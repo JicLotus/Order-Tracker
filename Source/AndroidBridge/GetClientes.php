@@ -9,11 +9,13 @@
 	$sql= "(select clientes.id, clientes.nombre, clientes.direccion, clientes.razon_social, clientes.telefono_movil, clientes.telefono_laboral, clientes.email, agendas.fecha from clientes, agendas where clientes.id = agendas.id_cliente and agendas.id_usuario = $vendedor";
 	
 	if ($fecha){
+		
 		 $y= date("Y", strtotime($fecha));
 		 $d= date("d", strtotime($fecha));
 		 $m= date("m", strtotime($fecha));
+		 
 		 //Lo hago asi, porq mysql responde mas rapido a este tipo de consulta, la alternativa es mandar DATE(fecha) asi de una 
-		 $sql.= " and YEAR(fecha)=" . $y . " AND MONTH(fecha)=" . $m .  " AND DAY(fecha)=" . $d;
+		 $sql.= " and YEAR(agendas.fecha)=" . $y . " and MONTH(agendas.fecha)=" . $m .  " and DAY(agendas.fecha)=" . $d;
 	}		
 		
 	$sql.= " )";
@@ -23,6 +25,8 @@
 	while($row=mysql_fetch_object($rs)){
 		$datos[] = $row;
 	}
+
+
 
 	echo json_encode($datos);
 	

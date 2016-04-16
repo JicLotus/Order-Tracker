@@ -1,5 +1,6 @@
 package com.tdp2.ordertracker;
 
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONObject;
 
@@ -62,6 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
 
+
         LatLng latLng = new LatLng(-34.55343001093603, -58.47850725000001);
         if (direcciones != null){
             Address direccion = direcciones.get(0);
@@ -69,6 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         googleMap.addMarker(new MarkerOptions().position(latLng).title(nombre));
+
 
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
 

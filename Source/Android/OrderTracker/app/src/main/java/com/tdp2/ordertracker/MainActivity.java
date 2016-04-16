@@ -3,13 +3,13 @@ package com.tdp2.ordertracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+
 
 import Model.Request;
 import Model.RequestHandler;
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-    }
 
+    }
 
 
     public void login(View view) {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             if (resp.getStatus()) {
                 JSONArray vendedor = resp.getJsonArray();
                 ManejadorPersistencia.persistirVendedor(this,  vendedor.getJSONObject(0).get("id").toString());
-                Intent documentsActivity = new Intent(this, MenuInicial.class);
+                Intent documentsActivity = new Intent(this, AgendaActivity.class);
                  startActivity(documentsActivity);
             } else {
                 Toast.makeText(this, "Contraseña o usuario invalido", Toast.LENGTH_LONG).show();
@@ -59,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     public void testQr(View view) {
         Intent intent = new Intent("com.google.zxing.client.android.SCAN");
         intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
@@ -73,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -82,4 +82,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

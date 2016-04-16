@@ -1,17 +1,11 @@
 package com.tdp2.ordertracker;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,27 +15,34 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Hashtable;
 import java.util.List;
 
-/**
- * Created by juan on 10/04/16.
- */
+
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder>{
 
     private List<RecyclerViewItem> datos;
     private JSONArray jsonArray;
+    Hashtable<Integer, JSONObject> pedidos;
+
     Context contexto;
     Class claseOnClick;
 
-
-    // Provide a suitable constructor (depends on the kind of dataset)
     public ProductoAdapter(List<RecyclerViewItem> datos, Class claseOnClick, Context context) {
         this.datos = datos;
         this.contexto = context;
         this.claseOnClick = claseOnClick;
+        pedidos = new Hashtable<Integer, JSONObject>();
+    }
+
+    public Hashtable<Integer, JSONObject> getPedidos()
+    {
+        return pedidos;
     }
 
     public void setJsonArray(JSONArray jsonArrayParam)
@@ -63,6 +64,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         RecyclerViewItem datoActual = datos.get(position);
         holder.posicion = position;
+
+        try {
+            holder.itemId = jsonArray.getJSONObject(position).getInt("id");
+        }catch(Exception e){}
+
+        try {
+            holder.np.setMaxValue(jsonArray.getJSONObject(position).getInt("stock"));
+        }catch(Exception e){}
+
         holder.titulo.setText(datoActual.titulo);
 
         try {
@@ -77,6 +87,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
 
         holder.descripcion.setText(datoActual.descripcion);
+
+        try {
+
+            holder.precio = jsonArray.getJSONObject(position).getInt("precio");
+        }
+        catch(Exception e)
+        {
+        }
+
     }
 
     @Override
@@ -88,41 +107,46 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         ImageView icono;
         TextView titulo;
         TextView descripcion;
-        FloatingActionButton agregarAlCarro;
         int posicion;
+        int itemId;
+        int precio;
+
+        NumberPicker np;
 
         public ViewHolder(View view) {
             super(view);
             icono = (ImageView) itemView.findViewById(R.id.imagenProducto);
             titulo = (TextView) itemView.findViewById(R.id.nombreProducto);
             descripcion = (TextView) itemView.findViewById(R.id.caracteristicasProductos);
-            agregarAlCarro = (FloatingActionButton) itemView.findViewById(R.id.iconoCarro);
-            this.accionCarroDeCompras();
 
-            icono.setOnClickListener(this);
 
-//            agregarAlCarro.setOnClickListener(this);
-//            titulo.setOnClickListener(this);
- //           descripcion.setOnClickListener(this);
-        }
+            np = (NumberPicker) itemView.findViewById(R.id.nPicker);
 
-        private void accionCarroDeCompras(){
+            np.setMinValue(0);
+            np.setMaxValue(12);
+            np.setWrapSelectorWheel(false);
 
-            agregarAlCarro.setOnClickListener(new View.OnClickListener() {
+            np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
-                public void onClick(View v) {
-                    Context contexto = v.getContext();
-                    Intent documentsActivity = new Intent(contexto, NumberPickerActivity.class);
-                    try {
-                        documentsActivity.putExtra("jsonArray", jsonArray.getJSONObject(posicion).toString());
-                    }
-                    catch(Exception e)
-                    {   return;
-                    }
+                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    if (newVal == 0)
+                        pedidos.remove(itemId);
+                    else {
+                        try {
+                            JSONObject producto = new JSONObject();
+                            producto.put("id_producto", itemId);
+                            producto.put("cant", newVal);
+                            producto.put("titulo", titulo.getText().toString());
+                            producto.put("precio",precio);
+                            pedidos.put(itemId, producto);
+                        } catch (JSONException e) {
+                        }
 
-                    contexto.startActivity(documentsActivity);
+                    }
                 }
             });
+
+            icono.setOnClickListener(this);
         }
 
 
@@ -139,8 +163,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             catch(Exception e)
             {   return;
             }
-
             contexto.startActivity(documentsActivity);
         }
+
+
+
     }
 }

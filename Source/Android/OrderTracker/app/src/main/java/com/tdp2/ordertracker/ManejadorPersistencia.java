@@ -11,6 +11,8 @@ import org.json.JSONObject;
 /**
  * Created by juan on 10/04/16.
  */
+
+
 public class ManejadorPersistencia {
 
     public static void persistirVendedor(Context context, String valor) {
