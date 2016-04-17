@@ -40,7 +40,7 @@ class NuevaAgendaController extends Controller
     	$idCliente= $request->idCliente[0];
     	
     	foreach ($request->idCliente as $cliente){
-			$id = DB::table('agendas')->insertGetId(array('id_usuario' => ($idVendedor),'id_cliente' => ($cliente), 'fecha' => ($fecha)));
+			$id = DB::table('agendas')->insertGetId(array('id_usuario' => ($idVendedor),'id_cliente' => ($cliente), 'fecha' => ($fecha), 'dia' => $request->dia));
 		}
 		$url = app()->make('urls')->getUrlAgendas();
 		return redirect($url);
