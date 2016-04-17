@@ -10,12 +10,8 @@
 	
 	if ($fecha){
 		
-		 $y= date("Y", strtotime($fecha));
-		 $d= date("d", strtotime($fecha));
-		 $m= date("m", strtotime($fecha));
-		 
 		 //Lo hago asi, porq mysql responde mas rapido a este tipo de consulta, la alternativa es mandar DATE(fecha) asi de una 
-		 $sql.= " and YEAR(agendas.fecha)=" . $y . " and MONTH(agendas.fecha)=" . $m .  " and DAY(agendas.fecha)=" . $d." order by agendas.fecha asc";
+		 $sql.= " and agendas.dia="."'".$fecha."'"." order by agendas.orden asc";
 	}		
 		
 	$sql.= ")";
@@ -26,8 +22,7 @@
 		$datos[] = $row;
 	}
 
-
+	
 
 	echo json_encode($datos);
-	
 ?>

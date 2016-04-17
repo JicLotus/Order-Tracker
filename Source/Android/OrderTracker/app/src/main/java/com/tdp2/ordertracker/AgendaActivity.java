@@ -191,7 +191,7 @@ public class AgendaActivity extends AppCompatActivity  {
 
     public void verDia(View view){
         int id = view.getId();
-        int diaSeleccionado = 0;
+        String diaSeleccionado = "";
         selectItem(id);
 
         switch (id) {
@@ -204,28 +204,25 @@ public class AgendaActivity extends AppCompatActivity  {
                 break;
             case R.id.lunes:
 
-                diaSeleccionado = Calendar.MONDAY;
+                diaSeleccionado = "Lunes";
                 break;
             case R.id.martes:
 
-                diaSeleccionado = Calendar.TUESDAY;
+                diaSeleccionado = "Martes";
                 break;
             case R.id.miercoles:
 
-                diaSeleccionado = Calendar.WEDNESDAY;
+                diaSeleccionado = "Miercoles";
                 break;
             case R.id.jueves:
-                diaSeleccionado = Calendar.THURSDAY;
+                diaSeleccionado = "Jueves";
                 break;
             case R.id.viernes:
-                diaSeleccionado = Calendar.FRIDAY;
+                diaSeleccionado = "Viernes";
                 break;
         }
 
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.DAY_OF_WEEK, diaSeleccionado);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        fechaActual = dateFormat.format(c.getTime()).toString();
+        fechaActual = diaSeleccionado;
 
         usuarios = getUsuariosAgenda();
 
