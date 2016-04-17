@@ -74,7 +74,7 @@ public class DetallesPedido extends AppCompatActivity {
             catch(Exception e){}
         }
 
-        return "Total: $" +Integer.toString(precioTotal);
+        return "$" +Integer.toString(precioTotal);
     }
 
     public void confirmarPedido(View view)

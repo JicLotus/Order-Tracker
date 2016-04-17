@@ -36,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$300"
+                android:textColor="@color/negro"
                 android:id="@+id/precio"
                 android:textSize="30sp"
                 android:layout_below="@+id/nombreProducto"
@@ -53,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="x 12"
+        android:textColor="@color/negro"
         android:id="@+id/cantidad"
         android:textSize="30sp"
         />
