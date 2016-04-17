@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -89,6 +90,8 @@ public class AgendaActivity extends AppCompatActivity  {
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_agenda);
         rv.setHasFixedSize(true);
+
+
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
@@ -99,6 +102,8 @@ public class AgendaActivity extends AppCompatActivity  {
         mPlanetTitles = getResources().getStringArray(R.array.dias_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RelativeLayout) findViewById(R.id.left_drawer);
+
+
         cargarItems();
         mTitle = mDrawerTitle = getTitle();
 

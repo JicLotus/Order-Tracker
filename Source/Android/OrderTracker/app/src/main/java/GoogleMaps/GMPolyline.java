@@ -80,26 +80,17 @@ public class GMPolyline extends FragmentActivity implements OnMapReadyCallback {
 
         this.map = unMap;
         markerPoints = new ArrayList<LatLng>();// Enable MyLocation Button in the Map
-
+        markerPoints.clear();
+        map.clear();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
         if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
         if (puntos.size()>=2){
 
-            markerPoints.clear();
-            map.clear();
             map.setMyLocationEnabled(true);
-
-
 
             LatLng latLng = puntos.remove(0);
             LatLng latLng2 = puntos.remove(puntos.size()-1);
