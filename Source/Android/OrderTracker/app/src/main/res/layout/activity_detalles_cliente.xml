@@ -16,15 +16,51 @@
         android:onClick="verMapa"/>
 
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_below="@id/boton_mapa"
-        android:layout_width="fill_parent"
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id = "@+id/direccion_detalleC"
+        android:layout_below="@+id/boton_mapa"
+        android:textColor="@color/negro"
+        android:textStyle="bold"
+        android:layout_margin="26dp"
         android:layout_height="wrap_content"
-        android:drawSelectorOnTop="false"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        />
+        android:text="Dirección"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id = "@+id/razonSocial_detalleC"
+        android:layout_below="@+id/direccion_detalleC"
+        android:textColor="@color/negro"
+        android:textStyle="bold"
+        android:layout_margin="26dp"
+        android:layout_height="wrap_content"
+        android:text="Razón Social"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id = "@+id/telMovil_detalleC"
+        android:layout_below="@+id/razonSocial_detalleC"
+        android:textColor="@color/negro"
+        android:textStyle="bold"
+        android:layout_margin="26dp"
+        android:layout_height="wrap_content"
+        android:text="+541160581642"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id = "@+id/telLaboral_detalleC"
+        android:layout_below="@+id/telMovil_detalleC"
+        android:layout_margin="26dp"
+        android:textColor="@color/negro"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:text="20717046"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id = "@+id/email_detalleC"
+        android:layout_below="@+id/telMovil_detalleC_detalleC"
+        android:layout_margin="26dp"
+        android:layout_height="wrap_content"
+        android:text="Moncholo06@gmail.com"/>
 
 
 </RelativeLayout>

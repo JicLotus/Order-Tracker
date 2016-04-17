@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,11 +44,9 @@ public class DetallesCliente extends AppCompatActivity{
         }catch(Exception e){}
 
 
-        this.setAdaptador(this.getListaDetalles());
 
-//        MapFragment mapFragment = (MapFragment) getFragmentManager()
-//                .findFragmentById(R.id.mapa_fragmento);
-//        mapFragment.getMapAsync(this);
+        this.getListaDetalles();
+
     }
 
     private void scanQRCode() {
@@ -74,16 +73,17 @@ public class DetallesCliente extends AppCompatActivity{
 
     public ArrayList<String> getListaDetalles()
     {
+
         ArrayList<String> datos = new ArrayList<String>();
 
         try {
 
-            datos.add("Nombre: " + cliente.getString("nombre"));
-            datos.add("Dirección: " + cliente.getString("direccion"));
-            datos.add("Razón Social: " + cliente.getString("razon_social"));
-            datos.add("Teléfono Móvil: " + cliente.getString("telefono_movil"));
-            datos.add("Teléfono Laboral: " + cliente.getString("telefono_laboral"));
-            datos.add("E-mail: " + cliente.getString("email"));
+            ((TextView)findViewById(R.id.direccion_detalleC)).setText(cliente.getString("direccion"));
+            ((TextView)findViewById(R.id.razonSocial_detalleC)).setText("Razón Social: "+cliente.getString("razon_social"));
+            ((TextView)findViewById(R.id.telMovil_detalleC)).setText("Tel. Móvil: "+cliente.getString("telefono_movil"));
+            ((TextView)findViewById(R.id.telLaboral_detalleC)).setText("Tel. Laboral: "+cliente.getString("telefono_laboral"));
+            ((TextView)findViewById(R.id.email_detalleC)).setText(cliente.getString("email"));
+
         }
         catch(Exception e){}
 
@@ -120,32 +120,6 @@ public class DetallesCliente extends AppCompatActivity{
     }
 
 
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker")); //TODO: cuando este segura de que anda, borrar esto y descomentar lo de abajo
-
-//        String direccionStr = null, nombreCliente = null;
-//        try {
-//            direccionStr = cliente.getString("direccion");
-//            nombreCliente = cliente.getString("nombre");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        Geocoder geoCoder = new Geocoder(this);
-//        List<Address> direcciones = null;
-//
-//        try {
-//            direcciones = geoCoder.getFromLocationName(direccionStr, 1);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Address direccion = direcciones.get(0);
-//        LatLng latLng = new LatLng(direccion.getLatitude(), direccion.getLongitude());
-//
-//        googleMap.addMarker(new MarkerOptions().position(latLng).title(nombreCliente));
-//        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-//    }
 
     public void verMapa(View v) {
         Context contexto = v.getContext();
