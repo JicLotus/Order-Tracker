@@ -56,9 +56,8 @@
 										<label class="control-label" for="Estado">Estado del pedido:</label>
 											<select id="estado" name="estado" onchange= "this.form.submit()" >
 												
-												
-												<option value="entregado"  <?php If ($pedido->estado == "entregado"){?> selected = 'selected'<?php } ?> >Entregado</option>
 												<option value="en_proceso" <?php If ($pedido->estado == "en_proceso"){?> selected = 'selected'<?php } ?>>En Proceso</option>
+												<option value="entregado"  <?php If ($pedido->estado == "entregado"){?> selected = 'selected'<?php } ?> >Entregado</option>
 												<option value="cancelado" <?php If ($pedido->estado == "cancelado"){?> selected = 'selected'<?php } ?>>Cancelado</option>
             
 											</select>

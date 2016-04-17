@@ -29,4 +29,5 @@ class EditarPedidoController extends Controller
                                 'page' => 'home','pedidos' => $pedidos, 'vendedores' => $vendedores, 'nombre' => $nombre]
         );
 	}
+	
 }

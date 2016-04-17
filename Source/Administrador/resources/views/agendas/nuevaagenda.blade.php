@@ -47,12 +47,11 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="Vendedor">Vendedor</label>
           <div class="col-sm-8">
-			<select onclick="reload();" id="selectVendedor">
+			<select onclick="reload();" id="idVendedor" name="idVendedor">
 				@foreach($vendedores as $vendedor)
-				<option>{{$vendedor->id}}){{$vendedor->nombre}}</option>  
+				<option value = {{$vendedor->id}}>{{$vendedor->nombre}}</option>  
 				@endforeach 
 			</select>
-			<input type="hidden" id="idVendedorr" name="idVendedor" value= "1"; >
 		  </div> 
     </div>	
 	
