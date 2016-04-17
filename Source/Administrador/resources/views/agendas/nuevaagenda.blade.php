@@ -74,6 +74,21 @@
 		</div>
 	</div>	
 	
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="Clientes">Día</label>
+			<div class="col-sm-8">
+			<select id="dia" name="dia" >
+				<option value="Lunes">Lunes</option>
+				<option value="Martes">Martes</option>
+				<option value="Miércoles">Miércoles</option>
+				<option value="Jueves">Jueves</option>
+				<option value="Viernes">Viernes</option>
+								
+			</select> 
+			</div>
+	</div>	
+	
+	
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
                 <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>

@@ -18,6 +18,8 @@ class CrearTablaAgendas extends Migration
         		$table->integer('id_cliente');
             $table->unique(array('id_usuario', 'id_cliente'));
             $table->dateTime('fecha');
+            $table->string('dia');
+            $table->integer('orden');
         });
     }
 

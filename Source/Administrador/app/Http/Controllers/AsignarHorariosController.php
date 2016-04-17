@@ -11,6 +11,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use App\Models\Property as Property;
 
+function procesarYGuardarAgenda($procesar,$numeroDeOrden){
+	
+	$fecha = date_create($procesar->fecha);
+	date_time_set($fecha, 7,0);                  //EMPIEZA EL HORARIO A LAS 7 AM
+	date_add($fecha, date_interval_create_from_date_string($numeroDeOrden ." hours"));
+					
+	DB::table(Config::get('constants.TABLA_AGENDAS'))->where(Config::get('constants.TABLA_AGENDAS_ID'), $procesar->idAgenda)
+	->update(array(Config::get('constants.TABLA_AGENDAS_FECHA') => ($fecha), 
+			Config::get('constants.TABLA_AGENDAS_ORDEN') => ($numeroDeOrden))); 
+					
+	
+}
+
 function getCoordinates($address){
 		 
 		$address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
@@ -51,41 +64,31 @@ function calcularHorarios($agendas, $dirSalida, $numeroDeOrden){
 			$cantidad = count($agendas);
 			$minDistancia = 10000;
 			$distFinal = "";
-			if ($cantidad > 1){
-				
-				foreach ($agendas as $agenda){
-					// $distancia['distance'] . $distancia['time'];
-					$distancia = getDrivingDistance($dirSalida, $agenda->direccion);
-					$distFinal = (preg_split('/\s+/', $distancia['distance']));
-					if($minDistancia > ($distFinal[0])){
-							array_push($agendaAux, $agenda);
-							$minDistancia = $distFinal[0];
+			if ($cantidad != 0){
+				if ($cantidad > 1){
+					
+					foreach ($agendas as $agenda){
+						// $distancia['distance'] . $distancia['time'];
+						$distancia = getDrivingDistance($dirSalida, $agenda->direccion);
+						$distFinal = (preg_split('/\s+/', $distancia['distance']));
+						if($minDistancia > ($distFinal[0])){
+								array_push($agendaAux, $agenda);
+								$minDistancia = $distFinal[0];
+						}
+						else
+								array_unshift($agendaAux, $agenda);
+							
 					}
-					else
-							array_unshift($agendaAux, $agenda);
-						
+					$procesar = array_pop($agendaAux);
+					procesarYGuardarAgenda($procesar,$numeroDeOrden);
+					
+					$numeroDeOrden += 1;
+					$dirSalida = $procesar->direccion;
+					
+					calcularHorarios($agendaAux, $dirSalida, $numeroDeOrden);
 				}
-				$procesar = array_pop($agendaAux);
-				$fecha = date_create($procesar->fecha);
-				date_time_set($fecha, 7,0);                  //EMPIEZA EL HORARIO A LAS 7 AM
-				date_add($fecha, date_interval_create_from_date_string($numeroDeOrden ." hours"));
-				
-				DB::table(Config::get('constants.TABLA_AGENDAS'))->where(Config::get('constants.TABLA_AGENDAS_ID'), $procesar->idAgenda)
-				->update(array(Config::get('constants.TABLA_AGENDAS_FECHA') => ($fecha))); 
-				
-				$numeroDeOrden += 1;
-				$dirSalida = $procesar->direccion;
-				
-				calcularHorarios($agendaAux, $dirSalida, $numeroDeOrden);
-			}
-			else {
-				$procesar = array_pop($agendas);
-				$fecha = date_create($procesar->fecha);
-				date_time_set($fecha, 7,0);                  //EMPIEZA EL HORARIO A LAS 7 AM
-				date_add($fecha, date_interval_create_from_date_string($numeroDeOrden ." hours"));
-				
-				DB::table(Config::get('constants.TABLA_AGENDAS'))->where(Config::get('constants.TABLA_AGENDAS_ID'), $procesar->idAgenda)
-				->update(array(Config::get('constants.TABLA_AGENDAS_FECHA') => ($fecha))); 
+				else
+					procesarYGuardarAgenda(array_pop($agendas),$numeroDeOrden);
 			}
 }
 
@@ -93,7 +96,9 @@ function calcularHorarios($agendas, $dirSalida, $numeroDeOrden){
 
 class AsignarHorariosController extends Controller
 {	
+	
 
+	
     /**
      * Display a listing of the resource.
      *
@@ -101,21 +106,31 @@ class AsignarHorariosController extends Controller
      */
     public function index($id)
     {		
+		
+			$diasPosibles = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes");
+			
+			foreach($diasPosibles as $dia){
+				
+				$sql = "select *, agendas.id as idAgenda, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
+				$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
+				$sql .= " left join clientes on agendas.id_cliente = clientes.id where agendas.dia = '" . $dia . "' and usuarios.id = " . $id;
+				$agendas = DB::select($sql);
 
+				$dirSalida= "Av. Paseo Colón 850";
+				$numeroDeOrden = 0;
+				
+				calcularHorarios($agendas, $dirSalida, $numeroDeOrden);
+			}
+			
+			
 			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
 			$sql = "select *, agendas.id as idAgenda, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
 			$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
 			$sql .= " left join clientes on agendas.id_cliente = clientes.id where usuarios.id = " . $id;
 			$agendas = DB::select($sql);
+			
 			$nombre =  DB::select("select nombre,id from usuarios where id = " . $id);
 			
-
-			$dirSalida= "Av. Paseo Colón 850";
-			$numeroDeOrden = 0;
-			
-			calcularHorarios($agendas, $dirSalida, $numeroDeOrden);
-			
-			$agendas = DB::select($sql);
                         
         return view('agendas.agenda', ['title' => 'Home',
                                 'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre]

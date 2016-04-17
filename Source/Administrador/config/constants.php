@@ -33,6 +33,8 @@ return [
     'TABLA_AGENDAS' => 'agendas',
     'TABLA_AGENDAS_ID' => 'id',
     'TABLA_AGENDAS_FECHA' => 'fecha',
+    'TABLA_AGENDAS_ORDEN' => 'orden',
+    'TABLA_AGENDAS_DIA' => 'dia',
     
     'TABLA_PEDIDOS' => 'pedidos',
     'TABLA_PEDIDOS_ID' => 'id',

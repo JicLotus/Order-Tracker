@@ -59,11 +59,15 @@
                                 <div class="control-group">
                                     <span class="control-label dimgray">Dirección: {{$agenda->direccion}}</span>
                                 </div>
-
+                                
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Fecha/Hora: {{$agenda->fecha}}</span>
+                                    <span class="control-label dimgray">Orden De Visita: {{$agenda->orden}}</span>
                                 </div>
 
+                                <div class="control-group">
+                                    <span class="control-label dimgray">Día: {{$agenda->dia}}</span>
+                                </div>
+                              
                             </div>
                         </p>
                 @endforeach
