@@ -107,6 +107,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         ImageView icono;
         TextView titulo;
         TextView descripcion;
+        TextView subtotal;
         int posicion;
         int itemId;
         int precio;
@@ -115,23 +116,28 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         public ViewHolder(View view) {
             super(view);
+
+
             icono = (ImageView) itemView.findViewById(R.id.imagenProducto);
             titulo = (TextView) itemView.findViewById(R.id.nombreProducto);
             descripcion = (TextView) itemView.findViewById(R.id.caracteristicasProductos);
-
+            subtotal = (TextView)itemView.findViewById(R.id.subtotal);
+            subtotal.setText("");
 
             np = (NumberPicker) itemView.findViewById(R.id.nPicker);
 
             np.setMinValue(0);
             np.setMaxValue(12);
+            np.setValue(0);
             np.setWrapSelectorWheel(false);
 
             np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                    if (newVal == 0)
+                    if (newVal == 0){
                         pedidos.remove(itemId);
-                    else {
+                        subtotal.setText("");
+                    } else {
                         try {
                             JSONObject producto = new JSONObject();
                             producto.put("id_producto", itemId);
@@ -139,6 +145,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                             producto.put("titulo", titulo.getText().toString());
                             producto.put("precio",precio);
                             pedidos.put(itemId, producto);
+
+                            subtotal.setText("Subtotal: $"+String.valueOf(precio*newVal));
                         } catch (JSONException e) {
                         }
 
@@ -147,6 +155,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             });
 
             icono.setOnClickListener(this);
+
         }
 
 

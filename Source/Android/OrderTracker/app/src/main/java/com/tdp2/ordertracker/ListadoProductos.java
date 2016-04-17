@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.NumberPicker;
 
 
@@ -75,12 +76,6 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_listado_productos, menu);
-        return true;
-    }
 
 
     public void downloadImagenesProductos()
@@ -134,19 +129,7 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.finalizarPedido:
-                finalizarPedido();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void finalizarPedido() {
+    public void finalizarPedido(View v) {
 
         Hashtable<Integer, JSONObject> pedidos = adapter.getPedidos();
         JSONArray productos = new JSONArray();
