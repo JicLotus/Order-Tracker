@@ -40,7 +40,9 @@
 				</div>	
 		</form>
 
-    </section>
+<hr width=75%"/>
 
+	<a href="{{app()->make('urls')->getUrlEliminarPedidosCancelados()}}" class="btn btn-primary">Eliminar Pedidos Cancelados</a> 
+      </section>
 @endsection
 

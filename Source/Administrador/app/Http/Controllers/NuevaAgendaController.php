@@ -33,7 +33,7 @@ class NuevaAgendaController extends Controller
 
     	$hora = "00:00";
     	
-    	$old_date = date($request->datepicker. $hora);           
+    	$old_date = date("11-11-2016". $hora);           
 		$middle = strtotime($old_date);             
 		$fecha = date('Y-m-d H:i:s', $middle); 
 		

@@ -36,8 +36,11 @@
 </form>
 
 <hr width=75%"/>
-	
+
 	<div class="form-group">
+
+	</div>	
+
 		<label class="control-label col-sm-2" for="VendedorSeleccionado">Vendedor Seleccionado:</label>
         <div class="control-group">
               <span class="control-label dimgray">{{$nombre[0]->nombre}}</span>
@@ -62,7 +65,9 @@
             
 											</select>
 									</div>	
+									<input type="hidden" name="cantidad" value= {{$pedido->cantidad}}>
 									<input type="hidden" name="idVendedor" value={{$nombre[0]->id}}>
+									<input type="hidden" name="id_producto" value= {{$pedido->id_producto}}>
 									
 								</form>
 

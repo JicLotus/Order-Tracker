@@ -65,14 +65,6 @@
 			</select> 
 			</div>
 	</div>	
-
-
-	<div class="form-group">
-		<label class="control-label col-sm-2" for="Día">Día</label>
-          <div class="col-sm-8">
-			<input type="text" id="datepicker" name = "datepicker">
-		</div>
-	</div>	
 	
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="Clientes">Día</label>

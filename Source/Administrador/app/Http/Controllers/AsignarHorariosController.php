@@ -17,7 +17,7 @@ function procesarYGuardarAgenda($procesar,$numeroDeOrden){
 	date_time_set($fecha, 7,0);                  //EMPIEZA EL HORARIO A LAS 7 AM
 	date_add($fecha, date_interval_create_from_date_string($numeroDeOrden ." hours"));
 					
-	DB::table(Config::get('constants.TABLA_AGENDAS'))->where(Config::get('constants.TABLA_AGENDAS_ID'), $procesar->idAgenda)
+	DB::table(Config::get('constants.TABLA_AGENDAS'))->where(Config::get('constants.TABLA_AGENDAS_ID'), $procesar->agendaId)
 	->update(array(Config::get('constants.TABLA_AGENDAS_FECHA') => ($fecha), 
 			Config::get('constants.TABLA_AGENDAS_ORDEN') => ($numeroDeOrden))); 
 					
@@ -111,7 +111,7 @@ class AsignarHorariosController extends Controller
 			
 			foreach($diasPosibles as $dia){
 				
-				$sql = "select *, agendas.id as idAgenda, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
+				$sql = "select *, agendas.id as agendaId, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
 				$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
 				$sql .= " left join clientes on agendas.id_cliente = clientes.id where agendas.dia = '" . $dia . "' and usuarios.id = " . $id;
 				$agendas = DB::select($sql);
@@ -124,7 +124,7 @@ class AsignarHorariosController extends Controller
 			
 			
 			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
-			$sql = "select *, agendas.id as idAgenda, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
+			$sql = "select *, agendas.id as agendaId, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
 			$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
 			$sql .= " left join clientes on agendas.id_cliente = clientes.id where usuarios.id = " . $id;
 			$agendas = DB::select($sql);

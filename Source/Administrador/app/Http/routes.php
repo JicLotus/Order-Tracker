@@ -40,6 +40,7 @@ Route::post('editarusuario/guardarusuario', "GuardarUsuarioController@index");
 Route::get('pedidos', "PedidosController@index");
 Route::get('pedidovendedor', "PedidoVendedorController@index");
 Route::get('editarpedido/{id}', "EditarPedidoController@index");
+Route::get('eliminarpedidoscancelados', "EliminarPedidosCanceladosController@index");
 
 Route::get('agenda', "AgendaController@index");
 Route::get('agendas', "AgendasController@index");
@@ -47,7 +48,6 @@ Route::get('agregaragenda', "NuevaAgendaController@index");
 Route::post('guardarnuevaagenda', "NuevaAgendaController@guardar");
 Route::get('asignarhorarios/{id}', "AsignarHorariosController@index");
 Route::get('eliminaragenda/{idAgenda}/{vendedor}', "EliminarAgendaController@index");
-
 
 
 

@@ -122,6 +122,12 @@ class Urls {
   public function getUrlEditarPedido($id,$inputData = []) {
     return url("editarpedido/". $id . $this->appendQuery($inputData));
   }
+  public function getUrlEliminarPedidosCancelados($inputData = []) {
+    return url("eliminarpedidoscancelados/". $this->appendQuery($inputData));
+  }
+  
+  
+  
 
   public function getUrlUsuarios($inputData = []) {
     return url("usuarios" . $this->appendQuery($inputData));

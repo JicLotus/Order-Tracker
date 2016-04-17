@@ -18,12 +18,18 @@ class EditarPedidoController extends Controller
 	   	DB::table(Config::get('constants.TABLA_PEDIDOS'))->where(Config::get('constants.TABLA_PEDIDOS_ID'), $id)
 				->update(array(Config::get('constants.TABLA_PEDIDOS_ESTADO') => ($request->estado)));
 	   
+	   if($request->estado == 'cancelado'){
+		$sql2= "Update productos set stock= (stock + $request->cantidad)  where id = $request->id_producto";
+		DB::statement($sql2);
+		}
+	   
 			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
 			$sql = "select *, productos.nombre as nombreProducto from productos ";
 			$sql .= "left join pedidos on pedidos.id_producto = productos.id where pedidos.id_usuario = " . $request->idVendedor ;
 			$pedidos = DB::select($sql);
 			$nombre =  DB::select("select nombre,id from usuarios where id = " .$request->idVendedor);
-                      
+            
+            
                         
         return view('pedidos.pedidovendedor', ['title' => 'Home',
                                 'page' => 'home','pedidos' => $pedidos, 'vendedores' => $vendedores, 'nombre' => $nombre]
