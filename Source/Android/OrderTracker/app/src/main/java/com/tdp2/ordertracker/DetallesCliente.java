@@ -90,12 +90,6 @@ public class DetallesCliente extends AppCompatActivity{
         return datos;
     }
 
-    public void setAdaptador(ArrayList<String> datos)
-    {
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
-        ListView listado = (ListView) findViewById(R.id.list);
-        listado.setAdapter(adaptador);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

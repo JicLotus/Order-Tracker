@@ -105,8 +105,6 @@ public class AgendaActivity extends AppCompatActivity  {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
-        ((TextView)findViewById(R.id.lunes)).setTypeface(null, Typeface.BOLD);
-
         switch (day) {
             case Calendar.MONDAY:
                 ((TextView)findViewById(R.id.lunes)).setTypeface(null, Typeface.BOLD);
@@ -195,16 +193,20 @@ public class AgendaActivity extends AppCompatActivity  {
 
             //Fuera de ruta
             case R.id.fueraDeRuta:
+
                 Intent documentsActivity = new Intent(view.getContext(), ListadoClientes.class);
                 startActivity(documentsActivity);
                 break;
             case R.id.lunes:
+
                 diaSeleccionado = Calendar.MONDAY;
                 break;
             case R.id.martes:
+
                 diaSeleccionado = Calendar.TUESDAY;
                 break;
             case R.id.miercoles:
+
                 diaSeleccionado = Calendar.WEDNESDAY;
                 break;
             case R.id.jueves:

@@ -57,7 +57,7 @@ public class DetallesProducto extends AppCompatActivity {
         }catch(Exception e){}
 
 
-        this.setAdaptador(this.getListaDetalles());
+        this.getListaDetalles();
 
         ArrayList<String> imagenes = getListaImagenes();
 
@@ -111,13 +111,13 @@ public class DetallesProducto extends AppCompatActivity {
         int ivWidth = imageView.getWidth();
         int ivHeight = imageView.getHeight();
         System.out.print(ivHeight);
-        int newHeigth = 150;
+        int newHeigth = 140;
 
         int newWidth = (int) Math.floor((double) currentBitmapWidth * ((double) newHeigth / (double) currentBitmapHeight));
 
         Bitmap newbitMap = Bitmap.createScaledBitmap(bitMap, newWidth, newHeigth, true);
 
-        imageView.setImageBitmap(newbitMap);
+        imageView.setImageBitmap(bitMap);
 
     }
 
@@ -140,14 +140,12 @@ public class DetallesProducto extends AppCompatActivity {
         ArrayList<String> datos = new ArrayList<String>();
 
         try {
-            datos.add("$" + producto.getString("precio"));
-            datos.add(producto.getString("nombre"));
-            datos.add("Caracteristicas: " + producto.getString("caracteristicas"));
-            datos.add("Stock: " + producto.getString("stock"));
-            datos.add("Marca: " + producto.getString("marca"));
-            datos.add("Categoria: " + producto.getString("categoria"));
-            datos.add("Codigo: " + producto.getString("codigo"));
-            //datos.add("Estado: " + producto.getString("estado"));
+            ((TextView)findViewById(R.id.precio_DetalleP)).setText("$"+producto.getString("precio"));
+            ((TextView)findViewById(R.id.nombre_detalleP)).setText(producto.getString("nombre"));
+            ((TextView)findViewById(R.id.descripcion_detalleP)).setText(producto.getString("caracteristicas"));
+            ((TextView)findViewById(R.id.stock_detalleP)).setText(producto.getString("stock")+" unidades disponibles");
+            ((TextView)findViewById(R.id.marca_detalleP)).setText("Producto elaborado por "+producto.getString("marca"));
+            ((TextView)findViewById(R.id.categoria_detalleP)).setText(producto.getString("categoria"));
 
         }
         catch(Exception e){}
@@ -155,12 +153,6 @@ public class DetallesProducto extends AppCompatActivity {
         return datos;
     }
 
-    public void setAdaptador(ArrayList<String> datos)
-    {
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
-        ListView listado = (ListView) findViewById(R.id.list);
-        listado.setAdapter(adaptador);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
