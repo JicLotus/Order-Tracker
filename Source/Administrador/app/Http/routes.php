@@ -46,6 +46,7 @@ Route::get('agendas', "AgendasController@index");
 Route::get('agregaragenda', "NuevaAgendaController@index");
 Route::post('guardarnuevaagenda', "NuevaAgendaController@guardar");
 Route::get('asignarhorarios/{id}', "AsignarHorariosController@index");
+Route::get('eliminaragenda/{idAgenda}/{vendedor}', "EliminarAgendaController@index");
 
 
 

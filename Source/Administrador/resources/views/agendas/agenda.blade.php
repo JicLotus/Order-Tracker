@@ -38,16 +38,17 @@
 <hr width=75%"/>
 	
 	<div class="form-group">
-		<label class="control-label col-sm-2" for="VendedorSeleccionado">Vendedor Seleccionado:</label>
-        <div class="control-group">
-              <span class="control-label dimgray">{{$nombre[0]->nombre}}</span>
-         </div>
-              
-			</div>	
-		     <a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a> 
-         	<a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Reasignar Recorrido</a>     
 
-    
+	<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a> 
+    <a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Reasignar Recorrido</a>     
+	</div>	
+		<div>
+			<label class="control-label col-sm-2" for="VendedorSeleccionado">Vendedor Seleccionado:</label>
+			<div class="control-group">
+			
+              <span class="control-label dimgray">{{$nombre[0]->nombre}}</span>
+			</div>
+		</div>
                 @foreach($agendas as $agenda)
                         <p>
                             <div class="well">
@@ -68,6 +69,9 @@
                                     <span class="control-label dimgray">Día: {{$agenda->dia}}</span>
                                 </div>
                               
+                              
+								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary">Eliminar</a>  
+
                             </div>
                         </p>
                 @endforeach

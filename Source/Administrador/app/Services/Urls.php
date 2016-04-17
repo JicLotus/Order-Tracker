@@ -102,6 +102,10 @@ class Urls {
   public function getUrlAsignarHorarios($id,$inputData = []) {
     return url("asignarhorarios/". $id. $this->appendQuery($inputData));
   }
+  public function getUrlEliminarAgenda($idAgenda,$vendedor,$inputData = []) {
+    return url("eliminaragenda/". $idAgenda. "/". $vendedor .$this->appendQuery($inputData));
+  }
+  
 
   /**
    * @param array $inputData

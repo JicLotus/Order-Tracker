@@ -71,7 +71,7 @@
                                 </div>
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Cantidad: {{$pedido->id}}</span>
+                                    <span class="control-label dimgray">Cantidad: {{$pedido->cantidad}}</span>
                                 </div>
                                 
                                 <div class="control-group">
@@ -80,6 +80,10 @@
 
                                 <div class="control-group">
                                     <span class="control-label dimgray">Cliente: {{$pedido->id_cliente}}</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <span class="control-label dimgray">Identificación: {{$pedido->id}}</span>
                                 </div>
                                 
 
