@@ -107,7 +107,7 @@ class AsignarHorariosController extends Controller
     public function index($id)
     {		
 		
-			$diasPosibles = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes");
+			$diasPosibles = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes");
 			
 			foreach($diasPosibles as $dia){
 				
