@@ -15,10 +15,10 @@
 		 $m= date("m", strtotime($fecha));
 		 
 		 //Lo hago asi, porq mysql responde mas rapido a este tipo de consulta, la alternativa es mandar DATE(fecha) asi de una 
-		 $sql.= " and YEAR(agendas.fecha)=" . $y . " and MONTH(agendas.fecha)=" . $m .  " and DAY(agendas.fecha)=" . $d;
+		 $sql.= " and YEAR(agendas.fecha)=" . $y . " and MONTH(agendas.fecha)=" . $m .  " and DAY(agendas.fecha)=" . $d." order by agendas.fecha asc";
 	}		
 		
-	$sql.= " )";
+	$sql.= ")";
 
 	$rs = mysql_query($sql,$con);
 	
