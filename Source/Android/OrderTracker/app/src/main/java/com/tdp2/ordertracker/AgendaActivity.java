@@ -234,4 +234,26 @@ public class AgendaActivity extends AppCompatActivity  {
 
     }
 
+    public void leerQR(View view) {
+        Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+        startActivityForResult(intent, 0);
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                Toast.makeText(this, contents, Toast.LENGTH_LONG).show();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                // Handle successful scan
+            } else if (resultCode == RESULT_CANCELED) {
+                // Handle cancel
+            }
+        }
+
+    }
+
 }
