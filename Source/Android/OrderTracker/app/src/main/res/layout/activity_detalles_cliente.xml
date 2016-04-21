@@ -5,27 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/boton_mapa"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map_cliente"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary"
-        android:elevation="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/textColorPrimary"
-        android:layout_centerHorizontal="true"
-        android:text="Ver en el mapa"
-        android:onClick="verMapa"/>
+        android:layout_height="300dp"
+        tools:context="com.tdp2.ordertracker.MapsActivity" />
 
 
 
     <TextView
         android:layout_width="match_parent"
         android:id = "@+id/direccion_detalleC"
-        android:layout_below="@+id/boton_mapa"
+        android:layout_below="@+id/map_cliente"
         android:textColor="@color/negro"
         android:textStyle="bold"
-        android:layout_margin="26dp"
+        android:layout_margin="10dp"
         android:layout_height="wrap_content"
         android:text="Dirección"/>
 
@@ -35,7 +32,7 @@
         android:layout_below="@+id/direccion_detalleC"
         android:textColor="@color/negro"
         android:textStyle="bold"
-        android:layout_margin="26dp"
+        android:layout_margin="10dp"
         android:layout_height="wrap_content"
         android:text="Razón Social"/>
     <TextView
@@ -44,14 +41,14 @@
         android:layout_below="@+id/razonSocial_detalleC"
         android:textColor="@color/negro"
         android:textStyle="bold"
-        android:layout_margin="26dp"
+        android:layout_margin="10dp"
         android:layout_height="wrap_content"
         android:text="+541160581642"/>
     <TextView
         android:layout_width="match_parent"
         android:id = "@+id/telLaboral_detalleC"
         android:layout_below="@+id/telMovil_detalleC"
-        android:layout_margin="26dp"
+        android:layout_margin="10dp"
         android:textColor="@color/negro"
         android:textStyle="bold"
         android:layout_height="wrap_content"
@@ -59,8 +56,10 @@
     <TextView
         android:layout_width="match_parent"
         android:id = "@+id/email_detalleC"
-        android:layout_below="@+id/telMovil_detalleC_detalleC"
-        android:layout_margin="26dp"
+        android:layout_below="@+id/telLaboral_detalleC"
+        android:textColor="@color/negro"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
         android:layout_height="wrap_content"
         android:text="Moncholo06@gmail.com"/>
 

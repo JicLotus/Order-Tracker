@@ -127,7 +127,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             np = (NumberPicker) itemView.findViewById(R.id.nPicker);
 
             np.setMinValue(0);
-            np.setMaxValue(12);
             np.setValue(0);
             np.setWrapSelectorWheel(false);
 
@@ -140,9 +139,9 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                     } else {
                         try {
                             JSONObject producto = new JSONObject();
-                            producto.put("id_producto", itemId);
-                            producto.put("cant", newVal);
-                            producto.put("titulo", titulo.getText().toString());
+                            producto.put("id", itemId);
+                            producto.put("cantidad", newVal);
+                            producto.put("nombre", titulo.getText().toString());
                             producto.put("precio",precio);
                             pedidos.put(itemId, producto);
 
@@ -155,6 +154,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             });
 
             icono.setOnClickListener(this);
+            titulo.setOnClickListener(this);
+            descripcion.setOnClickListener(this);
 
         }
 

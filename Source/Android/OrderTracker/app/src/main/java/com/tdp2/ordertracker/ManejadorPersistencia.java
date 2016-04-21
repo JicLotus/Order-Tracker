@@ -60,4 +60,14 @@ public class ManejadorPersistencia {
         //persistirlo al carro
     }
 
+    public static void persistirCliente(Context context, String id, String nombre, String direccion, String hora){
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.commit();
+
+    }
+
+
+
 }

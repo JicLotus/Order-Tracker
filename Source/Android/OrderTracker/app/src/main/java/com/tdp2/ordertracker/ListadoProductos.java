@@ -1,14 +1,15 @@
 package com.tdp2.ordertracker;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.NumberPicker;
@@ -37,7 +38,7 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
     private List<String> firstIdImagenes;
 
     ProductoAdapter adapter;
-    private String cliente;
+    private String jsonCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         setContentView(R.layout.activity_listado_productos);
 
         try {
-            cliente = getIntent().getStringExtra("cliente");
+            jsonCliente = getIntent().getStringExtra("cliente");
         }catch(Exception e){}
 
 
@@ -100,6 +101,7 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
     public List<RecyclerViewItem> obtenerProductos() {
 
         downloadImagenesProductos();
+
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < productos.length(); i++) {
@@ -142,19 +144,36 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
             productos.put(producto);
         }
 
-
-
-        Context contexto = this.getApplicationContext();
         Intent documentsActivity = new Intent(this, DetallesPedido.class);
         try {
             documentsActivity.putExtra("jsonArray", productos.toString());
-            documentsActivity.putExtra("cliente", cliente);
+            documentsActivity.putExtra("cliente", jsonCliente);
         }
         catch(Exception e)
         {   return;
         }
 
         startActivity(documentsActivity);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("¿Desea Cancelar su visita?")
+                .setMessage("Presiona Si para finalizar su visita")
+                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //no hace nada
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
 

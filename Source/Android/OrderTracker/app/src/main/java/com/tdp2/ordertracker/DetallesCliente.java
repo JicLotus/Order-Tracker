@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -27,7 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetallesCliente extends AppCompatActivity{
+public class DetallesCliente extends AppCompatActivity implements OnMapReadyCallback{
 
     private JSONObject cliente;
 
@@ -36,6 +37,10 @@ public class DetallesCliente extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_cliente);
 
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map_cliente);
+        mapFragment.getMapAsync(this);
 
 
         try {
@@ -128,4 +133,36 @@ public class DetallesCliente extends AppCompatActivity{
 
         contexto.startActivity(mapActivity);
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        // Add a marker in Sydney and move the camera
+        Geocoder geoCoder = new Geocoder(this);
+        List<Address> direcciones = null;
+
+        try {
+            String direccionStr = cliente.getString("direccion"), nombre = cliente.getString("nombre");
+            direcciones = geoCoder.getFromLocationName(direccionStr, 1);
+            LatLng latLng = new LatLng(-34.55343001093603, -58.47850725000001);
+            if (direcciones != null){
+                Address direccion = direcciones.get(0);
+                latLng = new LatLng(direccion.getLatitude(),  direccion.getLongitude());
+            }
+
+            googleMap.addMarker(new MarkerOptions().position(latLng).title(nombre));
+
+
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
 }

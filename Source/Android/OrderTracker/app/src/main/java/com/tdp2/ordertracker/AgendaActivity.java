@@ -1,46 +1,33 @@
 package com.tdp2.ordertracker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import GoogleMaps.GMPolyline;
@@ -53,11 +40,12 @@ import Model.Response;
  */
 
 
-public class AgendaActivity extends AppCompatActivity  {
+public class AgendaActivity extends AppCompatActivity {
 
     RecyclerView rv;
     String vendedor;
-
+    AgendaAdapter.AgendaViewHolder usuarioSeleccionado;
+    JSONArray clientesDelDia;
     private DrawerLayout mDrawerLayout;
     private RelativeLayout mDrawerList;
     private GoogleMap mMap;
@@ -88,7 +76,7 @@ public class AgendaActivity extends AppCompatActivity  {
         fechaActual = dateFormat.format(date).toString();
         usuarios = getUsuariosAgenda();
 
-        rv = (RecyclerView)findViewById(R.id.recycler_view_agenda);
+        rv = (RecyclerView) findViewById(R.id.recycler_view_agenda);
         rv.setHasFixedSize(true);
 
 
@@ -112,15 +100,15 @@ public class AgendaActivity extends AppCompatActivity  {
 
         switch (day) {
             case Calendar.MONDAY:
-                ((TextView)findViewById(R.id.lunes)).setTypeface(null, Typeface.BOLD);
+                ((TextView) findViewById(R.id.lunes)).setTypeface(null, Typeface.BOLD);
             case Calendar.TUESDAY:
-                ((TextView)findViewById(R.id.martes)).setTypeface(null, Typeface.BOLD);
+                ((TextView) findViewById(R.id.martes)).setTypeface(null, Typeface.BOLD);
             case Calendar.WEDNESDAY:
-                ((TextView)findViewById(R.id.miercoles)).setTypeface(null, Typeface.BOLD);
+                ((TextView) findViewById(R.id.miercoles)).setTypeface(null, Typeface.BOLD);
             case Calendar.THURSDAY:
-                ((TextView)findViewById(R.id.jueves)).setTypeface(null, Typeface.BOLD);
+                ((TextView) findViewById(R.id.jueves)).setTypeface(null, Typeface.BOLD);
             case Calendar.FRIDAY:
-                ((TextView)findViewById(R.id.viernes)).setTypeface(null, Typeface.BOLD);
+                ((TextView) findViewById(R.id.viernes)).setTypeface(null, Typeface.BOLD);
 
         }
 
@@ -128,16 +116,17 @@ public class AgendaActivity extends AppCompatActivity  {
         this.crearDraweToggle();
     }
 
-    private void cargarItems(){
-        TextView unDia = (TextView)findViewById(R.id.itemDia);
+
+    private void cargarItems() {
+        TextView unDia = (TextView) findViewById(R.id.itemDia);
         unDia = new TextView(this);
 
         unDia.setText("Lunes");
         items.add(unDia);
     }
 
-    private void crearDraweToggle()
-    {
+
+    private void crearDraweToggle() {
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
@@ -152,7 +141,8 @@ public class AgendaActivity extends AppCompatActivity  {
             public void onDrawerOpened(View drawerView) {
                 mDrawerList.bringToFront();
                 mDrawerLayout.requestLayout();
-            }};
+            }
+        };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
@@ -162,34 +152,32 @@ public class AgendaActivity extends AppCompatActivity  {
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
-    public ArrayList<Agenda> getUsuariosAgenda(){
-        ArrayList<Agenda> listaUsuarios= new ArrayList<Agenda>();
+    public ArrayList<Agenda> getUsuariosAgenda() {
+        ArrayList<Agenda> listaUsuarios = new ArrayList<Agenda>();
         Date cDate = new Date();
-        String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
         try {
-            Request request = new Request("GET", "GetClientes.php?id="+vendedor+"&fecha="+fechaActual);
+            Request request = new Request("GET", "GetClientes.php?id=" + vendedor + "&fecha=" + fechaActual);
             Response resp = new RequestHandler().sendRequest(request);
-
-            for (int i=0;i<resp.getJsonArray().length();i++){
-                JSONObject agenda = resp.getJsonArray().getJSONObject(i);
+            clientesDelDia = resp.getJsonArray();
+            for (int i = 0; i < clientesDelDia.length(); i++) {
+                JSONObject agenda = clientesDelDia.getJSONObject(i);
                 Date date = format.parse(agenda.getString("fecha"));
                 String hora = new SimpleDateFormat("HH:mm").format(date);
 
-                Agenda unaAgenda = new Agenda(agenda.getString("nombre"),agenda.getString("direccion"), hora,agenda.getString("id"));
+                Agenda unaAgenda = new Agenda(agenda.getString("nombre"), agenda.getString("direccion"), hora, agenda.getString("id"));
                 listaUsuarios.add(unaAgenda);
             }
+        } catch (Exception e) {
         }
-        catch(Exception e){}
 
         return listaUsuarios;
     }
 
 
-
-    public void verDia(View view){
+    public void verDia(View view) {
         int id = view.getId();
         String diaSeleccionado = "";
         selectItem(id);
@@ -228,16 +216,10 @@ public class AgendaActivity extends AppCompatActivity  {
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        map = new GMPolyline(usuarios,mapFragment, this);
+        map = new GMPolyline(usuarios, mapFragment, this);
         AgendaAdapter adapter = new AgendaAdapter(usuarios);
         rv.setAdapter(adapter);
 
-    }
-
-    public void leerQR(View view) {
-        Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-        startActivityForResult(intent, 0);
     }
 
 
@@ -248,11 +230,33 @@ public class AgendaActivity extends AppCompatActivity  {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 Toast.makeText(this, contents, Toast.LENGTH_LONG).show();
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                // Handle successful scan
+                usuarioSeleccionado.ponerVerde();
+                Intent documentsActivity = new Intent(this, ListadoProductos.class);
+                documentsActivity.putExtra("cliente", jsonCliente(usuarioSeleccionado.id));
+                startActivity(documentsActivity);
             } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "No valido", Toast.LENGTH_LONG).show();
                 // Handle cancel
             }
         }
+
+    }
+
+    private String jsonCliente(String id) {
+
+        for (int i = 0; i < clientesDelDia.length(); i++) {
+            try {
+                JSONObject cliente = clientesDelDia.getJSONObject(i);
+
+                if (cliente.getString("id") == id) {
+                    return cliente.toString();
+                }
+            } catch (JSONException e) {
+                return "";
+            }
+        }
+
+        return "";
 
     }
 

@@ -1,5 +1,6 @@
 package com.tdp2.ordertracker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -7,22 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.google.android.gms.maps.SupportMapFragment;
-
-import org.json.JSONArray;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by juan on 06/04/16.
- */
 public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaViewHolder> {
 
     private List<Agenda> usuarios;
@@ -40,11 +31,6 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_agenda, parent, false);
         AgendaViewHolder pvh = new AgendaViewHolder(v);
-
-        Date cDate = new Date();
-        String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-
-
 
         return pvh;
     }
@@ -69,20 +55,27 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         TextView direccion;
         TextView horario;
         String id;
+        View view;
+        AgendaViewHolder selfHolder;
         RelativeLayout holder_agenda;
         FloatingActionButton agregarAlCarro;
         int posicion;
 
         AgendaViewHolder(View itemView) {
             super(itemView);
+            selfHolder = this;
+            view = itemView;
             nombre = (TextView)itemView.findViewById(R.id.nombre_agenda);
             direccion = (TextView)itemView.findViewById(R.id.direccion_agenda);
             horario = (TextView)itemView.findViewById(R.id.hora_agenda);
             holder_agenda = (RelativeLayout)itemView.findViewById(R.id.holder_agenda);
-
             agregarAlCarro = (FloatingActionButton) itemView.findViewById(R.id.iconoCarro);
             this.accionCarroDeCompras();
 
+        }
+
+        public void ponerVerde(){
+            holder_agenda.setBackgroundColor(0xFF00FF00);
         }
 
         private void accionCarroDeCompras(){
@@ -91,21 +84,25 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
                 @Override
                 public void onClick(View v) {
                     Context contexto = v.getContext();
+/*
                     Intent documentsActivity = new Intent(contexto, ListadoProductos.class);
-                    try {
-                        documentsActivity.putExtra("cliente", id);
-                    }
-                    catch(Exception e)
-                    {   return;
-                    }
-
+                    documentsActivity.putExtra("cliente", id);
                     contexto.startActivity(documentsActivity);
+
+*/
+                    ((AgendaActivity)contexto).usuarioSeleccionado = selfHolder;
+                    Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+                    intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+                    ((Activity) contexto).startActivityForResult(intent, 0);
+
                 }
             });
         }
 
 
     }
+
+
 
 
 }

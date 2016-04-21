@@ -6,58 +6,69 @@
     android:padding="5dp"
     >
 
+
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".75"
-        android:id="@+id/cv_producto"
-        >
+        android:id="@+id/cv_producto">
 
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/iconoCarro">
+            android:layout_alignParentBottom="true">
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dados de 6 numeros"
+                android:text="Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros"
                 android:textColor="@color/negro"
                 android:id="@+id/nombreProducto"
+                android:layout_toLeftOf="@+id/nPicker"
                 android:layout_alignParentTop="true"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$300"
-                android:textColor="@color/negro"
                 android:id="@+id/precio"
+                android:layout_toRightOf="@+id/imagenProducto"
+                android:gravity="bottom"
                 android:textSize="30sp"
                 android:layout_below="@+id/nombreProducto"
                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad: 3"
+                android:id="@+id/cantidad"
+                android:gravity="bottom"
+                android:textSize="20sp"
+                android:layout_below="@+id/precio"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal: $900"
+                android:id="@+id/subtotal"
+                android:gravity="bottom"
+                android:textSize="20sp"
+                android:layout_below="@+id/cantidad"
+                />
+
 
 
 
         </RelativeLayout>
 
 
-
     </android.support.v7.widget.CardView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="x 12"
-        android:textColor="@color/negro"
-        android:id="@+id/cantidad"
-        android:textSize="30sp"
-        />
+
 
 </LinearLayout>
 

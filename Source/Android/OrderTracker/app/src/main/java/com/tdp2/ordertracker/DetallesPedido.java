@@ -13,10 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import Files.FileHandler;
 import Model.Request;
 import Model.RequestHandler;
 import Model.Response;
@@ -28,7 +31,9 @@ public class DetallesPedido extends AppCompatActivity {
     private RecyclerView rv;
     TextView precioTotal;
     String vendedor;
-    String cliente;
+    JSONObject jsonCliente;
+    private FileHandler fileHandler;
+    private List<String> firstIdImagenes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,8 @@ public class DetallesPedido extends AppCompatActivity {
 
         try {
             pedidos = new JSONArray(getIntent().getStringExtra("jsonArray"));
-            cliente = getIntent().getStringExtra("cliente");
+            String cliente = getIntent().getStringExtra("cliente");
+            jsonCliente = new JSONObject(cliente);
         }catch(Exception e){}
 
         vendedor = ManejadorPersistencia.obtenerVendedor(this);
@@ -49,13 +55,74 @@ public class DetallesPedido extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-        adapter = new PedidoAdapter(pedidos);
+        adapter = new PedidoAdapter(obtenerProductos(),pedidos);
         rv.setAdapter(adapter);
         precioTotal = (TextView) findViewById(R.id.totalPedido);
         precioTotal.setText(calcularPrecioTotal());
+        settearDetalleCliente();
 
     }
 
+    private void settearDetalleCliente(){
+        try {
+            ((TextView)findViewById(R.id.direccion_detalleC)).setText(jsonCliente.getString("direccion"));
+            ((TextView)findViewById(R.id.razonSocial_detalleC)).setText("Razón Social: "+jsonCliente.getString("razon_social"));
+            ((TextView)findViewById(R.id.telMovil_detalleC)).setText("Tel. Móvil: "+jsonCliente.getString("telefono_movil"));
+            ((TextView)findViewById(R.id.telLaboral_detalleC)).setText("Tel. Laboral: "+jsonCliente.getString("telefono_laboral"));
+            ((TextView)findViewById(R.id.email_detalleC)).setText(jsonCliente.getString("email"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public void downloadImagenesProductos()
+    {
+        fileHandler = new FileHandler();
+        firstIdImagenes = new ArrayList<>();
+
+        for (int i=0;i<pedidos.length();i++) {
+
+            try {
+                String idProducto = pedidos.getJSONObject(i).getString("id");
+                String idFirstImagen = fileHandler.downloadFile("/mnt/sdcard/Download/", idProducto);
+
+                firstIdImagenes.add(idFirstImagen);
+
+            }catch(Exception e){}
+
+        }
+    }
+
+
+
+    public List<RecyclerViewItem> obtenerProductos() {
+
+        downloadImagenesProductos();
+
+        List<RecyclerViewItem> items = new ArrayList<>();
+        try {
+            for (int i = 0; i < pedidos.length(); i++) {
+                int idProducto = pedidos.getJSONObject(i).getInt("id");
+                int idImagen;
+                try {
+                    if (firstIdImagenes.get(i)=="") idImagen=0;
+                    else idImagen = Integer.parseInt(firstIdImagenes.get(i));
+                }catch(Exception e)
+                {
+                    idImagen = 0;
+                }
+
+                items.add(new RecyclerViewItem(pedidos.getJSONObject(i).getString("nombre"),"$ " + pedidos.getJSONObject(i).getString("precio"),idImagen));
+            }
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+
+        return items;
+    }
 
 
     public String calcularPrecioTotal()
@@ -66,7 +133,7 @@ public class DetallesPedido extends AppCompatActivity {
 
             try {
                 JSONObject producto = pedidos.getJSONObject(i);
-                cantidad = Integer.parseInt(producto.getString("cant"));
+                cantidad = Integer.parseInt(producto.getString("cantidad"));
                 precio = Integer.parseInt(producto.getString("precio"));
                 precioParcial = precio*cantidad;
                 precioTotal+=precioParcial;
@@ -83,11 +150,11 @@ public class DetallesPedido extends AppCompatActivity {
 
             try {
                 JSONObject producto = pedidos.getJSONObject(i);
-                String cantidad = producto.getString("cant");
+                String cantidad = producto.getString("cantidad");
                 String precio = producto.getString("precio");
-                String id_producto = producto.getString("id_producto");
+                String id_producto = producto.getString("id");
 
-                Request request = new Request("GET", "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+cliente+"&id_producto="+id_producto+"&cant="+cantidad+"&precio="+precio);
+                Request request = new Request("GET", "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+jsonCliente.getString("id")+"&id_producto="+id_producto+"&cant="+cantidad+"&precio="+precio);
                 Response resp = new RequestHandler().sendRequest(request);
 
             }
@@ -97,6 +164,7 @@ public class DetallesPedido extends AppCompatActivity {
         startActivity(documentsActivity);
 
     }
+
 
 
 }
