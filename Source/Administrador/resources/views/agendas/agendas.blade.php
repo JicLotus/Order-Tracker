@@ -26,7 +26,7 @@
 <form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="ListaVendedores">Seleccione un vendedor:</label>
+			<h4><label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label><h4>
 			  <div class="col-sm-8">
 				<select id="idVende" name="idVendedor">
 					@foreach($vendedores as $vendedor)

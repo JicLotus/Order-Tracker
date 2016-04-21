@@ -27,7 +27,7 @@
     <section id="search-section">
  <a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block">AGENDAS</a>
 		
-<div class= "form">		
+<h4><div class= "form">		
 <form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
@@ -42,7 +42,7 @@
 			  </div> 
 		</div>	
 </form>
-</div>
+</div></h4>
 <hr width=75%"/>
 	
 	<div class="form-group">
@@ -52,7 +52,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1">Lunes</a>
+					<a data-toggle="collapse" href="#collapse1"><b> Lunes</b> </a>
 				</h4>
 			</div>
 		<div id="collapse1" class="panel-collapse collapse">
@@ -94,7 +94,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse2">Martes</a>
+					<a data-toggle="collapse" href="#collapse2"><b> Martes</b> </a>
 				</h4>
 			</div>
 		<div id="collapse2" class="panel-collapse collapse">
@@ -138,7 +138,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3">Miércoles</a>
+					<a data-toggle="collapse" href="#collapse3"><b> Miércoles</b> </a>
 				</h4>
 			</div>
 		<div id="collapse3" class="panel-collapse collapse">
@@ -181,7 +181,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse4">Jueves</a>
+					<a data-toggle="collapse" href="#collapse4"><b> Jueves</b></a>
 				</h4>
 			</div>
 		<div id="collapse4" class="panel-collapse collapse">
@@ -226,7 +226,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse5">Viernes</a>
+					<a data-toggle="collapse" href="#collapse5"><b> Viernes</b></a>
 				</h4>
 			</div>
 		<div id="collapse5" class="panel-collapse collapse">

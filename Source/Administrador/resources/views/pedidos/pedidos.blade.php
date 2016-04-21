@@ -23,22 +23,26 @@
     
 @section("content")
     <section id="search-section">
+		<a  href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary btn-block">PEDIDOS</a>
+
 		
-		<form action="pedidovendedor" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+		
+		<h4><form action="pedidovendedor" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 				{{ csrf_field() }}
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
+					
+					<h4><label class="control-label col-sm-2" for="ListaClientes">Lista de clientes:</label></h4>
 					  <div class="col-sm-8">
-						<select id="idVende" name="idVendedor">
-							@foreach($vendedores as $vendedor)
-							<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
+						<select id="idCliente" name="idCliente">
+							@foreach($clientes as $cliente)
+							<option value= {{$cliente->id}} > {{$cliente->nombre}}</option>  
 							@endforeach
 													  
 							<input type="submit" value= "Ver" />
 						</select>
 					  </div> 
 				</div>	
-		</form>
+		</form></h4>
 
 <hr width=75%"/>
 
