@@ -19,14 +19,15 @@ class PedidoVendedorController extends Controller
      */
     public function index(Request $request)
     {		
-			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
+			$clientes = DB::select("select nombre,id from clientes order by nombre");
 			$sql = "select *, productos.nombre as nombreProducto from productos ";
-			$sql .= "left join pedidos on pedidos.id_producto = productos.id where pedidos.id_usuario = " . $request->idVendedor ;
+			$sql .= "left join pedidos on pedidos.id_producto = productos.id where pedidos.id_cliente = " . $request->idCliente ;
 			$pedidos = DB::select($sql);
-			$nombre =  DB::select("select nombre,id from usuarios where id = " .$request->idVendedor);
+			$bultos = DB::select("$sql group by id_compra");
+			$nombre =  DB::select("select nombre,id from clientes where id = " .$request->idCliente);
                         
         return view('pedidos.pedidovendedor', ['title' => 'Home',
-                                'page' => 'home','pedidos' => $pedidos, 'vendedores' => $vendedores, 'nombre' => $nombre]
+                                'page' => 'home','pedidos' => $pedidos, 'clientes' => $clientes, 'nombre' => $nombre, 'bultos' => $bultos]
         );
         
         

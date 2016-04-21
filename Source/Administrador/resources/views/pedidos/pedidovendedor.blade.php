@@ -20,36 +20,44 @@
 @section("content")
     <section id="search-section">
 		
-<form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+		<a  href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary btn-block">PEDIDOS</a>
+
+		
+<h4><form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
+			<h4><label class="control-label col-sm-2" for="ListaClientes">Lista de clientes:</label></h4>
 			  <div class="col-sm-8">
-				<select id="idVende" name="idVendedor" onchange= "this.form.submit()" >
-					@foreach($vendedores as $vendedor)
-					<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
+				<select id="idCliente" name="idCliente" onchange= "this.form.submit()" >
+					@foreach($clientes as $cliente)
+					<option value= {{$cliente->id}} > {{$cliente->nombre}}</option>  
 					@endforeach
 					 <option selected = "selected" value = {{$nombre[0]->id}} >{{$nombre[0]->nombre}}   </option>                   
 				</select>
 			  </div> 
 		</div>	
-</form>
+</form></h4>
 
 <hr width=75%"/>
 
 	<div class="form-group">
 
 	</div>	
-
-		<label class="control-label col-sm-2" for="VendedorSeleccionado">Vendedor Seleccionado:</label>
-        <div class="control-group">
-              <span class="control-label dimgray">{{$nombre[0]->nombre}}</span>
-         </div>
               
-			</div>	
-		
-    
+	@foreach($bultos as $bulto)
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#{{$bulto->id_compra}}"> <b> N° compra: {{$bulto->id_compra}}</b> </a>
+				</h4>
+			</div>
+		<div id="{{$bulto->id_compra}}" class="panel-collapse collapse">
+			<ul class="list-group">
+				<li class="list-group-item"> 
+				<div>
                 @foreach($pedidos as $pedido)
+                <?php If ($pedido->id_compra == $bulto->id_compra){?>   
                         <p>
                             <div class="well">
 								
@@ -66,7 +74,7 @@
 											</select>
 									</div>	
 									<input type="hidden" name="cantidad" value= {{$pedido->cantidad}}>
-									<input type="hidden" name="idVendedor" value={{$nombre[0]->id}}>
+									<input type="hidden" name="idCliente" value={{$nombre[0]->id}}>
 									<input type="hidden" name="id_producto" value= {{$pedido->id_producto}}>
 									
 								</form>
@@ -82,10 +90,6 @@
                                 <div class="control-group">
                                     <span class="control-label dimgray">Precio: {{$pedido->precio}}</span>
                                 </div>
-
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cliente: {{$pedido->id_cliente}}</span>
-                                </div>
                                 
                                 <div class="control-group">
                                     <span class="control-label dimgray">Identificación: {{$pedido->id}}</span>
@@ -95,8 +99,22 @@
 
                             </div>
                         </p>
+                 <?php } ?>
                 @endforeach
-        
+			
+
+               </div>
+               </li>
+			</ul>
+		</div>
+	</div>	
+    @endforeach
+    
+     <?php If (count($bultos) == 0){?>   
+		<div class="alert alert-danger">
+			<strong>No existen compras! </strong>Revise el nombre del cliente seleccionado.
+		</div>
+	  <?php } ?>
     </section>
 
 @endsection

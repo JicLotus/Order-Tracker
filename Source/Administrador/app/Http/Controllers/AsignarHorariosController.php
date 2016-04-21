@@ -126,7 +126,7 @@ class AsignarHorariosController extends Controller
 			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
 			$sql = "select *, agendas.id as agendaId, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
 			$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
-			$sql .= " left join clientes on agendas.id_cliente = clientes.id where usuarios.id = " . $id;
+			$sql .= " left join clientes on agendas.id_cliente = clientes.id where usuarios.id = " . $id . " order by agendas.orden";
 			$agendas = DB::select($sql);
 			
 			$nombre =  DB::select("select nombre,id from usuarios where id = " . $id);
