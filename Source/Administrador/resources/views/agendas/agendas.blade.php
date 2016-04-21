@@ -20,11 +20,13 @@
 
 @section("content")
     <section id="search-section">
+		<a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block">AGENDAS</a>
+
 		
 <form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
+			<label class="control-label col-sm-2" for="ListaVendedores">Seleccione un vendedor:</label>
 			  <div class="col-sm-8">
 				<select id="idVende" name="idVendedor">
 					@foreach($vendedores as $vendedor)
