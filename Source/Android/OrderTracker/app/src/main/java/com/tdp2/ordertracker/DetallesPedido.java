@@ -67,9 +67,6 @@ public class DetallesPedido extends AppCompatActivity {
         try {
             ((TextView)findViewById(R.id.direccion_detalleC)).setText(jsonCliente.getString("direccion"));
             ((TextView)findViewById(R.id.razonSocial_detalleC)).setText("Razón Social: "+jsonCliente.getString("razon_social"));
-            ((TextView)findViewById(R.id.telMovil_detalleC)).setText("Tel. Móvil: "+jsonCliente.getString("telefono_movil"));
-            ((TextView)findViewById(R.id.telLaboral_detalleC)).setText("Tel. Laboral: "+jsonCliente.getString("telefono_laboral"));
-            ((TextView)findViewById(R.id.email_detalleC)).setText(jsonCliente.getString("email"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

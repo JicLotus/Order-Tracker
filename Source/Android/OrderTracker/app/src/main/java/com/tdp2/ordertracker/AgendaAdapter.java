@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
@@ -54,6 +55,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         TextView nombre;
         TextView direccion;
         TextView horario;
+        ImageView iconoEstado;
         String id;
         View view;
         AgendaViewHolder selfHolder;
@@ -68,6 +70,8 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
             nombre = (TextView)itemView.findViewById(R.id.nombre_agenda);
             direccion = (TextView)itemView.findViewById(R.id.direccion_agenda);
             horario = (TextView)itemView.findViewById(R.id.hora_agenda);
+            iconoEstado = (ImageView) itemView.findViewById(R.id.icono_estado);
+            ponerAmarillo();
             holder_agenda = (RelativeLayout)itemView.findViewById(R.id.holder_agenda);
             agregarAlCarro = (FloatingActionButton) itemView.findViewById(R.id.iconoCarro);
             this.accionCarroDeCompras();
@@ -75,7 +79,11 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         }
 
         public void ponerVerde(){
-            holder_agenda.setBackgroundColor(0xFF00FF00);
+            iconoEstado.setColorFilter(R.color.verde);
+        }
+
+        public void ponerAmarillo(){
+            iconoEstado.setColorFilter(R.color.amarillo);
         }
 
         private void accionCarroDeCompras(){

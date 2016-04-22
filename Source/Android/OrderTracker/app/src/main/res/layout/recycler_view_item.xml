@@ -16,8 +16,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/nPicker"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/activity_horizontal_margin">
 
             <ImageView
                 android:layout_width="100dp"
@@ -26,21 +26,27 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/monitor"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="16dp"
+                android:layout_alignParentTop="true" />
 
-                />
+            <NumberPicker
+                android:id="@+id/nPicker"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros"
-                android:textColor="@color/negro"
                 android:id="@+id/nombreProducto"
-                android:layout_toLeftOf="@+id/nPicker"
-                android:layout_toRightOf="@+id/imagenProducto"
+                android:layout_toLeftOf="@id/nPicker"
+                android:layout_toRightOf="@id/imagenProducto"
                 android:layout_alignParentTop="true"
-                android:textSize="12sp"
+                android:textSize="15sp"
+                android:textColor="@color/negro"
+
                 />
 
             <TextView
@@ -48,30 +54,30 @@
                 android:layout_height="wrap_content"
                 android:text="$300"
                 android:id="@+id/caracteristicasProductos"
-                android:layout_toRightOf="@+id/imagenProducto"
+                android:layout_toRightOf="@id/imagenProducto"
                 android:gravity="bottom"
-                android:textSize="30sp"
-                android:layout_below="@+id/nombreProducto"
+                android:textSize="24sp"
+                android:layout_below="@id/nombreProducto"
+                android:paddingTop="@dimen/standard_padding"
+
+
                 />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Subtotal: $300"
-            android:id="@+id/subtotal"
-            android:layout_centerHorizontal="true"
-            android:layout_toRightOf="@+id/imagenProducto"
-            android:gravity="bottom"
-            android:textSize="20sp"
-            android:layout_below="@+id/caracteristicasProductos"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal: $300"
+                android:id="@+id/subtotal"
+                android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@id/imagenProducto"
+                android:gravity="bottom"
+                android:textSize="24sp"
+                android:layout_below="@id/caracteristicasProductos"
+                android:paddingTop="@dimen/standard_padding"
 
-        <NumberPicker
-            android:id="@+id/nPicker"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:gravity="right"
 
-            android:layout_height="wrap_content"/>
+                />
+
+
 
 
 

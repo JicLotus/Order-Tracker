@@ -17,10 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/holder_agenda"
-            android:background="@color/amarillo"
-
+            android:layout_margin="@dimen/activity_horizontal_margin"
             >
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:id="@+id/icono_estado"
+                android:icon="@mipmap/ic_lens_black_24dp"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,7 +35,7 @@
                 android:text="Juan Perez"
                 android:textColor="@color/negro"
                 android:id="@+id/nombre_agenda"
-
+                android:layout_toEndOf="@id/icono_estado"
                 android:layout_alignParentTop="true"
                 />
 
@@ -38,7 +44,6 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:gravity="right"
-                android:layout_below="@+id/direccion_agenda"
                 android:text="19:00 PM"
                 android:textColor="@color/negro"
                 android:id="@+id/hora_agenda"
@@ -51,9 +56,9 @@
                 android:textSize="10sp"
                 android:text="Superi 3683"
                 android:id="@+id/direccion_agenda"
-                android:layout_below="@+id/nombre_agenda"
+                android:layout_below="@id/nombre_agenda"
+                android:layout_alignStart="@id/nombre_agenda"
                  />
-
 
 
         </RelativeLayout>

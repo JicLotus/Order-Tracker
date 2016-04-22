@@ -16,7 +16,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/activity_horizontal_margin">
 
 
             <TextView
@@ -25,20 +26,19 @@
                 android:text="Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros.Dados de 6 numeros"
                 android:textColor="@color/negro"
                 android:id="@+id/nombreProducto"
-                android:layout_toLeftOf="@+id/nPicker"
                 android:layout_alignParentTop="true"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$300"
+                android:text="Precio unitario: $300"
                 android:id="@+id/precio"
-                android:layout_toRightOf="@+id/imagenProducto"
                 android:gravity="bottom"
-                android:textSize="30sp"
-                android:layout_below="@+id/nombreProducto"
+                android:textSize="15sp"
+                android:layout_below="@id/nombreProducto"
+                android:paddingTop="@dimen/standard_padding"
                 />
 
             <TextView
@@ -47,8 +47,8 @@
                 android:text="Cantidad: 3"
                 android:id="@+id/cantidad"
                 android:gravity="bottom"
-                android:textSize="20sp"
-                android:layout_below="@+id/precio"
+                android:textSize="15sp"
+                android:layout_below="@id/precio"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -56,8 +56,10 @@
                 android:text="Subtotal: $900"
                 android:id="@+id/subtotal"
                 android:gravity="bottom"
-                android:textSize="20sp"
-                android:layout_below="@+id/cantidad"
+                android:textSize="24sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/cantidad"
                 />
 
 

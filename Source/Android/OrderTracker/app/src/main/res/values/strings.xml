@@ -20,6 +20,6 @@
         <item>Jueves</item>
         <item>Viernes</item>
     </string-array>
-    <string name="title_activity_detalles_pedido">DetallesPedido</string>
+    <string name="title_activity_detalles_pedido">Detalles del Pedido</string>
 
 </resources>
