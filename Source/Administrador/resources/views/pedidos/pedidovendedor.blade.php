@@ -105,9 +105,9 @@
 										<label class="control-label" for="Estado">Estado del pedido:</label>
 											<select id="estado" name="estado" onchange= "this.form.submit()" >
 												
-												<option value="en_proceso" <?php If ($bulto->estado == "pendiente"){?> selected = 'selected'<?php } ?>>Pendiente</option>
+												<option value="pendiente" <?php If ($bulto->estado == "pendiente"){?> selected = 'selected'<?php } ?>>Pendiente</option>
 												<option value="en_proceso" <?php If ($bulto->estado == "en_proceso"){?> selected = 'selected'<?php } ?>>En Proceso de Armado</option>
-												<option value="en_proceso" <?php If ($bulto->estado == "empaquetado"){?> selected = 'selected'<?php } ?>>Empaquetado</option>												
+												<option value="empaquetado" <?php If ($bulto->estado == "empaquetado"){?> selected = 'selected'<?php } ?>>Empaquetado</option>												
 												<option value="entregado"  <?php If ($bulto->estado == "entregado"){?> selected = 'selected'<?php } ?> >Entregado</option>
 												<option value="cancelado" <?php If ($bulto->estado == "cancelado"){?> selected = 'selected'<?php } ?>>Cancelado</option>
             
