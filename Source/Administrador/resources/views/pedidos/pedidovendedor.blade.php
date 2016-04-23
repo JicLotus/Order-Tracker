@@ -139,7 +139,7 @@
 								?>   
 													
 													
-													<td>{{$pedido->nombreProducto}}</td>
+													<td>{{$pedido->nombre}}</td>
 													 <td>{{$pedido->codigo}} </td>
 													 <td>{{$pedido->cantidad}} </td>
 													<td>${{$pedido->precio}} </td>

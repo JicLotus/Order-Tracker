@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaImagen extends Migration
+class CrearTablaPedidos extends Migration
 {
     /**
      * Run the migrations.
@@ -12,20 +12,23 @@ class CrearTablaImagen extends Migration
      */
     public function up()
     {
-        Schema::create('imagenes', function (Blueprint $table) {
-            $table->increments('id_mapeo')->unsigned()->unique();
+        Schema::dropIfExists('pedidos');
+        Schema::create('pedidos', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('id_producto');
-				$table->string('imagen_base64');
+            $table->integer('cantidad');
+	    $table->integer('precio');
+	    $table->integer('id_compra');
+
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
+	 * @return void
      */
     public function down()
     {
-         Schema::drop('imagenes');
+        Schema::drop('pedidos');
     }
 }

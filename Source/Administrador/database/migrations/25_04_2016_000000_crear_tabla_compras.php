@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaPedidos extends Migration
+class CrearTablaCompras extends Migration
 {
     /**
      * Run the migrations.
@@ -12,22 +12,18 @@ class CrearTablaPedidos extends Migration
      */
     public function up()
     {
-        Schema::create('pedidos', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::dropIfExists('compras');
+        Schema::create('compras', function (Blueprint $table) {
+            $table->increments('id_compra');
             $table->integer('id_usuario');
             $table->integer('id_cliente');
-            $table->integer('id_producto');
-            $table->integer('cantidad');
-	    $table->integer('precio');
-	    $table->string('estado');
-	    $table->integer('id_compra');
+	    $table->string('estado')->default('pendiente');
             $table->dateTime('fecha');
         });
     }
 
     /**
-     * Reverse the migrations.
-     *
+     * Reverse the migrations.  
      * @return void
      */
     public function down()

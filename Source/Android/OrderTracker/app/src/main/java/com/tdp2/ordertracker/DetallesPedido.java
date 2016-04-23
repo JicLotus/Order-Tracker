@@ -148,27 +148,20 @@ public class DetallesPedido extends AppCompatActivity {
 
     public void confirmarPedido(View view)
     {
-        for(int i=0;i<pedidos.length();i++) {
+        try {
+            //pedidos.getJSONObject(i);
+            Request request = new Request("GET", "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+jsonCliente.getString("id")+"&productos="+pedidos.toString());
+            Response resp = new RequestHandler().sendRequest(request);
 
-            try {
-                JSONObject producto = pedidos.getJSONObject(i);
-                String cantidad = producto.getString("cantidad");
-                String precio = producto.getString("precio");
-                String id_producto = producto.getString("id");
-
-                Request request = new Request("GET", "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+jsonCliente.getString("id")+"&id_producto="+id_producto+"&cant="+cantidad+"&precio="+precio);
-                Response resp = new RequestHandler().sendRequest(request);
-
-                if (resp.getStatus()){
-                    mostrarDialogOK(view.getContext());
-                }else{
-                    mostrarDialogError(view.getContext());
-                }
-            }
-            catch(Exception e){
+            if (resp.getStatus()){
+                mostrarDialogOK(view.getContext());
+            }else{
                 mostrarDialogError(view.getContext());
-
             }
+        }
+        catch(Exception e){
+            mostrarDialogError(view.getContext());
+
         }
 
         mostrarDialogOK(view.getContext());
