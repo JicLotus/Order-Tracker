@@ -47,7 +47,7 @@ class EditarPedidoController extends Controller
 				if(strcmp($request->datepicker , 'Todas')){
 					if($contador > 0)
 						$sql .= " and ";
-					$sql .= " pedidos.fecha = " . $request->datepicker;
+					$sql .= " pedidos.fecha = '" . $request->datepicker . " 00:00:00'";
 				}
 			}
 			$pedidos = DB::select($sql);

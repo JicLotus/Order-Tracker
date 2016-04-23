@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Property as Property;
+use DateTime;
 
 class PedidoVendedorController extends Controller
 {
@@ -42,7 +43,9 @@ class PedidoVendedorController extends Controller
 				if(strcmp($request->datepicker , 'Todas')){
 					if($contador > 0)
 						$sql .= " and ";
-					$sql .= " pedidos.fecha = " . $request->datepicker;
+					$dt = new DateTime($fecha2);
+					$fecha = $dt->format('Y-m-d');
+					$sql .= " pedidos.fecha = '" . $fecha ." 00:00:00'";
 				}
 			}
 			$pedidos = DB::select($sql);
