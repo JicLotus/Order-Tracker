@@ -1,7 +1,20 @@
 @extends("layouts.base")
 
 @section("head")
-
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+    $("#timePicker").timePicker();
+  });
+  </script>
+</head>
 
 
   <script type="text/javascript">
@@ -26,17 +39,45 @@
 <h4><form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
-			<h4><label class="control-label col-sm-2" for="ListaClientes">Lista de clientes:</label></h4>
-			  <div class="col-sm-8">
-				<select id="idCliente" name="idCliente" onchange= "this.form.submit()" >
-					@foreach($clientes as $cliente)
-					<option value= {{$cliente->id}} > {{$cliente->nombre}}</option>  
-					@endforeach
-					 <option selected = "selected" value = {{$nombre[0]->id}} >{{$nombre[0]->nombre}}   </option>                   
-				</select>
-			  </div> 
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="Vendedor">Vendedor</label>
+				  <div class="col-sm-8">
+					<select onclick="reload();" id="idVendedor" name="idVendedor">
+						<option>Todos</option>
+						@foreach($vendedores as $vendedor)
+						<option value = {{$vendedor->id}} <?php If ($vendedor->id == $idVendedor){?> selected = 'selected'<?php } ?>>{{$vendedor->nombre}}</option>  
+						@endforeach 
+						
+					</select>
+				  </div> 
+			</div>	
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="Clientes">Clientes</label>
+					<div class="col-sm-8">
+					<select id="idClientee" name="idCliente" >
+						<option>Todos</option>
+						@foreach($clientes as $cliente)   
+						<option value = {{$cliente->id}}<?php If ($cliente->id == $idCliente){?> selected = 'selected'<?php } ?>>{{$cliente->nombre}}</option>
+						@endforeach
+					
+					</select> 
+					</div>
+			</div>	
+			 
+			 <div class="form-group">
+				<label class="control-label col-sm-2" for="Día">Fecha</label>
+        			 <div class="col-sm-8">
+				<input type="text" id="datepicker" name = "datepicker" value= "{{$fecha2}}">
+			</div>
 		</div>	
+			
+			<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
+		</div>	
+
 </form></h4>
+
 
 <hr width=75%"/>
 
@@ -55,7 +96,8 @@
 		<div id="{{$bulto->id_compra}}" class="panel-collapse collapse">
 			<ul class="list-group">
 				<li class="list-group-item"> 
-				<div>
+					
+					<div>
 					
 					<form action="{{app()->make('urls')->getUrlEditarPedido($bulto->id_compra)}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 								{{ csrf_field() }}
@@ -71,44 +113,58 @@
             
 											</select>
 									</div>	
-									<input type="hidden" name="idCliente" value={{$nombre[0]->id}}>
+									<input type="hidden" name="idCliente" value={{$bulto->id_cliente}}>
+									<input type="hidden" name="idVendedor" value={{$bulto->id_usuario}}>
+									<input type="hidden" name="datepicker" value={{$fecha2}}>
 									
 					</form>
-					
-				 <?php
-				$cantidadfinal = 0;
-                foreach($pedidos as $pedido){
-                If ($pedido->id_compra == $bulto->id_compra){?>   
-                        <p>
-							 <div class="well">
-								
-							    <div class="control-group">
-                                    <span class="control-label dimgray">Producto: {{$pedido->nombreProducto}}</span>
-                                </div>
-                                
-								<div class="control-group">
-                                    <span class="control-label dimgray">Código: {{$pedido->codigo}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cantidad: {{$pedido->cantidad}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Precio: ${{$pedido->precio}}</span>
-                                </div>
-                                                  
-                            </div>
-                        </p>
-                 <?php			
-                                $cantidadfinal +=  $pedido->cantidad * $pedido->precio;     
-					} 
-                }
-                
-				?>
-				
-				<label class="control-label" for="Estado">Importe Total: ${{$cantidadfinal}}</label>
+
                </div>
+				
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Producto</th>
+								<th>Código</th>
+								<th>Cantidad</th>
+								<th>Precio</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								 <?php
+								$cantidadfinal = 0;
+								foreach($pedidos as $pedido){
+									If ($pedido->id_compra == $bulto->id_compra){
+								?>   
+													
+													
+													<td>{{$pedido->nombreProducto}}</td>
+													 <td>{{$pedido->codigo}} </td>
+													 <td>{{$pedido->cantidad}} </td>
+													<td>${{$pedido->precio}} </td>
+
+										<?php	
+													$cantidadfinal +=  $pedido->cantidad * $pedido->precio;     
+										} 
+										?>
+									
+							</tr>	
+								<?php 
+								}?>
+								
+							<tr class="info">
+								<td><b>Total</b></td>
+								<td></td>
+								<td></td>
+								<td><b>${{$cantidadfinal}}</b></td>
+							</tr>
+								
+
+					  
+						</tbody>
+				  </table>
+								
                </li>
 			</ul>
 		</div>
