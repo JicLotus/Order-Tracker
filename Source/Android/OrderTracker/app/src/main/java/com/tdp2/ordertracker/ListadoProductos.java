@@ -160,8 +160,8 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
     public void onBackPressed() {
 
         new AlertDialog.Builder(this)
-                .setTitle("¿Desea Cancelar su visita?")
-                .setMessage("Presiona Si para finalizar su visita")
+                .setTitle("Está a punto de perder su pedido")
+                .setMessage("¿Desea cancelar el pedido?")
                 .setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
