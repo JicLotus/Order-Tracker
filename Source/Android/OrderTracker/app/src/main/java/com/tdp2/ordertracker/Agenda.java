@@ -11,11 +11,13 @@ public class Agenda {
     public String hora;
     public String direccion;
     public String id;
+    public String estadoVisita;
     private List<Agenda> persons;
 
-    Agenda(String unNombre, String unaDireccion, String unaHora,String identificador){
+    Agenda(String unNombre, String unaDireccion, String unaHora,String identificador, String estadoVisita){
         this.nombre=unNombre;
         this.hora=unaHora;
+        this.estadoVisita = estadoVisita;
         this.direccion=unaDireccion;
         this.id = identificador;
     }

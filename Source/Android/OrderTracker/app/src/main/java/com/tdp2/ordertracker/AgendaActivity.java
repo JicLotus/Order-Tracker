@@ -190,8 +190,8 @@ public class AgendaActivity extends AppCompatActivity {
                 JSONObject agenda = clientesDelDia.getJSONObject(i);
                 Date date = format.parse(agenda.getString("fecha"));
                 String hora = new SimpleDateFormat("HH:mm").format(date);
-
-                Agenda unaAgenda = new Agenda(agenda.getString("nombre"), agenda.getString("direccion"), hora, agenda.getString("id"));
+                Agenda unaAgenda = new Agenda(agenda.getString("nombre"), agenda.getString("direccion"), hora,
+                        agenda.getString("id"), agenda.getString(APIConstantes.AGENDA_ESTADO));
                 listaUsuarios.add(unaAgenda);
             }
         } catch (Exception e) {
@@ -261,7 +261,7 @@ public class AgendaActivity extends AppCompatActivity {
                 if (contents.equals(usuarioSeleccionado.id)){
                     Toast.makeText(this, "Bienvenido, "+ usuarioSeleccionado.nombre.getText(), Toast.LENGTH_LONG).show();
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    usuarioSeleccionado.ponerVerde();
+                    marcarUsuarioComoVisitado();
                     Intent documentsActivity = new Intent(this, ListadoProductos.class);
                     documentsActivity.putExtra("cliente", jsonCliente(usuarioSeleccionado.id));
                     startActivity(documentsActivity);
@@ -275,6 +275,21 @@ public class AgendaActivity extends AppCompatActivity {
         }
 
     }
+
+    private void marcarUsuarioComoVisitado(){
+        usuarioSeleccionado.ponerVerde();
+        try {
+            String requestString = "SetEstadoAgenda.php?id=" + vendedor + "&dia=" + fechaActual
+                    +"&id_cliente="+ usuarioSeleccionado.id+"&estado="+APIConstantes.ESTADO_VISITADO;
+            Log.e("Request", requestString);
+            Request request = new Request("GET", requestString);
+
+
+            Response resp = new RequestHandler().sendRequest(request);
+        } catch (Exception e) {
+        }
+    }
+
 
     private String jsonCliente(String id) {
 

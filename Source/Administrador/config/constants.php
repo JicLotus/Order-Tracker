@@ -41,5 +41,10 @@ return [
      'TABLA_PEDIDOS_ID_COMPRA' => 'id_compra',
     'TABLA_PEDIDOS_ESTADO' => 'estado',
     
+    'ESTADO_VISITA_VISITADO' => 'visitado',
+    'ESTADO_VISITA_PENDIENTE' => 'pendiente',
+    'ESTADO_VISITA_NOVISITADO' => 'novisitado'
+    
+    
 
 ];

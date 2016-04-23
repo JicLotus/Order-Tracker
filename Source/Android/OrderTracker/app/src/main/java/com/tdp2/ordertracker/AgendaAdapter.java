@@ -43,6 +43,20 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         holder.horario.setText(usuarios.get(position).hora);
         holder.id = usuarios.get(position).id;
 
+        switch (usuarios.get(position).estadoVisita){
+            case APIConstantes.ESTADO_VISITADO: {
+                holder.iconoEstado.setImageResource(R.drawable.ic_label_verde);
+                break;
+            }
+            case APIConstantes.ESTADO_PENDIENTE: {
+                holder.iconoEstado.setImageAlpha(R.drawable.ic_label_amarillo);
+                break;
+            }
+            case APIConstantes.ESTADO_NOVISITADO: {
+                
+                break;
+            }
+        }
     }
 
     @Override
@@ -81,6 +95,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         public void ponerVerde(){
             iconoEstado.setImageResource(R.drawable.ic_label_verde);
         }
+
 
         public void ponerAmarillo(){
             iconoEstado.setImageResource(R.drawable.ic_label_amarillo);

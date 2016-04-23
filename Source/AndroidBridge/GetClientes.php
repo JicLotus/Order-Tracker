@@ -6,7 +6,10 @@
 
 	$fecha  = $_REQUEST['fecha'];
 	
-	$sql= "(select clientes.id, clientes.nombre, clientes.direccion, clientes.razon_social, clientes.telefono_movil, clientes.telefono_laboral, clientes.email, agendas.fecha from clientes, agendas where clientes.id = agendas.id_cliente and agendas.id_usuario = $vendedor";
+	$sql= "(select clientes.id, clientes.nombre, clientes.direccion, clientes.razon_social, clientes.telefono_movil, 
+	clientes.telefono_laboral, clientes.email, agendas.fecha, agendas.estado_visita 
+	from clientes, agendas 
+	where clientes.id = agendas.id_cliente and agendas.id_usuario = $vendedor";
 	
 	if ($fecha){
 		
