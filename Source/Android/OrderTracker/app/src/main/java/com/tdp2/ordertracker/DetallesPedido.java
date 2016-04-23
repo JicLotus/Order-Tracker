@@ -1,6 +1,9 @@
 package com.tdp2.ordertracker;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +21,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Files.FileHandler;
 import Model.Request;
@@ -154,14 +159,63 @@ public class DetallesPedido extends AppCompatActivity {
                 Request request = new Request("GET", "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+jsonCliente.getString("id")+"&id_producto="+id_producto+"&cant="+cantidad+"&precio="+precio);
                 Response resp = new RequestHandler().sendRequest(request);
 
+                if (resp.getStatus()){
+                    mostrarDialogOK(view.getContext());
+                }else{
+                    mostrarDialogError(view.getContext());
+                }
             }
-            catch(Exception e){}
+            catch(Exception e){
+                mostrarDialogError(view.getContext());
+
+            }
         }
-        Intent documentsActivity = new Intent(view.getContext(), AgendaActivity.class);
-        startActivity(documentsActivity);
+
+        mostrarDialogOK(view.getContext());
 
     }
 
+    private void mostrarDialogOK(final Context contexto){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Su pedido ha sido realizado correctamente");
+        builder.setMessage("Que tenga un buen día!");
+        builder.setIcon(R.drawable.button_ok);
+        builder.setCancelable(true);
 
+        final AlertDialog closedialog= builder.create();
+
+        closedialog.show();
+
+        final Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            public void run() {
+                closedialog.dismiss();
+                Intent documentsActivity = new Intent(contexto, AgendaActivity.class);
+                startActivity(documentsActivity);
+
+                timer2.cancel(); //this will cancel the timer of the system
+            }
+        }, 3000); // the timer will count 5 seconds....
+    }
+
+    private void mostrarDialogError(final Context contexto){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Su pedido no se ha podido concretar");
+        builder.setMessage("Intente nuevamente");
+        builder.setIcon(R.drawable.button_error);
+        builder.setCancelable(true);
+
+        final AlertDialog closedialog= builder.create();
+
+        closedialog.show();
+
+        final Timer timer2 = new Timer();
+        timer2.schedule(new TimerTask() {
+            public void run() {
+                closedialog.dismiss();
+                timer2.cancel(); //this will cancel the timer of the system
+            }
+        }, 3000); // the timer will count 5 seconds....
+    }
 
 }

@@ -99,19 +99,43 @@ public class AgendaActivity extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
         switch (day) {
-            case Calendar.MONDAY:
+            case Calendar.MONDAY:{
                 ((TextView) findViewById(R.id.lunes)).setTypeface(null, Typeface.BOLD);
-            case Calendar.TUESDAY:
-                ((TextView) findViewById(R.id.martes)).setTypeface(null, Typeface.BOLD);
-            case Calendar.WEDNESDAY:
-                ((TextView) findViewById(R.id.miercoles)).setTypeface(null, Typeface.BOLD);
-            case Calendar.THURSDAY:
-                ((TextView) findViewById(R.id.jueves)).setTypeface(null, Typeface.BOLD);
-            case Calendar.FRIDAY:
-                ((TextView) findViewById(R.id.viernes)).setTypeface(null, Typeface.BOLD);
+                fechaActual="Lunes";
+                break;
+            }
 
+            case Calendar.TUESDAY:{
+                ((TextView) findViewById(R.id.martes)).setTypeface(null, Typeface.BOLD);
+                fechaActual="Martes";
+                break;
+                }
+            case Calendar.WEDNESDAY:{
+                ((TextView) findViewById(R.id.miercoles)).setTypeface(null, Typeface.BOLD);
+                fechaActual="Miercoles";
+                break;
+                }
+            case Calendar.THURSDAY:{
+                ((TextView) findViewById(R.id.jueves)).setTypeface(null, Typeface.BOLD);
+                fechaActual="Jueves";
+                break;
+                }
+            case Calendar.FRIDAY:{
+                ((TextView) findViewById(R.id.viernes)).setTypeface(null, Typeface.BOLD);
+                fechaActual="Viernes";
+                break;
+            }
+            case Calendar.SATURDAY:{
+                fechaActual="Lunes";
+                break;
+            }
+            case Calendar.SUNDAY:{
+                fechaActual="Lunes";
+                break;
+            }
         }
 
+        mostrarAgendaDelDia();
 
         this.crearDraweToggle();
     }
@@ -210,8 +234,15 @@ public class AgendaActivity extends AppCompatActivity {
                 break;
         }
 
+
+
         fechaActual = diaSeleccionado;
 
+        mostrarAgendaDelDia();
+
+    }
+
+    private void mostrarAgendaDelDia(){
         usuarios = getUsuariosAgenda();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -222,18 +253,21 @@ public class AgendaActivity extends AppCompatActivity {
 
     }
 
-
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
-                Toast.makeText(this, contents, Toast.LENGTH_LONG).show();
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                usuarioSeleccionado.ponerVerde();
-                Intent documentsActivity = new Intent(this, ListadoProductos.class);
-                documentsActivity.putExtra("cliente", jsonCliente(usuarioSeleccionado.id));
-                startActivity(documentsActivity);
+                if (contents.equals(usuarioSeleccionado.id)){
+                    Toast.makeText(this, "Bienvenido, "+ usuarioSeleccionado.nombre.getText(), Toast.LENGTH_LONG).show();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    usuarioSeleccionado.ponerVerde();
+                    Intent documentsActivity = new Intent(this, ListadoProductos.class);
+                    documentsActivity.putExtra("cliente", jsonCliente(usuarioSeleccionado.id));
+                    startActivity(documentsActivity);
+                }else{
+                    Toast.makeText(this, "QR Inválido", Toast.LENGTH_LONG).show();
+                }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "No valido", Toast.LENGTH_LONG).show();
                 // Handle cancel
