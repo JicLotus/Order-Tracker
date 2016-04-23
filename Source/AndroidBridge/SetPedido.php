@@ -7,8 +7,11 @@
 	$producto  = $_REQUEST['id_producto'];
 	$cantidad  = $_REQUEST['cant'];
 	$precio  = $_REQUEST['precio'];	
-	
-	$sql= "Insert into pedidos (id_usuario,id_cliente,id_producto,cantidad,precio,estado) values ($vendedor,$cliente,$producto,$cantidad,$precio,'en_proceso')";
+	$id_compra = 0;
+	$dt = new DateTime();
+	$fecha = $dt->format('Y-m-d');
+	$fecha.= " 00:00:00";
+	$sql= "Insert into pedidos (id_usuario,id_cliente,id_producto,cantidad,precio,estado,id_compra,fecha) values ($vendedor,$cliente,$producto,$cantidad,$precio,'pendiente',$id_compra, '$fecha')";
 
 	$rs = mysql_query($sql,$con);
 

@@ -25,4 +25,4 @@
         android:icon="@android:drawable/ic_menu_sort_alphabetically"
         android:orderInCategory="2"
         android:showAsAction="withText|ifRoom"/>
-</menu><!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/menu/encode.xml --><!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/menu/encode.xml -->
+</menu><!-- From: file:/home/debbie/Documents/Facultad/Cursando/7547/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/menu/encode.xml --><!-- From: file:/home/debbie/Documents/Facultad/Cursando/7547/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/build/intermediates/bundles/debug/res/menu/encode.xml -->

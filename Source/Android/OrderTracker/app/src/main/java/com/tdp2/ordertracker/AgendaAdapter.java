@@ -79,11 +79,11 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         }
 
         public void ponerVerde(){
-            iconoEstado.setColorFilter(R.color.verde);
+            iconoEstado.setImageResource(R.drawable.ic_label_verde);
         }
 
         public void ponerAmarillo(){
-            iconoEstado.setColorFilter(R.color.amarillo);
+            iconoEstado.setImageResource(R.drawable.ic_label_amarillo);
         }
 
         private void accionCarroDeCompras(){

@@ -3,22 +3,9 @@
 @section("content")
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>jQuery UI Datepicker - Default functionality</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-    $("#timePicker").timePicker();
-  });
-  </script>
-</head>
+
 <body>
- 
+ <a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block"><h4><b>AGENDAS</b></h4></a>
  
 <div class="container">
 <div class="row row-head">
@@ -39,7 +26,7 @@
 
 <div  class="row">
   <div class="col-md-12">
-    
+     <h4>
 <form action="guardarnuevaagenda" method="POST" class="form-horizontal"   enctype="multipart/form-data">
 	{{ csrf_field() }}
 	
@@ -81,13 +68,11 @@
 	</div>	
 	
 	
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-6">
-                <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
-                <button type="submit" class="col-sm-offset-1 btn btn-default">Publicar</button>
-            </div>
-        </div>
-       
+		<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+		<button type="submit" class="col-sm-offset-3 btn btn-primary">Publicar</button>
+               
+
+        </h4>
 	
 </form>
            

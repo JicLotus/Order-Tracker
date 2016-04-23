@@ -21,6 +21,7 @@ class CrearTablaPedidos extends Migration
 	    $table->integer('precio');
 	    $table->string('estado');
 	    $table->integer('id_compra');
+            $table->dateTime('fecha');
         });
     }
 

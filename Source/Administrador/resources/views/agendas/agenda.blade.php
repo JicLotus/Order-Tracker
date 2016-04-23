@@ -25,10 +25,10 @@
 
 @section("content")
     <section id="search-section">
- <a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block">AGENDAS</a>
+ <a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block"><h4><b>AGENDAS</b></h4></a>
 		
-<h4><div class= "form">		
-<form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+
+<h4><form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
@@ -41,8 +41,8 @@
 				</select>
 			  </div> 
 		</div>	
-</form>
-</div></h4>
+</form></h4>
+
 <hr width=75%"/>
 	
 	<div class="form-group">
@@ -67,6 +67,7 @@
                                 
                                 <div class="control-group">
                                     <span class="control-label dimgray">Cliente: 	{{$agenda->nombreCliente}}</span>
+                                    
                                 </div>
                                 
                                 <div class="control-group">
@@ -74,11 +75,13 @@
                                 </div>
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Orden De Visita: {{$agenda->orden}}</span>
-                                </div>                              
-                              
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary">Eliminar</a>  
-
+                                    <span class="control-label dimgray">Estado: Pendiente</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
+                                </div>              
+								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
                             </div>
                         </p>
                 <?php } ?>
@@ -116,11 +119,14 @@
                                 </div>
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Orden De Visita: {{$agenda->orden}}</span>
-                                </div>                              
+                                    <span class="control-label dimgray">Estado: Pendiente</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
+                                </div>                     
                               
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary">Eliminar</a>  
-
+									<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
                             </div>
                         </p>
                 <?php } ?>
@@ -160,11 +166,14 @@
                                 </div>
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Orden De Visita: {{$agenda->orden}}</span>
+                                    <span class="control-label dimgray">Estado: Pendiente</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
                                 </div>
                              
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary">Eliminar</a>  
-
+								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
                             </div>
                         </p>
                 <?php } ?>
@@ -202,12 +211,15 @@
                                     <span class="control-label dimgray">Dirección: {{$agenda->direccion}}</span>
                                 </div>
                                 
+                                 <div class="control-group">
+                                    <span class="control-label dimgray">Estado: Pendiente</span>
+                                </div>
+                                
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Orden De Visita: {{$agenda->orden}}</span>
+                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
                                 </div>
                              
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary">Eliminar</a>  
-
+								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
                             </div>
                         </p>
                 <?php } ?>
@@ -248,11 +260,16 @@
                                 </div>
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Orden De Visita: {{$agenda->orden}}</span>
+                                    <span class="control-label dimgray">Estado: Pendiente</span>
                                 </div>
-                             
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary">Eliminar</a>  
+                                
+                                <div class="control-group">
+                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
+                                </div>
+                                
 
+                             
+								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
                             </div>
                         </p>
                 <?php } ?>
