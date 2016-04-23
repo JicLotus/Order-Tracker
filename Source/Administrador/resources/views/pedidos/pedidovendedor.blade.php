@@ -90,7 +90,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#{{$bulto->id_compra}}"> <b> Número	 de identifición: {{$bulto->id_compra}}</b> </a>
+					<a data-toggle="collapse" href="#{{$bulto->id_compra}}"> <b> Número	 de identificación: {{$bulto->id_compra}}</b> </a>
 				</h4>
 			</div>
 		<div id="{{$bulto->id_compra}}" class="panel-collapse collapse">
