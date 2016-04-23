@@ -8,7 +8,7 @@
 	$cantidad  = $_REQUEST['cant'];
 	$precio  = $_REQUEST['precio'];	
 	
-	$sql= "Insert into pedidos (id_usuario,id_cliente,id_producto,cantidad,precio,estado) values ($vendedor,$cliente,$producto,$cantidad,$precio,'en_proceso')";
+	$sql= "Insert into pedidos (id_usuario,id_cliente,id_producto,cantidad,precio,estado) values ($vendedor,$cliente,$producto,$cantidad,$precio,'pendiente')";
 
 	$rs = mysql_query($sql,$con);
 

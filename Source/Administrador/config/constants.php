@@ -38,6 +38,7 @@ return [
     
     'TABLA_PEDIDOS' => 'pedidos',
     'TABLA_PEDIDOS_ID' => 'id',
+     'TABLA_PEDIDOS_ID_COMPRA' => 'id_compra',
     'TABLA_PEDIDOS_ESTADO' => 'estado',
     
 

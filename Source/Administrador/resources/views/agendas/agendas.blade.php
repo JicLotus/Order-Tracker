@@ -20,7 +20,7 @@
 
 @section("content")
     <section id="search-section">
-		<a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block">AGENDAS</a>
+ <a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block"><h4><b>AGENDAS</b></h4></a>
 
 		
 <form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">

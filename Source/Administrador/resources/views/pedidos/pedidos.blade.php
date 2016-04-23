@@ -23,7 +23,7 @@
     
 @section("content")
     <section id="search-section">
-		<a  href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary btn-block">PEDIDOS</a>
+		<a  href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary btn-block"><h4><b>PEDIDOS</b></h4></a>
 
 		
 		

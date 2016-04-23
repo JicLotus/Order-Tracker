@@ -15,12 +15,13 @@ class EditarPedidoController extends Controller
     public function index($id, Request $request)
    {		
 	   
-	   	DB::table(Config::get('constants.TABLA_PEDIDOS'))->where(Config::get('constants.TABLA_PEDIDOS_ID'), $id)
+	   DB::table(Config::get('constants.TABLA_PEDIDOS'))->where(Config::get('constants.TABLA_PEDIDOS_ID_COMPRA'), $id)
 				->update(array(Config::get('constants.TABLA_PEDIDOS_ESTADO') => ($request->estado)));
 	   
 	   if($request->estado == 'cancelado'){
-		$sql2= "Update productos set stock= (stock + $request->cantidad)  where id = $request->id_producto";
-		DB::statement($sql2);
+			$sql2= "UPDATE productos dest, (SELECT * FROM pedidos where id_compra=$id) src 
+			SET dest.stock = dest.stock + src.cantidad where dest.id= src.id_producto ";
+			DB::statement($sql2);
 		}
 	   
 			$clientes = DB::select("select nombre,id from clientes order by nombre");
