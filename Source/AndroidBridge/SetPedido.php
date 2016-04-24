@@ -1,29 +1,37 @@
 <?php
+
 	$con = mysql_connect("localhost", "root","123456") or die("Sin conexion");
+
 	mysql_select_db("orderTracker");
 	
-	$stringproductos = $_REQUEST['productos'];
+
+		
+		
+	$txt= file_get_contents('php://input');
 	
-	$vendedor = $_REQUEST['id_usuario'];
-	$cliente  = $_REQUEST['id_cliente'];
+	$result = json_decode($txt);
+	var_dump($result);
+	
+	$productos = $result->pedidos;
+	$vendedor = $result->id_usuario;
+	$cliente  = $result->id_cliente;
+	
 	$dt = new DateTime();
 	$fecha = $dt->format('Y-m-d');
 	$fecha.= " 00:00:00";
-
 	
-	$sql0 = "Insert into compras (id_cliente, id_usuario, fecha) values ($cliente, $vendedor, '$fecha')";
+	$sql0 = "Insert into compras (id_cliente, id_usuario, fecha) values ($cliente, $vendedor, '$fecha');";
 	$rs = mysql_query($sql0,$con);
 	$id_compra = mysql_insert_id();
 	
-	$productos = json_decode($stringproductos);
-	
+		
 	foreach($productos as $producto){
 		
-		$id_producto = $producto['id'];
-		$cantidad = $producto['cantidad'];
-		$precio = $producto['precio'];
+		$id_producto = $producto->id;
+		$cantidad = $producto->cantidad;
+		$precio = $producto->precio;
 		
-		$sql1= "Insert into pedidos (id_producto, cantidad,precio,id_compra) values ($id_producto,$cantidad,$precio,$id_compra)";
+		$sql1= "Insert into pedidos (id_producto, cantidad,precio,id_compra) values ($id_producto,$cantidad,$precio,$id_compra);";
 
 		$rs = mysql_query($sql1,$con);
 

@@ -26,10 +26,11 @@ DB::table('productos')->insert(
 
 #    	  $productos = DB::table('productos')->get();
 
-		  $productos = DB::table('productos')
-            ->leftJoin('imagenes', 'productos.id', '=', 'imagenes.id_producto')
-            ->get();
-                        
+		  
+		  $sql = "SELECT u.id, u.nombre, u.codigo, u.stock, u.marca, MIN(t.imagen_base64) AS imagen_base64 FROM productos u JOIN imagenes t ON t.id_producto = u.id GROUP BY u.id;";
+
+		  $productos = DB::select($sql);
+
         return view('productos.productos', ['title' => 'Home',
                                 'page' => 'home','productos' => $productos]
         );

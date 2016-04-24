@@ -184,11 +184,5 @@
                 }
             });
         </script>
-        <footer>
-            <div class="container">
-                @yield("footer")
-                <span class="pull-right">© Order Tracker 2016</span>
-            </div>
-        </footer>
     </body>
 </html>

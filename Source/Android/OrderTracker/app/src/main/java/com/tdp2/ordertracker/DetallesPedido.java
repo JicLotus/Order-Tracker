@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +16,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -146,11 +157,35 @@ public class DetallesPedido extends AppCompatActivity {
         return "$" +Integer.toString(precioTotal);
     }
 
+    /*
+            int TIMEOUT_MILLISEC = 10000;  // = 10 seconds
+            HttpParams httpParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
+            HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLISEC);
+            HttpClient client = new DefaultHttpClient(httpParams);
+
+            HttpPost request = new HttpPost("http://10.0.2.2:8080/");
+            request.setEntity(new ByteArrayEntity(
+                    requestString.toString().getBytes("UTF8")));
+            HttpResponse response = client.execute(request);
+*/
+
+
     public void confirmarPedido(View view)
     {
         try {
             //pedidos.getJSONObject(i);
-            Request request = new Request("GET", "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+jsonCliente.getString("id")+"&productos="+pedidos.toString());
+
+            String requestString = "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+jsonCliente.getString("id")+"&productos="+pedidos.toString();
+
+
+            JSONObject object = new JSONObject();
+            object.put("pedidos", pedidos);
+            object.put("id_usuario", vendedor);
+            object.put("id_cliente", jsonCliente.getString("id"));
+
+            Request request = new Request("POST", "SetPedido.php/",object);
+
             Response resp = new RequestHandler().sendRequest(request);
 
             if (resp.getStatus()){
@@ -158,6 +193,7 @@ public class DetallesPedido extends AppCompatActivity {
             }else{
                 mostrarDialogError(view.getContext());
             }
+
         }
         catch(Exception e){
             mostrarDialogError(view.getContext());

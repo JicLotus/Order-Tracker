@@ -37,13 +37,15 @@ return [
     'TABLA_AGENDAS_DIA' => 'dia',
     
     'TABLA_PEDIDOS' => 'pedidos',
+    'TABLA_COMPRAS' => 'compras',
     'TABLA_PEDIDOS_ID' => 'id',
-     'TABLA_PEDIDOS_ID_COMPRA' => 'id_compra',
-    'TABLA_PEDIDOS_ESTADO' => 'estado',
+	'TABLA_PEDIDOS_ID_COMPRA' => 'id_compra',
+	'TABLA_COMPRAS_ID_COMPRA' => 'id_compra',
+	'TABLA_COMPRAS_ESTADO' => 'estado',
     
-    'ESTADO_VISITA_VISITADO' => 'visitado',
-    'ESTADO_VISITA_PENDIENTE' => 'pendiente',
-    'ESTADO_VISITA_NOVISITADO' => 'novisitado'
+    'ESTADO_VISITA_VISITADO' => 'Visitado',
+    'ESTADO_VISITA_PENDIENTE' => 'Pendiente',
+    'ESTADO_VISITA_NOVISITADO' => 'No Visitado'
     
     
 

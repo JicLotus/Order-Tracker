@@ -13,9 +13,9 @@ public class APIConstantes {
     public static final String PRODUCTO_ID = "id";
     public static final String PRODUCTO_STOCK = "stock";
     public static final String PERSISTENCIA_CARRO = "carro";
-    public static final String ESTADO_VISITADO = "visitado";
-    public static final String ESTADO_PENDIENTE = "pendiente";
-    public static final String ESTADO_NOVISITADO = "novisitado";
+    public static final String ESTADO_VISITADO = "Visitado";
+    public static final String ESTADO_PENDIENTE = "Pendiente";
+    public static final String ESTADO_NOVISITADO = "No Visitado";
     public static final String AGENDA_ESTADO = "estado_visita";
 
 }

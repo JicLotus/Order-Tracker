@@ -75,7 +75,7 @@
                                 </div>
                                 
                                 <div class="control-group">
-                                    <span class="control-label dimgray">Estado: Pendiente</span>
+                                    <span class="control-label dimgray">Estado: {{$agenda->estado_visita}}</span>
                                 </div>
                                 
                                 <div class="control-group">
