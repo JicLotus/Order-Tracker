@@ -3,6 +3,21 @@
 @section("head")
 
 	
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+    $("#timePicker").timePicker();
+  });
+  </script>
+</head>
+
 
 
   <script type="text/javascript">
@@ -26,17 +41,29 @@
 <form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<h4><div class="form-group">
-			<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
-			  <div class="col-sm-8">
-				<select id="idVende" name="idVendedor">
-					@foreach($vendedores as $vendedor)
-					<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
-					@endforeach
-					                          
-					<input type="submit" value= "Ver" />
-				</select>
-			  </div> 
-		</div>	<h4>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
+				  <div class="col-sm-8">
+					<select id="idVende" name="idVendedor">
+						@foreach($vendedores as $vendedor)
+						<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
+						@endforeach
+												  
+						<input type="submit" value= "Ver" />
+					</select>
+				  </div>
+			  </div>
+			
+			<div class="form-group">
+			
+				<label class="control-label col-sm-2" for="Día">Fecha:</label>
+					<div class="col-sm-1">
+						<input type="text" id="datepicker" name = "datepicker" value= "Todas">
+					</div>
+			</div>
+	 
+		</div><h4>
 </form>
 
 <hr width=75%"/>

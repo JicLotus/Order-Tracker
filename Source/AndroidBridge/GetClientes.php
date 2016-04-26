@@ -18,9 +18,7 @@
 	// convert DatePeriod object to array
 	$lunes = "'".$days[0]->format ('Y-m-d')."'";
 	$viernes = "'".$days[4]->format ('Y-m-d')."'";	
-	echo $lunes;
-	echo $viernes;
-
+	
 	
 	$sql= "(select clientes.id, clientes.nombre, clientes.direccion, clientes.razon_social, clientes.telefono_movil, 
 	clientes.telefono_laboral, clientes.email, agendas.fecha, agendas.estado_visita 
