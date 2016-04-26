@@ -37,10 +37,10 @@ class NuevaAgendaController extends Controller
 		$dt = new DateTime();
 		
 		// set object to Monday on next week
-		$dt->setISODate($dt->format('o'), $dt->format('W') + 1);
+		$dt->setISODate($dt->format('o'), $dt->format('W')+1);
 
 		// get all 1day periods from Monday to +6 days
-		$periods = new DatePeriod($dt, new DateInterval('P1D'), 6);
+		$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
 		
 		$days = iterator_to_array($periods);
 		// convert DatePeriod object to array
@@ -68,8 +68,7 @@ class NuevaAgendaController extends Controller
 		$middle = strtotime($old_date);             
 		
 		$fecha = date('Y-m-d H:i:s', $middle); 
-		
-    	$idCliente= $request->idCliente[0];
+		$idCliente= $request->idCliente[0];
 
     	foreach ($request->idCliente as $cliente){
 			$id = DB::table('agendas')->insertGetId(array('id_usuario' => ($idVendedor),'id_cliente' => ($cliente), 'fecha' => ($fecha), 'dia' => $request->dia));

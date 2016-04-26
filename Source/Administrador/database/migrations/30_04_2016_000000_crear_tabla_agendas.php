@@ -21,7 +21,7 @@ class CrearTablaAgendas extends Migration
             $table->string('dia');
             $table->integer('orden');
             $table->string('estado_visita')->default(Config::get('constants.ESTADO_VISITA_PENDIENTE'));
-            $table->unique(array('id_usuario', 'id_cliente', 'dia'));
+            $table->unique(array('id_usuario', 'id_cliente', 'fecha'));
         });
     }
 
