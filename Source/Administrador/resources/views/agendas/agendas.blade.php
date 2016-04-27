@@ -59,7 +59,7 @@
 			
 				<label class="control-label col-sm-2" for="Día">Fecha:</label>
 					<div class="col-sm-1">
-						<input type="text" id="datepicker" name = "datepicker" value= "Todas">
+						<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}">
 					</div>
 			</div>
 	 
