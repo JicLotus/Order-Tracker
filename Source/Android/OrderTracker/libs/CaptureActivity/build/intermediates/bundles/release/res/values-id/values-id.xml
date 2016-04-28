@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/debbie/Documents/Facultad/Cursando/7547/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values-id/strings.xml -->
+    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values-id/strings.xml -->
     <eat-comment/>
     <string name="app_name">Barcode Scanner</string>
     <string name="app_picker_name">Aplikasi</string>

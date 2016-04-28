@@ -35,6 +35,7 @@ dependencies {
     compile project(':libs:CaptureActivity')
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'de.hdodenhof:circleimageview:1.2.1'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.android.support:palette-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'

@@ -217,28 +217,38 @@ public class AgendaActivity extends AppCompatActivity {
             case R.id.lunes:
 
                 diaSeleccionado = "Lunes";
+                fechaActual = diaSeleccionado;
+
+                mostrarAgendaDelDia();
                 break;
             case R.id.martes:
 
                 diaSeleccionado = "Martes";
+                fechaActual = diaSeleccionado;
+
+                mostrarAgendaDelDia();
+
                 break;
             case R.id.miercoles:
 
                 diaSeleccionado = "Miercoles";
+                fechaActual = diaSeleccionado;
+                mostrarAgendaDelDia();
+
                 break;
             case R.id.jueves:
                 diaSeleccionado = "Jueves";
+                fechaActual = diaSeleccionado;
+                mostrarAgendaDelDia();
                 break;
             case R.id.viernes:
                 diaSeleccionado = "Viernes";
+                fechaActual = diaSeleccionado;
+                mostrarAgendaDelDia();
+
                 break;
         }
 
-
-
-        fechaActual = diaSeleccionado;
-
-        mostrarAgendaDelDia();
 
     }
 
@@ -275,6 +285,8 @@ public class AgendaActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     private void marcarUsuarioComoVisitado(){
         usuarioSeleccionado.ponerVerde();

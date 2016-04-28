@@ -117,7 +117,7 @@ public class DetallesProducto extends AppCompatActivity {
 
         Bitmap newbitMap = Bitmap.createScaledBitmap(bitMap, newWidth, newHeigth, true);
 
-        imageView.setImageBitmap(bitMap);
+        imageView.setImageBitmap(newbitMap);
 
     }
 

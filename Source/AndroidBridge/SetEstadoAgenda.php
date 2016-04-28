@@ -9,9 +9,12 @@
 	$cliente = 	$_REQUEST['id_cliente'];
 	$dia = $_REQUEST['dia'];
 	$estado  = $_REQUEST['estado'];
+
 	
 	$sql = "update agendas set estado_visita="."'".$estado."'"." where id_usuario ="."'". $id."'"." and id_cliente="."'".$cliente."'"." and dia ="."'".$dia."'".";";
+
 	echo $sql;
+
 	$rs = mysql_query($sql,$con);
 
 	

@@ -8,6 +8,8 @@
     android:layout_height="match_parent"
     android:onClick="verDia">
 
+
+
     <RelativeLayout
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
@@ -20,15 +22,47 @@
         android:descendantFocusability="blocksDescendants"
         android:background="#fff"
         >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            android:background="@drawable/background_poly"
+            android:orientation="vertical"
+            android:id="@+id/header"
+            android:weightSum="1"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/email_drawer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Juan Andres Laura"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
         <TextView
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/header"
             android:text="FUERA DE RUTA"
             android:textColor="@color/primary"
             android:layout_margin="10dp"
-            android:layout_above="@+id/lunes"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:clickable="true"
@@ -42,7 +76,7 @@
             android:text="LUNES"
             android:textColor="@color/primary"
             android:layout_margin="10dp"
-            android:layout_above="@+id/martes"
+            android:layout_below="@+id/fueraDeRuta"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:clickable="true"
@@ -60,15 +94,15 @@
             android:clickable="true"
 
             android:onClick="verDia"
-            android:layout_above="@+id/miercoles"
+            android:layout_below="@+id/lunes"
             android:id="@+id/martes" />
         <TextView
 
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textColor="@color/primary"
+            android:layout_below="@+id/martes"
             android:layout_width="match_parent"
-            android:layout_centerVertical="true"
             android:onClick="verDia"
             android:clickable="true"
             android:text="MIÉRCOLES"

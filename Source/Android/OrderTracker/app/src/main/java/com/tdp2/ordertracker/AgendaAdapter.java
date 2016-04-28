@@ -113,7 +113,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
                     contexto.startActivity(documentsActivity);
 
 */
-                    ((AgendaActivity)contexto).usuarioSeleccionado = selfHolder;
+                   ((AgendaActivity)contexto).usuarioSeleccionado = selfHolder;
                     Intent intent = new Intent("com.google.zxing.client.android.SCAN");
                     intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
                     ((Activity) contexto).startActivityForResult(intent, 0);

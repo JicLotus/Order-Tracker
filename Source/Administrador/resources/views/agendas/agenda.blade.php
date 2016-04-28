@@ -133,7 +133,7 @@
 	<hr width=75%"/>
 	
 	<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a> 
-    <a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Reasignar Recorrido</a>     
+    <a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Calcular Ruta</a>     
 	</div>	
 	
 	

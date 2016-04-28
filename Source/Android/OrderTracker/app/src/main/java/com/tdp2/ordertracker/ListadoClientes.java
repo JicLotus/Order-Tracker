@@ -4,12 +4,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import org.json.JSONArray;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Model.Request;
@@ -20,6 +24,7 @@ public class ListadoClientes extends AppCompatActivity {
     private RecyclerView rv;
     private JSONArray clientes;
     private String idVendedor;
+    private String fechaActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,10 @@ public class ListadoClientes extends AppCompatActivity {
 
         idVendedor = ManejadorPersistencia.obtenerVendedor(this);
 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        fechaActual = dateFormat.format(date).toString();
 
 
         setContentView(R.layout.activity_listado_clientes);
@@ -45,7 +54,8 @@ public class ListadoClientes extends AppCompatActivity {
 
     private void pedirClientes()
     {
-        Request request = new Request("GET", "GetClientes.php?id="+idVendedor);
+        Request request = new Request("GET", "GetFueraRuta.php?id="+idVendedor+"&fecha="+fechaActual);
+        Log.e("Request", "GetFueraRuta.php?id="+idVendedor+"&fecha="+fechaActual);
         Response resp = new RequestHandler().sendRequest(request);
 
         if (resp.getStatus())

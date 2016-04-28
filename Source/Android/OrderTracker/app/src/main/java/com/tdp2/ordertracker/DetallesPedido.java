@@ -207,7 +207,6 @@ public class DetallesPedido extends AppCompatActivity {
     private void mostrarDialogOK(final Context contexto){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Su pedido ha sido realizado correctamente");
-        builder.setMessage("Que tenga un buen día!");
         builder.setIcon(R.drawable.button_ok);
         builder.setCancelable(true);
 
