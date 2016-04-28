@@ -2,6 +2,22 @@
 
 @section("head")
 
+
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+    $("#timePicker").timePicker();
+  });
+  </script>
+</head>
+
 <script type="text/javascript">
 	function nombre_funcion(elDIV){
 		var obj = document.getElementById(elDIV);
@@ -41,27 +57,47 @@
 				</select>
 			  </div> 
 		</div>	
+		
+		<div class="form-group">
+			
+			<label class="control-label col-sm-2" for="Día">Fecha:</label>
+				<div class="col-sm-1">
+					<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}"  onchange= "this.form.submit()" >
+				</div>
+		</div>
 </form></h4>
 
 <hr width=75%"/>
 	
 	<div class="form-group">
+	<?PHP
+	// Inicializacion del Vector
+	
+	$dias[0] = "Lunes";
+	$dias[1] = "Martes";
+	$dias[2] = "Miercoles";
+	$dias[3] = "Jueves";
+	$dias[4] = "Viernes";
 
+	?>
+
+	@foreach($dias as $dia)
 	
 	<div class="panel-group">
+		
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1"><b> Lunes</b> </a>
+					<a data-toggle="collapse" href="#collapse{{$dia}}"><b> {{$dia}}</b> </a>
 				</h4>
 			</div>
-		<div id="collapse1" class="panel-collapse collapse">
+		<div id="collapse{{$dia}}" class="panel-collapse collapse">
 			<ul class="list-group">
 				<li class="list-group-item"> 
 					<div>
 			
 	                @foreach($agendas as $agenda)
-					<?php If ($agenda->dia == "Lunes"){?> 
+					<?php If ($agenda->dia == $dia){?> 
                         <p>
                             <div class="well">
                                 
@@ -91,194 +127,8 @@
 			</ul>
 		</div>
 	</div>	
+	@endforeach
 	
-	
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse2"><b> Martes</b> </a>
-				</h4>
-			</div>
-		<div id="collapse2" class="panel-collapse collapse">
-			<ul class="list-group">
-				<li class="list-group-item"> 
-					<div>
-			
-	                @foreach($agendas as $agenda)
-					<?php If ($agenda->dia == "Martes"){?> 
-                        <p>
-                            <div class="well">
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cliente: 	{{$agenda->nombreCliente}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Dirección: {{$agenda->direccion}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Estado: Pendiente</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
-                                </div>                     
-                              
-									<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
-                            </div>
-                        </p>
-                <?php } ?>
-                @endforeach
-               </div>
-               </li>
-			</ul>
-		</div>
-	</div>	
-	
-	
-	
-	
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3"><b> Miércoles</b> </a>
-				</h4>
-			</div>
-		<div id="collapse3" class="panel-collapse collapse">
-			<ul class="list-group">
-				<li class="list-group-item"> 
-					<div>
-			
-	                @foreach($agendas as $agenda)
-					<?php If ($agenda->dia == "Miercoles"){?> 
-                        <p>
-                            <div class="well">
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cliente: 	{{$agenda->nombreCliente}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Dirección: {{$agenda->direccion}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Estado: Pendiente</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
-                                </div>
-                             
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
-                            </div>
-                        </p>
-                <?php } ?>
-                @endforeach
-               </div>
-               </li>
-			</ul>
-		</div>
-	</div>	
-	
-	
-	
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse4"><b> Jueves</b></a>
-				</h4>
-			</div>
-		<div id="collapse4" class="panel-collapse collapse">
-			<ul class="list-group">
-				<li class="list-group-item"> 
-					<div>
-			
-	                @foreach($agendas as $agenda)
-					<?php If ($agenda->dia == "Jueves"){?> 
-                        <p>
-                            <div class="well">
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cliente: 	{{$agenda->nombreCliente}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Dirección: {{$agenda->direccion}}</span>
-                                </div>
-                                
-                                 <div class="control-group">
-                                    <span class="control-label dimgray">Estado: Pendiente</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
-                                </div>
-                             
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
-                            </div>
-                        </p>
-                <?php } ?>
-                @endforeach
-               </div>
-               </li>
-			</ul>
-		</div>
-	</div>	
-	
-	
-	
-		
-	
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse5"><b> Viernes</b></a>
-				</h4>
-			</div>
-		<div id="collapse5" class="panel-collapse collapse">
-			<ul class="list-group">
-				<li class="list-group-item"> 
-					<div>
-			
-	                @foreach($agendas as $agenda)
-					<?php If ($agenda->dia == "Viernes"){?> 
-                        <p>
-                            <div class="well">
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Cliente: 	{{$agenda->nombreCliente}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Dirección: {{$agenda->direccion}}</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Estado: Pendiente</span>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <span class="control-label dimgray">Orden de visita: {{$agenda->orden +1}}</span>
-                                </div>
-                                
-
-                             
-								<a href="{{app()->make('urls')->getUrlEliminarAgenda($agenda->agendaId, $nombre[0]->id)}}" class="btn btn-primary btn-xs col-sm-offset-11">Eliminar</a>  
-                            </div>
-                        </p>
-                <?php } ?>
-                @endforeach
-               </div>
-               </li>
-			</ul>
-		</div>
-	</div>	
 	
 	<hr width=75%"/>
 	

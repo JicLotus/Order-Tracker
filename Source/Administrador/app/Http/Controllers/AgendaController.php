@@ -57,9 +57,9 @@ class AgendaController extends Controller
 						." and date_format(agendas.fecha, '%Y-%m-%d') between ".$lunes." and ".$viernes." order by agendas.orden;";
 			$agendas = DB::select($sql);
 			$nombre =  DB::select("select nombre,id from usuarios where id = " .$request->idVendedor);
- 
+
         return view('agendas.agenda', ['title' => 'Home',
-                                'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre]
+                                'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre, 'hoy' => $fecha2]
         );
         
         
