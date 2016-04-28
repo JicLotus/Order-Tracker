@@ -52,7 +52,6 @@ class NuevoProductoController extends Controller
 		#se pasa la imagen a base64
 		$file= $request->file('imagen');		
 		$codificacion = base64_encode(file_get_contents($file));
-		$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
 		
 		#se guarda la imagen en base64 en la BBDD
 		DB::table('imagenes')->insert(array('id_producto' => $id, 'imagen_base64' => $codificacion));		
