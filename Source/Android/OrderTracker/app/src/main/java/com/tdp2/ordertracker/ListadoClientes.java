@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 
@@ -30,7 +31,7 @@ public class ListadoClientes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        idVendedor = ManejadorPersistencia.obtenerVendedor(this);
+        idVendedor = ManejadorPersistencia.obtenerIdVendedor(this);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -39,6 +40,8 @@ public class ListadoClientes extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_listado_clientes);
+
+        ((TextView) findViewById(R.id.email_drawer)).setText(ManejadorPersistencia.obtenerNombreVendedor(this));
 
         this.pedirClientes();
 

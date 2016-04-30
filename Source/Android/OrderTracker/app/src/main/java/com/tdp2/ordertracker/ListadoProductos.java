@@ -13,8 +13,7 @@ import android.support.v7.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.NumberPicker;
-
-
+import android.widget.TextView;
 
 
 import org.json.JSONArray;
@@ -49,6 +48,8 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
             jsonCliente = getIntent().getStringExtra("cliente");
         }catch(Exception e){}
 
+
+        ((TextView) findViewById(R.id.email_drawer)).setText(ManejadorPersistencia.obtenerNombreVendedor(this));
 
         this.pedirProductos();
 

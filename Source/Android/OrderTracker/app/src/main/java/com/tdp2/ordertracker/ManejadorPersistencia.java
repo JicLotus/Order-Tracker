@@ -15,16 +15,28 @@ import org.json.JSONObject;
 
 public class ManejadorPersistencia {
 
-    public static void persistirVendedor(Context context, String valor) {
+    public static void persistirIdVendedor(Context context, String valor) {
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(APIConstantes.PERSISTENCIA_VENDEDOR, valor);
         editor.commit();
     }
 
-    public static String obtenerVendedor(Context context) {
+    public static void persistirVendedor(Context context, String valor) {
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(APIConstantes.PERSISTENCIA_NOMBRE_VENDEDOR, valor);
+        editor.commit();
+    }
+
+    public static String obtenerIdVendedor(Context context) {
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         return settings.getString(APIConstantes.PERSISTENCIA_VENDEDOR, null);
+    }
+
+    public static String obtenerNombreVendedor(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        return settings.getString(APIConstantes.PERSISTENCIA_NOMBRE_VENDEDOR, null);
     }
 
     public static String obtenerProductosDelCarro(Context context) {

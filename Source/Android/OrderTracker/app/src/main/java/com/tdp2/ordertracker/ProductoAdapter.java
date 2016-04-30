@@ -71,6 +71,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         try {
             holder.np.setMaxValue(jsonArray.getJSONObject(position).getInt("stock"));
+            holder.np.setWrapSelectorWheel(false);
+
         }catch(Exception e){}
 
         holder.titulo.setText(datoActual.titulo);

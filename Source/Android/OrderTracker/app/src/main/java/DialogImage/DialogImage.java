@@ -47,8 +47,10 @@ public class DialogImage {
         mImgOriginal = (ImageView) view.findViewById(R.id.imgOriginal);
         try {
             File f = new File("/mnt/sdcard/Download/", imagenes.get((Integer)v.getTag()) + ".jpg");
+
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            mImgOriginal.setImageBitmap(b);
+
+            mImgOriginal.setImageBitmap(agrandarBitmap(b));
             mImgOriginal.setAdjustViewBounds(true);
 
 
@@ -66,5 +68,20 @@ public class DialogImage {
 
     }
 
+    private Bitmap agrandarBitmap(Bitmap bitMap){
+
+
+        int currentBitmapWidth = bitMap.getWidth();
+        int currentBitmapHeight = bitMap.getHeight();
+
+        int newHeigth = 500;
+
+        int newWidth = (int) Math.floor((double) currentBitmapWidth * ((double) newHeigth / (double) currentBitmapHeight));
+
+        Bitmap newbitMap = Bitmap.createScaledBitmap(bitMap, newWidth, newHeigth, true);
+
+        return newbitMap;
+
+    }
 
 }

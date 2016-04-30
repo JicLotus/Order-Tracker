@@ -88,8 +88,8 @@ class Urls {
    *
    * @return string
    */
-  public function getUrlAgendas($inputData = []) {
-    return url("agendas" . $this->appendQuery($inputData));
+  public function getUrlAgendas( $inputData = []) {
+    return url("agendas" .$this->appendQuery($inputData));
   }
   
    public function getUrlAgenda($inputData = []) {

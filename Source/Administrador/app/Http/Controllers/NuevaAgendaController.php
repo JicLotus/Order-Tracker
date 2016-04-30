@@ -38,6 +38,7 @@ class NuevaAgendaController extends Controller
 		
 		// set object to Monday on next week
 		$dt->setISODate($dt->format('o'), $dt->format('W')+1);
+//		$dt->setISODate($dt->format('o'), $dt->format('W'));
 
 		// get all 1day periods from Monday to +6 days
 		$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
@@ -70,12 +71,20 @@ class NuevaAgendaController extends Controller
 		$fecha = date('Y-m-d H:i:s', $middle); 
 		$idCliente= $request->idCliente[0];
 
-    	foreach ($request->idCliente as $cliente){
-			$id = DB::table('agendas')->insertGetId(array('id_usuario' => ($idVendedor),'id_cliente' => ($cliente), 'fecha' => ($fecha), 'dia' => $request->dia));
-		}
-			echo $dia;
+
+
+			foreach ($request->idCliente as $cliente){
+				try{		
+					$id = DB::table('agendas')->insertGetId(array('id_usuario' => ($idVendedor),'id_cliente' => ($cliente), 'fecha' => ($fecha), 'dia' => $request->dia));
+				}catch(\PDOException $exception){
+				
+				}
+			}
+			
+
 		$url = app()->make('urls')->getUrlAgendas();
 		return redirect($url);
+
     }
 
 

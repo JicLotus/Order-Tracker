@@ -5,13 +5,10 @@
 
 	mysql_select_db("orderTracker");
 
-	$id = $_REQUEST['id'];
-	$cliente = 	$_REQUEST['id_cliente'];
-	$dia = $_REQUEST['dia'];
+	$id = $_REQUEST['id_agenda'];
 	$estado  = $_REQUEST['estado'];
-
 	
-	$sql = "update agendas set estado_visita="."'".$estado."'"." where id_usuario ="."'". $id."'"." and id_cliente="."'".$cliente."'"." and dia ="."'".$dia."'".";";
+	$sql = "update agendas set estado_visita="."'".$estado."'"." where agendas.id ="."'". $id."'";
 
 	echo $sql;
 

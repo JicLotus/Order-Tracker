@@ -28,24 +28,29 @@ class PedidoVendedorController extends Controller
 			$idCliente = $request->idCliente ;
 			$idVendedor =$request->idVendedor ;
 			
-#			$sql = "select * from productos left join pedidos on pedidos.id_producto = productos.id 
-#											left join compras on pedidos.id_compra = compras.id_compra ";
-			$sql = "select * from productos, pedidos, compras
+			$sql = "select *, productos.nombre as nombreProducto, usuarios.nombre as nombreVendedor, date_format(compras.fecha, '%Y-%m-%d') as fechaCompra from productos, usuarios, pedidos, compras, clientes
 					where pedidos.id_producto = productos.id
-							and pedidos.id_compra = compras.id_compra";
+							and pedidos.id_compra = compras.id_compra
+							and usuarios.id = compras.id_usuario
+							and clientes.id = compras.id_cliente";
 														
-			if( (strcmp($request->idCliente, 'Todos')) || (strcmp($request->idVendedor ,'Todos')) || (strcmp($request->datepicker , 'Todas'))){
+			if( (strcmp($request->idCliente, 'Todos')) || (strcmp($request->idVendedor ,'Todos')) 
+					|| (strcmp($request->datepicker , 'Todas'))
+					|| (strcmp($request->datepicker , ''))){
 				if(strcmp($request->idCliente, 'Todos')){
 					$sql .= " and compras.id_cliente = " . $request->idCliente ;
 				}
 				if(strcmp($request->idVendedor ,'Todos')){
 					$sql .= " and compras.id_usuario = " . $request->idVendedor ;
 				}
-				if(strcmp($request->datepicker , 'Todas')){
+
+				if(strcmp($request->datepicker , 'Todas') &&
+					strcmp($request->datepicker , '')){
 					$dt = new DateTime($fecha2);
 					$fecha = $dt->format('Y-m-d');
 					$sql .= " and compras.fecha = '" . $fecha ." 00:00:00'";
 				}
+				
 			}
 			$pedidos = DB::select($sql);
 			

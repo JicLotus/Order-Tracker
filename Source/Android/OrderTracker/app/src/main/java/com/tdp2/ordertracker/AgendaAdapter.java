@@ -42,6 +42,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         holder.direccion.setText(usuarios.get(position).direccion);
         holder.horario.setText(usuarios.get(position).hora);
         holder.id = usuarios.get(position).id;
+        holder.id_agenda = usuarios.get(position).id_agenda;
 
         switch (usuarios.get(position).estadoVisita){
             case APIConstantes.ESTADO_VISITADO: {
@@ -70,7 +71,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
         TextView direccion;
         TextView horario;
         ImageView iconoEstado;
-        String id;
+        String id, id_agenda;
         View view;
         AgendaViewHolder selfHolder;
         RelativeLayout holder_agenda;

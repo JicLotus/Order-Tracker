@@ -62,7 +62,7 @@ public class DetallesPedido extends AppCompatActivity {
             jsonCliente = new JSONObject(cliente);
         }catch(Exception e){}
 
-        vendedor = ManejadorPersistencia.obtenerVendedor(this);
+        vendedor = ManejadorPersistencia.obtenerIdVendedor(this);
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
 
@@ -70,6 +70,8 @@ public class DetallesPedido extends AppCompatActivity {
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+
+        ((TextView) findViewById(R.id.email_drawer)).setText(ManejadorPersistencia.obtenerNombreVendedor(this));
 
         adapter = new PedidoAdapter(obtenerProductos(),pedidos);
         rv.setAdapter(adapter);

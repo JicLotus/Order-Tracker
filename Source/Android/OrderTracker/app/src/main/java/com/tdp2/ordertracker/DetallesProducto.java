@@ -61,6 +61,8 @@ public class DetallesProducto extends AppCompatActivity {
 
         ArrayList<String> imagenes = getListaImagenes();
 
+        ((TextView) findViewById(R.id.email_drawer)).setText(ManejadorPersistencia.obtenerNombreVendedor(this));
+
         this.createDialogImage(imagenes);
         this.createListImages(imagenes);
 

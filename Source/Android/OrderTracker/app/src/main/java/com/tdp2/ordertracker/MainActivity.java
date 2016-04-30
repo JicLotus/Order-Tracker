@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (resp.getStatus()) {
                 JSONArray vendedor = resp.getJsonArray();
-                ManejadorPersistencia.persistirVendedor(this,  vendedor.getJSONObject(0).get("id").toString());
+                ManejadorPersistencia.persistirIdVendedor(this,  vendedor.getJSONObject(0).get("id").toString());
+                ManejadorPersistencia.persistirVendedor(this, username.getText().toString());
                 Intent documentsActivity = new Intent(this, AgendaActivity.class);
                  startActivity(documentsActivity);
             } else {

@@ -48,6 +48,7 @@ public class DetallesCliente extends AppCompatActivity implements OnMapReadyCall
             setTitle(cliente.getString("nombre"));
         }catch(Exception e){}
 
+        ((TextView) findViewById(R.id.email_drawer)).setText(ManejadorPersistencia.obtenerNombreVendedor(this));
 
 
         this.getListaDetalles();

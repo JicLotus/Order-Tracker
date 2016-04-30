@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use App\Models\Property as Property;
+use \DateTime;
+use \DatePeriod;
+use \DateInterval;
+
 
 function procesarYGuardarAgenda($procesar,$numeroDeOrden){
 	
@@ -106,14 +110,34 @@ class AsignarHorariosController extends Controller
      */
     public function index($id)
     {		
-		
-			$diasPosibles = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes");
+
+//			$diasPosibles = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes");
 			
+			
+			$dt = new DateTime();
+			
+						
+			$dt->setISODate($dt->format('o'), $dt->format('W')+1);
+	
+			$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
+		
+			$days = iterator_to_array($periods);
+
+			$lunes = $days[0]->format ('Y-m-d');
+			$martes = $days[1]->format ('Y-m-d');
+			$miercoles = $days[2]->format ('Y-m-d');
+			$jueves = $days[3]->format ('Y-m-d');
+			$viernes = $days[4]->format ('Y-m-d');
+			
+			
+			$diasPosibles = array($lunes, $martes, $miercoles, $jueves, $viernes);
+
 			foreach($diasPosibles as $dia){
-				
-				$sql = "select *, agendas.id as agendaId, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
-				$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
-				$sql .= " left join clientes on agendas.id_cliente = clientes.id where agendas.dia = '" . $dia . "' and usuarios.id = " . $id;
+				$sql = "	select *, agendas.id as agendaId, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
+				$sql .= "	left join usuarios on agendas.id_usuario = usuarios.id ";
+				$sql .= "   left join clientes on agendas.id_cliente = clientes.id where
+							date_format(agendas.fecha, '%Y-%m-%d') = '" . $dia . "' 
+							and usuarios.id = " . $id;
 				$agendas = DB::select($sql);
 
 				$dirSalida= "Av. Paseo Colón 850";
@@ -130,12 +154,21 @@ class AsignarHorariosController extends Controller
 			$agendas = DB::select($sql);
 			
 			$nombre =  DB::select("select nombre,id from usuarios where id = " . $id);
-			
-                        
-        return view('agendas.agenda', ['title' => 'Home',
-                                'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre]
-        );
+			$hoy = date('m/d/Y');
+		
         
+
+		  return view('agendas.agendas', ['title' => 'Home',
+									'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre
+									,'hoy' => $hoy]
+			);
+	  
+/*				
+        return view('agendas.agenda', ['title' => 'Home',
+                                'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre
+                                ,'hoy' => $hoy]
+        );
+ */       
         
     }
 }

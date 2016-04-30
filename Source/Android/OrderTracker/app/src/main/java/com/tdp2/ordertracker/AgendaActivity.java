@@ -22,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -68,7 +69,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_agenda);
 
-        this.vendedor = ManejadorPersistencia.obtenerVendedor(this);
+        this.vendedor = ManejadorPersistencia.obtenerIdVendedor(this);
         this.items = new ArrayList<TextView>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -91,7 +92,7 @@ public class AgendaActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RelativeLayout) findViewById(R.id.left_drawer);
 
-
+        ((TextView) findViewById(R.id.email_drawer)).setText(ManejadorPersistencia.obtenerNombreVendedor(this));
         cargarItems();
         mTitle = mDrawerTitle = getTitle();
 
@@ -184,14 +185,16 @@ public class AgendaActivity extends AppCompatActivity {
 
         try {
             Request request = new Request("GET", "GetClientes.php?id=" + vendedor + "&fecha=" + fechaActual);
+            Log.e("Reuqest","GetClientes.php?id=" + vendedor + "&fecha=" + fechaActual );
             Response resp = new RequestHandler().sendRequest(request);
+
             clientesDelDia = resp.getJsonArray();
             for (int i = 0; i < clientesDelDia.length(); i++) {
                 JSONObject agenda = clientesDelDia.getJSONObject(i);
                 Date date = format.parse(agenda.getString("fecha"));
                 String hora = new SimpleDateFormat("HH:mm").format(date);
                 Agenda unaAgenda = new Agenda(agenda.getString("nombre"), agenda.getString("direccion"), hora,
-                        agenda.getString("id"), agenda.getString(APIConstantes.AGENDA_ESTADO));
+                        agenda.getString("id"), agenda.getString(APIConstantes.AGENDA_ESTADO), agenda.getString(APIConstantes.ID_AGENDA));
                 listaUsuarios.add(unaAgenda);
             }
         } catch (Exception e) {
@@ -291,8 +294,8 @@ public class AgendaActivity extends AppCompatActivity {
     private void marcarUsuarioComoVisitado(){
         usuarioSeleccionado.ponerVerde();
         try {
-            String requestString = "SetEstadoAgenda.php?id=" + vendedor + "&dia=" + fechaActual
-                    +"&id_cliente="+ usuarioSeleccionado.id+"&estado="+APIConstantes.ESTADO_VISITADO;
+            String requestString = "SetEstadoAgenda.php?id_agenda=" + usuarioSeleccionado.id_agenda+"&estado="
+                    + APIConstantes.ESTADO_VISITADO;
             Log.e("Request", requestString);
             Request request = new Request("GET", requestString);
 

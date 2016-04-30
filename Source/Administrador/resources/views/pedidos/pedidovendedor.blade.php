@@ -90,7 +90,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#{{$bulto->id_compra}}"> <b> Número	 de identificación: {{$bulto->id_compra}}</b> </a>
+					<a data-toggle="collapse" href="#{{$bulto->id_compra}}"> 
+					<b>Pedido: {{$bulto->id_compra}}  ,  {{$bulto->nombre}}   ,  {{$bulto->razon_social}}   ,  {{$bulto->fechaCompra}}
+					  ,  {{$bulto->nombreVendedor}}</b> </a>
 				</h4>
 			</div>
 		<div id="{{$bulto->id_compra}}" class="panel-collapse collapse">
@@ -108,7 +110,9 @@
 												<option value="pendiente" <?php If ($bulto->estado == "pendiente"){?> selected = 'selected'<?php } ?>>Pendiente</option>
 												<option value="en_proceso" <?php If ($bulto->estado == "en_proceso"){?> selected = 'selected'<?php } ?>>En Proceso de Armado</option>
 												<option value="empaquetado" <?php If ($bulto->estado == "empaquetado"){?> selected = 'selected'<?php } ?>>Empaquetado</option>												
+												<option value="en_distribucion"  <?php If ($bulto->estado == "en_distribucion"){?> selected = 'selected'<?php } ?> >En Distribución</option>
 												<option value="entregado"  <?php If ($bulto->estado == "entregado"){?> selected = 'selected'<?php } ?> >Entregado</option>
+												<option value="facturado" <?php If ($bulto->estado == "facturado"){?> selected = 'selected'<?php } ?>>Facturado</option>
 												<option value="cancelado" <?php If ($bulto->estado == "cancelado"){?> selected = 'selected'<?php } ?>>Cancelado</option>
             
 											</select>
@@ -139,7 +143,7 @@
 								?>   
 													
 													
-													<td>{{$pedido->nombre}}</td>
+													<td>{{$pedido->nombreProducto}}</td>
 													 <td>{{$pedido->codigo}} </td>
 													 <td>{{$pedido->cantidad}} </td>
 													<td>${{$pedido->precio}} </td>
