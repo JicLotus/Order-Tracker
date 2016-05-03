@@ -48,141 +48,21 @@
     <body id="{{$page}}">
         <header id="header">
             <div class="container">
-                <div class="row">
-                    
-                  <div class="col-md-8 col-sm-8">
+			<div class="btn-group btn-group-justified">
+
                     
                     <a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-primary">Productos</a>
                     <a href="{{app()->make('urls')->getUrlClientes()}}" class="btn btn-primary">Clientes</a>
                     <a href="{{app()->make('urls')->getUrlUsuarios()}}" class="btn btn-primary">Usuarios</a>
                     <a href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary">Pedidos</a>
                     <a href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary">Agendas</a>
+                    <a href="{{app()->make('urls')->getUrlDescuentos()}}" class="btn btn-primary">Descuentos</a>
                                         
-						</div>                    
-                    
-                    <div class="col-md-3 col-sm-3">
-                        
-                        @if(app()->make("currentUser") != null)
-                            <a href="{{app()->make('urls')->getUrlMyAccount()}}" class="btn btn-primary">Mi cuenta</a>
-                            <a href="{{app()->make('urls')->getUrlLogout()}}" class="btn btn-default" >Cerrar sesión</a>
-                        @else
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">
-                              Ingresar
-                            </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">
-                              Registrarme
-                            </button>
-                        @endif
-                        
-               			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fa fa-bars"></i>
-                        </button>
-								
-								<ul class="dropdown-menu">
-                            @if(app()->make("currentUser") != null)
-                                <li>
-                                    <a href="{{app()->make('urls')->getUrlPublish()}}">Publicar</a>
-                                </li>
-                            @endif
-                            <li>
-                                <a href="{{app()->make('urls')->getUrlHelp()}}">Ayuda</a>
-                            </li>
-                        </ul>
-
-
-                    </div>
-                    
                     
                 </div>
             </div>
         </header>
         @yield("content")
-        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginModal">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: #f2f2f2;">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="loginModal">Ingresar a mi cuenta</h4>
-              </div>
-              <div class="modal-body">
-                <form method="post" action="/auth/login">
-                    {{csrf_field()}}
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="email" placeholder="E-mail"></input>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="password" name="password" placeholder="contraseña"></input>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn btn-warning" type="submit">Iniciar sesión</button>
-                        </div>
-                    </div>
-                    <input type="hidden" name="uri" value="{{Request::path()}}">
-                </form>
-              </div>
-              <div class="modal-footer" style="text-align: center; background-color: rgb(192, 190, 190);">
-                <h5 class="modal-title" id="loginModal">No estoy registrado</h5>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#register" id="registerButton">Registrarme</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerModal">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: #f2f2f2;">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="registerModal">Nuevo usuario</h4>
-              </div>
-              <div class="modal-body">
-                <form method="post" action="/auth/register">
-                    {{csrf_field()}}
-                    <div class="form-group">
-                        {!! HtmlHelper::selectFromDicc(UserRoleDefinitions::map(), "id", "name", UserRoleDefinitions::constant('INDIVIDUAL_USER'), ["class" => "form-control", "name" => "role", "id" => "registerRole"], false) !!}
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="name" placeholder="Nombre"></input>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="email" placeholder="E-mail"></input>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="password" name="password" placeholder="Contraseña"></input>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" id="registerCuit" type="text" name="cuit" placeholder="CUIT" style="display: none;"></input>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" id="registerPhone" type="text" name="phone" placeholder="Teléfono" style="display: none;"></input>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="mobile_phone" placeholder="Teléfono móvil"></input>
-                    </div>
-                    <input type="hidden" name="uri" value="{{Request::path()}}">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button class="btn btn-warning">Registrarme</button>
-                        </div>
-                    </div>
-                </form>
-              </div>
-              <div class="modal-footer" style="text-align: center; background-color: rgb(192, 190, 190);">
-                <h5 class="modal-title" id="loginModal">Ya tengo una cuenta</h5>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login" id="loginButton">
-                          Iniciar sesión
-                        </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <script type="text/javascript">
-            $(document).ready(function(data) {    
-                var loginError = "<?php echo $errors->first('email') ?>";
-                if (loginError != "") {
-                    alert("error de login");
-                }
-            });
-        </script>
+        
     </body>
 </html>

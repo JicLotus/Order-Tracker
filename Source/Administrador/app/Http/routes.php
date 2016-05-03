@@ -49,7 +49,7 @@ Route::post('guardarnuevaagenda', "NuevaAgendaController@guardar");
 Route::get('asignarhorarios/{id}', "AsignarHorariosController@index");
 Route::get('eliminaragenda/{idAgenda}/{vendedor}', "EliminarAgendaController@index");
 
-
+Route::get('descuentos', "DescuentosController@index");
 
 Route::group(array('middleware' => 'auth'), function() {
 
