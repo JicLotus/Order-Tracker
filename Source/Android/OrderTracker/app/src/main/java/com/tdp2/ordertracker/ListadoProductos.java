@@ -52,6 +52,7 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         ((TextView) findViewById(R.id.email_drawer)).setText(ManejadorPersistencia.obtenerNombreVendedor(this));
 
         this.pedirProductos();
+        this.pedirDescuentos();
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
 
@@ -78,6 +79,16 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
     }
 
+
+    private void pedirDescuentos()
+    {
+        Request request = new Request("GET", "GetDescuentos.php");
+        Response resp = new RequestHandler().sendRequest(request);
+
+        if (resp.getStatus())
+            ManejadorPersistencia.persistirDescuentos(this,resp.getJsonArray().toString());
+
+    }
 
 
     public void downloadImagenesProductos()
