@@ -23,7 +23,7 @@ class AgendasController extends Controller
 			$sql = "select *,usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
 			$sql .= "left join usuarios on agendas.id_usuario = usuarios.id left join clientes on agendas.id_cliente = clientes.id";
 			$agendas = DB::select($sql);
-            $hoy = date('m/d/Y');
+            $hoy = date('d-m-Y');
         return view('agendas.agendas', ['title' => 'Home',
                                 'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'hoy' => $hoy]
         );

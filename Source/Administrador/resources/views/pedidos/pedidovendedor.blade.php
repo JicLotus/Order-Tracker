@@ -10,8 +10,13 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
-    $("#timePicker").timePicker();
+    $("#datepicker").datepicker({ 
+		minDate: -20,
+		maxDate: "+1M +10D",
+		dateFormat: "dd-mm-yy",
+		altFormat: "ddmmyy",
+		altField: "#alt-date"
+	});
   });
   </script>
 </head>
@@ -177,7 +182,7 @@
     
      <?php If (count($bultos) == 0){?>   
 		<div class="alert alert-danger">
-			<strong>No existen compras! </strong>Revise el nombre del cliente seleccionado.
+			<strong>No existen compras! </strong>Revise los filtros seleccionados.
 		</div>
 	  <?php } ?>
     </section>

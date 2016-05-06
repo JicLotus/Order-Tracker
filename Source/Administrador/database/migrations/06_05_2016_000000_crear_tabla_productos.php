@@ -12,6 +12,7 @@ class CrearTablaProductos extends Migration
      */
     public function up()
     {
+		Schema::dropIfExists('productos');
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');				
@@ -20,9 +21,9 @@ class CrearTablaProductos extends Migration
 				$table->integer('imagen');
 				$table->string('caracteristicas',10000);
 				$table->integer('stock');
-				$table->string('marca');
+				$table->integer('marca');
 				$table->integer('estado');
-				$table->string('categoria');
+				$table->integer('categoria');
 				$table->integer('precio');
         });
     }

@@ -12,8 +12,13 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
-    $("#timePicker").timePicker();
+    $("#datepicker").datepicker({ 
+		minDate: -20,
+		maxDate: "+1M +10D",
+		dateFormat: "dd-mm-yy",
+		altFormat: "ddmmyy",
+		altField: "#alt-date"
+	});
   });
   </script>
 </head>
@@ -65,6 +70,10 @@
 					<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}"  onchange= "this.form.submit()" >
 				</div>
 		</div>
+		<div class="form-group">	
+			
+			<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
+		</div>	
 </form></h4>
 
 <hr width=75%"/>

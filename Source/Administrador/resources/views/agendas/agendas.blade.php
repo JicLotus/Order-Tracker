@@ -10,10 +10,15 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
+   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
-    $("#timePicker").timePicker();
+    $("#datepicker").datepicker({ 
+		minDate: -20,
+		maxDate: "+1M +10D",
+		dateFormat: "dd-mm-yy",
+		altFormat: "ddmmyy",
+		altField: "#alt-date"
+	});
   });
   </script>
 </head>
@@ -40,7 +45,7 @@
 		
 <form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
-		<h4><div class="form-group">
+		<h4>
 			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
@@ -50,7 +55,6 @@
 						<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
 						@endforeach
 												  
-						<input type="submit" value= "Ver" />
 					</select>
 				  </div>
 			  </div>
@@ -62,8 +66,13 @@
 						<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}">
 					</div>
 			</div>
+			
+		<div class="form-group">	
+			
+			<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
+		</div>	
 	 
-		</div><h4>
+		<h4>
 </form>
 
 <hr width=75%"/>

@@ -40,7 +40,7 @@
     
 @section("content")
     <section id="search-section">
-			<a  href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary btn-block"><h4><b>PEDIDOS</b></h4></a>
+			<a  href="{{app()->make('urls')->getUrlDescuentos()}}" class="btn btn-primary btn-block"><h4><b>DESCUENTOS</b></h4></a>
 
 		
 <h4><form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
@@ -48,10 +48,10 @@
 		<div class="form-group">
 			
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="Vendedor">Vendedor</label>
+				<label class="control-label col-sm-2" for="Vendedor">Categoría</label>
 				  <div class="col-sm-8">
 					<select onclick="reload();" id="idVendedor" name="idVendedor">
-						<option>Todos</option>
+						<option>Todas</option>
 						@foreach($vendedores as $vendedor)
 						<option value = {{$vendedor->id}}>{{$vendedor->nombre}}</option>  
 						@endforeach 
@@ -60,10 +60,10 @@
 			</div>	
 			
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="Clientes">Clientes</label>
+				<label class="control-label col-sm-2" for="Clientes">Marca</label>
 					<div class="col-sm-8">
 					<select id="idClientee" name="idCliente" >
-						<option>Todos</option>
+						<option>Todas</option>
 						@foreach($clientes as $cliente)   
 						<option value = {{$cliente->id}}>{{$cliente->nombre}}</option>
 						@endforeach
@@ -85,7 +85,7 @@
 
 <hr width=75%"/>
 
-	<a href="{{app()->make('urls')->getUrlEliminarPedidosCancelados()}}" class="btn btn-primary">Eliminar Pedidos Cancelados</a> 
+	<a href="{{app()->make('urls')->getUrlEliminarPedidosCancelados()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
       </section>
 @endsection
 
