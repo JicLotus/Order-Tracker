@@ -12,12 +12,14 @@ class CrearDescuentos extends Migration
      */
     public function up()
     {
+		Schema::dropIfExists('descuentos');
         Schema::create('descuentos', function (Blueprint $table) {
             $table->increments('id')->unique();
 			$table->integer('id_marca');
 			$table->integer('id_categoria');
 			$table->integer('id_producto');
 			$table->integer('cantidad');
+			$table->double('porcentaje');
 			$table->dateTime('desde');
 			$table->dateTime('hasta');
         });
