@@ -29,7 +29,7 @@
 		
 		$id_producto = $producto->id;
 		$cantidad = $producto->cantidad;
-		$precio = $producto->precio;
+		$precio = $producto->precio_final;
 		
 		$sql1= "Insert into pedidos (id_producto, cantidad,precio,id_compra) values ($id_producto,$cantidad,$precio,$id_compra);";
 

@@ -14,6 +14,8 @@ public class APIConstantes {
     public static final String PRODUCTO_CANTIDAD = "cantidad";
     public static final String PRODUCTO_ID = "id";
     public static final String PRODUCTO_PRECIO = "precio";
+    public static final String PRODUCTO_MARCA = "marca";
+    public static final String PRODUCTO_CATEGORIA = "categoria";
     public static final String PRODUCTO_NOMBRE = "nombre";
     public static final String DESCUENTOS_CANTIDAD = "cantidad";
     public static final String DESCUENTOS_PORCENTAJE = "porcentaje";

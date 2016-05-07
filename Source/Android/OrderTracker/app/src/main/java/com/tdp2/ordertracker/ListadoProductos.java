@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
     private JSONArray productos;
     private FileHandler fileHandler;
     private List<String> firstIdImagenes;
+    JSONArray descuentos;
 
     ProductoAdapter adapter;
     private String jsonCliente;
@@ -53,6 +55,9 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
         this.pedirProductos();
         this.pedirDescuentos();
+        this.obtenerDescuentos();
+        this.aplicarDescuentos();
+
 
         rv = (RecyclerView)findViewById(R.id.recycler_view_productos);
 
@@ -64,6 +69,73 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
         adapter.setJsonArray(productos);
         rv.setAdapter(adapter);
+    }
+    private void obtenerDescuentos(){
+        String json = ManejadorPersistencia.obtenerDescuentos(this);
+
+        if (json ==  null){
+            descuentos = new JSONArray();
+        }else{
+            try {
+                descuentos = new JSONArray(json);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                descuentos = new JSONArray();
+            }
+        }
+    }
+
+    private void aplicarDescuentos(){
+
+        int cantidadComprada;
+        double porcentaje;
+        int precio;
+        String marcaProducto, marcaDescuento;
+        String categoriaProducto, categoriaDescuento;
+
+        for (int i=0;i<descuentos.length();i++) {
+
+            try {
+                int cantidadDescuento = Integer.parseInt(descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_CANTIDAD));
+                porcentaje = Double.parseDouble(descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_PORCENTAJE));
+                marcaDescuento = descuentos.getJSONObject(i).getString(APIConstantes.PRODUCTO_MARCA);
+                categoriaDescuento = descuentos.getJSONObject(i).getString(APIConstantes.PRODUCTO_CATEGORIA);
+
+                for(int j=0;j<productos.length();j++) {
+                    try {
+                        JSONObject producto = productos.getJSONObject(j);
+                        //cantidadComprada = Integer.parseInt(producto.getString(APIConstantes.PRODUCTO_CANTIDAD));
+                        precio = Integer.parseInt(producto.getString(APIConstantes.PRODUCTO_PRECIO));
+                        marcaProducto = producto.getString(APIConstantes.PRODUCTO_MARCA);
+                        categoriaProducto = producto.getString(APIConstantes.PRODUCTO_CATEGORIA);
+
+                        /*
+                        if (cantidadComprada >= cantidadDescuento){
+                            double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
+                            if (precio*porcentaje < precio_final)
+                                producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
+                        }
+                        */
+
+                        if (marcaProducto.equals(marcaDescuento)){
+                            double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
+                            if (precio*porcentaje < precio_final)
+                                producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
+                        }
+                        if (categoriaProducto.equals(categoriaDescuento)){
+                            double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
+                            if (precio*porcentaje < precio_final)
+                                producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
+                        }
+
+                    }
+                    catch(Exception e){}
+                }
+
+            }catch(Exception e){}
+
+        }
+
     }
 
 

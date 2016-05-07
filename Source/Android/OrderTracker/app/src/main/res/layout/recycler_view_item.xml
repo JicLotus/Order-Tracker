@@ -61,7 +61,20 @@
                 android:paddingTop="@dimen/standard_padding"
                 android:layout_toLeftOf="@id/nPicker"
                 />
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/verde"
+                    android:id="@+id/precioFinal"
+                    android:layout_toRightOf="@id/imagenProducto"
+                    android:gravity="bottom"
+                    android:textSize="24sp"
+                    android:layout_below="@id/caracteristicasProductos"
+                    android:paddingTop="@dimen/standard_padding"
+                    android:layout_toLeftOf="@id/nPicker"
+                    />
+
+                <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Subtotal: $300"
@@ -70,7 +83,7 @@
                 android:layout_toRightOf="@id/imagenProducto"
                 android:gravity="bottom"
                 android:textSize="24sp"
-                android:layout_below="@id/caracteristicasProductos"
+                android:layout_below="@id/precioFinal"
                 android:paddingTop="@dimen/standard_padding"
                 android:layout_toLeftOf="@id/nPicker"
                 />

@@ -77,6 +77,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         holder.titulo.setText(datoActual.titulo);
 
+
         try {
             File f = new File("/mnt/sdcard/Download/", datoActual.idIcono + ".jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
@@ -94,9 +95,17 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
             holder.precio = jsonArray.getJSONObject(position).getInt(APIConstantes.PRODUCTO_PRECIO);
             holder.precio_final = jsonArray.getJSONObject(position).getInt(APIConstantes.PRODUCTO_PRECIO_FINAL);
+            holder.marca = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_MARCA);
+            holder.categoria = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_CATEGORIA);
         }
         catch(Exception e)
         {
+        }
+
+        if (holder.precio_final<holder.precio){
+            holder.precioFinal.setText("$"+holder.precio_final);
+        }else{
+            holder.precioFinal.setText("");
         }
 
     }
@@ -109,12 +118,16 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView icono;
         TextView titulo;
+
         TextView descripcion;
         TextView subtotal;
+        TextView precioFinal;
         int posicion;
         int itemId;
         int precio;
-        int precio_final;
+        String marca;
+        String categoria;
+        double precio_final;
 
         NumberPicker np;
 
@@ -124,6 +137,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
             icono = (ImageView) itemView.findViewById(R.id.imagenProducto);
             titulo = (TextView) itemView.findViewById(R.id.nombreProducto);
+            precioFinal = (TextView) itemView.findViewById(R.id.precioFinal);
             descripcion = (TextView) itemView.findViewById(R.id.caracteristicasProductos);
             subtotal = (TextView)itemView.findViewById(R.id.subtotal);
             subtotal.setText("");
@@ -143,14 +157,21 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                     } else {
                         try {
                             JSONObject producto = new JSONObject();
+                            aplicarDescuentos(newVal);
                             producto.put(APIConstantes.PRODUCTO_ID, itemId);
                             producto.put(APIConstantes.PRODUCTO_CANTIDAD, newVal);
                             producto.put(APIConstantes.PRODUCTO_NOMBRE, titulo.getText().toString());
                             producto.put(APIConstantes.PRODUCTO_PRECIO,precio);
                             producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL,precio_final);
                             pedidos.put(itemId, producto);
+                            descripcion.setText("$"+ String.valueOf(precio));
+                            subtotal.setText("Subtotal: $"+String.valueOf(precio_final*newVal));
+                            if (precio_final<precio){
+                                precioFinal.setText("$"+precio_final);
+                            }else{
+                                precioFinal.setText("");
+                            }
 
-                            subtotal.setText("Subtotal: $"+String.valueOf(precio*newVal));
                         } catch (JSONException e) {
                         }
 
@@ -158,12 +179,70 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                 }
             });
 
+
             icono.setOnClickListener(this);
             titulo.setOnClickListener(this);
             descripcion.setOnClickListener(this);
 
         }
 
+
+        private void aplicarDescuentos(int cantidadComprada){
+            JSONArray descuentos = obtenerDescuentos();
+
+            double porcentaje;
+            String marcaProducto, marcaDescuento;
+            String categoriaProducto, categoriaDescuento;
+
+            for (int i=0;i<descuentos.length();i++) {
+
+                try {
+                    int cantidadDescuento = Integer.parseInt(descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_CANTIDAD));
+                    porcentaje = Double.parseDouble(descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_PORCENTAJE));
+                    marcaDescuento = descuentos.getJSONObject(i).getString(APIConstantes.PRODUCTO_MARCA);
+                    categoriaDescuento = descuentos.getJSONObject(i).getString(APIConstantes.PRODUCTO_CATEGORIA);
+
+                    try {
+                        marcaProducto = marca;
+                        categoriaProducto = categoria;
+
+                        if ((cantidadDescuento>0)&&(cantidadComprada >= cantidadDescuento)){
+                            if (precio*porcentaje <= precio_final)
+                                precio_final = (precio*porcentaje);
+                        }else if (cantidadComprada<cantidadDescuento){
+                                precio_final = precio;
+                        }
+                        if (marcaProducto.equals(marcaDescuento)){
+                            if (precio*porcentaje <= precio_final)
+                                precio_final = (precio*porcentaje);
+                        }
+                        if (categoriaProducto.equals(categoriaDescuento)){
+                            if (precio*porcentaje <= precio_final)
+                                precio_final = (precio*porcentaje);
+                        }
+
+                    } catch(Exception e){}
+
+
+                }catch(Exception e){}
+
+            }
+        }
+
+        private JSONArray obtenerDescuentos(){
+            String json = ManejadorPersistencia.obtenerDescuentos(contexto);
+
+            if (json ==  null){
+                return new JSONArray();
+            }else{
+                try {
+                    return new JSONArray(json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new JSONArray();
+                }
+            }
+        }
 
 
         @Override

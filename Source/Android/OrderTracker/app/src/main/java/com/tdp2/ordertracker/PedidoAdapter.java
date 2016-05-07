@@ -33,7 +33,6 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
 
     public PedidoAdapter(List<RecyclerViewItem> datos, JSONArray pedidosParam) {
 
-
         pedidos = pedidosParam;
         this.datos = datos;
     }
@@ -54,11 +53,11 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
         RecyclerViewItem datoActual = datos.get(position);
 
         try {
-            holder.titulo.setText(pedidos.getJSONObject(position).getString("nombre"));
+            holder.titulo.setText(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_NOMBRE));
             holder.precio.setText("$ " + pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
-            holder.cantidad.setText("Cantidad: " + pedidos.getJSONObject(position).getString("cantidad"));
+            holder.cantidad.setText("Cantidad: " + pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_CANTIDAD));
 
-            int cant = Integer.parseInt(pedidos.getJSONObject(position).getString("cantidad"))*
+            int cant = Integer.parseInt(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_CANTIDAD))*
                         Integer.parseInt(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
             holder.subtotal.setText("Subtotal: $"+String.valueOf(cant));
         }catch(Exception e){}

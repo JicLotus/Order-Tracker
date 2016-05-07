@@ -47,25 +47,11 @@ public class DetallesPedido extends AppCompatActivity {
     private RecyclerView rv;
     TextView precioTotal;
     String vendedor;
-    JSONArray descuentos;
     JSONObject jsonCliente;
     private FileHandler fileHandler;
     private List<String> firstIdImagenes;
 
-    private void obtenerDescuentos(){
-        String json = ManejadorPersistencia.obtenerDescuentos(this);
 
-        if (json ==  null){
-            descuentos = new JSONArray();
-        }else{
-            try {
-                descuentos = new JSONArray(json);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                descuentos = new JSONArray();
-            }
-        }
-    }
 
 
     @Override
@@ -73,9 +59,6 @@ public class DetallesPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_pedido);
 
-
-        obtenerDescuentos();
-        aplicarDescuentos();
         try {
             pedidos = new JSONArray(getIntent().getStringExtra("jsonArray"));
             String cliente = getIntent().getStringExtra("cliente");
@@ -101,45 +84,6 @@ public class DetallesPedido extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-
-        obtenerDescuentos();
-        aplicarDescuentos();
-    }
-
-    private void aplicarDescuentos(){
-
-        int cantidadComprada;
-        int porcentaje;
-        int precio;
-
-        for (int i=0;i<descuentos.length();i++) {
-
-            try {
-                int cantidadDescuento = Integer.parseInt(descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_CANTIDAD));
-                porcentaje = Integer.parseInt(descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_PORCENTAJE));
-                for(int j=0;j<pedidos.length();j++) {
-
-                    try {
-                        JSONObject producto = pedidos.getJSONObject(j);
-                        cantidadComprada = Integer.parseInt(producto.getString("cantidad"));
-                        precio = Integer.parseInt(producto.getString("precio"));
-
-                        if (cantidadComprada >= cantidadDescuento){
-
-                            producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
-                        }
-                    }
-                    catch(Exception e){}
-                }
-
-            }catch(Exception e){}
-
-        }
-
-    }
     private void settearDetalleCliente(){
         try {
             ((TextView)findViewById(R.id.direccion_detalleC)).setText(jsonCliente.getString("direccion"));
