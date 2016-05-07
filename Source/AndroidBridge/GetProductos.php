@@ -9,7 +9,7 @@
 	//Selecciona todos los productos
 
 	
-	$sql= "Select * from productos where stock>0";
+	$sql= "Select *, precio as precio_final from productos where stock>0";
 
 		
 	$rs = mysql_query($sql,$con);

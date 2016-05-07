@@ -92,7 +92,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         try {
 
-            holder.precio = jsonArray.getJSONObject(position).getInt("precio");
+            holder.precio = jsonArray.getJSONObject(position).getInt(APIConstantes.PRODUCTO_PRECIO);
+            holder.precio_final = jsonArray.getJSONObject(position).getInt(APIConstantes.PRODUCTO_PRECIO_FINAL);
         }
         catch(Exception e)
         {
@@ -113,6 +114,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         int posicion;
         int itemId;
         int precio;
+        int precio_final;
 
         NumberPicker np;
 
@@ -141,10 +143,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                     } else {
                         try {
                             JSONObject producto = new JSONObject();
-                            producto.put("id", itemId);
-                            producto.put("cantidad", newVal);
-                            producto.put("nombre", titulo.getText().toString());
-                            producto.put("precio",precio);
+                            producto.put(APIConstantes.PRODUCTO_ID, itemId);
+                            producto.put(APIConstantes.PRODUCTO_CANTIDAD, newVal);
+                            producto.put(APIConstantes.PRODUCTO_NOMBRE, titulo.getText().toString());
+                            producto.put(APIConstantes.PRODUCTO_PRECIO,precio);
+                            producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL,precio_final);
                             pedidos.put(itemId, producto);
 
                             subtotal.setText("Subtotal: $"+String.valueOf(precio*newVal));

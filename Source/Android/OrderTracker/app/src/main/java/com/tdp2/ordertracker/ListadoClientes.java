@@ -95,7 +95,7 @@ public class ListadoClientes extends AppCompatActivity {
         List<RecyclerViewItem> items = new ArrayList<>();
         try {
             for (int i = 0; i < clientes.length(); i++) {
-                items.add(new RecyclerViewItem(clientes.getJSONObject(i).getString("nombre"),clientes.getJSONObject(i).getString("direccion"), R.drawable.perfil_vacio));
+                items.add(new RecyclerViewItem(clientes.getJSONObject(i).getString("nombre"),clientes.getJSONObject(i).getString("direccion"), R.drawable.perfil_vacio, ""));
             }
         }
         catch(Exception e)

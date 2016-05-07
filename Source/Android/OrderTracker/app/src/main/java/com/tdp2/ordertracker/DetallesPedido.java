@@ -52,6 +52,22 @@ public class DetallesPedido extends AppCompatActivity {
     private FileHandler fileHandler;
     private List<String> firstIdImagenes;
 
+    private void obtenerDescuentos(){
+        String json = ManejadorPersistencia.obtenerDescuentos(this);
+
+        if (json ==  null){
+            descuentos = new JSONArray();
+        }else{
+            try {
+                descuentos = new JSONArray(json);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                descuentos = new JSONArray();
+            }
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +75,7 @@ public class DetallesPedido extends AppCompatActivity {
 
 
         obtenerDescuentos();
+        aplicarDescuentos();
         try {
             pedidos = new JSONArray(getIntent().getStringExtra("jsonArray"));
             String cliente = getIntent().getStringExtra("cliente");
@@ -84,19 +101,12 @@ public class DetallesPedido extends AppCompatActivity {
 
     }
 
-    private void obtenerDescuentos(){
-        String json = ManejadorPersistencia.obtenerDescuentos(this);
+    @Override
+    protected void onResume(){
+        super.onResume();
 
-        if (json ==  null){
-            descuentos = new JSONArray();
-        }else{
-            try {
-                descuentos = new JSONArray(json);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                descuentos = new JSONArray();
-            }
-        }
+        obtenerDescuentos();
+        aplicarDescuentos();
     }
 
     private void aplicarDescuentos(){
@@ -118,6 +128,7 @@ public class DetallesPedido extends AppCompatActivity {
                         precio = Integer.parseInt(producto.getString("precio"));
 
                         if (cantidadComprada >= cantidadDescuento){
+
                             producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
                         }
                     }
@@ -176,7 +187,8 @@ public class DetallesPedido extends AppCompatActivity {
                     idImagen = 0;
                 }
 
-                items.add(new RecyclerViewItem(pedidos.getJSONObject(i).getString("nombre"),"$ " + pedidos.getJSONObject(i).getString("precio"),idImagen));
+                items.add(new RecyclerViewItem(pedidos.getJSONObject(i).getString("nombre"),"$ " + pedidos.getJSONObject(i).getString(APIConstantes.PRODUCTO_PRECIO),
+                        idImagen, pedidos.getJSONObject(i).getString(APIConstantes.PRODUCTO_PRECIO_FINAL)));
             }
         }
         catch(Exception e)
@@ -207,18 +219,6 @@ public class DetallesPedido extends AppCompatActivity {
         return "$" +Integer.toString(precioTotal);
     }
 
-    /*
-            int TIMEOUT_MILLISEC = 10000;  // = 10 seconds
-            HttpParams httpParams = new BasicHttpParams();
-            HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
-            HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLISEC);
-            HttpClient client = new DefaultHttpClient(httpParams);
-
-            HttpPost request = new HttpPost("http://10.0.2.2:8080/");
-            request.setEntity(new ByteArrayEntity(
-                    requestString.toString().getBytes("UTF8")));
-            HttpResponse response = client.execute(request);
-*/
 
 
     public void confirmarPedido(View view)

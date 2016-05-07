@@ -127,7 +127,8 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
                     idImagen = 0;
                 }
 
-                items.add(new RecyclerViewItem(productos.getJSONObject(i).getString("nombre"),"$ " + productos.getJSONObject(i).getString("precio"),idImagen));
+                items.add(new RecyclerViewItem(productos.getJSONObject(i).getString(APIConstantes.PRODUCTO_NOMBRE),"$ " + productos.getJSONObject(i).getString(APIConstantes.PRODUCTO_PRECIO),idImagen,
+                        productos.getJSONObject(i).getString(APIConstantes.PRODUCTO_PRECIO_FINAL)));
             }
         }
         catch(Exception e)
