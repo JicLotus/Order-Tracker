@@ -43,9 +43,8 @@ class NuevoClienteController extends Controller
 
 		$data['idCliente'] = $id;
 		
-		
 		Mail::send('clientes.email', ['id'=>$id], function($message) use($request){
-		$message->to($request->email, $request->nombre)->subject('Bienvenido a Order Tracker!');
+		$message->to($request->email, $request->nombre)->subject('Bienvenido '  .$request->nombre . ' a Order Tracker!');
 		});
 
 	
