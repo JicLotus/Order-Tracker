@@ -93,8 +93,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         try {
 
-            holder.precio = jsonArray.getJSONObject(position).getInt(APIConstantes.PRODUCTO_PRECIO);
-            holder.precio_final = jsonArray.getJSONObject(position).getInt(APIConstantes.PRODUCTO_PRECIO_FINAL);
+            holder.precio = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO);
+            holder.precio_final = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO_FINAL);
             holder.marca = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_MARCA);
             holder.categoria = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_CATEGORIA);
         }
@@ -103,7 +103,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         }
 
         if (holder.precio_final<holder.precio){
-            holder.precioFinal.setText("$"+holder.precio_final);
+            holder.precioFinal.setText("$"+ String.format( "%.2f", holder.precio_final ));
         }else{
             holder.precioFinal.setText("");
         }
@@ -124,7 +124,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         TextView precioFinal;
         int posicion;
         int itemId;
-        int precio;
+        double precio;
         String marca;
         String categoria;
         double precio_final;
@@ -164,10 +164,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                             producto.put(APIConstantes.PRODUCTO_PRECIO,precio);
                             producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL,precio_final);
                             pedidos.put(itemId, producto);
-                            descripcion.setText("$"+ String.valueOf(precio));
-                            subtotal.setText("Subtotal: $"+String.valueOf(precio_final*newVal));
+                            descripcion.setText("$"+ String.format( "%.2f", precio));
+                            subtotal.setText("Subtotal: $"+String.format("%.2f", precio_final*newVal));
                             if (precio_final<precio){
-                                precioFinal.setText("$"+precio_final);
+                                precioFinal.setText("$"+String.format( "%.2f", precio_final));
                             }else{
                                 precioFinal.setText("");
                             }
@@ -212,11 +212,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         }else if (cantidadComprada<cantidadDescuento){
                                 precio_final = precio;
                         }
-                        if (marcaProducto.equals(marcaDescuento)){
+                        if (marcaProducto!=null && marcaProducto.equals(marcaDescuento)){
                             if (precio*porcentaje <= precio_final)
                                 precio_final = (precio*porcentaje);
                         }
-                        if (categoriaProducto.equals(categoriaDescuento)){
+                        if (categoriaProducto!=null && categoriaProducto.equals(categoriaDescuento)){
                             if (precio*porcentaje <= precio_final)
                                 precio_final = (precio*porcentaje);
                         }

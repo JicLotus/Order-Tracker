@@ -12,10 +12,11 @@ class CrearTablaPromociones extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('promociones');
         Schema::create('promociones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cantidad');
-            $table->integer('porcentaje');
+            $table->double('porcentaje');
         });
     }
 

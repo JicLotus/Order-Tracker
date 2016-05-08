@@ -17,8 +17,8 @@ class CrearTablaPedidos extends Migration
 		$table->increments('id');
 		$table->integer('id_producto');
 		$table->integer('cantidad');
-	    $table->integer('precio');
-	    $table->double('precio_final');
+	    $table->double('precio',10,2);
+	    $table->double('precio_final',10,2);
 	    $table->integer('id_compra');
 
         });

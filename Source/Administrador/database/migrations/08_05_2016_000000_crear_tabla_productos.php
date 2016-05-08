@@ -24,7 +24,7 @@ class CrearTablaProductos extends Migration
 				$table->integer('marca');
 				$table->integer('estado');
 				$table->integer('categoria');
-				$table->integer('precio');
+				$table->double('precio',10,2);
         });
     }
 

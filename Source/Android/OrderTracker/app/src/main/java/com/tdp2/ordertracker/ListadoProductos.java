@@ -87,9 +87,8 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
     private void aplicarDescuentos(){
 
-        int cantidadComprada;
         double porcentaje;
-        int precio;
+        double precio;
         String marcaProducto, marcaDescuento;
         String categoriaProducto, categoriaDescuento;
 
@@ -104,25 +103,16 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
                 for(int j=0;j<productos.length();j++) {
                     try {
                         JSONObject producto = productos.getJSONObject(j);
-                        //cantidadComprada = Integer.parseInt(producto.getString(APIConstantes.PRODUCTO_CANTIDAD));
-                        precio = Integer.parseInt(producto.getString(APIConstantes.PRODUCTO_PRECIO));
+                        precio = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO));
                         marcaProducto = producto.getString(APIConstantes.PRODUCTO_MARCA);
                         categoriaProducto = producto.getString(APIConstantes.PRODUCTO_CATEGORIA);
 
-                        /*
-                        if (cantidadComprada >= cantidadDescuento){
+                        if (marcaProducto!=null && marcaProducto.equals(marcaDescuento)){
                             double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
                             if (precio*porcentaje < precio_final)
                                 producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
                         }
-                        */
-
-                        if (marcaProducto.equals(marcaDescuento)){
-                            double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
-                            if (precio*porcentaje < precio_final)
-                                producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
-                        }
-                        if (categoriaProducto.equals(categoriaDescuento)){
+                        if (categoriaProducto!=null && categoriaProducto.equals(categoriaDescuento)){
                             double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
                             if (precio*porcentaje < precio_final)
                                 producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
@@ -177,6 +167,9 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
         if (resp.getStatus())
             ManejadorPersistencia.persistirDescuentos(this,resp.getJsonArray().toString());
+        else{
+            ManejadorPersistencia.persistirDescuentos(this, new JSONArray().toString());
+        }
 
     }
 

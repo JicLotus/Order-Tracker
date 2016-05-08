@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+
+use Validator;
 use Illuminate\Support\Facades\Redirect;
 use File;
 
@@ -35,6 +37,12 @@ class NuevoProductoController extends Controller
 		#Si la imagen se cargo entonces se ejecuta el codigo que sigue
 		#Si la imagen no se cargo, o el archivo que se cargo no es una imagen
 		#entonces el codigo siguiente no se ejecuta y se vuelve al formulario (se hace automaticamente
+
+		$messages = array( 'required' => 'This field aint long enough.' );
+		$rules = array(
+			'nombre'=>'required|min:3'
+		);
+		$validator = Validator::make(['nombre'], $rules, $messages);
 		
 		$this->validate($request, [
         'imagen' => 'image|required',

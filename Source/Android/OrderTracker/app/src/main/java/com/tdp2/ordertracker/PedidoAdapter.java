@@ -54,12 +54,14 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
 
         try {
             holder.titulo.setText(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_NOMBRE));
-            holder.precio.setText("$ " + pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
+
+            holder.precio.setText("$ " + String.format("%.2f", pedidos.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO_FINAL)));
+
             holder.cantidad.setText("Cantidad: " + pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_CANTIDAD));
 
-            int cant = Integer.parseInt(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_CANTIDAD))*
-                        Integer.parseInt(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
-            holder.subtotal.setText("Subtotal: $"+String.valueOf(cant));
+            double cant = Double.parseDouble(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_CANTIDAD))*
+                        Double.parseDouble(pedidos.getJSONObject(position).getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
+            holder.subtotal.setText("Subtotal: $"+String.format("%.2f", cant));
         }catch(Exception e){}
 
 

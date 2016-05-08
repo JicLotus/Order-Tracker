@@ -146,22 +146,23 @@ public class DetallesPedido extends AppCompatActivity {
 
     public String calcularPrecioTotal()
     {
-        int precioTotal=0,precio=0,cantidad=0,precioParcial=0;
-
+        double precioTotal=0,precio=0,precioParcial=0;
+        int cantidad=0;
         for(int i=0;i<pedidos.length();i++) {
 
             try {
                 JSONObject producto = pedidos.getJSONObject(i);
                 cantidad = Integer.parseInt(producto.getString(APIConstantes.PRODUCTO_CANTIDAD));
-                precio = Integer.parseInt(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
+                precio = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
                 precioParcial = precio*cantidad;
                 precioTotal+=precioParcial;
             }
             catch(Exception e){}
         }
 
-        return "$" +Integer.toString(precioTotal);
+        return "$" +Double.toString(precioTotal);
     }
+
 
 
 

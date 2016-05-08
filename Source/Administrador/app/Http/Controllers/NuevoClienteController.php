@@ -30,7 +30,7 @@ class NuevoClienteController extends Controller
     {
 
 		$this->validate($request, [
-        'email' => 'required',
+        'email' => 'required|email|unique:clientes,email',
         'nombre' => 'required',
         'direccion' => 'required'
 		]);
@@ -60,3 +60,4 @@ class NuevoClienteController extends Controller
 
 
 }
+
