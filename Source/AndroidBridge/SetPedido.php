@@ -3,8 +3,6 @@
 	$con = mysql_connect("localhost", "root","123456") or die("Sin conexion");
 
 	mysql_select_db("orderTracker");
-	
-
 		
 		
 	$txt= file_get_contents('php://input');
@@ -29,9 +27,11 @@
 		
 		$id_producto = $producto->id;
 		$cantidad = $producto->cantidad;
-		$precio = $producto->precio_final;
+		$precio = $producto->precio;
+		$precio_final = $producto->precio_final;
 		
-		$sql1= "Insert into pedidos (id_producto, cantidad,precio,id_compra) values ($id_producto,$cantidad,$precio,$id_compra);";
+		$sql1= "Insert into pedidos (id_producto, cantidad,precio, precio_final, id_compra) 
+							 values ($id_producto,$cantidad,$precio,$precio_final,$id_compra);";
 
 		$rs = mysql_query($sql1,$con);
 

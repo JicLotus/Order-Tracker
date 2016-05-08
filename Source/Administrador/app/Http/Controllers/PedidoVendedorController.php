@@ -32,7 +32,8 @@ class PedidoVendedorController extends Controller
 					where pedidos.id_producto = productos.id
 							and pedidos.id_compra = compras.id_compra
 							and usuarios.id = compras.id_usuario
-							and clientes.id = compras.id_cliente";
+							and clientes.id = compras.id_cliente
+							";
 														
 			if( (strcmp($request->idCliente, 'Todos')) || (strcmp($request->idVendedor ,'Todos')) 
 					|| (strcmp($request->datepicker , 'Todas'))
@@ -54,7 +55,7 @@ class PedidoVendedorController extends Controller
 			}
 			$pedidos = DB::select($sql);
 			
-			$bultos = DB::select("$sql group by compras.id_compra");
+			$bultos = DB::select("$sql group by compras.id_compra order by fechaCompra desc");
 
                         
         return view('pedidos.pedidovendedor', ['title' => 'Home',

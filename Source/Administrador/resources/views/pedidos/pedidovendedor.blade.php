@@ -137,6 +137,8 @@
 								<th>Código</th>
 								<th>Cantidad</th>
 								<th>Precio</th>
+								<th>Precio Final</th>
+								<th>Subtotal</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -152,9 +154,11 @@
 													 <td>{{$pedido->codigo}} </td>
 													 <td>{{$pedido->cantidad}} </td>
 													<td>${{$pedido->precio}} </td>
+													<td>${{$pedido->precio_final}} </td>
+													<td>${{$pedido->precio_final*$pedido->cantidad}} </td>
 
 										<?php	
-													$cantidadfinal +=  $pedido->cantidad * $pedido->precio;     
+													$cantidadfinal +=  $pedido->cantidad * $pedido->precio_final;     
 										} 
 										?>
 									
@@ -164,6 +168,8 @@
 								
 							<tr class="info">
 								<td><b>Total</b></td>
+								<td></td>
+								<td></td>
 								<td></td>
 								<td></td>
 								<td><b>${{$cantidadfinal}}</b></td>

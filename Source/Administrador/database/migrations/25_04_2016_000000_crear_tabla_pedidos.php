@@ -14,10 +14,11 @@ class CrearTablaPedidos extends Migration
     {
         Schema::dropIfExists('pedidos');
         Schema::create('pedidos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_producto');
-            $table->integer('cantidad');
+		$table->increments('id');
+		$table->integer('id_producto');
+		$table->integer('cantidad');
 	    $table->integer('precio');
+	    $table->double('precio_final');
 	    $table->integer('id_compra');
 
         });

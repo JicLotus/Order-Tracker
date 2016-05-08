@@ -151,6 +151,24 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
     }
 
+    private void mostrarAlertaDeProductosNoSeleccionados(){
+        new AlertDialog.Builder(this)
+                .setTitle("No ha seleccionado ningun producto")
+                .setMessage("¿Desea finalizar su visita?")
+                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //no hace nada
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
 
     private void pedirDescuentos()
     {
@@ -229,16 +247,22 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
             productos.put(producto);
         }
 
-        Intent documentsActivity = new Intent(this, DetallesPedido.class);
-        try {
-            documentsActivity.putExtra("jsonArray", productos.toString());
-            documentsActivity.putExtra("cliente", jsonCliente);
-        }
-        catch(Exception e)
-        {   return;
-        }
+        if (productos.length()>0){
 
-        startActivity(documentsActivity);
+            Intent documentsActivity = new Intent(this, DetallesPedido.class);
+            try {
+                documentsActivity.putExtra("jsonArray", productos.toString());
+                documentsActivity.putExtra("cliente", jsonCliente);
+            }
+            catch(Exception e)
+            {   return;
+            }
+
+            startActivity(documentsActivity);
+
+        }else{
+            mostrarAlertaDeProductosNoSeleccionados();
+        }
     }
 
     @Override
