@@ -76,8 +76,8 @@
 					<input type="text" id="datepicker" name = "datepicker" value= "Todas las fechas">				
  <div class="col-sm-12">	
 			
-			<button type="submit" class="col-sm-offset-9 btn btn-primary">Buscar</button>
-		<a href="{{app()->make('urls')->getUrlEliminarPedidosCancelados()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
+			<button type="submit" class="col-sm-offset-8 btn btn-primary">Buscar</button>
+		<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
 			
 		</div>
 		</div>	

@@ -148,4 +148,7 @@ class Urls {
     return url("descuentos" . $this->appendQuery($inputData));
   }
 
+	function getUrlNuevoDescuento($inputData = []) {
+    return url("agregarnuevodescuento" . $this->appendQuery($inputData));
+  }
 }
