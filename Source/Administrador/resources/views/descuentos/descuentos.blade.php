@@ -46,46 +46,48 @@
 <h4><form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
-			
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="Vendedor">Categoría</label>
-				  <div class="col-sm-8">
+					<label class="control-label col-sm-2" for="filtros">Filtros</label>
 					<select onclick="reload();" id="idVendedor" name="idVendedor">
-						<option>Todas</option>
+						<option value =  0>Todas las Categorias</option>
 						@foreach($vendedores as $vendedor)
 						<option value = {{$vendedor->id}}>{{$vendedor->nombre}}</option>  
 						@endforeach 
 					</select>
-				  </div> 
-			</div>	
-			
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="Clientes">Marca</label>
-					<div class="col-sm-8">
+
 					<select id="idClientee" name="idCliente" >
-						<option>Todas</option>
+						<option value = 0>Todas las Marcas</option>
 						@foreach($clientes as $cliente)   
 						<option value = {{$cliente->id}}>{{$cliente->nombre}}</option>
 						@endforeach
 					</select> 
-					</div>
-			</div>	
-			 
-			 <div class="form-group">
-				<label class="control-label col-sm-2" for="Día">Fecha</label>
-					<div class="col-sm-8">
-				<input type="text" id="datepicker" name = "datepicker" value= "Todas">
-			</div>
+					
+					<select id="cantidad" name="cantidad" >
+						<option value = 0 >Todas las Cantidades</option>
+						 
+						<option value = 1 > Más de 10 iguales</option>
+						
+						<option value = 2 > Más de 20 iguales</option>
+						
+						<option value = 3 > Más de 30 iguales</option>
+
+					</select> 
+
+
+					<input type="text" id="datepicker" name = "datepicker" value= "Todas las fechas">				
+ <div class="col-sm-12">	
 			
+			<button type="submit" class="col-sm-offset-9 btn btn-primary">Buscar</button>
+		<a href="{{app()->make('urls')->getUrlEliminarPedidosCancelados()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
 			
+		</div>
 		</div>	
-		<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
+
 </form></h4>
 
 
 <hr width=75%"/>
 
-	<a href="{{app()->make('urls')->getUrlEliminarPedidosCancelados()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
+	
       </section>
 @endsection
 

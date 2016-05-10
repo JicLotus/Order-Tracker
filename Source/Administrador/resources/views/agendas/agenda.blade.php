@@ -77,6 +77,12 @@
 </form></h4>
 
 <hr width=75%"/>
+
+   <?php If ($asignado == 1){?>   
+		<div class="alert alert-success">
+			<strong>Agenda Actualizada! </strong>Revise el orden asignado para cada cliente.
+		</div>
+	<?php } ?>
 	
 	<div class="form-group">
 	<?PHP

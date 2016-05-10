@@ -122,7 +122,8 @@ class AsignarHorariosController extends Controller
 			$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
 		
 			$days = iterator_to_array($periods);
-
+			
+			$fecha2 = $days[0]->format ('d-m-Y');
 			$lunes = $days[0]->format ('Y-m-d');
 			$martes = $days[1]->format ('Y-m-d');
 			$miercoles = $days[2]->format ('Y-m-d');
@@ -146,23 +147,23 @@ class AsignarHorariosController extends Controller
 				calcularHorarios($agendas, $dirSalida, $numeroDeOrden);
 			}
 			
+		
 			
 			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
-			$sql = "select *, agendas.id as agendaId, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
-			$sql .= "left join usuarios on agendas.id_usuario = usuarios.id ";
-			$sql .= " left join clientes on agendas.id_cliente = clientes.id where usuarios.id = " . $id . " order by agendas.orden";
-			$agendas = DB::select($sql);
-			
-			$nombre =  DB::select("select nombre,id from usuarios where id = " . $id);
-			$hoy = date('m/d/Y');
-		
-        
+			$sql2 = "select *, agendas.id as agendaId, usuarios.nombre as nombreVendedor, clientes.nombre as nombreCliente from agendas ";
+			$sql2 .= "left join usuarios on agendas.id_usuario = usuarios.id ";
+			$sql2 .= " left join clientes on agendas.id_cliente = clientes.id where usuarios.id = " .$id 
+						." and date_format(agendas.fecha, '%Y-%m-%d') between '".$lunes."' and '".$viernes."' order by agendas.orden;";
+			$agendas = DB::select($sql2);
+			$nombre =  DB::select("select nombre,id from usuarios where id = " .$id);
 
-		  return view('agendas.agendas', ['title' => 'Home',
-									'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre
-									,'hoy' => $hoy]
-			);
-	  
+			$asignado = 1;
+        return view('agendas.agenda', ['title' => 'Home',
+                                'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre, 'hoy' => $fecha2, 'asignado' => $asignado]
+        );
+        
+     
+        
 /*				
         return view('agendas.agenda', ['title' => 'Home',
                                 'page' => 'home','agendas' => $agendas, 'vendedores' => $vendedores, 'nombre' => $nombre
