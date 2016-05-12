@@ -48,14 +48,22 @@
     <div class="form-group">
 		<label class="control-label col-sm-2" for="marca">Marca</label>
           <div class="col-sm-8">
-			<input type="Text" name="marca"  value="{{$producto->marca}}"><br>
+			<select id="marca" name="marca" >
+					@foreach($marcas as $marca)   
+					<option value= {{$marca->id}} <?php If ($marca->id == $producto->marca){?> selected = 'selected'<?php } ?>>{{$marca->nombre}}</option>
+					@endforeach
+			</select> 
 		  </div>
     </div>
     
     <div class="form-group">
 		<label class="control-label col-sm-2" for="categoria">Categoria</label>
           <div class="col-sm-8">
-			<input type="Text" name="categoria"  value="{{$producto->categoria}}"><br>
+			<select id="categoria" name="categoria" >
+					@foreach($categorias as $categoria)   
+					<option value= {{$categoria->id}} <?php If ($categoria->id == $producto->categoria){?> selected = 'selected'<?php } ?>>{{$categoria->nombre}}</option>
+					@endforeach
+			</select> 
 		  </div>
     </div>	
     

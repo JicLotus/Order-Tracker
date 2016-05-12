@@ -14,9 +14,11 @@ class EditarProductoController extends Controller
     public function index($id)
     {
     		$producto = DB::table('productos')->where('id', $id)->first(); 
-    		
+    		$marcas = DB::select("select nombre,id from marcas order by nombre");
+			$categorias = DB::select("select nombre,id from categorias order by nombre");
+
 			return view('productos.edit', ['title' => 'Home',
-							'page' => 'home','producto'=>$producto]
+							'page' => 'home','producto'=>$producto,'marcas' => $marcas, 'categorias' => $categorias]
 			);
 			
     }

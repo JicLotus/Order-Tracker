@@ -214,7 +214,7 @@ $.datepicker.regional['es'] = {
 								<option value= {{$marca->id}}>{{$marca->nombre}}</option>
 								@endforeach
 							</select> 
-							<select onclick="reload();" id="porcentaje2" name="idCategoria"  >
+							<select  id="porcentaje2" name="idCategoria"  >
 									<option value = 10>10% de Descuento</option>  
 									<option value = 15>15% de Descuento</option>  
 									<option value = 20>20% de Descuento</option>  
@@ -267,12 +267,12 @@ $.datepicker.regional['es'] = {
 
 								</select>
 								
-								<select onclick="reload();" id="producto" name="idproducto" >
+								<select  id="producto" name="idproducto" >
 									@foreach($productos as $producto)
 									<option value = {{$producto->id}}>{{$producto->nombre}}</option>  
 									@endforeach 
 								</select>
-								<select onclick="reload();" id="porcentaje3" name="idCategoria" >
+								<select  id="porcentaje3" name="idCategoria" >
 									<option value = 10>10% de Descuento</option>  
 									<option value = 15>15% de Descuento</option>  
 									<option value = 20>20% de Descuento</option>  
@@ -312,7 +312,6 @@ $.datepicker.regional['es'] = {
   </div>
 </div>
 
- 
  
 </body>
 </html>

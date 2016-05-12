@@ -47,17 +47,17 @@
 		{{ csrf_field() }}
 		<div class="form-group">
 					<label class="control-label col-sm-2" for="filtros">Filtros</label>
-					<select onclick="reload();" id="idVendedor" name="idVendedor">
+					<select onclick="reload();" id="categoria" name="categoria">
 						<option value =  0>Todas las Categorias</option>
-						@foreach($vendedores as $vendedor)
-						<option value = {{$vendedor->id}}>{{$vendedor->nombre}}</option>  
+						@foreach($categorias as $categoria)
+						<option value = {{$categoria->id}}>{{$categoria->nombre}}</option>  
 						@endforeach 
 					</select>
 
 					<select id="idClientee" name="idCliente" >
 						<option value = 0>Todas las Marcas</option>
-						@foreach($clientes as $cliente)   
-						<option value = {{$cliente->id}}>{{$cliente->nombre}}</option>
+						@foreach($marcas as $marca)   
+						<option value = {{$marca->id}}>{{$marca->nombre}}</option>
 						@endforeach
 					</select> 
 					
@@ -87,6 +87,109 @@
 
 <hr width=75%"/>
 
+
+	@foreach($productos as $producto)
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#{{$producto->idProducto}}"> 
+					<b>Descuento aplicando en: {{$producto->nombreProducto}} ,{{$producto->nombreMarca}},  
+					{{$producto->nombreCategoria}}</b> 
+					</a>
+				</h4>
+			</div>
+		<div id="{{$producto->idProducto}}" class="panel-collapse collapse">
+			<ul class="list-group">
+				<li class="list-group-item"> 
+					
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Tipo de descuento</th>
+								<th>Porcentaje descontado</th>
+								<th>Precio</th>
+								<th>Final</th>
+								<th>Puesta en vigencia</th>
+								<th>Finalización de la vigencia</th>								
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								
+							foreach($descuentos as $descuento){
+
+								If ($descuento->id_producto == $producto->idProducto){
+							?> 
+								<tr>
+								<?php
+								
+									If ($descuento->id_marca == $producto->marca){
+								  ?> 
+													
+													
+													<td>Por marca ({{$producto->nombreMarca}})</td>
+													<td>{{$descuento->porcentaje}}% </td>
+													<td>${{$producto->precio}} </td>
+													<td>${{$producto->precio*(100-$descuento->porcentaje)/100}} </td>
+													<td>{{$descuento->desde}} </td>
+													<td>{{$descuento->hasta}} </td>
+									
+							
+								<?php 
+									}
+									Else{
+										If ($descuento->id_categoria == $producto->categoria){
+								?>
+										
+													<td>Por categoria ({{$producto->nombreCategoria}})</td>
+													<td>{{$descuento->porcentaje}}% </td>
+													<td>${{$producto->precio}} </td>
+													<td>${{$producto->precio*(100-$descuento->porcentaje)/100}} </td>
+													<td>{{$descuento->desde}} </td>
+													<td>{{$descuento->hasta}} </td>
+										
+								<?php 
+										}
+										
+										Else{
+											
+								?>
+													<td>Por cantidad (Más de {{$descuento->cantidad}})</td>
+													<td>{{$descuento->porcentaje}}% </td>
+													<td>${{$producto->precio}} </td>
+													<td>${{$producto->precio*(100-$descuento->porcentaje)/100}} </td>
+													<td>{{$descuento->desde}} </td>
+													<td>{{$descuento->hasta}} </td>
+													
+								<?php 
+											
+										}
+									}
+								?>	
+								</tr>
+								<?php 
+								}
+							}
+								?>		
+							
+					  
+						</tbody>
+				  </table>
+								
+               </li>
+			</ul>
+		</div>
+	</div>	
+ </div>	
+@endforeach
+    
+     <?php If (count($descuentos) == 0){?>   
+		<div class="alert alert-danger">
+			<strong>No existen descuentos! </strong>Revise los filtros seleccionados.
+		</div>
+	  <?php } ?>
+    </section>
 	
       </section>
 @endsection

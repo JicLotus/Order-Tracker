@@ -28,11 +28,14 @@ class GuardarProductoController extends Controller
 		
 		$producto = DB::table(Config::get('constants.TABLA_PRODUCTOS'))
 					->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $request->idProducto)->first();
-		
-        return view('productos.edit', ['title' => 'Home',
-                                'page' => 'home','producto'=>$producto]
-        );
-        
+		$marcas = DB::select("select nombre,id from marcas order by nombre");
+		$categorias = DB::select("select nombre,id from categorias order by nombre");
+
+		return view('productos.edit', ['title' => 'Home',
+						'page' => 'home','producto'=>$producto,'marcas' => $marcas, 'categorias' => $categorias]
+		);
+
+	
         
     }
 }
