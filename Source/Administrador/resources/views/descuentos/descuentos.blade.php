@@ -46,40 +46,51 @@
 <h4><form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
-					<label class="control-label col-sm-2" for="filtros">Filtros</label>
-					<select onclick="reload();" id="categoria" name="categoria">
-						<option value =  0>Todas las Categorias</option>
-						@foreach($categorias as $categoria)
-						<option value = {{$categoria->id}}>{{$categoria->nombre}}</option>  
-						@endforeach 
-					</select>
+					<div class="row">	
 
-					<select id="idClientee" name="idCliente" >
-						<option value = 0>Todas las Marcas</option>
-						@foreach($marcas as $marca)   
-						<option value = {{$marca->id}}>{{$marca->nombre}}</option>
-						@endforeach
-					</select> 
+						<label class="col-sm-1" ></label>
+						<label class="control-label col-sm-1" >Categoría</label>
+							<select class = "col-sm-1" onclick="reload();" id="categoria" name="categoria">
+								<option value =  0>Todas las Categorias</option>
+								@foreach($categorias as $categoria)
+									<option value = {{$categoria->id}}>{{$categoria->nombre}}</option>  
+								@endforeach 
+							</select>
+
+						<label class="control-label col-sm-1" >Marca</label>
+							<select class="col-sm-1" id="idClientee" name="idCliente" >
+								<option value = 0>Todas las Marcas</option>
+								@foreach($marcas as $marca)   
+								<option value = {{$marca->id}}>{{$marca->nombre}}</option>
+								@endforeach
+							</select> 
+
+						<label class="control-label col-sm-1" >Cantidad</label>
+
+						<select class="col-sm-1" id="cantidad" name="cantidad" >
+							<option value = 0 >Todas</option>
+							 
+							<option value = 1 > Más de 10 iguales</option>
+							
+							<option value = 2 > Más de 20 iguales</option>
+							
+							<option value = 3 > Más de 30 iguales</option>
+
+						</select> 
+
+						<label class="control-label col-sm-1" >Fecha</label>
+						
+						<input class="col-sm-1" type="text" id="datepicker" name = "datepicker" value= "Todas"> 
+						
+					</div>
+
 					
-					<select id="cantidad" name="cantidad" >
-						<option value = 0 >Todas las Cantidades</option>
-						 
-						<option value = 1 > Más de 10 iguales</option>
+					<div class="row">	
 						
-						<option value = 2 > Más de 20 iguales</option>
+						<button type="submit" class="col-sm-offset-8 btn btn-primary">Buscar</button>
+						<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
 						
-						<option value = 3 > Más de 30 iguales</option>
-
-					</select> 
-
-
-					<input type="text" id="datepicker" name = "datepicker" value= "Todas las fechas">				
- <div class="col-sm-12">	
-			
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Buscar</button>
-		<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
-			
-		</div>
+					</div>
 		</div>	
 
 </form></h4>
