@@ -13,6 +13,7 @@ use \DateTime;
 use \DatePeriod;
 use \DateInterval;
 
+use Validator;
 
 class NuevoDescuentoController extends Controller
 {
@@ -38,6 +39,14 @@ class NuevoDescuentoController extends Controller
 		$cantidad=$request->cantidad;
 		$porcentaje=$request->porcentaje;
 		
+		if ($idCategoria==0 & $idMarca==0 & $idProducto==0 & $cantidad==0){
+			
+				$this->validate($request, [
+				'cantidad' => 'accepted'
+				]);
+				
+		}
+		
 		
 		$fecha = $request->from;
 		$dt = new DateTime($fecha);
@@ -54,8 +63,6 @@ class NuevoDescuentoController extends Controller
 		$url = app()->make('urls')->getUrlDescuentos();
 		return redirect($url);
     }
-
-
 
 
 

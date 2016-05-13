@@ -12,6 +12,10 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
+	  
+
+	  
+	  
 $.datepicker.regional['es'] = {
  closeText: 'Cerrar',
  prevText: '<Ant',
@@ -29,7 +33,8 @@ $.datepicker.regional['es'] = {
  showMonthAfterYear: false,
  yearSuffix: ''
  };
- $.datepicker.setDefaults($.datepicker.regional['es']);
+ 
+$.datepicker.setDefaults($.datepicker.regional['es']);
 
   $(function() {
     $( "#from" ).datepicker({
@@ -113,10 +118,8 @@ $.datepicker.regional['es'] = {
       }
     });
   });
-
+  
   </script>	
-  
-  
   
 	
 <a  href="{{app()->make('urls')->getUrlDescuentos()}}" class="btn btn-primary btn-block"><h4><b>DESCUENTOS</b></h4></a>
@@ -147,9 +150,9 @@ $.datepicker.regional['es'] = {
 			
 <div class="panel-group" id="TiposGeneral">					
 			<label for="from">Desde</label>
-			<input type="text" id="from" name="from">
+			<input type="text" id="from" name="from" value="<?php echo date("d-m-Y"); ?>">
 			<label for="to">Hasta</label>
-			<input type="text" id="to" name="to">
+			<input type="text" id="to" name="to" value="<?php echo date("d-m-Y"); ?>">
 			
 			<select  name="porcentaje" >
 				<option value = 0.10>10% de Descuento</option>  
@@ -181,7 +184,7 @@ $.datepicker.regional['es'] = {
 							  <div class="col-sm-8">
 								<select name="idCategoria" >
 									
-									<option selected>Descuento sin categoria</option>
+									<option value=0 selected>Descuento sin categoria</option>
 									
 									@foreach($categorias as $categoria)
 									<option value = {{$categoria->id}}>{{$categoria->nombre}}</option>  
@@ -194,9 +197,9 @@ $.datepicker.regional['es'] = {
 				</div>
 				
 			</div>
-
 			
-			<div class="panel panel-primary">			
+			<div class="panel panel-primary">
+			
 			<div class="panel-heading">
 			  <h4 class="panel-title">	
 				<label > Marca</label>
@@ -209,7 +212,7 @@ $.datepicker.regional['es'] = {
 
 							<div class="col-sm-8">
 							<select name="idMarca" >
-								<option selected>Descuento sin marca</option>
+								<option value=0 selected>Descuento sin marca</option>
 								@foreach($marcas as $marca)   
 								<option value= {{$marca->id}}>{{$marca->nombre}}</option>
 								@endforeach
@@ -235,7 +238,7 @@ $.datepicker.regional['es'] = {
 							  <div class="col-sm-8">
 								<select name="cantidad" >
 									
-									<option selected>Descuento sin cantidad</option>
+									<option value=0 selected>Descuento sin cantidad</option>
 									
 									<option value = 1 > Más de 10</option>
 									<option value = 20 > Más de 20</option>
@@ -243,6 +246,7 @@ $.datepicker.regional['es'] = {
 								</select>
 								
 								<select  name="idproducto" >
+									<option value=0 selected>Descuento sin producto</option>
 									@foreach($productos as $producto)
 									<option value = {{$producto->id}}>{{$producto->nombre}}</option>  
 									@endforeach
