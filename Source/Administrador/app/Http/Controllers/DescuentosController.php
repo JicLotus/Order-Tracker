@@ -30,11 +30,7 @@ class DescuentosController extends Controller
 			$marcas = DB::select("select nombre,id from marcas order by nombre");
 			$categorias = DB::select("select nombre,id from categorias order by nombre");
 			
-			
-			$dt = new DateTime();
-			$fecha = "'".$dt->format('Y-m-d')."'";
-			
-			$descuentos = DB::select("select * from descuentos where descuentos.desde <= $fecha");
+			$descuentos = DB::select("select * from descuentos");
 
 			
 
@@ -46,17 +42,18 @@ class DescuentosController extends Controller
     
     public function filtro(Request $request)
     {	
-			$productos = DB::select("select *, productos.id as idProducto, productos.nombre as nombreProducto,
+			$sql = "select *, productos.id as idProducto, productos.nombre as nombreProducto,
 			 marcas.nombre as nombreMarca, categorias.nombre as nombreCategoria 
 			from productos,marcas,categorias,descuentos 
 			where productos.marca = marcas.id and productos.categoria = categorias.id 
-			and productos.id = descuentos.id_producto group by productos.id");
+			and productos.id = descuentos.id_producto";
 			
 			$marcas = DB::select("select nombre,id from marcas order by nombre");
 			$categorias = DB::select("select nombre,id from categorias order by nombre");
 
 			$sql = "select * from descu
 			entos";
+			$descuentos = "select * from descuentos";
 
 			$idMarca = $request->idMarca;
 			$idCategoria = $request->categoria;
@@ -65,7 +62,6 @@ class DescuentosController extends Controller
 			
 
 			if ($fecha != "Todas" || $idMarca != 0 || $idCategoria != 0){ 
-				$sql.=" where 1=1";
 				
 				if ($fecha != "Todas"){
 					$dt = new DateTime($fecha);
@@ -77,10 +73,11 @@ class DescuentosController extends Controller
 					$sql .= " and id_marca=$idMarca";
 				if ($idCategoria != 0)
 					$sql.= " and id_categoria=$idCategoria";
-					
 			}
 
-			$descuentos = DB::select($sql);
+			//$sql.= " group by productos.id";
+			
+			$productos = DB::select($sql);
 
 			return view('descuentos.descuentos', ['title' => 'Home',
 							'page' => 'home','marcas' => $marcas, 'categorias' => $categorias, 'productos' => $productos, 'descuentos' => $descuentos]
