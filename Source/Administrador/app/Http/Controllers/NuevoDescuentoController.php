@@ -40,11 +40,9 @@ class NuevoDescuentoController extends Controller
 		$porcentaje=$request->porcentaje;
 		
 		if ($idCategoria==0 & $idMarca==0 & $idProducto==0 & $cantidad==0){
-			
 				$this->validate($request, [
 				'cantidad' => 'accepted'
 				]);
-				
 		}
 		
 		
@@ -56,9 +54,18 @@ class NuevoDescuentoController extends Controller
 		$dt = new DateTime($fecha);
 		$hasta = "'".$dt->format('Y-m-d')."'";
 		
-		$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values ($idMarca,$idCategoria,$idProducto,$cantidad,$porcentaje,$desde,$hasta)";
+		if ($idCategoria!=0){
+			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values (0,$idCategoria,0,0,$porcentaje,$desde,$hasta)";
+			DB::insert($sql);}
 		
-		DB::insert($sql);
+		if ($idMarca!=0){
+			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values ($idMarca,0,0,0,$porcentaje,$desde,$hasta)";
+			DB::insert($sql);}
+		
+		if ($cantidad!=0){
+			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values (0,0,$idProducto,$cantidad,$porcentaje,$desde,$hasta)";
+			DB::insert($sql);}
+		
 		
 		$url = app()->make('urls')->getUrlDescuentos();
 		return redirect($url);
