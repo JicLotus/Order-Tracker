@@ -151,4 +151,10 @@ class Urls {
 	function getUrlNuevoDescuento($inputData = []) {
     return url("agregarnuevodescuento" . $this->appendQuery($inputData));
   }
+
+	function getUrlFiltroDescuento($inputData = []) {
+    return url("descuentosFiltro" . $this->appendQuery($inputData));
+  }
+  
+  
 }

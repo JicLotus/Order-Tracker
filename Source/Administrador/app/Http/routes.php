@@ -50,6 +50,8 @@ Route::get('asignarhorarios/{id}', "AsignarHorariosController@index");
 Route::get('eliminaragenda/{idAgenda}/{vendedor}', "EliminarAgendaController@index");
 
 Route::get('descuentos', "DescuentosController@index");
+Route::post('descuentosFiltro', "DescuentosController@filtro");
+
 Route::get('agregarnuevodescuento', "NuevoDescuentoController@index");
 Route::post('guardarnuevodescuento', "NuevoDescuentoController@guardar");
 

@@ -43,14 +43,15 @@
 			<a  href="{{app()->make('urls')->getUrlDescuentos()}}" class="btn btn-primary btn-block"><h4><b>DESCUENTOS</b></h4></a>
 
 		
-<h4><form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+<h4><form action="{{app()->make('urls')->getUrlFiltroDescuento()}}" method="POST" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
+
 		<div class="form-group">
 					<div class="row">	
 
 						<label class="col-sm-1" ></label>
 						<label class="control-label col-sm-1" >Categoría</label>
-							<select class = "col-sm-1" onclick="reload();" id="categoria" name="categoria">
+							<select class = "col-sm-1" id="categoria" name="categoria">
 								<option value =  0>Todas las Categorias</option>
 								@foreach($categorias as $categoria)
 									<option value = {{$categoria->id}}>{{$categoria->nombre}}</option>  
@@ -58,7 +59,7 @@
 							</select>
 
 						<label class="control-label col-sm-1" >Marca</label>
-							<select class="col-sm-1" id="idClientee" name="idCliente" >
+							<select class="col-sm-1" name="idMarca" >
 								<option value = 0>Todas las Marcas</option>
 								@foreach($marcas as $marca)   
 								<option value = {{$marca->id}}>{{$marca->nombre}}</option>
