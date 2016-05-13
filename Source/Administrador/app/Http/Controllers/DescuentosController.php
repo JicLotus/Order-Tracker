@@ -26,7 +26,7 @@ class DescuentosController extends Controller
 			from productos,marcas,categorias,descuentos 
 			where productos.marca = marcas.id and productos.categoria = categorias.id 
 			and productos.id = descuentos.id_producto group by productos.id");
-			
+
 			$marcas = DB::select("select nombre,id from marcas order by nombre");
 			$categorias = DB::select("select nombre,id from categorias order by nombre");
 			
@@ -55,12 +55,14 @@ class DescuentosController extends Controller
 			$marcas = DB::select("select nombre,id from marcas order by nombre");
 			$categorias = DB::select("select nombre,id from categorias order by nombre");
 
-			$sql = "select * from descuentos";
+			$sql = "select * from descu
+			entos";
 
 			$idMarca = $request->idMarca;
 			$idCategoria = $request->categoria;
 			$cantidad = $request->cantidad;
 			$fecha = $request->datepicker;
+			
 
 			if ($fecha != "Todas" || $idMarca != 0 || $idCategoria != 0){ 
 				$sql.=" where 1=1";
@@ -73,7 +75,6 @@ class DescuentosController extends Controller
 				
 				if ($idMarca != 0)
 					$sql .= " and id_marca=$idMarca";
-
 				if ($idCategoria != 0)
 					$sql.= " and id_categoria=$idCategoria";
 					

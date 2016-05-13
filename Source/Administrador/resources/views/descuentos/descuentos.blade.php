@@ -99,102 +99,67 @@
 
 <hr width=75%"/>
 
+<div class="container">
+  <h2>Descuentos</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Descuento</th>
+        <th>Desde</th>
+        <th>Hasta</th>
+        <th></th>
+      </tr>
+    </thead>
 
-	@foreach($productos as $producto)
-	<div class="panel-group">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#{{$producto->idProducto}}"> 
-					<b>Descuento aplicando en: {{$producto->nombreProducto}} ,{{$producto->nombreMarca}},  
-					{{$producto->nombreCategoria}}</b> 
-					</a>
-				</h4>
-			</div>
-		<div id="{{$producto->idProducto}}" class="panel-collapse collapse">
-			<ul class="list-group">
-				<li class="list-group-item"> 
-					
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Tipo de descuento</th>
-								<th>Porcentaje descontado</th>
-								<th>Precio</th>
-								<th>Final</th>
-								<th>Puesta en vigencia</th>
-								<th>Finalización de la vigencia</th>								
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								
-							foreach($descuentos as $descuento){
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Productos Marca Sony</td>
+        <td>20%</td>
+        <td>20-05-2016</td>
+        <td>23-06-2016</td>
+		<td>
+			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
+		</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Productos de Juguetería</td>
+        <td>15%</td>
+        <td>23-05-2016</td>
+        <td>20-07-2016</td>
+		<td>
+			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
+		</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Productos de Cocina</td>
+        <td>35%</td>
+        <td>27-05-2016</td>
+        <td>10-09-2016</td>
+		<td>
+			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
+		</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Llevando más de 2</td>
+        <td>20%</td>
+        <td>17-06-2016</td>
+        <td>14-08-2016</td>
+		<td>
+			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
+		</td>
+      </tr>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-								If ($descuento->id_producto == $producto->idProducto){
-							?> 
-								<tr>
-								<?php
-								
-									If ($descuento->id_marca == $producto->marca){
-								  ?> 
-													
-													
-													<td>Por marca ({{$producto->nombreMarca}})</td>
-													<td>{{$descuento->porcentaje}}% </td>
-													<td>${{$producto->precio}} </td>
-													<td>${{$producto->precio*(100-$descuento->porcentaje)/100}} </td>
-													<td>{{$descuento->desde}} </td>
-													<td>{{$descuento->hasta}} </td>
-									
-							
-								<?php 
-									}
-									Else{
-										If ($descuento->id_categoria == $producto->categoria){
-								?>
-										
-													<td>Por categoria ({{$producto->nombreCategoria}})</td>
-													<td>{{$descuento->porcentaje}}% </td>
-													<td>${{$producto->precio}} </td>
-													<td>${{$producto->precio*(100-$descuento->porcentaje)/100}} </td>
-													<td>{{$descuento->desde}} </td>
-													<td>{{$descuento->hasta}} </td>
-										
-								<?php 
-										}
-										
-										Else{
-											
-								?>
-													<td>Por cantidad (Más de {{$descuento->cantidad}})</td>
-													<td>{{$descuento->porcentaje}}% </td>
-													<td>${{$producto->precio}} </td>
-													<td>${{$producto->precio*(100-$descuento->porcentaje)/100}} </td>
-													<td>{{$descuento->desde}} </td>
-													<td>{{$descuento->hasta}} </td>
-													
-								<?php 
-											
-										}
-									}
-								?>	
-								</tr>
-								<?php 
-								}
-							}
-								?>		
-							
-					  
-						</tbody>
-				  </table>
-								
-               </li>
-			</ul>
-		</div>
-	</div>	
- </div>	
-@endforeach
     
      <?php If (count($descuentos) == 0){?>   
 		<div class="alert alert-danger">

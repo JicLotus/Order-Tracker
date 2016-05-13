@@ -163,47 +163,42 @@ public class AgendaActivity extends AppCompatActivity {
 
     private void notificar() {
 
-        mNotificationManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
+        Request request = new Request("GET", "GetNotificaciones.php?id_usuario=" + vendedor);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, YourActivity.class), 0);
+        Response resp = new RequestHandler().sendRequest(request);
 
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_stat_gcm)
-                        .setContentTitle("GCM Notification")
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg))
-                        .setContentText(msg);
+        try {
+            JSONArray notificaciones = new JSONArray(resp.getJsonArray());
+            for (int i = 0; i < notificaciones.length(); i++) {
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(this)
+                                .setSmallIcon(R.drawable.ic_label_verde)
+                                .setContentTitle("Su agenda del día " + notificaciones.getJSONObject(i).getString("valor"))
+                                .setContentText("Hello World!");
 
-        mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+                Intent resultIntent = new Intent(this, AgendaActivity.class);
+                PendingIntent resultPendingIntent =
+                        PendingIntent.getActivity(
+                                this,
+                                0,
+                                resultIntent,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+                NotificationManager mNotifyMgr =
+                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+                mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
-        /*
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_label_verde)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+            }
 
-        Intent resultIntent = new Intent(this, AgendaActivity.class);
+            } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 // Because clicking the notification opens a new ("special") activity, there's
 // no need to create an artificial back stack.
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        this,
-                        0,
-                        resultIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-        int mNotificationId = 001;
-// Gets an instance of the NotificationManager service
-        NotificationManager mNotifyMgr =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
-        mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
 
     }
