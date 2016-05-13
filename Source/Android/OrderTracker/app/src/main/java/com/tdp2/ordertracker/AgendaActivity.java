@@ -1,13 +1,20 @@
 package com.tdp2.ordertracker;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +23,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
@@ -61,6 +71,11 @@ public class AgendaActivity extends AppCompatActivity {
 
     ArrayList<Agenda> usuarios;
     ArrayList<TextView> items;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -68,7 +83,6 @@ public class AgendaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_agenda);
-
         this.vendedor = ManejadorPersistencia.obtenerIdVendedor(this);
         this.items = new ArrayList<TextView>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -100,38 +114,38 @@ public class AgendaActivity extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
         switch (day) {
-            case Calendar.MONDAY:{
+            case Calendar.MONDAY: {
                 ((TextView) findViewById(R.id.lunes)).setTypeface(null, Typeface.BOLD);
-                fechaActual="Lunes";
+                fechaActual = "Lunes";
                 break;
             }
 
-            case Calendar.TUESDAY:{
+            case Calendar.TUESDAY: {
                 ((TextView) findViewById(R.id.martes)).setTypeface(null, Typeface.BOLD);
-                fechaActual="Martes";
+                fechaActual = "Martes";
                 break;
-                }
-            case Calendar.WEDNESDAY:{
+            }
+            case Calendar.WEDNESDAY: {
                 ((TextView) findViewById(R.id.miercoles)).setTypeface(null, Typeface.BOLD);
-                fechaActual="Miercoles";
+                fechaActual = "Miercoles";
                 break;
-                }
-            case Calendar.THURSDAY:{
+            }
+            case Calendar.THURSDAY: {
                 ((TextView) findViewById(R.id.jueves)).setTypeface(null, Typeface.BOLD);
-                fechaActual="Jueves";
+                fechaActual = "Jueves";
                 break;
-                }
-            case Calendar.FRIDAY:{
+            }
+            case Calendar.FRIDAY: {
                 ((TextView) findViewById(R.id.viernes)).setTypeface(null, Typeface.BOLD);
-                fechaActual="Viernes";
+                fechaActual = "Viernes";
                 break;
             }
-            case Calendar.SATURDAY:{
-                fechaActual="Lunes";
+            case Calendar.SATURDAY: {
+                fechaActual = "Lunes";
                 break;
             }
-            case Calendar.SUNDAY:{
-                fechaActual="Lunes";
+            case Calendar.SUNDAY: {
+                fechaActual = "Lunes";
                 break;
             }
         }
@@ -139,6 +153,59 @@ public class AgendaActivity extends AppCompatActivity {
         mostrarAgendaDelDia();
 
         this.crearDraweToggle();
+
+       // notificar();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+
+    private void notificar() {
+
+        mNotificationManager = (NotificationManager)
+                this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, YourActivity.class), 0);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_stat_gcm)
+                        .setContentTitle("GCM Notification")
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(msg))
+                        .setContentText(msg);
+
+        mBuilder.setContentIntent(contentIntent);
+        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+
+        /*
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_label_verde)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!");
+
+        Intent resultIntent = new Intent(this, AgendaActivity.class);
+
+// Because clicking the notification opens a new ("special") activity, there's
+// no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+
     }
 
 
@@ -185,7 +252,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         try {
             Request request = new Request("GET", "GetClientes.php?id=" + vendedor + "&fecha=" + fechaActual);
-            Log.e("Reuqest","GetClientes.php?id=" + vendedor + "&fecha=" + fechaActual );
+            Log.e("Reuqest", "GetClientes.php?id=" + vendedor + "&fecha=" + fechaActual);
             Response resp = new RequestHandler().sendRequest(request);
 
             clientesDelDia = resp.getJsonArray();
@@ -221,8 +288,8 @@ public class AgendaActivity extends AppCompatActivity {
 
                 diaSeleccionado = "Lunes";
                 fechaActual = diaSeleccionado;
-
-                mostrarAgendaDelDia();
+                notificar();
+//                mostrarAgendaDelDia();
                 break;
             case R.id.martes:
 
@@ -255,7 +322,7 @@ public class AgendaActivity extends AppCompatActivity {
 
     }
 
-    private void mostrarAgendaDelDia(){
+    private void mostrarAgendaDelDia() {
         usuarios = getUsuariosAgenda();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -271,14 +338,14 @@ public class AgendaActivity extends AppCompatActivity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
-                if (contents.equals(usuarioSeleccionado.id)){
-                    Toast.makeText(this, "Bienvenido, "+ usuarioSeleccionado.nombre.getText(), Toast.LENGTH_LONG).show();
+                if (contents.equals(usuarioSeleccionado.id)) {
+                    Toast.makeText(this, "Bienvenido, " + usuarioSeleccionado.nombre.getText(), Toast.LENGTH_LONG).show();
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     marcarUsuarioComoVisitado();
                     Intent documentsActivity = new Intent(this, ListadoProductos.class);
                     documentsActivity.putExtra("cliente", jsonCliente(usuarioSeleccionado.id));
                     startActivity(documentsActivity);
-                }else{
+                } else {
                     Toast.makeText(this, "QR Inválido", Toast.LENGTH_LONG).show();
                 }
             } else if (resultCode == RESULT_CANCELED) {
@@ -290,11 +357,10 @@ public class AgendaActivity extends AppCompatActivity {
     }
 
 
-
-    private void marcarUsuarioComoVisitado(){
+    private void marcarUsuarioComoVisitado() {
         usuarioSeleccionado.ponerVerde();
         try {
-            String requestString = "SetEstadoAgenda.php?id_agenda=" + usuarioSeleccionado.id_agenda+"&estado="
+            String requestString = "SetEstadoAgenda.php?id_agenda=" + usuarioSeleccionado.id_agenda + "&estado="
                     + APIConstantes.ESTADO_VISITADO;
             Log.e("Request", requestString);
             Request request = new Request("GET", requestString);
@@ -324,4 +390,43 @@ public class AgendaActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Agenda Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.tdp2.ordertracker/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Agenda Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.tdp2.ordertracker/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
