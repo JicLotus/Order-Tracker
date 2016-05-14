@@ -24,6 +24,14 @@ return [
 	'TIPO_NOTIFICACION_MARCA' => 'MARCA',
 	'TIPO_NOTIFICACION_CATEGORIA' => 'CATEGORIA',
 	
+	'TABLA_ESTADISTICAS' => 'estadisticas',
+	'ESTADISTICAS_VISITADOS_HOY' => 'visitados_hoy',
+	'ESTADISTICAS_ID' => 'id',
+	'ESTADISTICAS_ID_VENDEDOR' => 'id_usuario',
+	'ESTADISTICAS_A_VISITAR' => 'a_visitar',
+	'ESTADISTICAS_VISITADOS_FUERA_RUTA' => 'fuera_ruta',
+	'ESTADISTICAS_VENDIDO_FUERA_RUTA' => 'vendido_fuera_ruta',
+	'ESTADISTICAS_VENDIDO_CLIENTES_DIA' => 'vendido_clientes',
 	
     'TABLA_CLIENTES' => 'clientes',
     'TABLA_CLIENTES_ID' => 'id',

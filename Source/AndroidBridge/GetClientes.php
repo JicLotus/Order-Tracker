@@ -2,6 +2,7 @@
 	$con = mysql_connect("localhost", "root","123456") or die("Sin conexion");
 	mysql_query("SET NAMES 'utf8'");
 	mysql_select_db("orderTracker");
+
 	$vendedor = $_REQUEST['id'];
 
 	$fecha  = $_REQUEST['fecha'];
@@ -24,6 +25,7 @@
 	clientes.telefono_laboral, clientes.email, agendas.fecha, agendas.estado_visita 
 	from clientes, agendas 
 	where clientes.id = agendas.id_cliente and agendas.id_usuario = $vendedor";
+	
 	
 	if ($fecha){
 		

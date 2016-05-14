@@ -17,6 +17,7 @@ public class APIConstantes {
     public static final String TIPO_CANTIDAD = "CANTIDAD";
     public static final String VALOR = "valor";
     public static final String PERSISTENCIA_VENDEDOR = "idVendedor";
+    public static final String PERSISTENCIA_ESTADISTICAS = "estadisticas";
     public static final String PERSISTENCIA_DESCUENTOS = "descuentos";
     public static final String PRODUCTO_CANTIDAD = "cantidad";
     public static final String PRODUCTO_ID = "id";

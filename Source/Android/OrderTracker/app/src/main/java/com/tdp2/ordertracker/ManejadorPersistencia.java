@@ -48,6 +48,17 @@ public class ManejadorPersistencia {
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         return settings.getString(APIConstantes.PERSISTENCIA_DESCUENTOS, null);
     }
+    public static String obtenerEstadisticas(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_ESTADISTICAS, 0);
+        return settings.getString(APIConstantes.PERSISTENCIA_DESCUENTOS, null);
+    }
+
+    public static void persistirEstadisticas(Context context, String estadisticas){
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(APIConstantes.PERSISTENCIA_ESTADISTICAS, estadisticas);
+        editor.commit();
+    }
 
     private static void persistirProductos(Context context, String productos){
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
@@ -55,6 +66,7 @@ public class ManejadorPersistencia {
         editor.putString(APIConstantes.PERSISTENCIA_CARRO, productos);
         editor.commit();
     }
+
 
     public static void persistirDescuentos(Context context, String productos){
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);

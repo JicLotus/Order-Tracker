@@ -153,6 +153,7 @@ public class AgendaActivity extends AppCompatActivity {
             }
         }
 
+        crearEstadisticasDelDia();
         mostrarAgendaDelDia();
 
         this.crearDraweToggle();
@@ -163,6 +164,7 @@ public class AgendaActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    git
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -175,7 +177,8 @@ public class AgendaActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.estadisticas:
-                //newGame();
+                Intent estadisticasActivity = new Intent(this, Estadisticas.class);
+                startActivity(estadisticasActivity);
                 return true;
             case R.id.descuentos:
                 //showHelp();
@@ -293,10 +296,6 @@ public class AgendaActivity extends AppCompatActivity {
                 fechaActual = diaSeleccionado;
                 mostrarAgendaDelDia();
 
-                break;
-            case R.id.estadisticas:
-                Intent estadisticasActivity = new Intent(view.getContext(), Estadisticas.class);
-                startActivity(estadisticasActivity);
                 break;
         }
 

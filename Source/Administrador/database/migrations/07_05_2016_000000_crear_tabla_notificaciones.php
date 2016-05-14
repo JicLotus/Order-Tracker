@@ -29,6 +29,6 @@ class CrearTablaNotificaciones extends Migration
      */
     public function down()
     {
-        Schema::drop('qr');
+        Schema::drop('notificaciones');
     }
 }
