@@ -58,14 +58,22 @@
     <div class="form-group">
 		<label class="control-label col-sm-2" for="marca">Marca</label>
           <div class="col-sm-8">
-			<input type="Text" name="marca"  value=""><br>
+			<select id="marca" name="marca" >
+					@foreach($marcas as $marca)   
+					<option value= {{$marca->id}}>{{$marca->nombre}}</option>
+					@endforeach
+			</select> 
 		  </div>
     </div>
     
     <div class="form-group">
 		<label class="control-label col-sm-2" for="categoria">Categoria</label>
           <div class="col-sm-8">
-			<input type="Text" name="categoria"  value=""><br>
+			<select id="categoria" name="categoria" >
+					@foreach($categorias as $categoria)   
+					<option value= {{$categoria->id}}>{{$categoria->nombre}}</option>
+					@endforeach
+			</select> 
 		  </div>
     </div>	
     

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
+    'accepted'             => 'Como minimo se deben seleccionar un tipo de descuento.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',
     'alpha'                => 'The :attribute may only contain letters.',
@@ -76,7 +76,6 @@ return [
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -93,6 +92,8 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+    
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -106,5 +107,7 @@ return [
     */
 
     'attributes' => [],
+    
+    
 
 ];

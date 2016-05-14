@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Property as Property;
 
+use DateTime;
+
 class DescuentosController extends Controller
 {
     /**
@@ -19,13 +21,59 @@ class DescuentosController extends Controller
      */
     public function index()
     {		
-			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2 order by nombre");
-			$clientes = DB::select("select nombre,id from clientes order by nombre");
+		$sql = "select descuentos.id,id_marca,id_categoria,marcas.nombre as marca, categorias.nombre as categoria, porcentaje,id_producto, cantidad, desde, hasta from descuentos
+		 left join marcas on descuentos.id_marca = marcas.id left join categorias on
+		  descuentos.id_categoria = categorias.id";
 
-        
-        return view('descuentos.descuentos', ['title' => 'Home',
-                                'page' => 'home', 'clientes' => $clientes,'vendedores' => $vendedores]
-        );
-        
+		$descuentos = DB::select($sql);
+		$categorias = DB::select("select * from categorias");
+		$marcas = DB::select("select * from marcas");
+
+		return view('descuentos.descuentos', ['title' => 'Home',
+						'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
+		);
+			
     }
+    
+    public function filtro(Request $request)
+    {	
+		
+			$sql = "select descuentos.id,id_marca,id_categoria,marcas.nombre as marca, categorias.nombre as categoria, porcentaje,
+			 id_producto, cantidad, desde, hasta from descuentos left join marcas on
+			 descuentos.id_marca = marcas.id left join categorias on descuentos.id_categoria = categorias.id where 1=1 ";
+			
+			$categorias = DB::select("select * from categorias");
+			$marcas = DB::select("select * from marcas");
+			
+			$idMarca = $request->idMarca;
+			$idCategoria = $request->categoria;
+			$cantidad = $request->cantidad;
+			$fecha = $request->datepicker;
+
+			if ($fecha != "Todas" || $idMarca != 0 || $idCategoria != 0){ 
+				
+				if ($fecha != "Todas"){
+					$dt = new DateTime($fecha);
+					$fecha = "'".$dt->format('Y-m-d')."'";	
+					$sql .= " and descuentos.desde <= $fecha";
+				}
+				
+				if ($idMarca != 0)
+					$sql .= " and id_marca=$idMarca";
+					
+				if ($idCategoria != 0)
+					$sql.= " and id_categoria=$idCategoria";
+					
+				if ($cantidad != 0)
+					$sql.= " and cantidad=$cantidad";
+			}
+
+			$descuentos = DB::select($sql);
+
+			return view('descuentos.descuentos', ['title' => 'Home',
+							'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
+			);
+	}
+    
+    
 }
