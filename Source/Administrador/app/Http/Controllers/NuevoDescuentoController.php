@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use File;
+use Illuminate\Support\Facades\Config;
+
 use \DateTime;
 use \DatePeriod;
 use \DateInterval;
@@ -56,7 +58,15 @@ class NuevoDescuentoController extends Controller
 		
 		if ($idCategoria!=0){
 			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values (0,$idCategoria,0,0,$porcentaje,$desde,$hasta)";
-			DB::insert($sql);}
+			DB::insert($sql);
+			DB::table(Config::get('constants.TABLA_NOTIFICACIONES'))->insert(
+					array(
+					Config::get('constants.TABLA_NOTIFICACIONES_TIPO') => Config::get('constants.TIPO_NOTIFICACION_CATEGORIA'),
+					Config::get('constants.TABLA_NOTIFICACIONES_VALOR') => $idCategoria,
+					Config::get('constants.TABLA_NOTIFICACIONES_PORCENTAJE') => $porcentaje
+															
+					));
+			}
 		
 		if ($idMarca!=0){
 			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values ($idMarca,0,0,0,$porcentaje,$desde,$hasta)";

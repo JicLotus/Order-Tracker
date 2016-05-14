@@ -70,9 +70,6 @@
         android:normalScreens="true"
         android:smallScreens="true"
         android:anyDensity="true"/>
-    <service
-        android:name="com.tdp2.ordertracker.ServicioDeNotificaciones"
-        android:process="remote" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -155,6 +152,7 @@
         <activity android:name=".DetallesPedido"
             android:label="@string/title_activity_detalles_pedido"
             />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -171,6 +169,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tdp2.ordertracker.DetallesCliente" />
         </activity>
+         <service android:name=".ServicioDeNotificaciones" android:exported="false"/>
     </application>
 
 </manifest>

@@ -18,6 +18,9 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -160,6 +163,29 @@ public class AgendaActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detalles_agenda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.estadisticas:
+                //newGame();
+                return true;
+            case R.id.descuentos:
+                //showHelp();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
     private void notificar() {
 
@@ -167,38 +193,36 @@ public class AgendaActivity extends AppCompatActivity {
 
         Response resp = new RequestHandler().sendRequest(request);
 
-        try {
-            JSONArray notificaciones = new JSONArray(resp.getJsonArray());
-            for (int i = 0; i < notificaciones.length(); i++) {
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(this)
-                                .setSmallIcon(R.drawable.ic_label_verde)
-                                .setContentTitle("Su agenda del día " + notificaciones.getJSONObject(i).getString("valor"))
-                                .setContentText("Hello World!");
+        JSONArray notificaciones = resp.getJsonArray();
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                Intent resultIntent = new Intent(this, AgendaActivity.class);
-                PendingIntent resultPendingIntent =
-                        PendingIntent.getActivity(
-                                this,
-                                0,
-                                resultIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-                int mNotificationId = 001;
-// Gets an instance of the NotificationManager service
-                NotificationManager mNotifyMgr =
-                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
-                mNotifyMgr.notify(mNotificationId, mBuilder.build());
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder b = new NotificationCompat.Builder(this);
+        b.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_label_verde)
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+                .setContentIntent(contentIntent)
+                .setContentInfo("Info");
 
-            }
+        for (int i = 0; i < notificaciones.length(); i++) {
+
+            try {
+                b.setContentTitle("El día " + notificaciones.getJSONObject(i).getString(APIConstantes.VALOR)
+                        + " ha sido reprogramado");
+                notificationManager.notify(i, b.build());
 
             } catch (JSONException e) {
-            e.printStackTrace();
+                e.printStackTrace();
+            }
+
+
+
         }
 
-// Because clicking the notification opens a new ("special") activity, there's
-// no need to create an artificial back stack.
+
 
 
     }

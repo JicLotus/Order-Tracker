@@ -109,7 +109,6 @@
         <th>Descuento</th>
         <th>Desde</th>
         <th>Hasta</th>
-        <th></th>
       </tr>
     </thead>
 
@@ -120,9 +119,6 @@
         <td>20%</td>
         <td>20-05-2016</td>
         <td>23-06-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
       </tr>
       <tr>
         <td>2</td>
@@ -130,9 +126,6 @@
         <td>15%</td>
         <td>23-05-2016</td>
         <td>20-07-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
       </tr>
       <tr>
         <td>3</td>
@@ -140,19 +133,13 @@
         <td>35%</td>
         <td>27-05-2016</td>
         <td>10-09-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
       </tr>
       <tr>
         <td>4</td>
-        <td>Llevando más de 2</td>
+        <td>Llevando más de 2 productos</td>
         <td>20%</td>
         <td>17-06-2016</td>
         <td>14-08-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
       </tr>
         
       </tr>

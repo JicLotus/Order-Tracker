@@ -51,8 +51,7 @@ class DescuentosController extends Controller
 			$marcas = DB::select("select nombre,id from marcas order by nombre");
 			$categorias = DB::select("select nombre,id from categorias order by nombre");
 
-			$sql = "select * from descu
-			entos";
+			$sql = "select * from descuentos";
 			$descuentos = "select * from descuentos";
 
 			$idMarca = $request->idMarca;

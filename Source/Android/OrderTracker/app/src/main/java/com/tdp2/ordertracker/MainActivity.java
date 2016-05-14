@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
 
+
     }
 
 
@@ -47,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray vendedor = resp.getJsonArray();
                 ManejadorPersistencia.persistirIdVendedor(this,  vendedor.getJSONObject(0).get("id").toString());
                 ManejadorPersistencia.persistirVendedor(this, username.getText().toString());
+                Intent i = new Intent(this, ServicioDeNotificaciones.class);
+                // Add extras to the bundle
+                i.putExtra("id_usuario", ManejadorPersistencia.obtenerIdVendedor(this));
+                // Start the service
+                startService(i);
                 Intent documentsActivity = new Intent(this, AgendaActivity.class);
                  startActivity(documentsActivity);
             } else {

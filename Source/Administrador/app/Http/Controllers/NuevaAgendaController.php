@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
+
 use Illuminate\Support\Facades\Redirect;
 use File;
 use \DateTime;
@@ -80,7 +82,16 @@ class NuevaAgendaController extends Controller
 				
 				}
 			}
-			
+
+
+		DB::table(Config::get('constants.TABLA_NOTIFICACIONES'))->insert(
+										array(
+										Config::get('constants.TABLA_NOTIFICACIONES_VENDEDOR') => $idVendedor,
+										Config::get('constants.TABLA_NOTIFICACIONES_TIPO') => Config::get('constants.TIPO_NOTIFICACION_AGENDA'),
+										Config::get('constants.TABLA_NOTIFICACIONES_VALOR') => $dia										
+										));
+
+		
 
 		$url = app()->make('urls')->getUrlAgendas();
 		return redirect($url);

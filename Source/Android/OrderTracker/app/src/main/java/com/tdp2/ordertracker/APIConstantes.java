@@ -9,6 +9,12 @@ public class APIConstantes {
     static final String PUERTO= "8080";
     public static final String PERSISTENCIA_DATOS = "Datos";
     public static final String PERSISTENCIA_NOMBRE_VENDEDOR = "Vendedor";
+    public static final String TIPO_NOTIFICACION = "tipo_notificacion";
+    public static final String TIPO_AGENDA = "AGENDA";
+    public static final String TIPO_CATEGORIA = "CATEGORIA";
+    public static final String TIPO_MARCA = "MARCA";
+    public static final String TIPO_CANTIDAD = "CANTIDAD";
+    public static final String VALOR = "valor";
     public static final String PERSISTENCIA_VENDEDOR = "idVendedor";
     public static final String PERSISTENCIA_DESCUENTOS = "descuentos";
     public static final String PRODUCTO_CANTIDAD = "cantidad";
