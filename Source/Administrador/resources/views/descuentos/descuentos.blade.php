@@ -144,8 +144,15 @@
 	</td>
 	
 	<td>{{$descuento->porcentaje*100}}%</td>
-	<td><time datetime="d">{{$descuento->desde}}</time></td>
-	<td>{{$descuento->hasta}}</td>
+	<td>
+		<?php 
+			$date = new DateTime($descuento->desde);
+			echo $date->format('d-m-Y'); ?>
+		
+	</td>
+	<td>		<?php 
+			$date = new DateTime($descuento->hasta);
+			echo $date->format('d-m-Y'); ?></td>
 	</tr>
 	@endforeach
 	

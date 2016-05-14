@@ -26,6 +26,8 @@ class DescuentosController extends Controller
 		  descuentos.id_categoria = categorias.id";
 
 		$descuentos = DB::select($sql);
+		
+		
 		$categorias = DB::select("select * from categorias");
 		$marcas = DB::select("select * from marcas");
 
@@ -55,7 +57,7 @@ class DescuentosController extends Controller
 				if ($fecha != "Todas"){
 					$dt = new DateTime($fecha);
 					$fecha = "'".$dt->format('Y-m-d')."'";	
-					$sql .= " and descuentos.desde <= $fecha";
+					$sql .= " and descuentos.desde <= $fecha and descuentos.hasta >= $fecha";
 				}
 				
 				if ($idMarca != 0)
