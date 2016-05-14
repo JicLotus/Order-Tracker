@@ -6,9 +6,14 @@
 	mysql_select_db("orderTracker");
 
 	$id = $_REQUEST['id_agenda'];
-	$estado  = $_REQUEST['estado'];
 	
-	$sql = "update agendas set estado_visita="."'".$estado."'"." where agendas.id ="."'". $id."'";
+	$estado  = $_REQUEST['estado'];
+	$fecha_hoy = date("Y-m-d");
+	$fecha_hoy = "'".$fecha_hoy."'";
+
+
+	
+	$sql = "update agendas set estado_visita="."'".$estado."' , fecha_visitado = $fecha_hoy"." where agendas.id ="."'". $id."'";
 
 	echo $sql;
 
