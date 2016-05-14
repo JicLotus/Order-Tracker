@@ -153,7 +153,6 @@ public class AgendaActivity extends AppCompatActivity {
             }
         }
 
-        crearEstadisticasDelDia();
         mostrarAgendaDelDia();
 
         this.crearDraweToggle();
@@ -164,7 +163,7 @@ public class AgendaActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    git
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

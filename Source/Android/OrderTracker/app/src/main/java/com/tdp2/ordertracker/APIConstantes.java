@@ -16,6 +16,12 @@ public class APIConstantes {
     public static final String TIPO_MARCA = "MARCA";
     public static final String TIPO_CANTIDAD = "CANTIDAD";
     public static final String VALOR = "valor";
+    public static final String ESTADISTICAS_VISITADOS_HOY = "visitados_hoy";
+    public static final String ESTADISTICAS_A_VISITAR = "a_visitar";
+    public static final String ESTADISTICAS_FUERA_RUTA = "fuera_ruta";
+    public static final String ESTADISTICAS_VENDIDO_FUERA_RUTA = "vendido_fuera_ruta";
+    public static final String ESTADISTICAS_VENDIDO_CLIENTES = "vendido_clientes";
+
     public static final String PERSISTENCIA_VENDEDOR = "idVendedor";
     public static final String PERSISTENCIA_ESTADISTICAS = "estadisticas";
     public static final String PERSISTENCIA_DESCUENTOS = "descuentos";
