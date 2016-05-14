@@ -12,6 +12,7 @@ public class APIConstantes {
     public static final String TIPO_NOTIFICACION = "tipo_notificacion";
     public static final String TIPO_AGENDA = "AGENDA";
     public static final String TIPO_CATEGORIA = "CATEGORIA";
+    public static final String ID_NOTIFICACION = "id";
     public static final String TIPO_MARCA = "MARCA";
     public static final String TIPO_CANTIDAD = "CANTIDAD";
     public static final String VALOR = "valor";

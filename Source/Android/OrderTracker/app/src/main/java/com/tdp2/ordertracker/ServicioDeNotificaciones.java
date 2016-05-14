@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -72,9 +73,9 @@ public class ServicioDeNotificaciones extends Service {
         NotificationCompat.Builder b = new NotificationCompat.Builder(this);
         b.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
+                .setLights(Color.GRAY, 500, 500)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_label_verde)
-                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+                .setDefaults(Notification.DEFAULT_SOUND)
                 .setContentIntent(contentIntent)
                 .setContentInfo("Info");
 
@@ -88,38 +89,42 @@ public class ServicioDeNotificaciones extends Service {
                         case APIConstantes.TIPO_AGENDA:{
                             titulo = "El día " + notificaciones.getJSONObject(i).getString(APIConstantes.VALOR)
                                     + " ha sido reprogramado";
+                            b.setSmallIcon(R.drawable.ic_agenda);
                             break;
                         }
                         case APIConstantes.TIPO_CATEGORIA:{
                             double porcentaje = notificaciones.getJSONObject(i).getDouble(APIConstantes.DESCUENTOS_PORCENTAJE);
                             porcentaje = porcentaje*100;
-                            titulo = String.valueOf(porcentaje)
-                                    +"% de descuento";
+                            titulo = String.valueOf((int)porcentaje)
+                                    +"% de Descuento";
                             subtitulo = "Descuento aplica a "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
+                            b.setSmallIcon(R.drawable.ic_descuento_blanco);
                             break;
                         }
                         case APIConstantes.TIPO_MARCA:{
                             double porcentaje = notificaciones.getJSONObject(i).getDouble(APIConstantes.DESCUENTOS_PORCENTAJE);
                             porcentaje = porcentaje*100;
-                            titulo = String.valueOf(porcentaje)
-                                    +"% de descuento en productos "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
-                            subtitulo = "Descuento aplica a "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
+                            titulo = String.valueOf((int)porcentaje)
+                                    +"% de Descuento";
+                            subtitulo = "Descuento aplica a productos "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
+                            b.setSmallIcon(R.drawable.ic_descuento_blanco);
                             break;
                         }
                         case APIConstantes.TIPO_CANTIDAD:{
-                            int porcentaje = (int) notificaciones.getJSONObject(i).getDouble(APIConstantes.DESCUENTOS_PORCENTAJE);
+                            double porcentaje =  notificaciones.getJSONObject(i).getDouble(APIConstantes.DESCUENTOS_PORCENTAJE);
                             porcentaje = porcentaje*100;
-                            titulo = String.valueOf(porcentaje)
+                            titulo = String.valueOf((int)porcentaje)
                                     + "% de Descuento";
                             subtitulo = "Llevando " + notificaciones.getJSONObject(i).getString(APIConstantes.VALOR)
                                     + " o más productos iguales";
+                            b.setSmallIcon(R.drawable.ic_descuento_blanco);
                             break;
                         }
 
                     }
                     b.setContentTitle(titulo);
                     b.setContentText(subtitulo);
-                    notificationManager.notify(i, b.build());
+                    notificationManager.notify(notificaciones.getJSONObject(i).getInt(APIConstantes.ID_NOTIFICACION), b.build());
 
                 } catch (JSONException e) {
                     e.printStackTrace();

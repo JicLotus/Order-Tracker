@@ -170,6 +170,10 @@
                 android:value="com.tdp2.ordertracker.DetallesCliente" />
         </activity>
          <service android:name=".ServicioDeNotificaciones" android:exported="false"/>
+        <activity android:name=".Estadisticas"
+            android:label="@string/title_activity_estadisticas"
+            />
+
     </application>
 
 </manifest>

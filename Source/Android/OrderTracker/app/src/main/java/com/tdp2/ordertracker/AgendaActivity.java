@@ -187,47 +187,6 @@ public class AgendaActivity extends AppCompatActivity {
 
 
 
-    private void notificar() {
-
-        Request request = new Request("GET", "GetNotificaciones.php?id_usuario=" + vendedor);
-
-        Response resp = new RequestHandler().sendRequest(request);
-
-        JSONArray notificaciones = resp.getJsonArray();
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder b = new NotificationCompat.Builder(this);
-        b.setAutoCancel(true)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_label_verde)
-                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-                .setContentIntent(contentIntent)
-                .setContentInfo("Info");
-
-        for (int i = 0; i < notificaciones.length(); i++) {
-
-            try {
-                b.setContentTitle("El día " + notificaciones.getJSONObject(i).getString(APIConstantes.VALOR)
-                        + " ha sido reprogramado");
-                notificationManager.notify(i, b.build());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-
-        }
-
-
-
-
-    }
-
-
     private void cargarItems() {
         TextView unDia = (TextView) findViewById(R.id.itemDia);
         unDia = new TextView(this);
@@ -307,8 +266,7 @@ public class AgendaActivity extends AppCompatActivity {
 
                 diaSeleccionado = "Lunes";
                 fechaActual = diaSeleccionado;
-                notificar();
-//                mostrarAgendaDelDia();
+                mostrarAgendaDelDia();
                 break;
             case R.id.martes:
 
@@ -335,6 +293,10 @@ public class AgendaActivity extends AppCompatActivity {
                 fechaActual = diaSeleccionado;
                 mostrarAgendaDelDia();
 
+                break;
+            case R.id.estadisticas:
+                Intent estadisticasActivity = new Intent(view.getContext(), Estadisticas.class);
+                startActivity(estadisticasActivity);
                 break;
         }
 

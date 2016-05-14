@@ -1,22 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use File;
 use Illuminate\Support\Facades\Config;
 
+use File;
 use \DateTime;
 use \DatePeriod;
 use \DateInterval;
-
 use Validator;
-
 class NuevoDescuentoController extends Controller
 {
 	
@@ -37,9 +32,9 @@ class NuevoDescuentoController extends Controller
 		
 		$idCategoria=$request->idCategoria;
 		$idMarca=$request->idMarca;
-		$idProducto=$request->idproducto;
+		$idProducto=0;
 		$cantidad=$request->cantidad;
-		$porcentaje=$request->porcentaje;
+		$porcentaje=$request->porcentaje/100.0;
 		
 		if ($idCategoria==0 & $idMarca==0 & $idProducto==0 & $cantidad==0){
 				$this->validate($request, [
@@ -59,28 +54,37 @@ class NuevoDescuentoController extends Controller
 		if ($idCategoria!=0){
 			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values (0,$idCategoria,0,0,$porcentaje,$desde,$hasta)";
 			DB::insert($sql);
-			DB::table(Config::get('constants.TABLA_NOTIFICACIONES'))->insert(
-					array(
-					Config::get('constants.TABLA_NOTIFICACIONES_TIPO') => Config::get('constants.TIPO_NOTIFICACION_CATEGORIA'),
-					Config::get('constants.TABLA_NOTIFICACIONES_VALOR') => $idCategoria,
-					Config::get('constants.TABLA_NOTIFICACIONES_PORCENTAJE') => $porcentaje
-															
-					));
-			}
+			$tipo = "'".Config::get('constants.TIPO_NOTIFICACION_CATEGORIA')."'";
+
+			$sql = "Insert into notificaciones (id_usuario, tipo_notificacion, porcentaje, valor)
+					select usuarios.id, $tipo , $porcentaje, categorias.nombre from usuarios, categorias
+					where categorias.id = $idCategoria";
+			DB::insert($sql);
+
+		}
 		
 		if ($idMarca!=0){
 			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values ($idMarca,0,0,0,$porcentaje,$desde,$hasta)";
-			DB::insert($sql);}
+			DB::insert($sql);
+			$tipo = "'".Config::get('constants.TIPO_NOTIFICACION_MARCA')."'";
+			$sql = "Insert into notificaciones (id_usuario, tipo_notificacion, porcentaje, valor)
+					select usuarios.id, $tipo , $porcentaje, marcas.nombre from usuarios, marcas
+					where marcas.id = $idMarca";
+			DB::insert($sql);
+			}
 		
 		if ($cantidad!=0){
 			$sql = "insert into descuentos (id_marca,id_categoria,id_producto,cantidad,porcentaje,desde,hasta) values (0,0,$idProducto,$cantidad,$porcentaje,$desde,$hasta)";
-			DB::insert($sql);}
+			DB::insert($sql);
+			$tipo = "'".Config::get('constants.TIPO_NOTIFICACION_CANTIDAD')."'";
+			$sql = "Insert into notificaciones (id_usuario, tipo_notificacion, porcentaje, valor)
+					select id, $tipo , $porcentaje, $cantidad from usuarios";
+			DB::insert($sql);
+
+			}
 		
 		
 		$url = app()->make('urls')->getUrlDescuentos();
 		return redirect($url);
     }
-
-
-
 }

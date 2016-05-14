@@ -4,8 +4,9 @@
 	mysql_select_db("orderTracker");
 	$vendedor = $_REQUEST['id_usuario'];
 
-	$sql= "select * from notificaciones where id_usuario = $vendedor";
-	
+	$sql= "select distinct * from notificaciones
+			where id_usuario = $vendedor";
+
 
 	$rs = mysql_query($sql,$con);
 	
@@ -13,7 +14,10 @@
 		$datos[] = $row;
 	}
 
+	$sql = "delete from notificaciones
+			where id_usuario = $vendedor"; 
 	
+	mysql_query($sql, $con);
 
 	echo json_encode($datos);
 ?>

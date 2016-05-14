@@ -1,17 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\DB;
 use App\Models\Property as Property;
-
 use DateTime;
-
 class DescuentosController extends Controller
 {
     /**
@@ -21,45 +15,32 @@ class DescuentosController extends Controller
      */
     public function index()
     {		
-			$productos = DB::select("select *, productos.id as idProducto, productos.nombre as nombreProducto,
-			 marcas.nombre as nombreMarca, categorias.nombre as nombreCategoria 
-			from productos,marcas,categorias,descuentos 
-			where productos.marca = marcas.id and productos.categoria = categorias.id 
-			and productos.id = descuentos.id_producto group by productos.id");
-
-			$marcas = DB::select("select nombre,id from marcas order by nombre");
-			$categorias = DB::select("select nombre,id from categorias order by nombre");
-			
-			$descuentos = DB::select("select * from descuentos");
-
-			
-
-			return view('descuentos.descuentos', ['title' => 'Home',
-							'page' => 'home','marcas' => $marcas, 'categorias' => $categorias, 'productos' => $productos, 'descuentos' => $descuentos]
-			);
+		$sql = "select descuentos.id,id_marca,id_categoria,marcas.nombre as marca, categorias.nombre as categoria, porcentaje,id_producto, cantidad, desde, hasta from descuentos
+		 left join marcas on descuentos.id_marca = marcas.id left join categorias on
+		  descuentos.id_categoria = categorias.id";
+		$descuentos = DB::select($sql);
+		$categorias = DB::select("select * from categorias");
+		$marcas = DB::select("select * from marcas");
+		return view('descuentos.descuentos', ['title' => 'Home',
+						'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
+		);
 			
     }
     
     public function filtro(Request $request)
     {	
-			$sql = "select *, productos.id as idProducto, productos.nombre as nombreProducto,
-			 marcas.nombre as nombreMarca, categorias.nombre as nombreCategoria 
-			from productos,marcas,categorias,descuentos 
-			where productos.marca = marcas.id and productos.categoria = categorias.id 
-			and productos.id = descuentos.id_producto";
+		
+			$sql = "select descuentos.id,id_marca,id_categoria,marcas.nombre as marca, categorias.nombre as categoria, porcentaje,
+			 id_producto, cantidad, desde, hasta from descuentos left join marcas on
+			 descuentos.id_marca = marcas.id left join categorias on descuentos.id_categoria = categorias.id where 1=1 ";
 			
-			$marcas = DB::select("select nombre,id from marcas order by nombre");
-			$categorias = DB::select("select nombre,id from categorias order by nombre");
-
-			$sql = "select * from descuentos";
-			$descuentos = "select * from descuentos";
-
+			$categorias = DB::select("select * from categorias");
+			$marcas = DB::select("select * from marcas");
+			
 			$idMarca = $request->idMarca;
 			$idCategoria = $request->categoria;
 			$cantidad = $request->cantidad;
 			$fecha = $request->datepicker;
-			
-
 			if ($fecha != "Todas" || $idMarca != 0 || $idCategoria != 0){ 
 				
 				if ($fecha != "Todas"){
@@ -70,16 +51,16 @@ class DescuentosController extends Controller
 				
 				if ($idMarca != 0)
 					$sql .= " and id_marca=$idMarca";
+					
 				if ($idCategoria != 0)
 					$sql.= " and id_categoria=$idCategoria";
+					
+				if ($cantidad != 0)
+					$sql.= " and cantidad=$cantidad";
 			}
-
-			//$sql.= " group by productos.id";
-			
-			$productos = DB::select($sql);
-
+			$descuentos = DB::select($sql);
 			return view('descuentos.descuentos', ['title' => 'Home',
-							'page' => 'home','marcas' => $marcas, 'categorias' => $categorias, 'productos' => $productos, 'descuentos' => $descuentos]
+							'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
 			);
 	}
     

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/standard_padding">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Visitas"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:id="@+id/subtitulo_visitas"
+                android:textColor="@color/negro"
+                android:layout_marginBottom="@dimen/standard_padding"/>            />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_label_rojo"
+                android:layout_below="@id/subtitulo_visitas"
+                android:id="@+id/atrazadas_icon"
+                android:layout_marginBottom="@dimen/standard_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Atrazadas:"
+                android:layout_toEndOf="@id/atrazadas_icon"
+                android:layout_alignTop="@id/atrazadas_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/atrazadas_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/cant_atrazadas"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_label_amarillo"
+                android:layout_below="@id/atrazadas_icon"
+                android:id="@+id/visitar_hoy_icon"
+                android:layout_marginBottom="@dimen/standard_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A visitar hoy:"
+                android:layout_toEndOf="@id/visitar_hoy_icon"
+                android:layout_alignTop="@id/visitar_hoy_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/visitar_hoy_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/cant_visitar_hoy"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_label_verde"
+                android:layout_below="@id/visitar_hoy_icon"
+                android:id="@+id/visitados_icon"
+                android:layout_marginBottom="@dimen/standard_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Visitados hoy:"
+                android:layout_toEndOf="@id/visitados_icon"
+                android:layout_alignTop="@id/visitados_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/visitados_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/cant_visitados"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_label"
+                android:layout_below="@id/visitados_icon"
+                android:id="@+id/fuera_ruta_icon"
+                android:layout_marginBottom="@dimen/standard_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Visitados fuera de ruta:"
+                android:layout_toEndOf="@id/fuera_ruta_icon"
+                android:layout_alignTop="@id/fuera_ruta_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/fuera_ruta_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/cant_visitados_fuera_ruta"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pedidos"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:id="@+id/subtitulo_pedidos"
+                android:textColor="@color/negro"
+                android:paddingBottom="@dimen/half_padding"
+                android:paddingTop="@dimen/standard_padding"
+                android:layout_below="@id/fuera_ruta_icon"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/standard_padding"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_turned_in"
+                android:layout_below="@id/subtitulo_pedidos"
+                android:id="@+id/vendido_icon"
+                android:layout_marginBottom="@dimen/standard_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendido hoy:"
+                android:layout_toEndOf="@id/vendido_icon"
+                android:layout_alignTop="@id/vendido_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 4000,00"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/vendido_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/precio_vendidos"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_late"
+                android:layout_below="@id/vendido_icon"
+                android:id="@+id/vendido_fuera_icon"
+                android:layout_marginBottom="@dimen/standard_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendido fuera de ruta:"
+                android:layout_toEndOf="@id/vendido_fuera_icon"
+                android:layout_alignTop="@id/vendido_fuera_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 1000,00"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/vendido_fuera_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/precio_vendido_fuera_ruta"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment"
+                android:layout_below="@id/vendido_fuera_icon"
+                android:id="@+id/vendido_dia_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendido a clientes del día:"
+                android:layout_toEndOf="@id/vendido_dia_icon"
+                android:layout_alignTop="@id/vendido_dia_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 3000,00"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/vendido_dia_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/precio_vendidos_del_dia"/>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
