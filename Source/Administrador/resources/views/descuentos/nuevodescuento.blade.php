@@ -154,17 +154,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 			<label for="to">Hasta</label>
 			<input type="text" id="to" name="to" value="<?php echo date("d-m-Y"); ?>">
 			
-			<select  name="porcentaje" >
-				<option value = 0.10>10% de Descuento</option>  
-				<option value = 0.15>15% de Descuento</option>  
-				<option value = 0.20>20% de Descuento</option>  
-				<option value = 0.25>25% de Descuento</option>  
-				<option value = 0.30>30% de Descuento</option>  
-				<option value = 0.35>35% de Descuento</option>  
-				<option value = 0.40>40% de Descuento</option>  
-				<option value = 0.45>45% de Descuento</option>  
-				<option value = 0.50>50% de Descuento</option>
-			</select>	
+			<label>Porcentaje</label> <input name="porcentaje" type="number" min="0" max="100" /> %
 </div>
 			
 <div class="panel-group" id="TiposDescuentos">
@@ -245,12 +235,6 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 									<option value = 30 > Más de 30</option>
 								</select>
 								
-								<select  name="idproducto" >
-									<option value=0 selected>Descuento sin producto</option>
-									@foreach($productos as $producto)
-									<option value = {{$producto->id}}>{{$producto->nombre}}</option>  
-									@endforeach
-								</select>
 					</div>	
 				</div>
 			</div>

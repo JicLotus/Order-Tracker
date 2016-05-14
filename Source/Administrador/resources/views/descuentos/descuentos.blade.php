@@ -19,6 +19,8 @@
 	});
   });
   </script>
+  
+  
 </head>
 
 
@@ -39,6 +41,7 @@
 
     
 @section("content")
+ 
     <section id="search-section">
 			<a  href="{{app()->make('urls')->getUrlDescuentos()}}" class="btn btn-primary btn-block"><h4><b>DESCUENTOS</b></h4></a>
 
@@ -71,11 +74,11 @@
 						<select class="col-sm-1" id="cantidad" name="cantidad" >
 							<option value = 0 >Todas</option>
 							 
-							<option value = 1 > Más de 10 iguales</option>
+							<option value = 10 > Más de 10 iguales</option>
 							
-							<option value = 2 > Más de 20 iguales</option>
+							<option value = 20 > Más de 20 iguales</option>
 							
-							<option value = 3 > Más de 30 iguales</option>
+							<option value = 30 > Más de 30 iguales</option>
 
 						</select> 
 
@@ -114,48 +117,38 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Productos Marca Sony</td>
-        <td>20%</td>
-        <td>20-05-2016</td>
-        <td>23-06-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Productos de Juguetería</td>
-        <td>15%</td>
-        <td>23-05-2016</td>
-        <td>20-07-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Productos de Cocina</td>
-        <td>35%</td>
-        <td>27-05-2016</td>
-        <td>10-09-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Llevando más de 2</td>
-        <td>20%</td>
-        <td>17-06-2016</td>
-        <td>14-08-2016</td>
-		<td>
-			<button type="submit" class="col-sm-offset-8 btn btn-primary">Quitar</button>
-		</td>
-      </tr>
-        
-      </tr>
+		
+	@foreach($descuentos as $descuento)  
+	<tr>
+	<td>{{$descuento->id}}</td>
+	
+	<td>
+
+		<script language="JavaScript">
+		function ponerTexto(idMarca,idCategoria,cantidad)	{
+			if (idMarca != 0)
+				document.write("Descuento de marca para ");
+			else if (idCategoria != 0)
+				document.write("Descuento de categoria para ");
+			else if (cantidad != 0)
+				document.write("Descuento de cantidad para " + cantidad);
+				
+		}
+		
+		ponerTexto({{$descuento->id_marca}},{{$descuento->id_categoria}},{{$descuento->cantidad}});
+		
+		
+		</script>
+		{{$descuento->categoria}}
+		{{$descuento->marca}}
+	</td>
+	
+	<td>{{$descuento->porcentaje*100}}%</td>
+	<td><time datetime="d">{{$descuento->desde}}</time></td>
+	<td>{{$descuento->hasta}}</td>
+	</tr>
+	@endforeach
+	
     </tbody>
   </table>
 </div>

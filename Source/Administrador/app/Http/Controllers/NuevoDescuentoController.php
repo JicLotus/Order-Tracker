@@ -35,9 +35,9 @@ class NuevoDescuentoController extends Controller
 		
 		$idCategoria=$request->idCategoria;
 		$idMarca=$request->idMarca;
-		$idProducto=$request->idproducto;
+		$idProducto=0;
 		$cantidad=$request->cantidad;
-		$porcentaje=$request->porcentaje;
+		$porcentaje=$request->porcentaje/100.0;
 		
 		if ($idCategoria==0 & $idMarca==0 & $idProducto==0 & $cantidad==0){
 				$this->validate($request, [
