@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Atrazadas:"
+                android:text="Atrasadas:"
                 android:layout_toEndOf="@id/atrazadas_icon"
                 android:layout_alignTop="@id/atrazadas_icon"
                 android:padding="@dimen/half_padding"
@@ -159,41 +159,12 @@
                 android:layout_marginBottom="@dimen/standard_padding"
                 />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_assignment_turned_in"
-                android:layout_below="@id/subtitulo_pedidos"
-                android:id="@+id/vendido_icon"
-                android:layout_marginBottom="@dimen/standard_padding"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vendido hoy:"
-                android:layout_toEndOf="@id/vendido_icon"
-                android:layout_alignTop="@id/vendido_icon"
-                android:padding="@dimen/half_padding"
-                android:textColor="@color/negro"
-                android:textSize="16dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$ 4000,00"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@id/vendido_icon"
-                android:padding="@dimen/half_padding"
-                android:textColor="@color/negro"
-                android:textSize="16dp"
-                android:id="@+id/precio_vendidos"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_assignment_late"
-                android:layout_below="@id/vendido_icon"
+                android:layout_below="@id/subtitulo_pedidos"
                 android:id="@+id/vendido_fuera_icon"
                 android:layout_marginBottom="@dimen/standard_padding"/>
 
@@ -247,6 +218,40 @@
                 android:textColor="@color/negro"
                 android:textSize="16dp"
                 android:id="@+id/precio_vendidos_del_dia"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_turned_in"
+                android:layout_below="@id/vendido_dia_icon"
+                android:id="@+id/vendido_icon"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/standard_padding"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendido hoy:"
+                android:textStyle="bold"
+                android:layout_toEndOf="@id/vendido_icon"
+                android:layout_alignTop="@id/vendido_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 4000,00"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/vendido_icon"
+                android:padding="@dimen/half_padding"
+                android:textColor="@color/negro"
+                android:textSize="16dp"
+                android:id="@+id/precio_vendidos"/>
+
         </RelativeLayout>
     </ScrollView>
 

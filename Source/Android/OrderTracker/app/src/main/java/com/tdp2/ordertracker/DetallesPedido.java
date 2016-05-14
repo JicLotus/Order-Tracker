@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -219,6 +220,29 @@ public class DetallesPedido extends AppCompatActivity {
                 timer2.cancel(); //this will cancel the timer of the system
             }
         }, 3000); // the timer will count 5 seconds....
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detalles_agenda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.estadisticas:
+                Intent estadisticasActivity = new Intent(this, Estadisticas.class);
+                startActivity(estadisticasActivity);
+                return true;
+            case R.id.descuentos:
+                //showHelp();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void mostrarDialogError(final Context contexto){

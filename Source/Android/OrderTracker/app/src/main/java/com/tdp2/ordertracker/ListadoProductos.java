@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -85,6 +88,14 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         }
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        this.obtenerDescuentos();
+        this.aplicarDescuentos();
+    }
+
+
     private void aplicarDescuentos(){
 
         double porcentaje;
@@ -126,6 +137,29 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detalles_agenda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.estadisticas:
+                Intent estadisticasActivity = new Intent(this, Estadisticas.class);
+                startActivity(estadisticasActivity);
+                return true;
+            case R.id.descuentos:
+                //showHelp();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
