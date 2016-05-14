@@ -250,6 +250,10 @@ public class AgendaActivity extends AppCompatActivity {
                 mostrarAgendaDelDia();
 
                 break;
+            case R.id.estadisticas:
+                Intent estadisticasActivity = new Intent(view.getContext(), Estadisticas.class);
+                startActivity(estadisticasActivity);
+                break;
         }
 
 

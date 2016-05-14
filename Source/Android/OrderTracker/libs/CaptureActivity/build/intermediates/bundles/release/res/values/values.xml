@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/arrays.xml -->
+    <!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/arrays.xml -->
     <eat-comment/>
     <string-array name="country_codes">
     <item>-</item>
@@ -46,7 +46,7 @@
     <item>AUTO</item>
     <item>OFF</item>
   </string-array>
-    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/colors.xml -->
+    <!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/colors.xml -->
     <eat-comment/>
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>
@@ -59,11 +59,11 @@
     <color name="transparent">#00000000</color>
     <color name="viewfinder_laser">#ffcc0000</color>
     <color name="viewfinder_mask">#60000000</color>
-    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/dimens.xml -->
+    <!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="half_padding">4dip</dimen>
     <dimen name="standard_padding">8dip</dimen>
-    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/ids.xml -->
+    <!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/ids.xml -->
     <eat-comment/>
     <item name="decode" type="id"/>
     <item name="decode_failed" type="id"/>
@@ -72,7 +72,7 @@
     <item name="quit" type="id"/>
     <item name="restart_preview" type="id"/>
     <item name="return_scan_result" type="id"/>
-    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/strings.xml -->
+    <!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">OrderTracker</string>
     <string name="app_picker_name">Applications</string>
@@ -195,13 +195,13 @@
     <string name="wifi_changing_network">Requesting connection to network\u2026</string>
     <string name="wifi_ssid_label">Network Name</string>
     <string name="wifi_type_label">Type</string>
-    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/themes.xml -->
+    <!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/themes.xml -->
     <eat-comment/>
     <style name="CaptureTheme" parent="android:Theme.Holo">
     <item name="android:windowFullscreen">true</item>
     <item name="android:windowContentOverlay">@null</item>
   </style>
-    <!-- From: file:/home/juan/Documentos/Taller/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/styles.xml -->
+    <!-- From: file:/home/chicas/Documentos/Facultad/Cursando/75.47/Order-Tracker/Source/Android/OrderTracker/libs/CaptureActivity/res/values/styles.xml -->
     <eat-comment/>
     <style name="ResultButton">
     <item name="android:layout_width">0dip</item>

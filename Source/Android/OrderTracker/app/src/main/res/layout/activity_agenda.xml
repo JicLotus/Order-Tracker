@@ -132,6 +132,19 @@
             android:layout_margin="10dp"
             android:id="@+id/viernes" />
 
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viernes"
+            android:layout_centerVertical="true"
+            android:textColor="@color/primary"
+            android:onClick="verDia"
+            android:clickable="true"
+            android:text="ESTADISTICAS"
+            android:layout_margin="10dp"
+            android:id="@+id/estadisticas" />
+
     </RelativeLayout>
 
 

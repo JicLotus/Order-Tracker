@@ -167,6 +167,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tdp2.ordertracker.DetallesCliente" />
         </activity>
+
+        <activity android:name=".Estadisticas"
+            android:label="@string/title_activity_estadisticas"
+            />
     </application>
 
 </manifest>
