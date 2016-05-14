@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,6 +92,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         holder.descripcion.setText(datoActual.descripcion);
 
+
         try {
 
             holder.precio = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO);
@@ -104,6 +106,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         if (holder.precio_final<holder.precio){
             holder.precioFinal.setText("$"+ String.format( "%.2f", holder.precio_final ));
+            holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
         }else{
             holder.precioFinal.setText("");
         }
@@ -168,8 +172,12 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                             subtotal.setText("Subtotal: $"+String.format("%.2f", precio_final*newVal));
                             if (precio_final<precio){
                                 precioFinal.setText("$"+String.format( "%.2f", precio_final));
+                                descripcion.setPaintFlags(descripcion.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
                             }else{
                                 precioFinal.setText("");
+                                descripcion.setPaintFlags(precioFinal.getPaintFlags());
+
                             }
 
                         } catch (JSONException e) {

@@ -140,7 +140,7 @@
 		{{$descuento->marca}}
 	</td>
 	
-	<td>{{$descuento->porcentaje*100}}%</td>
+	<td>{{100-$descuento->porcentaje*100}}%</td>
 	<td>
 		<?php 
 			$date = new DateTime($descuento->desde);

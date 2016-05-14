@@ -7,9 +7,9 @@
 
 	$vendedor = $_REQUEST['id_usuario'];
 
-//	$fecha_hoy = date("Y-m-d");
-//	$fecha_hoy = "'".$fecha_hoy."'";
-	$fecha_hoy = "'2016-05-14'";
+	$fecha_hoy = date("Y-m-d");
+	$fecha_hoy = "'".$fecha_hoy."'";
+//	$fecha_hoy = "'2016-05-09'";
 
 	//obtengo cantidad de visitados hoy
 	$rs = mysql_query("Select count(*) as cantidad from agendas where id_usuario = $vendedor
@@ -21,20 +21,12 @@
    //obtengo cantidad de visitados fuera de ruta, es decir, los que no estaban programados para ese dia pero fueron
    //visitados en la semana
    
-    $dt = new DateTime();
-	$dt->setISODate($dt->format('o'), $dt->format('W'));
-	$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
-	$days = iterator_to_array($periods);
-	$lunes = "'".$days[0]->format ('Y-m-d')."'";
-	$viernes = "'".$days[4]->format ('Y-m-d')."'";	
-
 
 						
 	$rs = mysql_query("Select count(*) as cantidad from agendas where date_format(agendas.fecha, '%Y-%m-%d') <> $fecha_hoy
 						and agendas.estado_visita = 'Visitado'
 						and agendas.id_usuario = $vendedor
-						and date_format(agendas.fecha_visitado, '%Y-%m-%d') = $fecha_hoy
-						and agendas.fecha between $lunes and $viernes");
+						and date_format(agendas.fecha_visitado, '%Y-%m-%d') = $fecha_hoy");
 	$row = mysql_fetch_assoc($rs);
 
 	$cantidadVisitadosFueraDeRuta = $row['cantidad'];

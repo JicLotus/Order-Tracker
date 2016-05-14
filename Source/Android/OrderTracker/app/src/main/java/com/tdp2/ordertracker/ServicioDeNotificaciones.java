@@ -59,6 +59,19 @@ public class ServicioDeNotificaciones extends Service {
     }
 
 
+    private void pedirDescuentos()
+    {
+        Request request = new Request("GET", "GetDescuentos.php");
+        Response resp = new RequestHandler().sendRequest(request);
+
+        if (resp.getStatus())
+            ManejadorPersistencia.persistirDescuentos(this,resp.getJsonArray().toString());
+        else{
+            ManejadorPersistencia.persistirDescuentos(this, new JSONArray().toString());
+        }
+
+    }
+
     public void notificar(){
         Request request = new Request("GET", "GetNotificaciones.php?id_usuario=" +
         ManejadorPersistencia.obtenerIdVendedor(this));
@@ -95,29 +108,32 @@ public class ServicioDeNotificaciones extends Service {
                         case APIConstantes.TIPO_CATEGORIA:{
                             double porcentaje = notificaciones.getJSONObject(i).getDouble(APIConstantes.DESCUENTOS_PORCENTAJE);
                             porcentaje = porcentaje*100;
-                            titulo = String.valueOf((int)porcentaje)
+                            titulo = String.valueOf(100-(int)porcentaje)
                                     +"% de Descuento";
                             subtitulo = "Descuento aplica a "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
                             b.setSmallIcon(R.drawable.ic_descuento_blanco);
+                            pedirDescuentos();
                             break;
                         }
                         case APIConstantes.TIPO_MARCA:{
                             double porcentaje = notificaciones.getJSONObject(i).getDouble(APIConstantes.DESCUENTOS_PORCENTAJE);
                             porcentaje = porcentaje*100;
-                            titulo = String.valueOf((int)porcentaje)
+                            titulo = String.valueOf(100-(int)porcentaje)
                                     +"% de Descuento";
                             subtitulo = "Descuento aplica a productos "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
                             b.setSmallIcon(R.drawable.ic_descuento_blanco);
+                            pedirDescuentos();
                             break;
                         }
                         case APIConstantes.TIPO_CANTIDAD:{
                             double porcentaje =  notificaciones.getJSONObject(i).getDouble(APIConstantes.DESCUENTOS_PORCENTAJE);
                             porcentaje = porcentaje*100;
-                            titulo = String.valueOf((int)porcentaje)
+                            titulo = String.valueOf(100-(int)porcentaje)
                                     + "% de Descuento";
                             subtitulo = "Llevando " + notificaciones.getJSONObject(i).getString(APIConstantes.VALOR)
                                     + " o más productos iguales";
                             b.setSmallIcon(R.drawable.ic_descuento_blanco);
+                            pedirDescuentos();
                             break;
                         }
 
