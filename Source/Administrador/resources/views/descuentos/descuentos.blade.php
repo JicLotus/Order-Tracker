@@ -101,7 +101,6 @@
 
 
 <hr width=75%"/>
-
 <div class="container">
   <h2>Descuentos</h2>
   <table class="table table-striped">
@@ -115,7 +114,6 @@
         <th></th>
       </tr>
     </thead>
-
     <tbody>
 		
 	@foreach($descuentos as $descuento)  
@@ -123,7 +121,6 @@
 	<td>{{$descuento->id}}</td>
 	
 	<td>
-
 		<script language="JavaScript">
 		function ponerTexto(idMarca,idCategoria,cantidad)	{
 			if (idMarca != 0)
@@ -159,7 +156,6 @@
     </tbody>
   </table>
 </div>
-
     
      <?php If (count($descuentos) == 0){?>   
 		<div class="alert alert-danger">
@@ -170,4 +166,3 @@
 	
       </section>
 @endsection
-

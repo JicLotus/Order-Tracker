@@ -17,6 +17,7 @@ class CrearTablaNotificaciones extends Migration
             $table->increments('id')->unique();
             $table->string('id_usuario');
 			$table->string('tipo_notificacion');
+			$table->double('porcentaje');
 			$table->string('valor');
 		});
     }

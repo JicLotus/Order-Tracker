@@ -230,7 +230,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 									
 									<option value=0 selected>Descuento sin cantidad</option>
 									
-									<option value = 1 > Más de 10</option>
+									<option value = 10 > Más de 10</option>
 									<option value = 20 > Más de 20</option>
 									<option value = 30 > Más de 30</option>
 								</select>

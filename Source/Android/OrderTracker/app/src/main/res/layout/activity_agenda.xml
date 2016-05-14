@@ -50,10 +50,11 @@
                     android:textStyle="normal"
 
                     />
+
+
             </LinearLayout>
 
         </RelativeLayout>
-
 
         <TextView
 
@@ -96,6 +97,7 @@
             android:onClick="verDia"
             android:layout_below="@+id/lunes"
             android:id="@+id/martes" />
+
         <TextView
 
             android:layout_height="wrap_content"
@@ -107,6 +109,7 @@
             android:clickable="true"
             android:text="MIÉRCOLES"
             android:id="@+id/miercoles" />
+
         <TextView
 
             android:layout_width="match_parent"
@@ -119,6 +122,8 @@
             android:clickable="true"
             android:text="JUEVES"
             android:id="@+id/jueves" />
+
+
         <TextView
 
             android:layout_width="match_parent"
@@ -132,8 +137,20 @@
             android:layout_margin="10dp"
             android:id="@+id/viernes" />
 
-    </RelativeLayout>
+        <TextView
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viernes"
+            android:layout_centerVertical="true"
+            android:textColor="@color/primary"
+            android:onClick="verDia"
+            android:clickable="true"
+            android:text="ESTADISTICAS"
+            android:layout_margin="10dp"
+            android:id="@+id/estadisticas" />
+
+    </RelativeLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"

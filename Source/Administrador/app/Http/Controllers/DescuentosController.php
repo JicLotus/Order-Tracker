@@ -1,17 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\DB;
 use App\Models\Property as Property;
-
 use DateTime;
-
 class DescuentosController extends Controller
 {
     /**
@@ -24,13 +18,11 @@ class DescuentosController extends Controller
 		$sql = "select descuentos.id,id_marca,id_categoria,marcas.nombre as marca, categorias.nombre as categoria, porcentaje,id_producto, cantidad, desde, hasta from descuentos
 		 left join marcas on descuentos.id_marca = marcas.id left join categorias on
 		  descuentos.id_categoria = categorias.id";
-
 		$descuentos = DB::select($sql);
 		
 		
 		$categorias = DB::select("select * from categorias");
 		$marcas = DB::select("select * from marcas");
-
 		return view('descuentos.descuentos', ['title' => 'Home',
 						'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
 		);
@@ -51,7 +43,6 @@ class DescuentosController extends Controller
 			$idCategoria = $request->categoria;
 			$cantidad = $request->cantidad;
 			$fecha = $request->datepicker;
-
 			if ($fecha != "Todas" || $idMarca != 0 || $idCategoria != 0){ 
 				
 				if ($fecha != "Todas"){
@@ -69,9 +60,7 @@ class DescuentosController extends Controller
 				if ($cantidad != 0)
 					$sql.= " and cantidad=$cantidad";
 			}
-
 			$descuentos = DB::select($sql);
-
 			return view('descuentos.descuentos', ['title' => 'Home',
 							'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
 			);

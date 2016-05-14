@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.tdp2.ordertracker.DetallesProducto">
+    <item android:id="@+id/estadisticas" android:title="Estadísticas"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/descuentos" android:title="Descuentos"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>
