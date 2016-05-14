@@ -117,7 +117,7 @@ class AsignarHorariosController extends Controller
 			$dt = new DateTime();
 			
 						
-			$dt->setISODate($dt->format('o'), $dt->format('W')+1);
+			$dt->setISODate($dt->format('o'), $dt->format('W'));
 	
 			$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
 		

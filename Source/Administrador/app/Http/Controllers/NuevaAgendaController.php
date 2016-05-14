@@ -39,7 +39,7 @@ class NuevaAgendaController extends Controller
 		$dt = new DateTime();
 		
 		// set object to Monday on next week
-		$dt->setISODate($dt->format('o'), $dt->format('W')+1);
+		$dt->setISODate($dt->format('o'), $dt->format('W'));
 //		$dt->setISODate($dt->format('o'), $dt->format('W'));
 
 		// get all 1day periods from Monday to +6 days
