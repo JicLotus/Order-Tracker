@@ -11,6 +11,7 @@
     <string name="title_activity_number_picker">Agregar Al Carro</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_estadisticas">Estadísticas</string>
+    <string name="title_activity_descuentos">Descuentos</string>
     <string name="json_nombre">nombre</string>
 
     <string-array name="dias_array">
