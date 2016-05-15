@@ -5,7 +5,7 @@ public class DescuentosItem {
     String descripcion;
 
     public DescuentosItem(int cantidad, double porcentaje, String marca, String categoria){
-        descripcion = porcentaje + " de descuento";
+        descripcion = porcentaje + "% de descuento";
         if (cantidad > 0) {
             descripcion += " llevando " + cantidad + " productos";
         } if (categoria != null && ! categoria.isEmpty()) {

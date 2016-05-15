@@ -238,7 +238,8 @@ public class DetallesPedido extends AppCompatActivity {
                 startActivity(estadisticasActivity);
                 return true;
             case R.id.descuentos:
-                //showHelp();
+                Intent descuentosActivity = new Intent(this, Descuentos.class);
+                startActivity(descuentosActivity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
