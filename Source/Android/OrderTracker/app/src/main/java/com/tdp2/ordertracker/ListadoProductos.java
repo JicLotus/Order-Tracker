@@ -78,6 +78,8 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         rv.setAdapter(adapter);
 
     }
+
+
     private void obtenerDescuentos(){
         String json = ManejadorPersistencia.obtenerDescuentos(this);
 
@@ -98,6 +100,12 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         super.onResume();
         this.obtenerDescuentos();
         this.aplicarDescuentos();
+
+        adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
+        adapter.setJsonArray(productos);
+
+        rv.setAdapter(adapter);
+
     }
 
 

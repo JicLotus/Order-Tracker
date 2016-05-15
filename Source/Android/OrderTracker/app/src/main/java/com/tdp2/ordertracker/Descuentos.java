@@ -97,4 +97,20 @@ public class Descuentos extends AppCompatActivity {
         return items;
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        String str_descuentos = ManejadorPersistencia.obtenerDescuentos(this);
+        try {
+            descuentos = new JSONArray(str_descuentos);
+        } catch (JSONException e) {
+            descuentos = new JSONArray();
+        }
+        DescuentosAdapter adapter = new DescuentosAdapter(obtenerDescuentos());
+        adapter.setJsonArray(descuentos);
+        rv.setAdapter(adapter);
+
+    }
+
 }

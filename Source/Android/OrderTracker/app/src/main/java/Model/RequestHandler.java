@@ -27,8 +27,8 @@ public class RequestHandler {
     private Model.Response response;
 
  //   private String ip = "http://192.168.1.102:8080/";
-    private String ip = "http://192.168.100.114:8080/";
-//    private String ip = "http://10.0.2.2:8080/";
+   // private String ip = "http://192.168.100.114:8080/";
+    private String ip = "http://10.0.2.2:8080/";
 //    private String ip = "http://10.31.88.8:8080/";
 
     public Model.Response sendRequest(final Request request) {

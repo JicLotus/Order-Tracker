@@ -43,7 +43,7 @@ public class ServicioDeNotificaciones extends Service {
 
                 while(corriendo) {
                     try {
-                        Thread.sleep(20000);
+                        Thread.sleep(5000);
                     } catch (Exception e) {
                     }
 
@@ -88,7 +88,7 @@ public class ServicioDeNotificaciones extends Service {
                 .setWhen(System.currentTimeMillis())
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setContentInfo("Info");
-        Intent intent = new Intent(this, AgendaActivity.class);
+        Intent intent = new Intent(this, Descuentos.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -158,7 +158,6 @@ public class ServicioDeNotificaciones extends Service {
                     e.printStackTrace();
                 }
 
-            ManejadorPersistencia.persistirActualizacionDescuentos(this, true);
 
             }
         }

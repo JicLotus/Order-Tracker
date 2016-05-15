@@ -148,8 +148,10 @@
         <activity
             android:name=".DetallesCliente"
             android:label="@string/title_activity_detalles_cliente" />
-
-
+        <activity
+            android:name=".Descuentos"
+            android:launchMode="singleTask"
+            android:label="@string/title_activity_descuentos" />
         <activity android:name=".DetallesPedido"
             android:label="@string/title_activity_detalles_pedido"
             />
