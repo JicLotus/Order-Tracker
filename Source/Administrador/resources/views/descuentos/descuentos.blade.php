@@ -88,13 +88,15 @@
 					<div class="row">	
 						
 						<button type="submit" class="col-sm-offset-8 btn btn-primary">Buscar</button>
-						<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class="btn btn-primary">Agregar Nuevo Descuento</a> 
+						
 						
 					</div>
 		</div>	
 
 </form></h4>
 
+	<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class="col-sm-offset-1 btn btn-primary">Agregar Nuevo Descuento</a> 
+	<a href="{{app()->make('urls')->getUrlBorrarDescuentosVencidos()}}" class="btn btn-primary">Borrar descuentos vencidos</a> 
 
      <?php If (count($descuentos) == 0){?>   
 		<div class="alert alert-danger">

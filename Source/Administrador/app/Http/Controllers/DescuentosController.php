@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Property as Property;
 use DateTime;
+use Carbon;
+
 class DescuentosController extends Controller
 {
     /**
@@ -60,10 +62,22 @@ class DescuentosController extends Controller
 				if ($cantidad != 0)
 					$sql.= " and cantidad=$cantidad";
 			}
+			
 			$descuentos = DB::select($sql);
 			return view('descuentos.descuentos', ['title' => 'Home',
 							'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias,'idCategoria'=>$idCategoria,'idMarca'=>$idMarca,'cantidadMarcada'=>$cantidad,'fechaMarcada'=>$request->datepicker]
 			);
+	}
+    
+    public function borrarDescuentosVencidos()
+    {
+		$dt = new DateTime('today');
+		$fechaActual = "'".$dt->format('Y-m-d')."'";
+		
+		DB::delete("delete from descuentos where hasta<$fechaActual");
+		
+		$url = app()->make('urls')->getUrlDescuentos();
+		return redirect($url);
 	}
     
     

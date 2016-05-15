@@ -156,5 +156,9 @@ class Urls {
     return url("descuentosFiltro" . $this->appendQuery($inputData));
   }
   
+  function getUrlBorrarDescuentosVencidos($inputData = []) {
+    return url("borrarDescuentosVencidos" . $this->appendQuery($inputData));
+  }
+  
   
 }
