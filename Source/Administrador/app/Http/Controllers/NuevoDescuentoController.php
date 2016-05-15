@@ -36,12 +36,13 @@ class NuevoDescuentoController extends Controller
 		$cantidad=$request->cantidad;
 		$porcentaje=$request->porcentaje/100.0;
 		$porcentaje = 1.0 - $porcentaje;
+		
+		
 		if ($idCategoria==0 & $idMarca==0 & $idProducto==0 & $cantidad==0){
 				$this->validate($request, [
 				'cantidad' => 'accepted'
 				]);
 		}
-		
 		
 		$fecha = $request->from;
 		$dt = new DateTime($fecha);

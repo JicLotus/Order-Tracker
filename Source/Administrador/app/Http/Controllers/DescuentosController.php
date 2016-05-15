@@ -24,7 +24,7 @@ class DescuentosController extends Controller
 		$categorias = DB::select("select * from categorias");
 		$marcas = DB::select("select * from marcas");
 		return view('descuentos.descuentos', ['title' => 'Home',
-						'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
+						'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias,'idCategoria'=>0,'idMarca'=>0,'cantidadMarcada'=>0,'fechaMarcada'=>""]
 		);
 			
     }
@@ -45,7 +45,7 @@ class DescuentosController extends Controller
 			$fecha = $request->datepicker;
 			if ($fecha != "Todas" || $idMarca != 0 || $idCategoria != 0){ 
 				
-				if ($fecha != "Todas"){
+				if ($fecha != ""){
 					$dt = new DateTime($fecha);
 					$fecha = "'".$dt->format('Y-m-d')."'";	
 					$sql .= " and descuentos.desde <= $fecha and descuentos.hasta >= $fecha";
@@ -62,7 +62,7 @@ class DescuentosController extends Controller
 			}
 			$descuentos = DB::select($sql);
 			return view('descuentos.descuentos', ['title' => 'Home',
-							'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias]
+							'page' => 'home','descuentos' => $descuentos,'marcas'=> $marcas, 'categorias'=>$categorias,'idCategoria'=>$idCategoria,'idMarca'=>$idMarca,'cantidadMarcada'=>$cantidad,'fechaMarcada'=>$request->datepicker]
 			);
 	}
     

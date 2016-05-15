@@ -55,36 +55,32 @@
 						<label class="col-sm-1" ></label>
 						<label class="control-label col-sm-1" >Categoría</label>
 							<select class = "col-sm-1" id="categoria" name="categoria">
-								<option value =  0>Todas las Categorias</option>
+								<option value =  0>Todas</option>
 								@foreach($categorias as $categoria)
-									<option value = {{$categoria->id}}>{{$categoria->nombre}}</option>  
+									<option value = {{$categoria->id}} <?php If ($categoria->id == $idCategoria){?> selected = 'selected'<?php } ?>>{{$categoria->nombre}}</option>  
 								@endforeach 
 							</select>
 
 						<label class="control-label col-sm-1" >Marca</label>
 							<select class="col-sm-1" name="idMarca" >
-								<option value = 0>Todas las Marcas</option>
+								<option value = 0>Todas</option>
 								@foreach($marcas as $marca)   
-								<option value = {{$marca->id}}>{{$marca->nombre}}</option>
+									<option value = {{$marca->id}} <?php If ($marca->id == $idMarca){?> selected = 'selected'<?php } ?>>{{$marca->nombre}}</option>
 								@endforeach
 							</select> 
 
 						<label class="control-label col-sm-1" >Cantidad</label>
 
-						<select class="col-sm-1" id="cantidad" name="cantidad" >
+						<select class="col-sm-1" name="cantidad" >
 							<option value = 0 >Todas</option>
-							 
-							<option value = 10 > Más de 10 iguales</option>
-							
-							<option value = 20 > Más de 20 iguales</option>
-							
-							<option value = 30 > Más de 30 iguales</option>
-
-						</select> 
+							<option value = 10 <?php If ($cantidadMarcada == 10){?> selected = 'selected'<?php } ?>}> Más de 10 iguales</option>
+							<option value = 20 <?php If ($cantidadMarcada == 20){?> selected = 'selected'<?php } ?>}> Más de 20 iguales</option>
+							<option value = 30 <?php If ($cantidadMarcada == 30){?> selected = 'selected'<?php } ?>}> Más de 30 iguales</option>
+						</select>
 
 						<label class="control-label col-sm-1" >Fecha</label>
 						
-						<input class="col-sm-1" type="text" id="datepicker" name = "datepicker" value= "Todas"> 
+						<input class="col-sm-1" type="text" id="datepicker" name = "datepicker" value={{$fechaMarcada}}> 
 						
 					</div>
 
@@ -99,6 +95,12 @@
 
 </form></h4>
 
+
+     <?php If (count($descuentos) == 0){?>   
+		<div class="alert alert-danger">
+			<strong>No existen descuentos! </strong>Revise los filtros seleccionados.
+		</div>
+	  <?php } else {?>
 
 <hr width=75%"/>
 <div class="container">
@@ -157,11 +159,9 @@
   </table>
 </div>
     
-     <?php If (count($descuentos) == 0){?>   
-		<div class="alert alert-danger">
-			<strong>No existen descuentos! </strong>Revise los filtros seleccionados.
-		</div>
-	  <?php } ?>
+    
+     <?php } ?>
+
     </section>
 	
       </section>

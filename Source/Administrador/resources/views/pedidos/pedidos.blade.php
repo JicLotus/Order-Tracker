@@ -77,7 +77,6 @@
 				<input type="text" id="datepicker" name = "datepicker" value= "Todas">
 			</div>
 			
-			
 		</div>	
 		<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
 </form></h4>

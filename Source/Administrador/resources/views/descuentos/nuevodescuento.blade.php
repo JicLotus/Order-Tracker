@@ -154,7 +154,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 			<label for="to">Hasta</label>
 			<input type="text" id="to" name="to" value="<?php echo date("d-m-Y"); ?>">
 			
-			<label>Porcentaje</label> <input name="porcentaje" type="number" min="0" max="100" /> %
+			<label>Porcentaje</label> <input name="porcentaje" value=0 type="number" min="0" max="100" /> %
 </div>
 			
 <div class="panel-group" id="TiposDescuentos">
