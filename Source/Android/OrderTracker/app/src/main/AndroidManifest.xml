@@ -131,6 +131,7 @@
             android:label="@string/title_activity_menu_inicial" />
         <activity
             android:name=".AgendaActivity"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_agenda" />
         <activity
             android:name=".ListadoProductos"

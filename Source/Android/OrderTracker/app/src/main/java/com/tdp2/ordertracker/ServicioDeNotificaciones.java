@@ -79,8 +79,6 @@ public class ServicioDeNotificaciones extends Service {
         Response resp = new RequestHandler().sendRequest(request);
 
         JSONArray notificaciones = resp.getJsonArray();
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder b = new NotificationCompat.Builder(this);
@@ -89,8 +87,10 @@ public class ServicioDeNotificaciones extends Service {
                 .setLights(Color.GRAY, 500, 500)
                 .setWhen(System.currentTimeMillis())
                 .setDefaults(Notification.DEFAULT_SOUND)
-                .setContentIntent(contentIntent)
                 .setContentInfo("Info");
+        Intent intent = new Intent(this, AgendaActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (notificaciones!=null){
             for (int i = 0; i < notificaciones.length(); i++) {
@@ -102,7 +102,12 @@ public class ServicioDeNotificaciones extends Service {
                         case APIConstantes.TIPO_AGENDA:{
                             titulo = "El día " + notificaciones.getJSONObject(i).getString(APIConstantes.VALOR)
                                     + " ha sido reprogramado";
-                            b.setSmallIcon(R.drawable.ic_agenda);
+                            intent = new Intent(this, AgendaActivity.class);
+                            intent.putExtra("fechaActual", notificaciones.getJSONObject(i).getString(APIConstantes.VALOR));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                            contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                                    b.setSmallIcon(R.drawable.ic_agenda);
                             break;
                         }
                         case APIConstantes.TIPO_CATEGORIA:{
@@ -113,6 +118,8 @@ public class ServicioDeNotificaciones extends Service {
                             subtitulo = "Descuento aplica a "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
                             b.setSmallIcon(R.drawable.ic_descuento_blanco);
                             pedirDescuentos();
+                            //intent = new Intent(this, MainActivity.class);
+                            //contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             break;
                         }
                         case APIConstantes.TIPO_MARCA:{
@@ -123,6 +130,8 @@ public class ServicioDeNotificaciones extends Service {
                             subtitulo = "Descuento aplica a productos "+ notificaciones.getJSONObject(i).getString(APIConstantes.VALOR);
                             b.setSmallIcon(R.drawable.ic_descuento_blanco);
                             pedirDescuentos();
+                            //intent = new Intent(this, MainActivity.class);
+                            //contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             break;
                         }
                         case APIConstantes.TIPO_CANTIDAD:{
@@ -134,12 +143,15 @@ public class ServicioDeNotificaciones extends Service {
                                     + " o más productos iguales";
                             b.setSmallIcon(R.drawable.ic_descuento_blanco);
                             pedirDescuentos();
+                            //intent = new Intent(this, MainActivity.class);
+                            //contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             break;
                         }
 
                     }
                     b.setContentTitle(titulo);
                     b.setContentText(subtitulo);
+                    b.setContentIntent(contentIntent);
                     notificationManager.notify(notificaciones.getJSONObject(i).getInt(APIConstantes.ID_NOTIFICACION), b.build());
 
                 } catch (JSONException e) {

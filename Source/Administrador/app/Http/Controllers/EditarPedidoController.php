@@ -31,8 +31,9 @@ class EditarPedidoController extends Controller
 			$fecha = $request->datepicker;
 			$idCliente = $request->idCliente ;
 			$idVendedor =$request->idVendedor ;
-			$sql = "select * from productos, pedidos, compras, clientes
+			$sql = "select *, usuarios.nombre as nombreVendedor from productos, pedidos, compras, clientes, usuarios
 					where pedidos.id_producto = productos.id
+					and usuarios.id = compras.id_usuario
 					and compras.id_cliente = clientes.id
 					and pedidos.id_compra = compras.id_compra";
 											
@@ -46,10 +47,11 @@ class EditarPedidoController extends Controller
 				if(strcmp($request->datepicker , 'Todas')){
 					$dt = new DateTime($fecha);
 					$fecha = $dt->format('Y-m-d');
-					$sql .= " and compras.fecha = '" . $fecha ." 00:00:00'";
+					$sql .= " and date_format(compras.fecha, '%Y-%m-%d') = '".$fecha."'" ;
 				}
 			}
 			$pedidos = DB::select($sql);
+			
 			
 			$bultos = DB::select("$sql group by compras.id_compra order by compras.fecha desc");
 
@@ -57,7 +59,7 @@ class EditarPedidoController extends Controller
 			
                         
         return view('pedidos.pedidovendedor', ['title' => 'Home',
-                                'page' => 'home','pedidos' => $pedidos, 'clientes' => $clientes, 'bultos' => $bultos, 'vendedores' => $vendedores,
+                               'page' => 'home','pedidos' => $pedidos, 'clientes' => $clientes, 'bultos' => $bultos, 'vendedores' => $vendedores,
                                  'idVendedor' => $idVendedor, 'idCliente' => $idCliente, 'fecha2' => $fecha]
         );
         

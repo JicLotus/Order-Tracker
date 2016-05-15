@@ -161,7 +161,7 @@ public class DetallesPedido extends AppCompatActivity {
             catch(Exception e){}
         }
 
-        return "$" +Double.toString(precioTotal);
+        return "$" +String.format("%.2f",precioTotal);
     }
 
 

@@ -97,7 +97,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" href="#{{$bulto->id_compra}}"> 
 					<b>Pedido: {{$bulto->id_compra}}  ,  {{$bulto->nombre}}   ,  {{$bulto->razon_social}}   ,  {{$bulto->fecha}}
-					  ,  {{$bulto->nombre}}</b> </a>
+					  ,  {{$bulto->nombreVendedor}}</b> </a>
 				</h4>
 			</div>
 		<div id="{{$bulto->id_compra}}" class="panel-collapse collapse">

@@ -187,6 +187,25 @@ public class AgendaActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        //now getIntent() should always return the last received intent
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Bundle extras = getIntent().getExtras();
+        String id = "";
+
+        if (extras != null) {
+            fechaActual = extras.getString("fechaActual");
+            mostrarAgendaDelDia();
+        }
+
+    }
 
 
     private void cargarItems() {
@@ -196,6 +215,7 @@ public class AgendaActivity extends AppCompatActivity {
         unDia.setText("Lunes");
         items.add(unDia);
     }
+
 
 
     private void crearDraweToggle() {
