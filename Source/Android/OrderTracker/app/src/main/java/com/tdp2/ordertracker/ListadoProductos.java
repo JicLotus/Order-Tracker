@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Files.FileHandler;
 import Model.Request;
@@ -71,7 +74,9 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
         adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
         adapter.setJsonArray(productos);
+
         rv.setAdapter(adapter);
+
     }
     private void obtenerDescuentos(){
         String json = ManejadorPersistencia.obtenerDescuentos(this);
@@ -94,6 +99,7 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         this.obtenerDescuentos();
         this.aplicarDescuentos();
     }
+
 
 
     private void aplicarDescuentos(){

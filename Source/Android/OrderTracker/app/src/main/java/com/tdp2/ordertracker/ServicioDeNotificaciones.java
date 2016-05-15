@@ -146,7 +146,7 @@ public class ServicioDeNotificaciones extends Service {
                     e.printStackTrace();
                 }
 
-
+            ManejadorPersistencia.persistirActualizacionDescuentos(this, true);
 
             }
         }

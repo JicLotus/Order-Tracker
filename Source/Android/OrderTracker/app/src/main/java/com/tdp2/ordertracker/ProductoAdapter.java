@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder>{
@@ -30,7 +33,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     private List<RecyclerViewItem> datos;
     private JSONArray jsonArray;
     Hashtable<Integer, JSONObject> pedidos;
-
+    Timer t;
     Context contexto;
     Class claseOnClick;
 
@@ -45,6 +48,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     {
         return pedidos;
     }
+
 
     public void setJsonArray(JSONArray jsonArrayParam)
     {
@@ -105,19 +109,21 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         }
 
         if (holder.precio_final<holder.precio){
-            holder.precioFinal.setText("$"+ String.format( "%.2f", holder.precio_final ));
+            holder.precioFinal.setText("$" + String.format("%.2f", holder.precio_final));
             holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
         }else{
             holder.precioFinal.setText("");
         }
+        holder.aplicarDescuentos(0);
 
     }
+
 
     @Override
     public int getItemCount() {
         return datos.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView icono;
@@ -125,6 +131,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
         TextView descripcion;
         TextView subtotal;
+        TextView leyendaDescuento;
         TextView precioFinal;
         int posicion;
         int itemId;
@@ -143,6 +150,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             titulo = (TextView) itemView.findViewById(R.id.nombreProducto);
             precioFinal = (TextView) itemView.findViewById(R.id.precioFinal);
             descripcion = (TextView) itemView.findViewById(R.id.caracteristicasProductos);
+            leyendaDescuento = (TextView) itemView.findViewById(R.id.descuento);
             subtotal = (TextView)itemView.findViewById(R.id.subtotal);
             subtotal.setText("");
 
@@ -195,7 +203,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         }
 
 
-        private void aplicarDescuentos(int cantidadComprada){
+        public void aplicarDescuentos(int cantidadComprada){
             JSONArray descuentos = obtenerDescuentos();
 
             double porcentaje;
@@ -215,18 +223,30 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         categoriaProducto = categoria;
 
                         if ((cantidadDescuento>0)&&(cantidadComprada >= cantidadDescuento)){
-                            if (precio*porcentaje <= precio_final)
+                            if (precio*porcentaje <= precio_final){
                                 precio_final = (precio*porcentaje);
+                                leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
+                                            +"% llevando más de "+String.valueOf(cantidadDescuento)
+                                            +" unidades");
+                            }
                         }else if (cantidadComprada<cantidadDescuento){
                                 precio_final = precio;
+                                leyendaDescuento.setText("");
                         }
                         if (marcaProducto!=null && marcaProducto.equals(marcaDescuento)){
-                            if (precio*porcentaje <= precio_final)
+                            if (precio*porcentaje <= precio_final){
                                 precio_final = (precio*porcentaje);
+                                leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
+                                        +"% en productos de la marca "+ marcaProducto);
+                            }
                         }
                         if (categoriaProducto!=null && categoriaProducto.equals(categoriaDescuento)){
-                            if (precio*porcentaje <= precio_final)
+                            if (precio*porcentaje <= precio_final){
                                 precio_final = (precio*porcentaje);
+                                leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
+                                        +"% en productos de la categoría "+ categoriaProducto);
+
+                            }
                         }
 
                     } catch(Exception e){}

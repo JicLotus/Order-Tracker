@@ -22,6 +22,8 @@ public class APIConstantes {
     public static final String ESTADISTICAS_VENDIDO_FUERA_RUTA = "vendido_fuera_ruta";
     public static final String ESTADISTICAS_VENDIDO_CLIENTES = "vendido_clientes";
 
+    public static final String PERSISTENCIA_ACTUALIZAR_DESCUENTOS = "actualizarNotificaciones";
+
     public static final String PERSISTENCIA_VENDEDOR = "idVendedor";
     public static final String PERSISTENCIA_ESTADISTICAS = "estadisticas";
     public static final String PERSISTENCIA_DESCUENTOS = "descuentos";

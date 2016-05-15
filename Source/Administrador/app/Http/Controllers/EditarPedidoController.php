@@ -31,8 +31,9 @@ class EditarPedidoController extends Controller
 			$fecha = $request->datepicker;
 			$idCliente = $request->idCliente ;
 			$idVendedor =$request->idVendedor ;
-			$sql = "select * from productos, pedidos, compras
+			$sql = "select * from productos, pedidos, compras, clientes
 					where pedidos.id_producto = productos.id
+					and compras.id_cliente = clientes.id
 					and pedidos.id_compra = compras.id_compra";
 											
 			if( (strcmp($request->idCliente, 'Todos')) || (strcmp($request->idVendedor ,'Todos')) || (strcmp($request->datepicker , 'Todas'))){
@@ -50,10 +51,10 @@ class EditarPedidoController extends Controller
 			}
 			$pedidos = DB::select($sql);
 			
-			$bultos = DB::select("$sql group by compras.id_compra");
+			$bultos = DB::select("$sql group by compras.id_compra order by compras.fecha desc");
 
 
-
+			
                         
         return view('pedidos.pedidovendedor', ['title' => 'Home',
                                 'page' => 'home','pedidos' => $pedidos, 'clientes' => $clientes, 'bultos' => $bultos, 'vendedores' => $vendedores,

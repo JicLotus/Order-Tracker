@@ -132,7 +132,7 @@
 			else if (idCategoria != 0)
 				document.write("Descuento de categoria para ");
 			else if (cantidad != 0)
-				document.write("Descuento de cantidad para " + cantidad);
+				document.write("Descuento llevando más de " + cantidad);
 				
 		}
 		

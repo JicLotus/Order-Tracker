@@ -29,6 +29,18 @@ public class ManejadorPersistencia {
         editor.commit();
     }
 
+    public static void persistirActualizacionDescuentos (Context context, boolean valor){
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(APIConstantes.PERSISTENCIA_ACTUALIZAR_DESCUENTOS, valor);
+        editor.commit();
+    }
+
+    public static boolean hayQueActualizacionDescuentos (Context context, String valor){
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        return settings.getBoolean(APIConstantes.PERSISTENCIA_ACTUALIZAR_DESCUENTOS, false);
+    }
+
     public static String obtenerIdVendedor(Context context) {
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         return settings.getString(APIConstantes.PERSISTENCIA_VENDEDOR, null);
