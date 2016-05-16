@@ -44,7 +44,6 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		altFormat: "ddmmyy",
 		altField: "#alt-date",
       defaultDate: "+1w",
-      changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
         $( "#to" ).datepicker( "option", "minDate", selectedDate );
@@ -56,69 +55,12 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		altFormat: "ddmmyy",
 		altField: "#alt-date",
       defaultDate: "+1w",
-      changeMonth: true,
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
       }
     });
   });
-  
-  $(function() {
-    $( "#from2" ).datepicker({
-	
-		minDate: 0,
-		dateFormat: "dd-mm-yy",
-		altFormat: "ddmmyy",
-		altField: "#alt-date",
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-        $( "#to2" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to2" ).datepicker({
-		minDate: 0,
-		dateFormat: "dd-mm-yy",
-		altFormat: "ddmmyy",
-		altField: "#alt-date",
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-        $( "#from2" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-  });
-  $(function() {
-    $( "#from3" ).datepicker({
-	
-		minDate: 0,
-		dateFormat: "dd-mm-yy",
-		altFormat: "ddmmyy",
-		altField: "#alt-date",
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-        $( "#to3" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to3" ).datepicker({
-		minDate: 0,
-		dateFormat: "dd-mm-yy",
-		altFormat: "ddmmyy",
-		altField: "#alt-date",
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      onClose: function( selectedDate ) {
-        $( "#from3" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-  });
-  
   </script>	
   
 	
@@ -152,9 +94,9 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 			<label for="from">Desde</label>
 			<input type="text" id="from" name="from" value="<?php echo date("d-m-Y"); ?>">
 			<label for="to">Hasta</label>
-			<input type="text" id="to" name="to" value="<?php echo date("d-m-Y"); ?>">
+			<input type="text" id="to" name="to">
 			
-			<label>Porcentaje</label> <input name="porcentaje" value=0 type="number" min="1" max="100" /> %
+			<label>Porcentaje</label> <input name="porcentaje" value=1 type="number" min="1" max="100" /> %
 </div>
 			
 <div class="panel-group" id="TiposDescuentos">

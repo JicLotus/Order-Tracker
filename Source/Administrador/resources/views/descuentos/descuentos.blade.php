@@ -9,6 +9,26 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
+	  	  
+$.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '<Ant',
+ nextText: 'Sig>',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ 
+$.datepicker.setDefaults($.datepicker.regional['es']);
   $(function() {
     $("#datepicker").datepicker({ 
 		minDate: -20,
@@ -80,23 +100,23 @@
 
 						<label class="control-label col-sm-1" >Fecha</label>
 						
-						<input class="col-sm-1" type="text" id="datepicker" name = "datepicker" value={{$fechaMarcada}}> 
+						<input class="col-sm-2" type="text" id="datepicker" name = "datepicker" value={{$fechaMarcada}}> 
 						
 					</div>
 
 					
 					<div class="row">	
-						
 						<button type="submit" class="col-sm-offset-8 btn btn-primary">Buscar</button>
+						<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class=" btn btn-primary">Agregar Nuevo Descuento</a> 
 						
 						
 					</div>
+						<a href="{{app()->make('urls')->getUrlBorrarDescuentosVencidos()}}" class="col-sm-offset-9 btn-xs btn-danger">Borrar Descuentos Vencidos</a> 
 		</div>	
-
+		
 </form></h4>
 
-	<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class="col-sm-offset-1 btn btn-primary">Agregar Nuevo Descuento</a> 
-	<a href="{{app()->make('urls')->getUrlBorrarDescuentosVencidos()}}" class="btn btn-primary">Borrar descuentos vencidos</a> 
+	
 
      <?php If (count($descuentos) == 0){?>   
 		<div class="alert alert-danger">
