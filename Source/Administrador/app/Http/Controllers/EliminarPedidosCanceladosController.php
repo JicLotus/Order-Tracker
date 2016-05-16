@@ -19,18 +19,19 @@ class EliminarPedidosCanceladosController extends Controller
      */
    public function index()
     {		
+	
 
-			$sql = "DELETE from pedidos WHERE estado = 'cancelado'";
+			$sql = "DELETE pedidos from pedidos,compras WHERE estado = 'cancelado' and compras.id_compra = pedidos.id_compra";
+			$sql = "DELETE from compras WHERE estado = 'cancelado'";
 			DB::statement($sql);
 			
 
+			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2 order by nombre");
 			$clientes = DB::select("select nombre,id from clientes order by nombre");
-			$sql = "select *,clientes.nombre as nombreUsuario, productos.nombre as nombreProducto from pedidos ";
-			$sql .= "left join clientes on pedidos.id_usuario = clientes.id left join productos on pedidos.id_producto = productos.id";
-			$pedidos = DB::select($sql); 
+
         
         return view('pedidos.pedidos', ['title' => 'Home',
-                                'page' => 'home','pedidos' => $pedidos , 'clientes' => $clientes]
+                                'page' => 'home','vendedores' => $vendedores , 'clientes' => $clientes]
         );
         
     }
