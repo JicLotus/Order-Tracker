@@ -100,7 +100,7 @@
 					  ,  {{$bulto->nombreVendedor}}</b> </a>
 				</h4>
 			</div>
-		<div id="{{$bulto->id_compra}}" class="panel-collapse collapse">
+		<div id="{{$bulto->id_compra}}" <?php If ($compraeditada == $bulto->id_compra){?> class="panel-collapse collapse in" <?php }else  ?> class="panel-collapse collapse" >
 			<ul class="list-group">
 				<li class="list-group-item"> 
 					
@@ -124,6 +124,8 @@
 									</div>	
 									<input type="hidden" name="idCliente" value={{$bulto->id_cliente}}>
 									<input type="hidden" name="idVendedor" value={{$bulto->id_usuario}}>
+									<input type="hidden" name="filtroCliente" value={{$idCliente}}>
+									<input type="hidden" name="filtroVendedor" value={{$idVendedor}}>
 									<input type="hidden" name="datepicker" value={{$fecha2}}>
 									
 					</form>

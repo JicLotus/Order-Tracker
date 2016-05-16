@@ -55,12 +55,12 @@ class PedidoVendedorController extends Controller
 			}
 			$pedidos = DB::select($sql);
 			
-			$bultos = DB::select("$sql group by compras.id_compra order by fechaCompra desc");
+			$bultos = DB::select("$sql group by compras.id_compra order by fechaCompra desc,compras.id_compra desc");
 
                         
         return view('pedidos.pedidovendedor', ['title' => 'Home',
                                 'page' => 'home','pedidos' => $pedidos, 'clientes' => $clientes, 'bultos' => $bultos, 'vendedores' => $vendedores,
-                                 'idVendedor' => $idVendedor, 'idCliente' => $idCliente, 'fecha2' => $fecha2]
+                                 'idVendedor' => $idVendedor, 'idCliente' => $idCliente, 'fecha2' => $fecha2, 'compraeditada' => 0]
         );
         
         
