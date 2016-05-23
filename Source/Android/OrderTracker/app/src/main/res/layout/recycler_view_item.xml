@@ -69,7 +69,7 @@
                     android:layout_toRightOf="@id/imagenProducto"
                     android:gravity="bottom"
                     android:text="$250"
-                    android:textSize="17sp"
+                    android:textSize="19sp"
                     android:layout_below="@id/caracteristicasProductos"
                     android:paddingTop="@dimen/standard_padding"
                     android:layout_toLeftOf="@id/nPicker"
