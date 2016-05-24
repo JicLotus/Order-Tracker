@@ -1,7 +1,7 @@
 @extends("layouts.base") 
 
 @section("content")
-
+<a  href="{{app()->make('urls')->getUrlClientes()}}" class="btn btn-primary btn-block"><h4><b>CLIENTES</b></h4></a>
 <div class="container">
 <div class="row row-head">
   <div class="col-md-12">
@@ -20,8 +20,9 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
-    
+
+  <div class="col-md-5 col-sm-offset-1">
+     
  
 <form action="guardarcliente" method="POST" class="form-horizontal" enctype="multipart/form-data">
 	{{ csrf_field() }}
@@ -68,17 +69,17 @@
 			<input type="Text" name="telefono_laboral"  value=""><br>
 		  </div>
     </div>
-    	
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-8">
-                <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+    <div class="form-group">
+				<div class="col-sm-8">
+					
+	  				<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+					<button type="submit" class="col-sm-offset-4 btn btn-primary">Publicar</button>
 
-                <button type="submit" class="col-sm-offset-5 btn btn-default">Publicar
-                </button>
 
-            </div>
-        </div> 		
-			
+
+				</div>
+			</div> 		
+					
 	
 </form>
                               

@@ -1,7 +1,7 @@
 @extends("layouts.base") 
 
 @section("content")
-
+<a  href="{{app()->make('urls')->getUrlClientes()}}" class="btn btn-primary btn-block"><h4><b>CLIENTES</b></h4></a>
 <div class="container">
 <div class="row row-head">
   <div class="col-md-12">
@@ -12,12 +12,9 @@
 <div class="row">
  
 <script type="text/javascript" src="{{ URL::asset('js/qrcode.js') }}"></script>
-	<div class="col-md-4" id="qr">
-			<script>document.getElementById('qr').innerHTML=create_qrcode("{{$cliente->id}}");
-			</script>
-	</div>
+	
 
-  <div class="col-md-8">
+  <div class="col-md-5 col-sm-offset-1">
      
 	<form action="mailto:moncholo06@gmail.com" method="POST" class="form-horizontal" enctype="multipart/form-data">
 		{{ csrf_field() }}
@@ -69,10 +66,11 @@
 
 			<div class="form-group">
 				<div class="col-sm-8">
-					<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+					
+	  				<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+					<button type="submit" class="col-sm-offset-4 btn btn-primary">Publicar</button>
 
-					<button type="submit" class="col-sm-offset-4 btn btn-default">Publicar
-					</button>
+
 
 				</div>
 			</div> 		
@@ -82,7 +80,15 @@
 
                               
   </div>
+  <div class="col-md-6" id="qr">
+
+			<script>document.getElementById('qr').innerHTML=create_qrcode("{{$cliente->id}}");
+			
+			</script>
+	</div>
+	
 </div>
+
 </div>
 
 @endsection
