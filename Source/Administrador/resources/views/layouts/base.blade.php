@@ -53,10 +53,11 @@
                     
                     <a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-primary">Productos</a>
                     <a href="{{app()->make('urls')->getUrlClientes()}}" class="btn btn-primary">Clientes</a>
-                    <a href="{{app()->make('urls')->getUrlUsuarios()}}" class="btn btn-primary">Usuarios</a>
+                    <a href="{{app()->make('urls')->getUrlUsuarios()}}" class="btn btn-primary">Vendedores</a>
                     <a href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary">Pedidos</a>
                     <a href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary">Agendas</a>
                     <a href="{{app()->make('urls')->getUrlDescuentos()}}" class="btn btn-primary">Descuentos</a>
+                    <a href="{{app()->make('urls')->getUrlEstadisticas()}}" class="btn btn-primary">Estadísticas</a>
                                         
                     
                 </div>
