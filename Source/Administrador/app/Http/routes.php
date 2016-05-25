@@ -52,6 +52,7 @@ Route::get('eliminaragenda/{idAgenda}/{vendedor}', "EliminarAgendaController@ind
 Route::get('descuentos', "DescuentosController@index");
 Route::post('descuentosFiltro', "DescuentosController@filtro");
 Route::get('borrarDescuentosVencidos', "DescuentosController@borrarDescuentosVencidos");
+Route::get('eliminardescuento/{id}', "DescuentosController@eliminarDescuento");
 
 Route::get('agregarnuevodescuento', "NuevoDescuentoController@index");
 Route::post('guardarnuevodescuento', "NuevoDescuentoController@guardar");

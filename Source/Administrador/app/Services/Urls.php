@@ -161,4 +161,10 @@ class Urls {
   }
   
   
+  function getUrlEliminarDescuento($id,$inputData = []) {
+    return url("eliminardescuento/". $id . $this->appendQuery($inputData));
+  }
+  
+  
+  
 }
