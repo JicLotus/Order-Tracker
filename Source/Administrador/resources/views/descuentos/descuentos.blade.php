@@ -73,6 +73,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 					<div class="row">	
 
 						<label class="col-sm-1" ></label>
+		
 						<label class="control-label col-sm-1" >Categoría</label>
 							<select class = "col-sm-1" id="categoria" name="categoria">
 								<option value =  0>Todas</option>

@@ -56,6 +56,8 @@ Route::get('borrarDescuentosVencidos', "DescuentosController@borrarDescuentosVen
 Route::get('agregarnuevodescuento', "NuevoDescuentoController@index");
 Route::post('guardarnuevodescuento', "NuevoDescuentoController@guardar");
 
+Route::get('estadisticas', "EstadisticasController@index");
+
 Route::group(array('middleware' => 'auth'), function() {
 
   Route::post('/login-as', function(){
