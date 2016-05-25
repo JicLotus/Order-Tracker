@@ -67,7 +67,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 		
 <h4><form action="{{app()->make('urls')->getUrlFiltroDescuento()}}" method="POST" class="form-horizontal"   enctype="multipart/form-data">
-		{{ csrf_field() }}
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<div class="form-group">
 					<div class="row">	
