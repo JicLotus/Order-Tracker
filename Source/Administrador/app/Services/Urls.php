@@ -71,6 +71,10 @@ class Urls {
     return url("clientes" . $this->appendQuery($inputData));
   }
   
+ function getUrlFiltroClientes($inputData = []) {
+    return url("clientesFiltro" . $this->appendQuery($inputData));
+  }
+  
   public function getUrlAgregarCliente($inputData = []) {
     return url("agregarcliente" . $this->appendQuery($inputData));
   }
@@ -165,7 +169,7 @@ class Urls {
   }
   
   
-  function getUrlEliminarDescuento($id,$inputData = []) {
+  public function getUrlEliminarDescuento($id,$inputData = []) {
     return url("eliminardescuento/". $id . $this->appendQuery($inputData));
   }
   

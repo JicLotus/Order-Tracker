@@ -26,6 +26,7 @@ Route::get('editarproducto/{id}', "EditarProductoController@index");
 Route::post('editarproducto/guardarproducto', "GuardarProductoController@index");
 
 Route::get('clientes', "ClientesController@index");
+Route::post('clientesFiltro', "ClientesController@filtro");
 Route::get('agregarcliente', "NuevoClienteController@index");
 Route::post('guardarcliente', "NuevoClienteController@guardar");
 Route::get('editarcliente/{id}', "EditarClienteController@index");

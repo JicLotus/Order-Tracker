@@ -57,8 +57,6 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 @endsection
 
-@section("content")
-
     
 @section("content")
  
@@ -185,7 +183,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 			echo $date->format('d-m-Y'); ?></td>
 	<td> 
 		<form action="{{app()->make('urls')->getUrlEliminarDescuento($descuento->id)}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
-		{{ csrf_field() }}
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								
 		<input type="hidden" name = "datepicker" value={{$fechaMarcada}}> 
 		<input type="hidden" name = "categoria" value={{$idCategoria}}> 
