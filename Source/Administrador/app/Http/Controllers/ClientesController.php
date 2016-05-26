@@ -17,21 +17,43 @@ class ClientesController extends Controller
      *
      * @return Response
      */
-    public function index()
-    {
-    	/*
-DB::table('productos')->insert(
-    ['nombre' => 'El producto2', 'codigo' => 'asd']
-);*/
+    public function index(Request $request){
 
-#    	  $productos = DB::table('productos')->get();
-
-		  $clientes = DB::table('clientes')->get();
-                        
+		  $clientes = DB::select("select * from clientes order by nombre ");
+		  $clienteAnterior = "";
+ 		  $razonAnterior = "";
+ 		  $direccionAnterior = "";                     
         return view('clientes.clientes', ['title' => 'Home',
-                                'page' => 'home','clientes' => $clientes]
+                                'page' => 'home','clientes' => $clientes,  
+                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior , 'accion' => 0]
         );
-        
-        
+	}
+     public function filtro(Request $request){
+		 
+ 		  $clienteAnterior = $request->nombre;
+ 		  $razonAnterior = $request->razonsocial;
+ 		  $direccionAnterior = $request->direccion;       
+ 		  		 
+ 		  $cliente = strtoupper($clienteAnterior);		 
+  		  $razon = strtoupper($razonAnterior);
+ 		  $direccion = strtoupper($direccionAnterior);	
+ 		  		  		 
+ 		  $sql = "select * from clientes where ";
+ 		  
+ 		  if($cliente != "")
+			$sql .= "UPPER(nombre) like '%$cliente%' and " ;
+		  if($razon != "")
+			 $sql .= "UPPER(razon_social) like '%$razon%' and " ;		
+		  if($direccion != "")
+			$sql .= "UPPER(direccion) like '%$direccion%' and ";
+		  
+ 		  $sql .= "1 = 1 order by nombre";
+ 		  $clientes = DB::select($sql);
+ 		                
+        return view('clientes.clientes', ['title' => 'Home',
+                                'page' => 'home','clientes' => $clientes, 
+                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior, 'accion' => 0 ]
+        );
+           
     }
 }

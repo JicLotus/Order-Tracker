@@ -8,6 +8,16 @@
     <h2><strong>Editar Vendedor</strong></h2>
   </div>
 </div>
+
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+	@endif
 <div class="row">
   <div class="col-md-5 col-sm-offset-1">
      
@@ -44,7 +54,7 @@
     <div class="form-group">
 		<label class="control-label col-sm-2" for="telefono">Teléfono</label>
           <div class="col-sm-8">
-			<input type="Text" name="telefono" value=""> <br>
+			<input type="Text" name="telefono" value="{{$usuario->telefono}}"> <br>
 		  </div>
     </div>
 

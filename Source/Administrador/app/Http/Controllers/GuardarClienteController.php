@@ -16,6 +16,11 @@ class GuardarClienteController extends Controller
     
     public function index(Request $request)
     {
+		$this->validate($request, [
+        'email' => 'required|email|unique:clientes,email',
+        'nombre' => 'required',
+        'direccion' => 'required'
+		]);
   
 		DB::table(Config::get('constants.TABLA_CLIENTES'))->where(Config::get('constants.TABLA_CLIENTES_ID'), $request->idCliente)
 				->update(array(Config::get('constants.TABLA_CLIENTES_NOMBRE') => ($request->nombre),
@@ -25,11 +30,13 @@ class GuardarClienteController extends Controller
 				Config::get('constants.TABLA_CLIENTES_TELEFONO_2') => ($request->telefono_laboral),
 				Config::get('constants.TABLA_CLIENTES_EMAIL') => ($request->email)));
 		
-		$cliente = DB::table(Config::get('constants.TABLA_CLIENTES'))
-					->where(Config::get('constants.TABLA_CLIENTES_ID'), $request->idCliente)->first();
-		
-		return view('clientes.editcliente', ['title' => 'Home',
-							'page' => 'home','cliente'=>$cliente]
-			);
+		 $clientes = DB::select("select * from clientes order by nombre ");
+		  $clienteAnterior = "";
+ 		  $razonAnterior = "";
+ 		  $direccionAnterior = "";                     
+        return view('clientes.clientes', ['title' => 'Home',
+                                'page' => 'home','clientes' => $clientes,  
+                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior , 'accion' => 2]
+        );
     }
 }

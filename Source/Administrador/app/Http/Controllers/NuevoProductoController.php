@@ -39,18 +39,19 @@ class NuevoProductoController extends Controller
 		#Si la imagen se cargo entonces se ejecuta el codigo que sigue
 		#Si la imagen no se cargo, o el archivo que se cargo no es una imagen
 		#entonces el codigo siguiente no se ejecuta y se vuelve al formulario (se hace automaticamente
+	
 
-		$messages = array( 'required' => 'This field aint long enough.' );
-		$rules = array(
-			'nombre'=>'required|min:3'
-		);
-		$validator = Validator::make(['nombre'], $rules, $messages);
-		
-		$this->validate($request, [
-        'imagen' => 'image|required',
-        'nombre' => 'required'
-		]);
-		
+		$validator = Validator::make($request->all(), [
+             
+			'nombre' => 'required',			
+			'codigo' => 'required',
+			'precio' => 'required',
+			'imagen' => 'required|image'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 		
 
 		#guardo el producto
@@ -83,9 +84,7 @@ class NuevoProductoController extends Controller
 			DB::table('imagenes')->insert(array('id_producto' => $id, 'imagen_base64' => $codificacion));					
 		}
 		
-		$url = app()->make('urls')->getUrlProductos();
-		return redirect($url);
-        
+        return redirect('/productos');
     }
 
 

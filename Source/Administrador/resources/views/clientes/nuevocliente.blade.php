@@ -31,14 +31,14 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="nombre">Nombre</label>
           <div class="col-sm-8">
-			<input type="Text" name="nombre" value="" ><br>
+			<input type="Text" name="nombre" value="{{ old('nombre') }}" ><br>
 		  </div>
     </div>
     
      <div class="form-group">
 		<label class="control-label col-sm-2" for="email">Email</label>
           <div class="col-sm-8">
-			<input type="Text" name="email"  value=""><br>
+			<input type="Text" name="email"  value="{{ old('email') }}"><br>
 		  </div>
     </div>	
     
@@ -52,21 +52,21 @@
     <div class="form-group">
 		<label class="control-label col-sm-2" for="razon_social">Razón Social</label>
           <div class="col-sm-8">
-			<input type="Text" name="razon_social" value=""> <br>
+			<input type="Text" name="razon_social" value="{{ old('razon_social') }}"> <br>
 		  </div>
     </div>
     
     <div class="form-group">
 		<label class="control-label col-sm-2" for="telefono_movil">Teléfono Movil</label>
           <div class="col-sm-8">
-			<input type="Text" name="telefono_movil" value=""><br>
+			<input type="Text" name="telefono_movil" value="{{ old('telefono_movil') }}"><br>
 		  </div>
     </div>
     
     <div class="form-group">
 		<label class="control-label col-sm-2" for="marca">Teléfono Laboral</label>
           <div class="col-sm-8">
-			<input type="Text" name="telefono_laboral"  value=""><br>
+			<input type="Text" name="telefono_laboral" value="{{ old('telefono_laboral') }}"><br>
 		  </div>
     </div>
     <div class="form-group">

@@ -31,21 +31,21 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="nombre">Nombre</label>
           <div class="col-sm-8">
-			<input type="Text" name="nombre" value="" ><br>
+			<input type="Text" name="nombre"value="{{ old('nombre') }}" ><br>
 		  </div>
     </div>
     
      <div class="form-group">
 		<label class="control-label col-sm-2" for="email">Email</label>
           <div class="col-sm-8">
-			<input type="Text" name="email"  value=""><br>
+			<input type="Text" name="email"  value="{{ old('email') }}"><br>
 		  </div>
     </div>	
         
     <div class="form-group">
 		<label class="control-label col-sm-2" for="password">Contraseña</label>
           <div class="col-sm-8">
-			<input type="Text" name="password" value=""> <br>
+			<input type="Text" name="password" value="{{ old('password') }}""> <br>
 			    <input type="hidden" name="privilegio" value="2" >
 		  </div>
     </div>
@@ -53,7 +53,7 @@
     <div class="form-group">
 		<label class="control-label col-sm-2" for="telefono">Teléfono</label>
           <div class="col-sm-8">
-			<input type="Text" name="telefono" value=""> <br>
+			<input type="Text" name="telefono" value="{{ old('telefono') }}"> <br>
 		  </div>
     </div>
   

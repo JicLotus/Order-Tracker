@@ -57,8 +57,6 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 @endsection
 
-@section("content")
-
     
 @section("content")
  
@@ -67,15 +65,13 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 		
 <h4><form action="{{app()->make('urls')->getUrlFiltroDescuento()}}" method="POST" class="form-horizontal"   enctype="multipart/form-data">
-		{{ csrf_field() }}
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<div class="form-group">
 					<div class="row">	
 
-						<label class="col-sm-1" ></label>
-		
-						<label class="control-label col-sm-1" >Categoría</label>
-							<select class = "col-sm-1" id="categoria" name="categoria">
+						<label class="col-sm-offset-1 control-label col-sm-1" >Categoría</label>
+							<select class = "col-sm-2" id="categoria" name="categoria">
 								<option value =  0>Todas</option>
 								@foreach($categorias as $categoria)
 									<option value = {{$categoria->id}} <?php If ($categoria->id == $idCategoria){?> selected = 'selected'<?php } ?>>{{$categoria->nombre}}</option>  
@@ -83,7 +79,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 							</select>
 
 						<label class="control-label col-sm-1" >Marca</label>
-							<select class="col-sm-1" name="idMarca" >
+							<select class="col-sm-2" name="idMarca" >
 								<option value = 0>Todas</option>
 								@foreach($marcas as $marca)   
 									<option value = {{$marca->id}} <?php If ($marca->id == $idMarca){?> selected = 'selected'<?php } ?>>{{$marca->nombre}}</option>
@@ -92,35 +88,45 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 						<label class="control-label col-sm-1" >Cantidad</label>
 
-						<select class="col-sm-1" name="cantidad" >
+						<select class="col-sm-2" name="cantidad" >
 							<option value = 0 >Todas</option>
 							<option value = 10 <?php If ($cantidadMarcada == 10){?> selected = 'selected'<?php } ?>}> Más de 10 iguales</option>
 							<option value = 20 <?php If ($cantidadMarcada == 20){?> selected = 'selected'<?php } ?>}> Más de 20 iguales</option>
 							<option value = 30 <?php If ($cantidadMarcada == 30){?> selected = 'selected'<?php } ?>}> Más de 30 iguales</option>
 						</select>
 
-						<label class="control-label col-sm-1" >Fecha</label>
 						
-						<input class="col-sm-2" type="text" id="datepicker" name = "datepicker" value={{$fechaMarcada}}> 
 						
 					</div>
 
 					
 					<div class="row">	
-						<button type="submit" class="col-sm-offset-8 btn btn-primary">Buscar</button>
+						<label class="col-sm-offset-1 control-label col-sm-1" >Fecha</label>
+						
+						<input class="col-sm-2" type="text" id="datepicker" name = "datepicker" value={{$fechaMarcada}}> 
+						<button type="submit" class="col-sm-offset-4 btn btn-primary">Buscar</button>
 						<a href="{{app()->make('urls')->getUrlNuevoDescuento()}}" class=" btn btn-primary">Agregar Nuevo Descuento</a> 
 						
 						
 					</div>
-						<a href="{{app()->make('urls')->getUrlBorrarDescuentosVencidos()}}" class="col-sm-offset-9 btn-xs btn-danger">Borrar Descuentos Vencidos</a> 
-		</div>	
+				</div>	
 		
 </form></h4>
 
-	
+<?php If ($eliminado >= 0){
+		If ($eliminado == 1) {?> 
+			<div class="alert alert-success">
+				<strong>Se eliminó correctamente el descuento!</strong>
+			</div>
+ <?php } else {?>
+			<div class="alert alert-danger">
+				<strong>No se pudo eliminar el descuento! </strong>Se encuentra actualmente en vigencia.
+			</div>
+ <?php }
+	  }?> 
 
      <?php If (count($descuentos) == 0){?>   
-		<div class="alert alert-danger">
+		<div class="alert alert-warning">
 			<strong>No existen descuentos! </strong>Revise los filtros seleccionados.
 		</div>
 	  <?php } else {?>
@@ -136,7 +142,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
         <th>Descuento</th>
         <th>Desde</th>
         <th>Hasta</th>
-        <th></th>
+        <th>Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -175,6 +181,17 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 	<td>		<?php 
 			$date = new DateTime($descuento->hasta);
 			echo $date->format('d-m-Y'); ?></td>
+	<td> 
+		<form action="{{app()->make('urls')->getUrlEliminarDescuento($descuento->id)}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								
+		<input type="hidden" name = "datepicker" value={{$fechaMarcada}}> 
+		<input type="hidden" name = "categoria" value={{$idCategoria}}> 
+		<input type="hidden" name = "marca" value={{$idMarca}}> 
+		<button type="submit" class="btn-xs btn-danger">Eliminar</button> 
+		</form>
+	</td>
+	
 	</tr>
 	@endforeach
 	

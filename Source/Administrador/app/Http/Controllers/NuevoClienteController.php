@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use File;
-
+use Validator;
 use Mail;
 
 
@@ -28,12 +28,18 @@ class NuevoClienteController extends Controller
     
        public function guardar(Request $request)
     {
+		$validator = Validator::make($request->all(), [
+             
+			'nombre' => 'required',
+			'email' => 'required|email|unique:clientes,email',
+			'direccion' => 'required',
+			'telefono_movil' => 'required'
+		
+        ]);
 
-		$this->validate($request, [
-        'email' => 'required|email|unique:clientes,email',
-        'nombre' => 'required',
-        'direccion' => 'required'
-		]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 			
 		#guardo el cliente
 		$id = DB::table('clientes')->insertGetId(array('nombre' => ($request->nombre),'email' => ($request->email),'direccion' => ($request->direccion),
@@ -47,9 +53,15 @@ class NuevoClienteController extends Controller
 		$message->to($request->email, $request->nombre)->subject('Bienvenido '  .$request->nombre . ' a Order Tracker!');
 		});
 
-	
-		$url = app()->make('urls')->getUrlClientes();
-		return redirect($url);
+		
+		$clientes = DB::select("select * from clientes order by nombre ");
+		  $clienteAnterior = "";
+ 		  $razonAnterior = "";
+ 		  $direccionAnterior = "";                     
+        return view('clientes.clientes', ['title' => 'Home',
+                                'page' => 'home','clientes' => $clientes,  
+                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior , 'accion' => 1]
+        );
         
     }
 

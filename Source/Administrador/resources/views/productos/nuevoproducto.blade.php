@@ -30,28 +30,28 @@
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="nombre">Nombre</label>
           <div class="col-sm-8">
-			<input type="Text" name="nombre" value="" ><br>
+			<input type="Text" name="nombre" value="{{ old('nombre') }}" ><br>
 		  </div>
     </div>
     
     <div class="form-group">
 		<label class="control-label col-sm-2" for="codigo">Codigo</label>
           <div class="col-sm-8">
-			<input type="Text" name="codigo" value="" ><br>
+			<input type="Text" name="codigo" value="{{ old('codigo') }}" ><br>
 		  </div>
     </div>
     
     <div class="form-group">
 		<label class="control-label col-sm-2" for="caracteristicas">Caracteristicas</label>
           <div class="col-sm-8">
-			<input type="Text" name="caracteristicas" value=""> <br>
+			<input type="Text" name="caracteristicas" value="{{ old('caracteristicas') }}"> <br>
 		  </div>
     </div>
     
     <div class="form-group">
 		<label class="control-label col-sm-2" for="stock">Stock</label>
           <div class="col-sm-8">
-			<input type="Text" name="stock" value=""><br>
+			<input type="Text" name="stock" value="{{ old('stock') }}"><br>
 		  </div>
     </div>
     
@@ -80,7 +80,7 @@
     <div class="form-group">
 		<label class="control-label col-sm-2" for="precio">Precio</label>
           <div class="col-sm-8">
-			<input type="Text" name="precio" value=""><br>
+			<input type="Text" name="precio" value="{{ old('precio') }}"><br>
 		  </div>
     </div>	
 	<div class="form-group">
@@ -111,7 +111,7 @@
     	
         <div class="form-group">
             <div class="col-sm-offset-1">
-                <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+                <a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-default">Cancelar</a>
 
                 <button type="submit" class= " col-sm-offset-2 btn btn-primary">Publicar
                 </button>

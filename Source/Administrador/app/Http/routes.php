@@ -20,18 +20,23 @@ Route::get('/', "HomeController@index");
 Route::get('help', "HelpController@index");
 
 Route::get('productos', "ProductosController@index");
+Route::get('eliminarproducto/{id}', "ProductosController@eliminar");
+Route::post('buscarproducto', "ProductosController@filtro");
 Route::get('agregarproducto', "NuevoProductoController@index");
 Route::post('guardarnuevoproducto', "NuevoProductoController@guardar");
 Route::get('editarproducto/{id}', "EditarProductoController@index");
 Route::post('editarproducto/guardarproducto', "GuardarProductoController@index");
 
+
 Route::get('clientes', "ClientesController@index");
+Route::post('clientesFiltro', "ClientesController@filtro");
 Route::get('agregarcliente', "NuevoClienteController@index");
 Route::post('guardarcliente', "NuevoClienteController@guardar");
 Route::get('editarcliente/{id}', "EditarClienteController@index");
 Route::post('editarcliente/guardarcliente', "GuardarClienteController@index");
 
 Route::get('usuarios', "UsuariosController@index");
+Route::post('usuariosFiltro', "UsuariosController@filtro");
 Route::get('agregarusuario', "NuevoUsuarioController@index");
 Route::post('guardarusuario', "NuevoUsuarioController@guardar");
 Route::get('editarusuario/{id}', "EditarUsuarioController@index");
@@ -52,6 +57,7 @@ Route::get('eliminaragenda/{idAgenda}/{vendedor}', "EliminarAgendaController@ind
 Route::get('descuentos', "DescuentosController@index");
 Route::post('descuentosFiltro', "DescuentosController@filtro");
 Route::get('borrarDescuentosVencidos', "DescuentosController@borrarDescuentosVencidos");
+Route::get('eliminardescuento/{id}', "DescuentosController@eliminarDescuento");
 
 Route::get('agregarnuevodescuento', "NuevoDescuentoController@index");
 Route::post('guardarnuevodescuento', "NuevoDescuentoController@guardar");
