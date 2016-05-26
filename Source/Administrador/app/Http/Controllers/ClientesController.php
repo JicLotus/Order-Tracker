@@ -25,7 +25,7 @@ class ClientesController extends Controller
  		  $direccionAnterior = "";                     
         return view('clientes.clientes', ['title' => 'Home',
                                 'page' => 'home','clientes' => $clientes,  
-                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior ]
+                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior , 'accion' => 0]
         );
 	}
      public function filtro(Request $request){
@@ -52,7 +52,7 @@ class ClientesController extends Controller
  		                
         return view('clientes.clientes', ['title' => 'Home',
                                 'page' => 'home','clientes' => $clientes, 
-                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior ]
+                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior, 'accion' => 0 ]
         );
            
     }

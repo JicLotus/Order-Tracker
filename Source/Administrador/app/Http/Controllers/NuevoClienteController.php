@@ -47,9 +47,15 @@ class NuevoClienteController extends Controller
 		$message->to($request->email, $request->nombre)->subject('Bienvenido '  .$request->nombre . ' a Order Tracker!');
 		});
 
-	
-		$url = app()->make('urls')->getUrlClientes();
-		return redirect($url);
+		
+		$clientes = DB::select("select * from clientes order by nombre ");
+		  $clienteAnterior = "";
+ 		  $razonAnterior = "";
+ 		  $direccionAnterior = "";                     
+        return view('clientes.clientes', ['title' => 'Home',
+                                'page' => 'home','clientes' => $clientes,  
+                                'clienteAnterior'=> $clienteAnterior ,'razonAnterior' =>  $razonAnterior , 'direccionAnterior'=> $direccionAnterior , 'accion' => 1]
+        );
         
     }
 

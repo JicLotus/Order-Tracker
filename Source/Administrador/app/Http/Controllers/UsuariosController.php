@@ -22,7 +22,7 @@ class UsuariosController extends Controller
 		$usuarios = DB::table('usuarios')->get();
                         
         return view('usuarios.usuarios', ['title' => 'Home',
-                                'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => "", 'emailAnterior' => ""]
+                                'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => "", 'emailAnterior' => "", 'accion' => 0]
         );
         
         
@@ -37,7 +37,7 @@ class UsuariosController extends Controller
 		$usuarios =  DB::select("select * from usuarios where UPPER(nombre) like '%$vendedor%'");
                         
         return view('usuarios.usuarios', ['title' => 'Home',
-                                'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => $vendedorAnterior, 'emailAnterior' => ""]
+                                'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => $vendedorAnterior, 'emailAnterior' => "" ,'accion' => 0]
         );
         
         

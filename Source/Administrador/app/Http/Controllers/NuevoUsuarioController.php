@@ -40,10 +40,12 @@ class NuevoUsuarioController extends Controller
 		#guardo el usuario
 		$id = DB::table('usuarios')->insertGetId(array('nombre' => ($request->nombre),'email' => ($request->email),'password' => ($request->password),
 							'privilegio' => ($request->privilegio),'telefono' => ($request->telefono) ,'created_at' => (date('Y-m-d H:i:s'))));
-
+		$usuarios = DB::table('usuarios')->get();
 	
-		$url = app()->make('urls')->getUrlUsuarios();
-		return redirect($url);
+		 return view('usuarios.usuarios', ['title' => 'Home',
+                                'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => "", 'emailAnterior' => "", 'accion' => 1]
+        );
+        
         
     }
 

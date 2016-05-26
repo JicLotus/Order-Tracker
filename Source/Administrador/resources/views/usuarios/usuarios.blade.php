@@ -51,6 +51,18 @@
 			<strong>No existen Vendedores! </strong>Revise los filtros seleccionados.
 		</div>
 	  <?php } else {?>
+		  
+	 <?php If ($accion != 0){
+				If ($accion == 1){?>
+					<div class="alert alert-success">
+						<strong>Nuevo vendedor creado exitosamente!</strong>
+					</div>
+			<?php } Else If ($accion == 2){	?> 
+						<div class="alert alert-success">
+							<strong>Vendedor editado exitosamente!</strong>
+						</div>
+			<?php 	}
+			}?> 
 
 <hr width=75%"/>
 <div class="container">

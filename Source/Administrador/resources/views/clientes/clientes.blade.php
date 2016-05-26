@@ -51,6 +51,17 @@
 		</div>	
 		
 </form></h4>
+		 <?php If ($accion != 0){
+				If ($accion == 1){?>
+					<div class="alert alert-success">
+						<strong>Nuevo cliente creado exitosamente!</strong>
+					</div>
+			<?php } Else If ($accion == 2){	?> 
+						<div class="alert alert-success">
+							<strong>Cliente editado exitosamente!</strong>
+						</div>
+			<?php 	}
+			}?> 
 
      <?php If (count($clientes) == 0){?>   
 		<div class="alert alert-warning">
