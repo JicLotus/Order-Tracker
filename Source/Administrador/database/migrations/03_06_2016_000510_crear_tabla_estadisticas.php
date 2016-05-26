@@ -17,11 +17,15 @@ class CrearTablaEstadisticas extends Migration
         Schema::create(Config::get('constants.TABLA_ESTADISTICAS'), function (Blueprint $table) {
            
             $table->integer(Config::get('constants.ESTADISTICAS_VISITADOS_HOY'));				
-			$table->integer(Config::get('constants.ESTADISTICAS_ID_VENDEDOR'))->unique();				
+			$table->integer(Config::get('constants.ESTADISTICAS_ID_VENDEDOR'));				
 			$table->integer(Config::get('constants.ESTADISTICAS_A_VISITAR'));
 			$table->integer(Config::get('constants.ESTADISTICAS_VISITADOS_FUERA_RUTA'));
         	$table->double(Config::get('constants.ESTADISTICAS_VENDIDO_FUERA_RUTA'));
         	$table->double(Config::get('constants.ESTADISTICAS_VENDIDO_CLIENTES_DIA'));
+			$table->dateTime(Config::get('constants.ESTADISTICAS_DIA'));
+			$table->primary(array(Config::get('constants.ESTADISTICAS_ID_VENDEDOR'),
+						  Config::get('constants.ESTADISTICAS_DIA')));
+
         });
     }
 

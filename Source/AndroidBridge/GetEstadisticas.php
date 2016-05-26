@@ -6,7 +6,7 @@
 	mysql_select_db("orderTracker");
 
 	$vendedor = $_REQUEST['id_usuario'];
-
+	
 	$fecha_hoy = date("Y-m-d");
 	$fecha_hoy = "'".$fecha_hoy."'";
 //	$fecha_hoy = "'2016-05-09'";
@@ -77,9 +77,9 @@
 
 
 
-    $sql = "INSERT INTO estadisticas (id_usuario, visitados_hoy, a_visitar, fuera_ruta, vendido_fuera_ruta, vendido_clientes) 
+    $sql = "INSERT INTO estadisticas (id_usuario, visitados_hoy, a_visitar, fuera_ruta, vendido_fuera_ruta, vendido_clientes, dia) 
 			VALUES($vendedor, $cantidadVisitadosHoy, $cantidadAVisitarHoy, $cantidadVisitadosFueraDeRuta,
-			$cantidadFueraDeRuta, $cantidadVendidaHoy ) ON DUPLICATE KEY UPDATE   
+			$cantidadFueraDeRuta, $cantidadVendidaHoy, date_format(now(), '%Y-%m-%d') ) ON DUPLICATE KEY UPDATE   
 			visitados_hoy = $cantidadVisitadosHoy,
 			a_visitar = $cantidadAVisitarHoy,
 			fuera_ruta= $cantidadVisitadosFueraDeRuta,
@@ -89,7 +89,7 @@
 	mysql_query($sql);
 
 
-	$sql = "Select * from estadisticas where id_usuario = $vendedor";
+	$sql = "Select * from estadisticas where id_usuario = $vendedor and dia = $fecha_hoy";
 
 	$rs = mysql_query($sql,$con);
 	

@@ -11,15 +11,19 @@
 
 		
 		function topVendedores() {
-			var data = google.visualization.arrayToDataTable([
-				['Task', 'Hours per Day'],
-				['Juan Costa',     11],
-				['Jose Castelli',      2],
-				['Gabriel Masi',  2],
-				['Debora Martin', 2],
-				['Juan Laura',    7]
-				]);
+			
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Nombre');
+			data.addColumn('number', 'Cantidad Vendida');
+			
+			@foreach($rankingVendedores as $vendedor)
+				data.addRows([
+				  ['{{$vendedor->nombre}}', {{$vendedor->totalVendido}}] // Example of specifying actual and formatted values.
+				]);				
+			@endforeach
+			
 
+	
 			var options = {
 				title: 'Top 10 Vendedores',
 				is3D: true,
@@ -31,10 +35,18 @@
 
 
 		function ventaDelMes() {
-			 var data = google.visualization.arrayToDataTable([
-				['Ventas', '2015', '2016'],
-				['Ventas', 8175000, 808000]
-			  ]);
+		 	var data = new google.visualization.DataTable();
+		
+			data.addColumn('string', 'Nombre');
+		
+			@foreach($ventaDelMes as $venta)
+				data.addColumn('number', '{{$venta->anio}}');
+			@endforeach
+		
+				data.addRows([
+				  ['Ventas', {{$ventaDelMes[0]->total}}, {{$ventaDelMes[1]->total}}] // Example of specifying actual and formatted values.
+				]);				
+			
 
 		  var options = {
 			title: 'Mayo de 2016: $5.000.245',
@@ -56,47 +68,65 @@
 </head>
 
 <a  href="{{app()->make('urls')->getUrlEstadisticas()}}" class="btn btn-primary btn-block"><h4><b>ESTADISTICAS</b></h4></a>
-<div class="container">
+<h4><form action="{{app()->make('urls')->getUrlFiltrarEstadisticas()}}" method="POST" class="form-horizontal"   enctype="multipart/form-data">
+		{{ csrf_field() }}
+
+		<div class="form-group">
 
 	<div class="row">
 
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<label class="control-label" >Vendedor</label>
-			<select name="idMarca" >
-				<option value = 1 >Juan Laura</option>
-				<option value = 2 >Jose Castelli</option>
+			<select name="vendedor" >
+				<option value = ''>Todos</option>
+				@foreach($vendedores as $vendedor)   
+					<option value = {{$vendedor->id}}> {{$vendedor->nombre}}</option>
+				@endforeach
 			</select>
 		</div>
 	
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<label class="control-label" >Mes</label>
-			<select  name="cantidad" >
-				<option value = 1 >Enero</option>
-				<option value = 2 >Febrero</option>
-				<option value = 3 >Marzo</option>
-				<option value = 4 >Abril</option>
-				<option value = 5 >Mayo</option>
-				<option value = 6 >Junio</option>
-				<option value = 7 >Julio</option>
-				<option value = 8 >Agosto</option>
-				<option value = 9 >Septiembre</option>
+			<select  name="mes" >
+				<option value = '' >Todos</option>
+				<option value = 01 >Enero</option>
+				<option value = 02 >Febrero</option>
+				<option value = 03 >Marzo</option>
+				<option value = 04 >Abril</option>
+				<option value = 05 >Mayo</option>
+				<option value = 06 >Junio</option>
+				<option value = 07 >Julio</option>
+				<option value = 08 >Agosto</option>
+				<option value = 09 >Septiembre</option>
 				<option value = 10 >Octubre</option>
 				<option value = 11 >Noviembre</option>
 				<option value = 12 >Diciembre</option>
 			</select>
 		</div>
 			
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<label class="control-label" >Año</label>
-			<select name="cantidad" >
-				<option value = 2015 >2015</option>
-				<option value = 2016 >2016</option>
+			<select name="anio" >
+
+			<option value = ''>Todos</option>
+			@foreach($anios as $anio)   
+				<option value = {{$anio->anio}}> {{$anio->anio}}</option>
+			@endforeach
+			
 			</select>
+
+			
 		</div>
 	
-	
-	</div>
 
+		<div class="col-md-3">	
+			<button type="submit" class="btn btn-primary">Buscar</button>
+			
+		</div>
+
+	</div>	
+		
+</form></h4>
 
 	<table class="columns">
       <tr>
@@ -162,8 +192,5 @@
 
 	</div>
 
-
-
-</div>
 
 @endsection

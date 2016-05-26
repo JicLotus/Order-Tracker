@@ -32,7 +32,8 @@ return [
 	'ESTADISTICAS_VISITADOS_FUERA_RUTA' => 'fuera_ruta',
 	'ESTADISTICAS_VENDIDO_FUERA_RUTA' => 'vendido_fuera_ruta',
 	'ESTADISTICAS_VENDIDO_CLIENTES_DIA' => 'vendido_clientes',
-	
+	'ESTADISTICAS_DIA' => 'dia',
+		
     'TABLA_CLIENTES' => 'clientes',
     'TABLA_CLIENTES_ID' => 'id',
     'TABLA_CLIENTES_NOMBRE' => 'nombre',
