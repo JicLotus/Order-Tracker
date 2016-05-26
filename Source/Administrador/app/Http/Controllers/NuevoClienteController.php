@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use File;
-
+use Validator;
 use Mail;
 
 
@@ -28,12 +28,18 @@ class NuevoClienteController extends Controller
     
        public function guardar(Request $request)
     {
+		$validator = Validator::make($request->all(), [
+             
+			'nombre' => 'required',
+			'email' => 'required|email|unique:clientes,email',
+			'direccion' => 'required',
+			'telefono_movil' => 'required'
+		
+        ]);
 
-		$this->validate($request, [
-        'email' => 'required|email|unique:clientes,email',
-        'nombre' => 'required',
-        'direccion' => 'required'
-		]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 			
 		#guardo el cliente
 		$id = DB::table('clientes')->insertGetId(array('nombre' => ($request->nombre),'email' => ($request->email),'direccion' => ($request->direccion),

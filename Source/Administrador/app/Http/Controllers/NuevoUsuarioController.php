@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use File;
 
+use Validator;
 	 
 
 
@@ -29,13 +30,22 @@ class NuevoUsuarioController extends Controller
         public function guardar(Request $request)
     {
 
-		$this->validate($request, [
-        'email' => 'required',
-        'nombre' => 'required',
-        'password' => 'required',
-        'privilegio' => 'required',
-        'telefono' => 'required'
-		]);
+		$validator = Validator::make($request->all(), [
+             
+			'nombre' => 'required',
+			'email' => 'required|email|unique:clientes,email',
+			'password' => 'required',
+			'privilegio' => 'required',
+			'telefono' => 'required'
+		
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+
+
 
 		#guardo el usuario
 		$id = DB::table('usuarios')->insertGetId(array('nombre' => ($request->nombre),'email' => ($request->email),'password' => ($request->password),
