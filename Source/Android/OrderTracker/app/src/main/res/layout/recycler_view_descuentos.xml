@@ -42,6 +42,17 @@ android:outlineProvider="bounds"
             android:textSize="16sp"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valido desde el 12/4/2016 hasta el 15/8/2016"
+            android:textColor="@color/negro"
+            android:id="@+id/validez_descuento"
+            android:layout_below="@id/descripcion_descuento"
+            android:layout_toRightOf="@id/icono_descuento"
+            android:textSize="14sp"
+            />
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

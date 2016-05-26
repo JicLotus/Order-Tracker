@@ -43,6 +43,7 @@ public class DescuentosAdapter extends RecyclerView.Adapter<DescuentosAdapter.De
         DescuentosItem datoActual = datos.get(position);
         holder.posicion = position;
         holder.descripcion.setText(datoActual.descripcion);
+        holder.validez.setText(datoActual.validez);
     }
 
     @Override
@@ -52,11 +53,13 @@ public class DescuentosAdapter extends RecyclerView.Adapter<DescuentosAdapter.De
 
     public class DescuentosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView descripcion;
+        TextView validez;
         int posicion;
 
         public DescuentosViewHolder(View view) {
             super(view);
             descripcion = (TextView) itemView.findViewById(R.id.descripcion_descuento);
+            validez = (TextView) itemView.findViewById(R.id.validez_descuento);
         }
 
         @Override

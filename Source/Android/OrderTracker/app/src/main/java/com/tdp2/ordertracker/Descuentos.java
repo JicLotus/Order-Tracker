@@ -84,10 +84,10 @@ public class Descuentos extends AppCompatActivity {
                 double porcentaje = 100 * Double.parseDouble(descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_PORCENTAJE));
                 String marca = descuentos.getJSONObject(i).getString(APIConstantes.PRODUCTO_MARCA);
                 String categoria = descuentos.getJSONObject(i).getString(APIConstantes.PRODUCTO_CATEGORIA);
-                items.add(new DescuentosItem(cantidad, porcentaje, marca, categoria));
+                String fecha_in = descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_FECHA_INICIO);
+                String fecha_fin = descuentos.getJSONObject(i).getString(APIConstantes.DESCUENTOS_FECHA_FIN);
+                items.add(new DescuentosItem(cantidad, porcentaje, marca, categoria, fecha_in, fecha_fin));
             }
-
-
         }
         catch(Exception e)
         {
