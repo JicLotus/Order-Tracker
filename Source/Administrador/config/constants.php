@@ -48,7 +48,8 @@ return [
     'TABLA_USUARIOS_EMAIL' => 'email',
     'TABLA_USUARIOS_PASSWORD' => 'password',
     'TABLA_USUARIOS_PRIVILEGIO' => 'privilegio',
-    
+    'TABLA_USUARIOS_TELEFONO' => 'telefono',
+        
     'TABLA_AGENDAS' => 'agendas',
     'TABLA_AGENDAS_ID' => 'id',
     'TABLA_AGENDAS_FECHA' => 'fecha',

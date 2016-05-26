@@ -19,7 +19,7 @@ class ClientesController extends Controller
      */
     public function index(Request $request){
 
-		  $clientes = DB::table('clientes')->get();
+		  $clientes = DB::select("select * from clientes order by nombre ");
 		  $clienteAnterior = "";
  		  $razonAnterior = "";
  		  $direccionAnterior = "";                     

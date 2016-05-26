@@ -33,6 +33,7 @@ Route::get('editarcliente/{id}', "EditarClienteController@index");
 Route::post('editarcliente/guardarcliente', "GuardarClienteController@index");
 
 Route::get('usuarios', "UsuariosController@index");
+Route::post('usuariosFiltro', "UsuariosController@filtro");
 Route::get('agregarusuario', "NuevoUsuarioController@index");
 Route::post('guardarusuario', "NuevoUsuarioController@guardar");
 Route::get('editarusuario/{id}', "EditarUsuarioController@index");

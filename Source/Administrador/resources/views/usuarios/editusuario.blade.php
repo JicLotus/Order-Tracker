@@ -44,7 +44,7 @@
     <div class="form-group">
 		<label class="control-label col-sm-2" for="telefono">Teléfono</label>
           <div class="col-sm-8">
-			<input type="Text" name="telefono" value=""> <br>
+			<input type="Text" name="telefono" value="{{$usuario->telefono}}"> <br>
 		  </div>
     </div>
 

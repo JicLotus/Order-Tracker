@@ -43,8 +43,8 @@
 
 					
 					<div class="row">	
-						<a href="{{app()->make('urls')->getUrlAgregarCliente()}}" class="col-sm-2 col-sm-offset-1 btn btn-primary">Agregar Nuevo Cliente</a> 	
-						<button type="submit" class="col-sm-1 col-sm-offset-7 btn btn-primary">Buscar</button>
+						<a href="{{app()->make('urls')->getUrlAgregarCliente()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nuevo Cliente</a> 	
+						<button type="submit" class="col-sm-1 col-sm-offset-5 btn btn-primary">Buscar</button>
            						
 						
 					</div>

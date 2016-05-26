@@ -33,12 +33,13 @@ class NuevoUsuarioController extends Controller
         'email' => 'required',
         'nombre' => 'required',
         'password' => 'required',
-        'privilegio' => 'required'
+        'privilegio' => 'required',
+        'telefono' => 'required'
 		]);
 
 		#guardo el usuario
 		$id = DB::table('usuarios')->insertGetId(array('nombre' => ($request->nombre),'email' => ($request->email),'password' => ($request->password),
-							'privilegio' => ($request->privilegio), 'created_at' => (date('Y-m-d H:i:s'))));
+							'privilegio' => ($request->privilegio),'telefono' => ($request->telefono) ,'created_at' => (date('Y-m-d H:i:s'))));
 
 	
 		$url = app()->make('urls')->getUrlUsuarios();

@@ -11,13 +11,15 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {	
+	Schema::dropifexists('usuarios');
         Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->integer('privilegio');
+            $table->string('telefono');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -136,6 +136,9 @@ class Urls {
   public function getUrlUsuarios($inputData = []) {
     return url("usuarios" . $this->appendQuery($inputData));
   }
+  function getUrlFiltroUsuarios($inputData = []) {
+    return url("usuariosFiltro" . $this->appendQuery($inputData));
+  }
   
   public function getUrlAgregarUsuario($inputData = []) {
     return url("agregarusuario" . $this->appendQuery($inputData));
