@@ -15,8 +15,8 @@
 	$cliente  = $result->id_cliente;
 	
 	$dt = new DateTime();
-	$fecha = $dt->format('Y-m-d');
-	$fecha.= " 00:00:00";
+	$fecha = $dt->format('Y-m-d H:i:s');
+//	$fecha.= " 00:00:00";
 	
 	$sql0 = "Insert into compras (id_cliente, id_usuario, fecha) values ($cliente, $vendedor, '$fecha');";
 	$rs = mysql_query($sql0,$con);

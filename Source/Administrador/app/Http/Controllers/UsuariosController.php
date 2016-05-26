@@ -17,19 +17,27 @@ class UsuariosController extends Controller
      *
      * @return Response
      */
-    public function index()
-    {
-    	/*
-DB::table('productos')->insert(
-    ['nombre' => 'El producto2', 'codigo' => 'asd']
-);*/
-
-#    	  $productos = DB::table('productos')->get();
-
-		  $usuarios = DB::table('usuarios')->get();
+    public function index(){
+		
+		$usuarios = DB::table('usuarios')->get();
                         
         return view('usuarios.usuarios', ['title' => 'Home',
-                                'page' => 'home','usuarios' => $usuarios]
+                                'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => "", 'emailAnterior' => "", 'accion' => 0]
+        );
+        
+        
+    }
+    
+     public function filtro(Request $request){
+		
+		$vendedorAnterior = $request->nombre;
+		//$emailAnterior = $request->mail;
+		$vendedor = strtoupper($vendedorAnterior);		
+		 
+		$usuarios =  DB::select("select * from usuarios where UPPER(nombre) like '%$vendedor%'");
+                        
+        return view('usuarios.usuarios', ['title' => 'Home',
+                                'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => $vendedorAnterior, 'emailAnterior' => "" ,'accion' => 0]
         );
         
         

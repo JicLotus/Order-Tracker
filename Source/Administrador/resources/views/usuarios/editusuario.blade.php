@@ -1,20 +1,31 @@
 @extends("layouts.base") 
 
 @section("content")
-
+<a  href="{{app()->make('urls')->getUrlUsuarios()}}" class="btn btn-primary btn-block"><h4><b>VENDEDORES</b></h4></a>
 <div class="container">
 <div class="row row-head">
   <div class="col-md-12">
-    <h2><strong>Editar Cliente</strong></h2>
+    <h2><strong>Editar Vendedor</strong></h2>
   </div>
 </div>
 
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+	@endif
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-5 col-sm-offset-1">
+     
     
  
 <form action="guardarusuario" method="POST" class="form-horizontal" enctype="multipart/form-data">
 	{{ csrf_field() }}
+	<input type="hidden" name="privilegio"  value="{{$usuario->privilegio}}">
 	<input type="hidden" name="idUsuario" value="{{$usuario->id}}">
 	
 	<div class="form-group">
@@ -35,27 +46,29 @@
 		<label class="control-label col-sm-2" for="email">Email</label>
           <div class="col-sm-8">
 			<input type="Text" name="email" value="{{$usuario->email}}" ><br>
+			
+			
+		  </div>
+    </div>
+    
+    <div class="form-group">
+		<label class="control-label col-sm-2" for="telefono">Teléfono</label>
+          <div class="col-sm-8">
+			<input type="Text" name="telefono" value="{{$usuario->telefono}}"> <br>
 		  </div>
     </div>
 
-    
-     <div class="form-group">
-		<label class="control-label col-sm-2" for="privilegio">Privilegio</label>
-          <div class="col-sm-8">
-			<input type="Text" name="privilegio"  value="{{$usuario->privilegio}}"><br>
-		  </div>
-    </div>	
-    
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-8">
-                <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
 
-                <button type="submit" class="col-sm-offset-5 btn btn-default">Publicar
-                </button>
+    <div class="form-group">
+				<div class="col-sm-8">
+					
+	  				<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+					<button type="submit" class="col-sm-offset-4 btn btn-primary">Publicar</button>
 
-            </div>
-        </div> 		
-			
+
+
+				</div>
+			</div> 		
 	
 </form>
                               

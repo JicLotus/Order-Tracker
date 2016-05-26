@@ -62,6 +62,14 @@ class Urls {
     return url("guardarproducto/". $id . $this->appendQuery($inputData));
   }
 
+  public function getUrlEliminarProducto($id,$inputData = []) {
+    return url("eliminarproducto/". $id . $this->appendQuery($inputData));
+  }
+  
+  public function getUrlBuscarProducto($inputData = []) {
+    return url("buscarproducto". $this->appendQuery($inputData));
+  }
+
   /**
    * @param array $inputData
    *
@@ -69,6 +77,10 @@ class Urls {
    */
   public function getUrlClientes($inputData = []) {
     return url("clientes" . $this->appendQuery($inputData));
+  }
+  
+ function getUrlFiltroClientes($inputData = []) {
+    return url("clientesFiltro" . $this->appendQuery($inputData));
   }
   
   public function getUrlAgregarCliente($inputData = []) {
@@ -132,6 +144,9 @@ class Urls {
   public function getUrlUsuarios($inputData = []) {
     return url("usuarios" . $this->appendQuery($inputData));
   }
+  function getUrlFiltroUsuarios($inputData = []) {
+    return url("usuariosFiltro" . $this->appendQuery($inputData));
+  }
   
   public function getUrlAgregarUsuario($inputData = []) {
     return url("agregarusuario" . $this->appendQuery($inputData));
@@ -148,6 +163,10 @@ class Urls {
     return url("descuentos" . $this->appendQuery($inputData));
   }
 
+  public function getUrlEstadisticas($inputData = []) {
+    return url("estadisticas" . $this->appendQuery($inputData));
+  }
+
 	function getUrlNuevoDescuento($inputData = []) {
     return url("agregarnuevodescuento" . $this->appendQuery($inputData));
   }
@@ -159,6 +178,12 @@ class Urls {
   function getUrlBorrarDescuentosVencidos($inputData = []) {
     return url("borrarDescuentosVencidos" . $this->appendQuery($inputData));
   }
+  
+  
+  public function getUrlEliminarDescuento($id,$inputData = []) {
+    return url("eliminardescuento/". $id . $this->appendQuery($inputData));
+  }
+  
   
   
 }

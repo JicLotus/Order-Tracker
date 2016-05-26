@@ -9,9 +9,29 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
+	  
+	  	  
+$.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '<Ant',
+ nextText: 'Sig>',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ 
+$.datepicker.setDefaults($.datepicker.regional['es']);
   $(function() {
     $("#datepicker").datepicker({ 
-		minDate: -20,
 		maxDate: "+1M +10D",
 		dateFormat: "dd-mm-yy",
 		altFormat: "ddmmyy",
@@ -97,10 +117,10 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" href="#{{$bulto->id_compra}}"> 
 					<b>Pedido: {{$bulto->id_compra}}  ,  {{$bulto->nombre}}   ,  {{$bulto->razon_social}}   ,  {{$bulto->fecha}}
-					  ,  {{$bulto->nombre}}</b> </a>
+					  ,  {{$bulto->nombreVendedor}}</b> </a>
 				</h4>
 			</div>
-		<div id="{{$bulto->id_compra}}" class="panel-collapse collapse">
+		<div id="{{$bulto->id_compra}}" <?php If ($compraeditada == $bulto->id_compra){?> class="panel-collapse collapse in" <?php }else  ?> class="panel-collapse collapse" >
 			<ul class="list-group">
 				<li class="list-group-item"> 
 					
@@ -124,6 +144,8 @@
 									</div>	
 									<input type="hidden" name="idCliente" value={{$bulto->id_cliente}}>
 									<input type="hidden" name="idVendedor" value={{$bulto->id_usuario}}>
+									<input type="hidden" name="filtroCliente" value={{$idCliente}}>
+									<input type="hidden" name="filtroVendedor" value={{$idVendedor}}>
 									<input type="hidden" name="datepicker" value={{$fecha2}}>
 									
 					</form>

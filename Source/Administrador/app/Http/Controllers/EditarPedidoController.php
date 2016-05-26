@@ -31,10 +31,12 @@ class EditarPedidoController extends Controller
 			$fecha = $request->datepicker;
 			$idCliente = $request->idCliente ;
 			$idVendedor =$request->idVendedor ;
-			$sql = "select * from productos, pedidos, compras, clientes
+			$sql = "select *, productos.nombre as nombreProducto, usuarios.nombre as nombreVendedor, date_format(compras.fecha, '%Y-%m-%d') as fechaCompra from productos, usuarios, pedidos, compras, clientes
 					where pedidos.id_producto = productos.id
-					and compras.id_cliente = clientes.id
-					and pedidos.id_compra = compras.id_compra";
+							and pedidos.id_compra = compras.id_compra
+							and usuarios.id = compras.id_usuario
+							and clientes.id = compras.id_cliente
+							";
 											
 			if( (strcmp($request->idCliente, 'Todos')) || (strcmp($request->idVendedor ,'Todos')) || (strcmp($request->datepicker , 'Todas'))){
 				if(strcmp($request->idCliente, 'Todos')){
@@ -45,20 +47,21 @@ class EditarPedidoController extends Controller
 				}
 				if(strcmp($request->datepicker , 'Todas')){
 					$dt = new DateTime($fecha);
-					$fecha = $dt->format('Y-m-d');
-					$sql .= " and compras.fecha = '" . $fecha ." 00:00:00'";
+					$fecha2 = $dt->format('Y-m-d');
+					$sql .= " and date_format(compras.fecha, '%Y-%m-%d') = '".$fecha2."'" ;
 				}
 			}
 			$pedidos = DB::select($sql);
 			
-			$bultos = DB::select("$sql group by compras.id_compra order by compras.fecha desc");
+			
+			$bultos = DB::select("$sql group by compras.id_compra order by fechaCompra desc, compras.id_compra desc");
 
 
 			
                         
         return view('pedidos.pedidovendedor', ['title' => 'Home',
-                                'page' => 'home','pedidos' => $pedidos, 'clientes' => $clientes, 'bultos' => $bultos, 'vendedores' => $vendedores,
-                                 'idVendedor' => $idVendedor, 'idCliente' => $idCliente, 'fecha2' => $fecha]
+                               'page' => 'home','pedidos' => $pedidos, 'clientes' => $clientes, 'bultos' => $bultos, 'vendedores' => $vendedores,
+                                 'idVendedor' => $request->filtroVendedor, 'idCliente' => $request->filtroCliente, 'fecha2' => $fecha, 'compraeditada' => $id]
         );
         
 	}
