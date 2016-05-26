@@ -62,6 +62,14 @@ class Urls {
     return url("guardarproducto/". $id . $this->appendQuery($inputData));
   }
 
+  public function getUrlEliminarProducto($id,$inputData = []) {
+    return url("eliminarproducto/". $id . $this->appendQuery($inputData));
+  }
+  
+  public function getUrlBuscarProducto($inputData = []) {
+    return url("buscarproducto". $this->appendQuery($inputData));
+  }
+
   /**
    * @param array $inputData
    *

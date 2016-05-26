@@ -30,9 +30,10 @@ class GuardarProductoController extends Controller
 					->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $request->idProducto)->first();
 		$marcas = DB::select("select nombre,id from marcas order by nombre");
 		$categorias = DB::select("select nombre,id from categorias order by nombre");
+		$imagenes = DB::select("Select id_producto,imagen_base64 from imagenes where id_producto=".$request->idProducto);
 
 		return view('productos.edit', ['title' => 'Home',
-						'page' => 'home','producto'=>$producto,'marcas' => $marcas, 'categorias' => $categorias]
+						'page' => 'home','producto'=>$producto,'marcas' => $marcas, 'categorias' => $categorias, 'imagenes'=>$imagenes]
 		);
 
 	

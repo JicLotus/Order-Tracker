@@ -20,10 +20,13 @@ Route::get('/', "HomeController@index");
 Route::get('help', "HelpController@index");
 
 Route::get('productos', "ProductosController@index");
+Route::get('eliminarproducto/{id}', "ProductosController@eliminar");
+Route::post('buscarproducto', "ProductosController@filtro");
 Route::get('agregarproducto', "NuevoProductoController@index");
 Route::post('guardarnuevoproducto', "NuevoProductoController@guardar");
 Route::get('editarproducto/{id}', "EditarProductoController@index");
 Route::post('editarproducto/guardarproducto', "GuardarProductoController@index");
+
 
 Route::get('clientes', "ClientesController@index");
 Route::post('clientesFiltro', "ClientesController@filtro");

@@ -84,9 +84,7 @@ class NuevoProductoController extends Controller
 			DB::table('imagenes')->insert(array('id_producto' => $id, 'imagen_base64' => $codificacion));					
 		}
 		
-		$url = app()->make('urls')->getUrlProductos();
-		return redirect($url);
-        
+        return redirect('/productos');
     }
 
 
