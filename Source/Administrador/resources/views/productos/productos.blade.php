@@ -9,6 +9,11 @@
       min-height:190px;
       width:50%;
     }
+    
+    .centerside  {
+      margin-left: 28%;
+      margin-top:2%;
+    }
   </style>
 
   <script type="text/javascript">
@@ -36,24 +41,28 @@
 		
 		<form action="{{app()->make('urls')->getUrlBuscarProducto()}}" method="POST" class="form-horizontal"   enctype="multipart/form-data">
 			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<label class="col-sm-offset-1 control-label col-sm-1" >Nombre</label>
-			<input  class="col-sm-2" type="text" name="nombre" value= "{{$nombre}}">
+			 
+			 <div class="centerside">
+			<label >Nombre</label>
+			<input  type="text" name="nombre" value= "{{$nombre}}">
 			
-			<label class="col-sm-offset-1 control-label col-sm-1" >Codigo</label>
-			<input  class="col-sm-2" type="text" name="codigo" value= "{{$codigo}}">
+			<label >Codigo</label>
+			<input   type="text" name="codigo" value= "{{$codigo}}">
 			
-			<select class="col-sm-2" name="idMarca" >
+			<select name="idMarca" >
 				<option value = 0>Todas</option>
 				@foreach($marcas as $marca)   
 					<option value = {{$marca->id}} <?php If ($marca->id == $idMarca){?> selected = 'selected'<?php } ?>>{{$marca->nombre}}</option>
 				@endforeach
 			</select> 
 			
-			<button type="submit" class="col-sm-offset-4 btn btn-primary">Buscar</button>
-				
+			<button type="submit" class="btn btn-primary">Buscar</button>
+			<a href="{{app()->make('urls')->getUrlAgregarProducto()}}" class="btn btn-primary">Agregar</a>
+			
+			</div>
 		</form>       
 		           
-		<a href="{{app()->make('urls')->getUrlAgregarProducto()}}" class="btn btn-primary">Agregar</a>
+		
 		
 		@foreach($productos as $producto)
 			<p>

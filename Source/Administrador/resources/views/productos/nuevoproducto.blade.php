@@ -111,7 +111,7 @@
     	
         <div class="form-group">
             <div class="col-sm-offset-1">
-                <a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+                <a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-default">Cancelar</a>
 
                 <button type="submit" class= " col-sm-offset-2 btn btn-primary">Publicar
                 </button>
