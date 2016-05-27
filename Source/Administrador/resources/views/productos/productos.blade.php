@@ -38,32 +38,38 @@
 		
 		<a  href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-primary btn-block"><h4><b>PRODUCTOS</b></h4></a>
 		
-		
 		<form action="{{app()->make('urls')->getUrlBuscarProducto()}}" method="POST" class="form-horizontal"   enctype="multipart/form-data">
 			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 			 
-			 <div class="centerside">
-			<label >Nombre</label>
-			<input  type="text" name="nombre" value= "{{$nombre}}">
+			<h4><div class="form-group">
+					<div class="row">	
+
+						<label class="col-sm-offset-1 control-label col-sm-1" >Nombre</label>
+							<input  class="col-sm-2" type="text" name="nombre" value= "{{$nombre}}">
+								
+
+						<label class="control-label col-sm-1" >Código</label>
+							<input  class="col-sm-2"type="text" name="codigo" value= "{{$codigo}}">
+
+						<label class="control-label col-sm-1" >Marca</label>
+							<select name="idMarca" >
+								<option value = 0>Todas</option>
+								@foreach($marcas as $marca)   
+								<option value = {{$marca->id}} <?php If ($marca->id == $idMarca){?> selected = 'selected'<?php } ?>>{{$marca->nombre}}</option>
+								@endforeach
+							</select> 
+					</div>
+				
 			
-			<label >Codigo</label>
-			<input   type="text" name="codigo" value= "{{$codigo}}">
-			
-			<select name="idMarca" >
-				<option value = 0>Todas</option>
-				@foreach($marcas as $marca)   
-					<option value = {{$marca->id}} <?php If ($marca->id == $idMarca){?> selected = 'selected'<?php } ?>>{{$marca->nombre}}</option>
-				@endforeach
-			</select> 
-			
-			<button type="submit" class="btn btn-primary">Buscar</button>
-			<a href="{{app()->make('urls')->getUrlAgregarProducto()}}" class="btn btn-primary">Agregar</a>
-			
-			</div>
-		</form>       
-		           
-		
-		
+					<div class="row">	
+						
+						<a href="{{app()->make('urls')->getUrlAgregarProducto()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nuevo Producto</a> 	
+						<button type="submit" class="col-sm-1 col-sm-offset-4 btn btn-primary">Buscar</button>
+           						
+						
+					</div>
+			</div>	</h4> 
+			 
 		@foreach($productos as $producto)
 			<p>
 				<div class="well center box-centerside">
@@ -90,7 +96,7 @@
 						<span class="control-label dimgray">Codigo: {{$producto->codigo}}</span>
 					</div>
 				
-					<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="btn btn-primary">Ver mas</a>                                
+					<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="btn btn-primary">Ver más</a>                                
 					<a href="{{app()->make('urls')->getUrlEliminarProducto($producto->id)}}" class="btn btn-primary">Eliminar</a>
 					
 				</div>
