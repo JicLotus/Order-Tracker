@@ -74,7 +74,7 @@
     
   </div>				
 </div>	
-</form>
+
                            
 
   <div class="form-group">
@@ -88,7 +88,7 @@
 
 				</div>
 			</div> 		
-
+</form>
 </div> 
 
 @endsection

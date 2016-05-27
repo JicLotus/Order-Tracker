@@ -64,7 +64,7 @@
 		  </div>
     </div>  
     <div class="form-group">
-		<label class="control-label col-sm-5" for="password2">Repita Contraseña</label>
+		<label class="control-label col-sm-5" for="password3">Repita Contraseña</label>
           <div class="col-sm-7">
 			<input type="Text" name="password" value=""> <br>
 		  </div>
@@ -73,7 +73,7 @@
 	
   </div>
 </div>
-</form>
+
                               
               
 
@@ -88,7 +88,7 @@
 
 				</div>
 			</div> 		
-
+</form>
 </div> 
 
 @endsection
