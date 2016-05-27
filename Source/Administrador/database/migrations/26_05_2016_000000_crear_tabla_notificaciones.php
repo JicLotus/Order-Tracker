@@ -19,6 +19,8 @@ class CrearTablaNotificaciones extends Migration
 			$table->string('tipo_notificacion');
 			$table->double('porcentaje');
 			$table->string('valor');
+			$table->dateTime('desde');
+			$table->dateTime('hasta');
 		});
     }
 

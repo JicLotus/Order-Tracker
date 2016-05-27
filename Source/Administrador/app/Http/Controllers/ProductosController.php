@@ -55,10 +55,10 @@ class ProductosController extends Controller
 					$sql .= " and u.marca=$idMarca";
 					
 				if ($nombre != "")
-				    $sql.= " and u.nombre='$nombre'";
+				    $sql.= " and u.nombre like '%$nombre%'";
 					
 				if ($codigo != "")
-					$sql.= " and u.codigo='$codigo'";
+					$sql.= " and u.codigo like '%$codigo%'";
 			}
 			
 			$sql .= " GROUP BY u.id;";
