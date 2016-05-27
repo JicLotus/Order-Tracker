@@ -16,16 +16,24 @@ class GuardarUsuarioController extends Controller
     
     public function index(Request $request)
     {
+		$id = $request->idUsuario;
+		$vendedor = DB::select("select * from clientes where id=$id");
+		
 		$this->validate($request, [
         'email' => 'required|email|unique:clientes,email',
         'nombre' => 'required',
-        'telefono' => 'required'
+        'telefono' => 'required',
+        'password' => 'required',
 		]);
-		if($request->password == ""){
+		
+		
+		
+		if(($request->password == $vendedor->password) and ($request->password2 == "")){
+			
 			DB::table(Config::get('constants.TABLA_USUARIOS'))->where(Config::get('constants.TABLA_USUARIOS_ID'), $request->idUsuario)
 					->update(array(Config::get('constants.TABLA_USUARIOS_NOMBRE') => ($request->nombre),
 					Config::get('constants.TABLA_USUARIOS_EMAIL') => ($request->email),
-					//Config::get('constants.TABLA_USUARIOS_PASSWORD') => ($request->password),
+					Config::get('constants.TABLA_USUARIOS_PASSWORD') => ($request->password),
 					Config::get('constants.TABLA_USUARIOS_PRIVILEGIO') => ($request->privilegio),
 					Config::get('constants.TABLA_USUARIOS_TELEFONO') => ($request->telefono)));				
 		}else{
