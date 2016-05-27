@@ -29,13 +29,15 @@
 
 		<div class="form-group">
 					<div class="row">	
+						
+						
+						<label class="control-label col-sm-2" >Razón Social</label>
+							<input  class="col-sm-2" type="text" name="razonsocial" value= "{{$razonAnterior}}">
 
-						<label class="col-sm-offset-1 control-label col-sm-1" >Cliente</label>
+						<label class="control-label col-sm-1" >Cliente</label>
 							<input  class="col-sm-2" type="text" name="nombre" value= "{{$clienteAnterior}}">
 								
 
-						<label class="control-label col-sm-1" >Razón Social</label>
-							<input  class="col-sm-2" type="text" name="razonsocial" value= "{{$razonAnterior}}">
 
 						<label class="control-label col-sm-1" >Dirección</label>
 							<input  class="col-sm-3" type="text" name="direccion"value= "{{$direccionAnterior}}">
@@ -44,7 +46,7 @@
 					
 					<div class="row">	
 						<a href="{{app()->make('urls')->getUrlAgregarCliente()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nuevo Cliente</a> 	
-						<button type="submit" class="col-sm-1 col-sm-offset-5 btn btn-primary">Buscar</button>
+						<button type="submit" class="col-sm-1 col-sm-offset-4 btn btn-primary">Buscar</button>
            						
 						
 					</div>
@@ -97,7 +99,8 @@
 		{{$cliente->direccion}}
 	</td>
 	<td> 
-		<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn-xs btn-primary">Editar</a>                                
+		<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn-xs btn-primary">Ver más</a>
+		<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn-xs btn-default">Editar</a>                                    
 	</td>
 	
 	</tr>

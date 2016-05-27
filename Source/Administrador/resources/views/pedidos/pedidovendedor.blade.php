@@ -172,7 +172,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 								?>   
 													
 													
-													<td>{{$pedido->nombre}}</td>
+													<td>{{$pedido->nombreProducto}}</td>
 													 <td>{{$pedido->codigo}} </td>
 													 <td>{{$pedido->cantidad}} </td>
 													<td>${{$pedido->precio}} </td>

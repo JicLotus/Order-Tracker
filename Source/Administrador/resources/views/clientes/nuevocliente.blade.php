@@ -19,72 +19,76 @@
   </div>
 </div>
 
-<div class="row">
-
-  <div class="col-md-5 col-sm-offset-1">
-     
  
 <form action="guardarcliente" method="POST" class="form-horizontal" enctype="multipart/form-data">
 	{{ csrf_field() }}
 	<input type="hidden" name="idCliente" value="">
 	
+<div class="row">
+
+  <div class="col-md-4 col-sm-offset-1">
+     
 	<div class="form-group">
-		<label class="control-label col-sm-2" for="nombre">Nombre</label>
+		<label class="control-label col-sm-3" for="nombre">Nombre</label>
           <div class="col-sm-8">
 			<input type="Text" name="nombre" value="{{ old('nombre') }}" ><br>
 		  </div>
     </div>
     
      <div class="form-group">
-		<label class="control-label col-sm-2" for="email">Email</label>
+		<label class="control-label col-sm-3" for="email">Email</label>
           <div class="col-sm-8">
 			<input type="Text" name="email"  value="{{ old('email') }}"><br>
 		  </div>
     </div>	
     
     <div class="form-group">
-		<label class="control-label col-sm-2" for="direccion">Dirección</label>
+		<label class="control-label col-sm-3" for="direccion">Dirección</label>
           <div class="col-sm-8">
 			<input type="Text" name="direccion" value="" ><br>
 		  </div>
     </div>
-    
+ </div>
+  
+ <div class="col-md-5">
     <div class="form-group">
-		<label class="control-label col-sm-2" for="razon_social">Razón Social</label>
+		<label class="control-label col-sm-4" for="razon_social">Razón Social</label>
           <div class="col-sm-8">
 			<input type="Text" name="razon_social" value="{{ old('razon_social') }}"> <br>
 		  </div>
     </div>
     
     <div class="form-group">
-		<label class="control-label col-sm-2" for="telefono_movil">Teléfono Movil</label>
+		<label class="control-label col-sm-4" for="telefono_movil">Teléfono Movil</label>
           <div class="col-sm-8">
 			<input type="Text" name="telefono_movil" value="{{ old('telefono_movil') }}"><br>
 		  </div>
     </div>
     
     <div class="form-group">
-		<label class="control-label col-sm-2" for="marca">Teléfono Laboral</label>
+		<label class="control-label col-sm-4" for="marca">Teléfono Laboral</label>
           <div class="col-sm-8">
 			<input type="Text" name="telefono_laboral" value="{{ old('telefono_laboral') }}"><br>
 		  </div>
     </div>
-    <div class="form-group">
-				<div class="col-sm-8">
+    
+  </div>				
+</div>	
+
+                           
+
+  <div class="form-group">
+				<div class="col-sm-12">
 					
-	  				<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
-					<button type="submit" class="col-sm-offset-4 btn btn-primary">Publicar</button>
+					<button type="submit" class="col-sm-offset-9 btn btn-primary">Publicar</button>
+	  				<a href="{{ URL::previous() }}" class=" btn btn-default">Cancelar</a>
+					
 
 
 
 				</div>
 			</div> 		
-					
-	
 </form>
-                              
-  </div>
-</div>
-</div>
+</div> 
 
 @endsection
