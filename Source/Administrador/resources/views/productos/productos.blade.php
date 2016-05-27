@@ -79,7 +79,8 @@
 							<img src="data:image/png;base64, {{$producto->imagen_base64}}" alt="Pulpit Rock" style="width:150px;height:150px">
 						</div>
 					</div>
-				
+					<br>
+					
 					<div class="control-group">
 						<span class="control-label dimgray">Nombre: {{$producto->nombre}}</span>
 					</div>
@@ -95,10 +96,15 @@
 					<div class="control-group">
 						<span class="control-label dimgray">Codigo: {{$producto->codigo}}</span>
 					</div>
-				
-					<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="btn btn-primary">Ver más</a>                                
-					<a href="{{app()->make('urls')->getUrlEliminarProducto($producto->id)}}" class="btn btn-primary">Eliminar</a>
-					
+					<div class="row">
+						<div class="col-sm-offset-8 col-sm-1 col-md-2 ">
+							<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="btn-xs btn-primary">Ver más</a>                                
+						</div>
+						
+						<div class="col-sm-2">
+							<a href="{{app()->make('urls')->getUrlEliminarProducto($producto->id)}}" class="btn-xs btn-danger">Eliminar</a>
+						</div>
+					</div>
 				</div>
 				
 			</p>

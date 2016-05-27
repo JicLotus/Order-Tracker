@@ -29,13 +29,15 @@
 
 		<div class="form-group">
 					<div class="row">	
+						
+						
+						<label class="control-label col-sm-2" >Razón Social</label>
+							<input  class="col-sm-2" type="text" name="razonsocial" value= "{{$razonAnterior}}">
 
-						<label class="col-sm-offset-1 control-label col-sm-1" >Cliente</label>
+						<label class="control-label col-sm-1" >Cliente</label>
 							<input  class="col-sm-2" type="text" name="nombre" value= "{{$clienteAnterior}}">
 								
 
-						<label class="control-label col-sm-1" >Razón Social</label>
-							<input  class="col-sm-2" type="text" name="razonsocial" value= "{{$razonAnterior}}">
 
 						<label class="control-label col-sm-1" >Dirección</label>
 							<input  class="col-sm-3" type="text" name="direccion"value= "{{$direccionAnterior}}">
@@ -97,7 +99,8 @@
 		{{$cliente->direccion}}
 	</td>
 	<td> 
-		<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn-xs btn-primary">Editar</a>                                
+		<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn-xs btn-primary">Ver más</a>
+		<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="btn-xs btn-default">Editar</a>                                    
 	</td>
 	
 	</tr>
