@@ -80,7 +80,7 @@
   <div class="form-group">
 				<div class="col-sm-12">
 					
-					<button type="submit" class="col-sm-offset-8 btn btn-primary">Publicar</button>
+					<button type="submit" class="col-sm-offset-9 btn btn-primary">Publicar</button>
 	  				<a href="{{ URL::previous() }}" class=" btn btn-default">Cancelar</a>
 					
 
