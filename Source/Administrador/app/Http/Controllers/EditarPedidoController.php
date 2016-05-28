@@ -38,12 +38,12 @@ class EditarPedidoController extends Controller
 							and clientes.id = compras.id_cliente
 							";
 											
-			if( (strcmp($request->idCliente, 'Todos')) || (strcmp($request->idVendedor ,'Todos')) || (strcmp($request->datepicker , 'Todas'))){
-				if(strcmp($request->idCliente, 'Todos')){
-					$sql .= " and compras.id_cliente = " . $request->idCliente ;
+			if( (strcmp($idCliente, 'Todos')) || (strcmp($idVendedor ,'Todos')) || (strcmp($request->datepicker , 'Todas'))){
+				if(strcmp($idCliente, 'Todos')){
+					$sql .= " and compras.id_cliente = " . $idCliente ;
 				}
-				if(strcmp($request->idVendedor ,'Todos')){
-					$sql .= " and compras.id_usuario = " . $request->idVendedor ;
+				if(strcmp($idVendedor,'Todos')){
+					$sql .= " and compras.id_usuario = " . $idVendedor;
 				}
 				if(strcmp($request->datepicker , 'Todas')){
 					$dt = new DateTime($fecha);
