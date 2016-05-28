@@ -29,8 +29,8 @@ class EditarPedidoController extends Controller
 			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2 order by nombre");
 			$clientes = DB::select("select nombre,id from clientes order by nombre");
 			$fecha = $request->datepicker;
-			$idCliente = $request->idCliente ;
-			$idVendedor =$request->idVendedor ;
+			$idCliente = $request->filtroCliente ;
+			$idVendedor =$request->filtroVendedor ;
 			$sql = "select *, productos.nombre as nombreProducto, usuarios.nombre as nombreVendedor, date_format(compras.fecha, '%Y-%m-%d') as fechaCompra from productos, usuarios, pedidos, compras, clientes
 					where pedidos.id_producto = productos.id
 							and pedidos.id_compra = compras.id_compra

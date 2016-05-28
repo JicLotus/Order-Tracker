@@ -64,7 +64,8 @@ class AgendaController extends Controller
 			if(empty($agendas)){
 				
 				$fecha1 = $fecha0;
-				while(empty($agendas)){
+				$contador = 0;
+				while(empty($agendas) && ($contador< 10)){
 					
 					//busco los registros de alguna la semana pasada
 					$dt = new DateTime($fecha1);	
@@ -72,7 +73,7 @@ class AgendaController extends Controller
 					$periods = new DatePeriod($dt, new DateInterval('P1D'), 4);
 					$days = iterator_to_array($periods);
 					$fecha1 = $days[0]->format ('d-m-Y');
-				
+					$contador++;
 					$agendas = agendaFecha($request, $fecha1);
 					
 				}

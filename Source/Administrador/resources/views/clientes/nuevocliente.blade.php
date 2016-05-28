@@ -45,7 +45,7 @@
     <div class="form-group">
 		<label class="control-label col-sm-3" for="direccion">Dirección</label>
           <div class="col-sm-8">
-			<input type="Text" name="direccion" value="" ><br>
+			<input type="Text" name="direccion" value="{{ old('direccion') }}" ><br>
 		  </div>
     </div>
  </div>
