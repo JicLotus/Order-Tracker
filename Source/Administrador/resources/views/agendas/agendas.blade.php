@@ -68,8 +68,10 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		{{ csrf_field() }}
 		<h4>
 			
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
+	 
+	 <div class="row">
+				<div class="col-sm-offset-1 col-md-4">		
+				<label class="control-label col-sm-3" for="ListaVendedores">Vendedor</label>
 				  <div class="col-sm-8">
 					<select id="idVende" name="idVendedor">
 						@foreach($vendedores as $vendedor)
@@ -78,21 +80,23 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 												  
 					</select>
 				  </div>
-			  </div>
-			
-			<div class="form-group">
-			
-				<label class="control-label col-sm-2" for="Día">Fecha:</label>
+				 </div>
+				<div class="centerside col-md-3">
+				<label class="control-label col-sm-3" for="Día">Fecha</label>
 					<div class="col-sm-1">
 						<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}">
 					</div>
-			</div>
+				 </div>
 			
-		<div class="form-group">	
+		</div>
+		<div class="row">	
 			
-			<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
-		</div>	
-	 
+			<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nuevo Cliente</a> 	
+						<button type="submit" class="col-sm-1 col-sm-offset-4 btn btn-primary">Buscar</button>
+        
+									
+		</div>
+
 		<h4>
 </form>
 
@@ -100,7 +104,6 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 
 	
-	<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a>     
        
     </section>
 

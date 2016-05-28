@@ -61,12 +61,17 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		<a  href="{{app()->make('urls')->getUrlPedidos()}}" class="btn btn-primary btn-block"><h4><b>PEDIDOS</b></h4></a>
 
 		
+		
+		
+	
 <h4><form action="{{app()->make('urls')->getUrlPedidoVendedor()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
-		<div class="form-group">
 			
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="Vendedor">Vendedor</label>
+		<div class="row">
+				<div class="centerside col-md-1">
+					 </div>	
+				<div class="centerside col-md-3">		
+				<label  class=" control-label col-sm-4" for="Vendedor">Vendedor</label>
 				  <div class="col-sm-8">
 					<select onclick="reload();" id="idVendedor" name="idVendedor">
 						<option>Todos</option>
@@ -76,10 +81,9 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 						
 					</select>
 				  </div> 
-			</div>	
-			
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="Clientes">Clientes</label>
+				 </div>
+				<div class="centerside col-md-3">
+				<label  class="control-label col-sm-4" for="Clientes">Clientes</label>
 					<div class="col-sm-8">
 					<select id="idClientee" name="idCliente" >
 						<option>Todos</option>
@@ -89,20 +93,23 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 					
 					</select> 
 					</div>
-			</div>	
+				 </div>
 			 
-			 <div class="form-group">
-				<label class="control-label col-sm-2" for="Día">Fecha</label>
-        			 <div class="col-sm-8">
-				<input type="text" id="datepicker" name = "datepicker" value= "{{$fecha2}}">
-			</div>
-		</div>	
-			
-			<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
-		</div>	
+				<div class="centerside col-md-3">
+					<label class="control-label col-sm-3" for="Día">Fecha</label>
+					<div class="col-sm-8">
+						<input type="text" id="datepicker" name = "datepicker" value= "{{$fecha2}}">
+					</div>
+				</div>
+		</div>
+		<div class="row">	
+					
+					<button type="submit" class="col-sm-1 col-sm-offset-8 btn btn-primary">Buscar</button>
+									
+		</div>
 
-</form></h4>
-
+</form></h4>	
+	
 
 <hr width=75%"/>
 
