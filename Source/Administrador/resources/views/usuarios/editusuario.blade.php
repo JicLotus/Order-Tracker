@@ -5,7 +5,7 @@
 <div class="container">
 <div class="row row-head">
   <div class="col-md-12">
-    <h2><strong>Editar Vendedor</strong></h2>
+    <h2><strong><?php if ($editar == true){echo "Editar Vendedor";} else{ echo "Detalle del Vendedor";}?></strong></h2>
   </div>
 </div>
 

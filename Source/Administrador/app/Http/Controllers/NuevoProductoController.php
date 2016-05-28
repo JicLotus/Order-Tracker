@@ -44,8 +44,10 @@ class NuevoProductoController extends Controller
 		$validator = Validator::make($request->all(), [
              
 			'nombre' => 'required',			
-			'codigo' => 'required',
-			'precio' => 'required',
+			'precio' => 'required|numeric|min:0',
+			'marca'  => 'required',
+			'codigo' => 'required|unique:productos,codigo',
+			'stock'  => 'required|integer|min:1',
 			'imagen' => 'required|image'
         ]);
 

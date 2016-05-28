@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,6 +16,28 @@ class GuardarProductoController extends Controller
     
     public function index(Request $request)
     {
+		
+		$collection = array(     
+			'nombre' => 'required',			
+			'precio' => 'required|numeric|min:0',
+			'marca'  => 'required',
+			'stock'  => 'required|integer|min:1',
+        );
+		
+		$codigo = DB::table(Config::get('constants.TABLA_PRODUCTOS'))
+				->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $request->idProducto)
+				->pluck(Config::get('constants.TABLA_PRODUCTOS_CODIGO'));
+
+		if ($codigo!=$request->codigo){
+			$collection = array_add($collection, 'codigo', 'required|unique:productos,codigo');
+		}
+		
+		$validator = Validator::make($request->all(), $collection);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
   
 		DB::table(Config::get('constants.TABLA_PRODUCTOS'))->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $request->idProducto)
 				->update(array(Config::get('constants.TABLA_PRODUCTOS_NOMBRE') => ($request->nombre),

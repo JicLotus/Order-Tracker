@@ -2,10 +2,10 @@
 
 @section("content")
 <a  href="{{app()->make('urls')->getUrlClientes()}}" class="btn btn-primary btn-block"><h4><b>CLIENTES</b></h4></a>
-<div class="container">
+<div class="container">	
 <div class="row row-head">
   <div class="col-md-12">
-    <h2><strong>Editar Cliente</strong></h2>
+    <h2><strong><?php if ($editar == true){echo "Editar Cliente";} else{ echo "Detalle del Cliente";}?></strong></h2>
   </div>
 </div>
 
