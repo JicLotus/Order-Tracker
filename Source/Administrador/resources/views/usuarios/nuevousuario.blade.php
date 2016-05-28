@@ -46,7 +46,7 @@
     <div class="form-group">
 		<label class="control-label col-sm-3" for="password">Contraseña</label>
           <div class="col-sm-8">
-			<input type="Text" name="password" value="{{ old('password') }}""> <br>
+			<input type="password" name="password" value="{{ old('password') }}""> <br>
 			    <input type="hidden" name="privilegio" value="2" >
 		  </div>
     </div>
@@ -64,7 +64,7 @@
 					
 	  				
 					<button type="submit" class="col-sm-offset-9 btn btn-primary">Publicar</button>
-					<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
+					<a href="{{app()->make('urls')->getUrlUsuarios()}}" class="btn btn-default">Cancelar</a>
 
 
 				</div>

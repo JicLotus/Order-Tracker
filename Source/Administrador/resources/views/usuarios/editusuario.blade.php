@@ -54,19 +54,19 @@
    <div class="form-group">
 		<label class="control-label col-sm-5" for="password">Contraseña Antigua</label>
           <div class="col-sm-7">
-			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="password" value=""> <br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="password" name="password" value=""> <br>
 		  </div>
     </div> 
    <div class="form-group">
 		<label class="control-label col-sm-5" for="password2">Contraseña Nueva</label>
           <div class="col-sm-7">
-			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="password2" value=""> <br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="password" name="password2" value=""> <br>
 		  </div>
     </div>  
     <div class="form-group">
 		<label class="control-label col-sm-5" for="password3">Repita Contraseña</label>
           <div class="col-sm-7">
-			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="password3" value=""> <br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="password" name="password3" value=""> <br>
 		  </div>
     </div> 
    

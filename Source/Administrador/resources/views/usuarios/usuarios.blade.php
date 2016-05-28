@@ -70,10 +70,10 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Nombre</th>
-        <th>Mail</th>
-        <th>Teléfono</th>
-        <th>Acción</th>
+        <th class="col-md-4">Nombre</th>
+        <th class="col-md-4">Mail</th>
+        <th class="col-md-2">Teléfono</th>
+        <th class="col-md-2">Acción</th>
       </tr>
     </thead>
     <tbody>
