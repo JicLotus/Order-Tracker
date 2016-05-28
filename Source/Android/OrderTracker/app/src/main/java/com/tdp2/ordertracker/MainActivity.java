@@ -3,6 +3,7 @@ package com.tdp2.ordertracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -37,11 +38,12 @@ public class MainActivity extends AppCompatActivity {
         try {
 
             if (username.getText().toString().matches("") || password.getText().toString().matches("")) {
-                Toast.makeText(this, "Usuario a contraseña invalida", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Usuario o contraseña invalida", Toast.LENGTH_LONG).show();
                 return;
             }
 
             Request request = new Request("GET", "GetUsuarios.php?nombre="+username.getText().toString()+"&pass="+password.getText().toString());
+            Log.i("Request", "GetUsuarios.php?nombre=" + username.getText().toString() + "&pass=" + password.getText().toString());
             Response resp = new RequestHandler().sendRequest(request);
 
             if (resp.getStatus()) {

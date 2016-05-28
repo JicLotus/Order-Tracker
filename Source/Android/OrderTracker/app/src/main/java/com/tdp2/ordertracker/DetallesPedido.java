@@ -174,7 +174,6 @@ public class DetallesPedido extends AppCompatActivity {
 
             String requestString = "SetPedido.php?id_usuario="+vendedor+"&id_cliente="+jsonCliente.getString("id")+"&productos="+pedidos.toString();
 
-
             JSONObject object = new JSONObject();
             object.put("pedidos", pedidos);
             object.put("id_usuario", vendedor);

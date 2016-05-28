@@ -20,6 +20,11 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+
+		var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio",
+								"Julio","Agosto","Septiembre","Octubre","Noviembre",
+								"Diciembre");
+
 		google.charts.load("current", {packages:["corechart", "bar"]});
 
 		if ('{{$vendedorFiltro}}' == ''){
@@ -67,10 +72,10 @@
 				  ['Ventas', {{$ventaDelMes[0]->total}}, {{$ventaDelMes[1]->total}}] // Example of specifying actual and formatted values.
 				]);				
 			
-	
+		  var mes = meses[{{$mesFiltro}}-1];
 					
 		  var options = {
-			title: '{{$mesFiltro}} de {{$anioFiltro}}: ${{$ventaDelMes[0]->total}}',
+			title: mes +' de {{$anioFiltro}}: ${{$ventaDelMes[0]->total}}',
 			chartArea: {width: '60%'},
 			hAxis: {
 			  title: '',
@@ -145,15 +150,16 @@
 
 		
 </form></h4>
-
 	<table class="columns">
       <tr>
+
         <td style="padding:0 0px 0 0px;">
+			<h3 style="padding:30 0px 0 120px; 	"><span style="font-weight: bold; background-color:grey">Ventas del mes en curso {{$anioFiltro-1}}-{{$anioFiltro}}</span></h3> 
 			<div id="barchart_material" style="width: 600px; height: 300px;" >
 			</div>
 		</td>
         
-        <td style="padding:30 0px 0px 0px;"><div id = "tabla" style="width: 500px; height: 300px;"  >
+        <td style="padding:0 0px 0px 0px;"><div id = "tabla" style="width: 500px; height: 300px;"  >
 				<table class="table table-striped">
 			<thead>
 			  <tr>
