@@ -99,7 +99,7 @@
 
 	<div class="row">
 
-		<div class="centerside col-md-3">
+		<div class="col-sm-offset-1 centerside col-md-3">
 			<label class="control-label" >Vendedor</label>
 			<select name="vendedor" >
 				<option value = '' <?php If ($vendedorFiltro == ''){?> selected = 'selected'<?php } ?>}>Todos</option>
@@ -113,18 +113,18 @@
 			<label class="control-label" >Mes</label>
 
 			<select  name="mes" >
-				<option value = 01 <?php If ($mesFiltro == 01){?> selected = 'selected'<?php } ?>}>Enero</option>
-				<option value = 02 <?php If ($mesFiltro == 02){?> selected = 'selected'<?php } ?>}>Febrero</option>
-				<option value = 03 <?php If ($mesFiltro == 03){?> selected = 'selected'<?php } ?>}>Marzo</option>
-				<option value = 04 <?php If ($mesFiltro == 04){?> selected = 'selected'<?php } ?>}>Abril</option>
-				<option value = 05 <?php If ($mesFiltro == 05){?> selected = 'selected'<?php } ?>}>Mayo</option>
-				<option value = 06 <?php If ($mesFiltro == 06){?> selected = 'selected'<?php } ?>}>Junio</option>
-				<option value = 07 <?php If ($mesFiltro == 07){?> selected = 'selected'<?php } ?>}>Julio</option>
-				<option value = 08 <?php If ($mesFiltro == 08){?> selected = 'selected'<?php } ?>}>Agosto</option>
-				<option value = 09 <?php If ($mesFiltro == 09){?> selected = 'selected'<?php } ?>}>Septiembre</option>
-				<option value = 10 <?php If ($mesFiltro == 10){?> selected = 'selected'<?php } ?>}>Octubre</option>
-				<option value = 11 <?php If ($mesFiltro == 11){?> selected = 'selected'<?php } ?>}>Noviembre</option>
-				<option value = 12 <?php If ($mesFiltro == 12){?> selected = 'selected'<?php } ?>}>Diciembre</option>
+				<option value = 01 <?php If ($mesFiltro == "01"){?> selected = 'selected'<?php } ?>}>Enero</option>
+				<option value = 02 <?php If ($mesFiltro == "02"){?> selected = 'selected'<?php } ?>}>Febrero</option>
+				<option value = 03 <?php If ($mesFiltro == "03"){?> selected = 'selected'<?php } ?>}>Marzo</option>
+				<option value = 04 <?php If ($mesFiltro == "04"){?> selected = 'selected'<?php } ?>}>Abril</option>
+				<option value = 05 <?php If ($mesFiltro == "05"){?> selected = 'selected'<?php } ?>}>Mayo</option>
+				<option value = 06 <?php If ($mesFiltro == "06"){?> selected = 'selected'<?php } ?>}>Junio</option>
+				<option value = 07 <?php If ($mesFiltro == "07"){?> selected = 'selected'<?php } ?>}>Julio</option>
+				<option value = 08 <?php If ($mesFiltro == "08"){?> selected = 'selected'<?php } ?>}>Agosto</option>
+				<option value = 09 <?php If ($mesFiltro == "09"){?> selected = 'selected'<?php } ?>}>Septiembre</option>
+				<option value = 10 <?php If ($mesFiltro == "10"){?> selected = 'selected'<?php } ?>}>Octubre</option>
+				<option value = 11 <?php If ($mesFiltro == "11"){?> selected = 'selected'<?php } ?>}>Noviembre</option>
+				<option value = 12 <?php If ($mesFiltro == "12"){?> selected = 'selected'<?php } ?>}>Diciembre</option>
 			</select>
 		</div>
 			
@@ -141,12 +141,14 @@
 			
 		</div>
 
-		<div class="centerside col-md-3">	
-			<button type="submit" class="btn btn-primary">Buscar</button>
-			
-		</div>
 
 	</div>	
+	
+	<div class="row">	
+		<button type="submit" class="col-sm-1 col-sm-offset-8 btn btn-primary">Buscar</button>
+           						
+					
+	</div>
 
 		
 </form></h4>
