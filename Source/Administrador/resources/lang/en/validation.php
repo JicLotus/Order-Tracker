@@ -35,7 +35,7 @@ return [
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
     'email'                => 'El campo :attribute debe contener una dirección de email válida',
-    'exists'               => 'El atributo :attribute ya existe',
+    'exists'               => 'El atributo :attribute es incorrecto',
     'filled'               => 'The :attribute field is required.',
     'image'                => 'El campo :attribute debe ser una imagen',
     'in'                   => 'The selected :attribute is invalid.',
@@ -61,7 +61,7 @@ return [
     'required'             => 'El campo :attribute es obligatorio',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
-    'required_with'        => 'The :attribute field is required when :values is present.',
+    'required_with'        => 'El campo :attribute es requerido cuando el campo :values se encuentra presente',
     'required_with_all'    => 'The :attribute field is required when :values is present.',
     'required_without'     => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
@@ -88,8 +88,16 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'password' => [
+            'required_with' => 'Por favor, ingresar la contraseña',
+            'exists' => 'La contraseña ingresada es incorrecta'
+        ],
+		'password2' => [
+            'required_with' => 'Por favor, ingrese la nueva contraseña',
+        ],
+		'password3' => [
+            'required_with' => 'Por favor, repita la contraseña',
+            'same' => 'La nueva contraseña ingresada no coincide'
         ],
     ],
     
