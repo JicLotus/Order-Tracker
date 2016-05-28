@@ -33,7 +33,7 @@ class GuardarProductoController extends Controller
 		$imagenes = DB::select("Select id_producto,imagen_base64 from imagenes where id_producto=".$request->idProducto);
 
 		return view('productos.edit', ['title' => 'Home',
-						'page' => 'home','producto'=>$producto,'marcas' => $marcas, 'categorias' => $categorias, 'imagenes'=>$imagenes]
+						'page' => 'home','producto'=>$producto,'marcas' => $marcas, 'categorias' => $categorias, 'imagenes'=>$imagenes,'editar'=>false]
 		);
 
 	

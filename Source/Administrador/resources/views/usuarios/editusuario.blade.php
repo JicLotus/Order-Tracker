@@ -31,13 +31,13 @@
 	<div class="form-group">
 		<label class="control-label col-sm-3" for="nombre">Nombre</label>
           <div class="col-sm-8">
-			<input type="Text" name="nombre" value="{{$usuario->nombre}}" ><br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="nombre" value="{{$usuario->nombre}}" ><br>
 		  </div>
     </div>
     <div class="form-group">
 		<label class="control-label col-sm-3" for="email">Email</label>
           <div class="col-sm-8">
-			<input type="Text" name="email" value="{{$usuario->email}}" ><br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="email" value="{{$usuario->email}}" ><br>
 			
 			
 		  </div>
@@ -45,7 +45,7 @@
      <div class="form-group">
 		<label class="control-label col-sm-3" for="telefono">Teléfono</label>
           <div class="col-sm-8">
-			<input type="Text" name="telefono" value="{{$usuario->telefono}}"> <br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="telefono" value="{{$usuario->telefono}}"> <br>
 		  </div>
     </div>
   </div>
@@ -54,19 +54,19 @@
    <div class="form-group">
 		<label class="control-label col-sm-5" for="password">Contraseña Antigua</label>
           <div class="col-sm-7">
-			<input type="Text" name="password" value=""> <br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="password" value=""> <br>
 		  </div>
     </div> 
    <div class="form-group">
 		<label class="control-label col-sm-5" for="password2">Contraseña Nueva</label>
           <div class="col-sm-7">
-			<input type="Text" name="password" value=""> <br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="password2" value=""> <br>
 		  </div>
     </div>  
     <div class="form-group">
 		<label class="control-label col-sm-5" for="password3">Repita Contraseña</label>
           <div class="col-sm-7">
-			<input type="Text" name="password" value=""> <br>
+			<input <?php if ($editar !=true){ ?> disabled <?php }?> type="Text" name="password3" value=""> <br>
 		  </div>
     </div> 
    
@@ -74,17 +74,17 @@
   </div>
 </div>
 
-                              
-              
-
+                    
   <div class="form-group">
 				<div class="col-sm-12">
 					
-					<button type="submit" class="col-sm-offset-9 btn btn-primary">Publicar</button>
-	  				<a href="{{ URL::previous() }}" class=" btn btn-default">Cancelar</a>
-					
+	  				<a href="{{app()->make('urls')->getUrlUsuarios()}}" class=" btn btn-default">Cancelar</a>
 
-
+					<?php if ($editar ==true){ ?>
+						<button type="submit" class="col-sm-offset-9 btn btn-primary">Publicar</button>	
+					<?php }else{?>
+						<a href="{{app()->make('urls')->getUrlEditarUsuario($usuario->id)}}" class="col-sm-offset-9 btn btn-primary">Editar</a>
+					<?php }?>
 
 				</div>
 			</div> 		

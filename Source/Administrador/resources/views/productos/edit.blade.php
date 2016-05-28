@@ -1,6 +1,8 @@
 @extends("layouts.base") 
 
 @section("content")
+
+
 <a  href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-primary btn-block"><h4><b>PRODUCTOS</b></h4></a>
 <div class="container">
 <div class="row row-head">
@@ -25,35 +27,35 @@
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="nombre">Nombre</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="nombre" value="{{$producto->nombre}}" ><br>
+				<input type="Text" name="nombre" value="{{$producto->nombre}}" <?php if ($editar !=true){ ?> disabled <?php }?>><br>
 			  </div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="codigo">Codigo</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="codigo" value="{{$producto->codigo}}" ><br>
+				<input type="Text" name="codigo" value="{{$producto->codigo}}" <?php if ($editar !=true){ ?> disabled <?php }?>><br>
 			  </div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="caracteristicas">Caracteristicas</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="caracteristicas" value="{{$producto->caracteristicas}}"> <br>
+				<input type="Text" name="caracteristicas" value="{{$producto->caracteristicas}}" <?php if ($editar !=true){ ?> disabled <?php }?>> <br>
 			  </div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="stock">Stock</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="stock" value="{{$producto->stock}}"><br>
+				<input type="Text" name="stock" value="{{$producto->stock}}" <?php if ($editar !=true){ ?> disabled <?php }?>><br>
 			  </div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="marca">Marca</label>
 			  <div class="col-sm-8">
-				<select id="marca" name="marca" >
+				<select id="marca" name="marca" <?php if ($editar !=true){ ?> disabled <?php }?> >
 						@foreach($marcas as $marca)   
 						<option value= {{$marca->id}} <?php If ($marca->id == $producto->marca){?> selected = 'selected'<?php } ?>>{{$marca->nombre}}</option>
 						@endforeach
@@ -64,10 +66,10 @@
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="categoria">Categoria</label>
 			  <div class="col-sm-8">
-				<select id="categoria" name="categoria" >
-						@foreach($categorias as $categoria)   
+				<select id="categoria" name="categoria" <?php if ($editar !=true){ ?> disabled <?php }?> >
+					@foreach($categorias as $categoria)   
 						<option value= {{$categoria->id}} <?php If ($categoria->id == $producto->categoria){?> selected = 'selected'<?php } ?>>{{$categoria->nombre}}</option>
-						@endforeach
+					@endforeach
 				</select> 
 			  </div>
 		</div>	
@@ -75,17 +77,20 @@
 		<div class="form-group">
 			<label class="control-label col-sm-3" for="precio">Precio</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="precio" value="{{$producto->precio}}"><br>
+				<input type="Text" name="precio" value="{{$producto->precio}}" <?php if ($editar !=true){ ?> disabled <?php }?> ><br>
 			  </div>
-		</div>	
+		</div>
 		
 		 
 		<div class="form-group">
 				<div class="col-sm-offset-1">
-					<a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-default">Cancelar</a>
+					<a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-default">Atras</a>
 
-					<button type="submit" class= " col-sm-offset-2 btn btn-primary">Publicar
-					</button>
+					<?php if ($editar ==true){ ?>
+						<button type="submit" class= "col-sm-offset-2 btn btn-primary">Guardar</button>
+					<?php }else{?>
+						<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="col-sm-offset-2 btn btn-primary">Editar</a>
+					<?php }?>
 
 				</div>
 		</div> 
