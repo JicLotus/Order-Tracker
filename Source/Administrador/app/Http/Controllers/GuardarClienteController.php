@@ -17,7 +17,7 @@ class GuardarClienteController extends Controller
     public function index(Request $request)
     {
 		$this->validate($request, [
-        'email' => 'required|email|unique:clientes,email',
+        'email' => 'required|email',
         'nombre' => 'required',
         'direccion' => 'required'
 		]);
