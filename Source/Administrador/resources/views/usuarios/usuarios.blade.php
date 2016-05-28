@@ -92,8 +92,7 @@
 		{{$usuario->telefono}}
 	</td>
 	<td> 
-		<a href="{{app()->make('urls')->getUrlEditarUsuario($usuario->id)}}" class="btn-xs btn-primary">Ver más</a> 
-		<a href="{{app()->make('urls')->getUrlEditarUsuario($usuario->id)}}" class="btn-xs btn-default">Editar</a>                                   
+		<a href="{{app()->make('urls')->getUrlVerUsuario($usuario->id)}}" class="btn-xs btn-primary">Ver más</a>                                   
 	</td>
 	
 	</tr>

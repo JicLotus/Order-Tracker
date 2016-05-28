@@ -26,7 +26,7 @@
 
   <div class="col-md-5 col-sm-offset-1">
      
-	<form action="mailto:moncholo06@gmail.com" method="POST" class="form-horizontal" enctype="multipart/form-data">
+	<form action="guardarcliente" method="POST" class="form-horizontal" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<input type="hidden" name="idCliente" value="{{$cliente->id}}">
 		
@@ -34,42 +34,42 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="nombre">Nombre</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="nombre" value="{{$cliente->nombre}}" ><br>
+				<input <?php if ($editar !=true){ ?> disabled <?php }?>  type="Text" name="nombre" value="{{$cliente->nombre}}" ><br>
 			  </div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="email">Email</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="email" value="{{$cliente->email}}" ><br>
+				<input <?php if ($editar !=true){ ?> disabled <?php }?>  type="Text" name="email" value="{{$cliente->email}}" ><br>
 			  </div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="direccion">Dirección</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="direccion" value="{{$cliente->direccion}}"> <br>
+				<input <?php if ($editar !=true){ ?> disabled <?php }?>  type="Text" name="direccion" value="{{$cliente->direccion}}"> <br>
 			  </div>
 		</div>
 		
 		 <div class="form-group">
 			<label class="control-label col-sm-2" for="razon_social">Razón Social</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="razon_social"  value="{{$cliente->razon_social}}"><br>
+				<input <?php if ($editar !=true){ ?> disabled <?php }?>  type="Text" name="razon_social"  value="{{$cliente->razon_social}}"><br>
 			  </div>
 		</div>	
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="telefono_movil">Teléfono Móvil</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="telefono_movil" value="{{$cliente->telefono_movil}}"><br>
+				<input <?php if ($editar !=true){ ?> disabled <?php }?>  type="Text" name="telefono_movil" value="{{$cliente->telefono_movil}}"><br>
 			  </div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="telefono_laboral">Teléfono Laboral</label>
 			  <div class="col-sm-8">
-				<input type="Text" name="telefono_laboral"  value="{{$cliente->telefono_laboral}}"><br>
+				<input <?php if ($editar !=true){ ?> disabled <?php }?>  type="Text" name="telefono_laboral"  value="{{$cliente->telefono_laboral}}"><br>
 			  </div>
 		</div>
 
@@ -77,10 +77,13 @@
 			<div class="form-group">
 				<div class="col-sm-8">
 					
-	  				<a href="{{ URL::previous() }}" class="btn btn-default">Cancelar</a>
-					<button type="submit" class="col-sm-offset-4 btn btn-primary">Publicar</button>
-
-
+	  				<a href="{{app()->make('urls')->getUrlClientes()}}" class="btn btn-default">Cancelar</a>
+					
+					<?php if ($editar ==true){ ?>
+						<button type="submit" class="col-sm-offset-4 btn btn-primary">Publicar</button>
+					<?php }else{?>
+						<a href="{{app()->make('urls')->getUrlEditarCliente($cliente->id)}}" class="col-sm-offset-4 btn btn-primary">Editar</a>
+					<?php }?>
 
 				</div>
 			</div> 		

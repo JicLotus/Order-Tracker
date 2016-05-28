@@ -12,13 +12,22 @@ class EditarClienteController extends Controller
      * @param integer $id
      * @return Response
      */
-    public function index($id)
+    public function editarCliente($id)
     {
     		$cliente = DB::table('clientes')->where('id', $id)->first(); 
     		
 			return view('clientes.editcliente', ['title' => 'Home',
-							'page' => 'home','cliente'=>$cliente]
+							'page' => 'home','cliente'=>$cliente,'editar'=>true]
 			);
-			
     }
+    
+    public function verCliente($id)
+    {
+    		$cliente = DB::table('clientes')->where('id', $id)->first(); 
+    		
+			return view('clientes.editcliente', ['title' => 'Home',
+							'page' => 'home','cliente'=>$cliente,'editar'=>false]
+			);
+    }
+    
 }

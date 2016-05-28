@@ -12,13 +12,21 @@ class EditarUsuarioController extends Controller
      * @param integer $id
      * @return Response
      */
-    public function index($id)
+    public function editarUsuario($id)
     {
     		$usuario = DB::table('usuarios')->where('id', $id)->first(); 
     		
 			return view('usuarios.editusuario', ['title' => 'Home',
-							'page' => 'home','usuario'=>$usuario]
+							'page' => 'home','usuario'=>$usuario,'editar'=>true]
 			);
-			
+    }
+    
+    public function verUsuario($id)
+    {
+    		$usuario = DB::table('usuarios')->where('id', $id)->first(); 
+    		
+			return view('usuarios.editusuario', ['title' => 'Home',
+							'page' => 'home','usuario'=>$usuario,'editar'=>false]
+			);
     }
 }

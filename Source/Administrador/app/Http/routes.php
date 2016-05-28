@@ -24,7 +24,8 @@ Route::get('eliminarproducto/{id}', "ProductosController@eliminar");
 Route::post('buscarproducto', "ProductosController@filtro");
 Route::get('agregarproducto', "NuevoProductoController@index");
 Route::post('guardarnuevoproducto', "NuevoProductoController@guardar");
-Route::get('editarproducto/{id}', "EditarProductoController@index");
+Route::get('editarproducto/{id}', "EditarProductoController@editarProducto");
+Route::get('verproducto/{id}', "EditarProductoController@verProducto");
 Route::post('editarproducto/guardarproducto', "GuardarProductoController@index");
 
 
@@ -32,14 +33,16 @@ Route::get('clientes', "ClientesController@index");
 Route::post('clientesFiltro', "ClientesController@filtro");
 Route::get('agregarcliente', "NuevoClienteController@index");
 Route::post('guardarcliente', "NuevoClienteController@guardar");
-Route::get('editarcliente/{id}', "EditarClienteController@index");
+Route::get('editarcliente/{id}', "EditarClienteController@editarCliente");
+Route::get('vercliente/{id}', "EditarClienteController@verCliente");
 Route::post('editarcliente/guardarcliente', "GuardarClienteController@index");
 
 Route::get('usuarios', "UsuariosController@index");
 Route::post('usuariosFiltro', "UsuariosController@filtro");
 Route::get('agregarusuario', "NuevoUsuarioController@index");
 Route::post('guardarusuario', "NuevoUsuarioController@guardar");
-Route::get('editarusuario/{id}', "EditarUsuarioController@index");
+Route::get('editarusuario/{id}', "EditarUsuarioController@editarUsuario");
+Route::get('verusuario/{id}', "EditarUsuarioController@verUsuario");
 Route::post('editarusuario/guardarusuario', "GuardarUsuarioController@index");
 
 Route::get('pedidos', "PedidosController@index");

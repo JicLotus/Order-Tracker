@@ -57,6 +57,11 @@ class Urls {
   public function getUrlEditarProducto($id,$inputData = []) {
     return url("editarproducto/". $id . $this->appendQuery($inputData));
   }
+
+  public function getUrlVerProducto($id,$inputData = []) {
+    return url("verproducto/". $id . $this->appendQuery($inputData));
+  }
+
   
   public function getUrlGuardarProducto($id,$inputData = []) {
     return url("guardarproducto/". $id . $this->appendQuery($inputData));
@@ -89,6 +94,10 @@ class Urls {
   
   public function getUrlEditarCliente($id,$inputData = []) {
     return url("editarcliente/" . $id . $this->appendQuery($inputData));
+  }
+
+  public function getUrlVerCliente($id,$inputData = []) {
+    return url("vercliente/" . $id . $this->appendQuery($inputData));
   }
   
   public function getUrlGuardarCliente($id,$inputData = []) {
@@ -153,6 +162,10 @@ class Urls {
   }
   public function getUrlEditarUsuario($id,$inputData = []) {
     return url("editarusuario/" . $id . $this->appendQuery($inputData));
+  }
+
+  public function getUrlVerUsuario($id,$inputData = []) {
+    return url("verusuario/" . $id . $this->appendQuery($inputData));
   }
   
   public function getUrlGuardarUsuario($id,$inputData = []) {

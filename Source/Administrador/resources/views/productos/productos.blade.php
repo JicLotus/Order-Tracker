@@ -98,7 +98,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-offset-8 col-sm-1 col-md-2 ">
-							<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="btn-xs btn-primary">Ver más</a>                                
+							<a href="{{app()->make('urls')->getUrlVerProducto($producto->id)}}" class="btn-xs btn-primary">Ver más</a>                                
 						</div>
 						
 						<div class="col-sm-2">

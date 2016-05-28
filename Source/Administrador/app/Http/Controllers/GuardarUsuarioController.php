@@ -17,7 +17,7 @@ class GuardarUsuarioController extends Controller
     public function index(Request $request)
     {
 		$id = $request->idUsuario;
-		$vendedor = DB::select("select * from clientes where id=$id");
+		$vendedor = DB::select("select * from usuarios where id=$id");
 		
 		$this->validate($request, [
         'email' => 'required|email|unique:clientes,email',
@@ -26,10 +26,7 @@ class GuardarUsuarioController extends Controller
         'password' => 'required',
 		]);
 		
-		
-		
-		if(($request->password == $vendedor->password) and ($request->password2 == "")){
-			
+		if( ($request->password == $vendedor[0]->password) and ($request->password2 != "") and $request->password2 == $request->password3 ){	
 			DB::table(Config::get('constants.TABLA_USUARIOS'))->where(Config::get('constants.TABLA_USUARIOS_ID'), $request->idUsuario)
 					->update(array(Config::get('constants.TABLA_USUARIOS_NOMBRE') => ($request->nombre),
 					Config::get('constants.TABLA_USUARIOS_EMAIL') => ($request->email),
@@ -37,11 +34,9 @@ class GuardarUsuarioController extends Controller
 					Config::get('constants.TABLA_USUARIOS_PRIVILEGIO') => ($request->privilegio),
 					Config::get('constants.TABLA_USUARIOS_TELEFONO') => ($request->telefono)));				
 		}else{
-			if($request->password2 == $request->password3){
 			
-			
-			}
 		}
+		
 		$usuarios = DB::table('usuarios')->get();
 
 		 return view('usuarios.usuarios', ['title' => 'Home',
