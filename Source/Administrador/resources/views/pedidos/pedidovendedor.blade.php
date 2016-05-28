@@ -155,12 +155,12 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Producto</th>
-								<th>Código</th>
-								<th>Cantidad</th>
-								<th>Precio</th>
-								<th>Precio Final</th>
-								<th>Subtotal</th>
+								<th class="col-md-5">Producto</th>
+								<th class="col-md-1">Código</th>
+								<th class="col-md-1">Cantidad</th>
+								<th class="col-md-1">Precio</th>
+								<th class="col-md-1">Precio Final</th>
+								<th class="col-md-1">Subtotal</th>
 							</tr>
 						</thead>
 						<tbody>

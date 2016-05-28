@@ -49,7 +49,7 @@
 			@endforeach
 				
 			var options = {
-				title: 'Top 10 Vendedores',
+				title: 'Top 10 Vendedores {{$anioFiltro}}',
 				is3D: true,
 			};
 

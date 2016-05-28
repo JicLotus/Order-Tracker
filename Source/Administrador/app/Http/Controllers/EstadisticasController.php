@@ -21,15 +21,16 @@ class EstadisticasController extends Controller
 		  $anioFiltro = $dt->format('Y');
 		  $anioAnterior = $anioFiltro-1;
 		  $vendedorFiltro = '';
-		  $ano = '';
 
-		  $sql = "select usuarios.nombre as nombre, (sum(vendido_fuera_ruta)+sum(vendido_clientes)) as totalVendido 
+			$sql = "select usuarios.nombre as nombre, (sum(vendido_fuera_ruta)+sum(vendido_clientes)) as totalVendido 
 					from estadisticas, usuarios 
-					where date_format(dia, '%Y') LIKE '%$ano%' 
+					where date_format(dia, '%Y') LIKE '%$anioFiltro%' 
 					and usuarios.id = estadisticas.id_usuario
+					and date_format(dia, '%m') LIKE '%$mesFiltro%'
 					group by id_usuario 
 					order by totalVendido desc 
 					LIMIT 10;";
+
 		  $rankingVendedores = DB::select($sql);
 
 		  $rankingMarcas = DB::Select("(select  marcas.id, marcas.nombre as marca, sum(pedidos.cantidad) as cantidad, 
@@ -38,7 +39,7 @@ class EstadisticasController extends Controller
 										where pedidos.id_producto = productos.id 
 										and compras.id_compra = pedidos.id_compra 
 										and date_format(fecha, '%m') = $mesFiltro 
-										and date_format(fecha,'%Y')= $anioFiltro 
+										and date_format(fecha,'%Y') = $anioFiltro 
 										and marcas.id = productos.marca 
 										group by marcas.id order by cantidad desc LIMIT 5);");
 			
