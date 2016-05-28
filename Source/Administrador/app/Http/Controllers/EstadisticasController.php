@@ -13,7 +13,8 @@ class EstadisticasController extends Controller
     public function index()
     {		
 
-		  $anios = DB::select("select distinct date_format(dia,'%Y') as anio from estadisticas order by anio desc");
+//		  $anios = DB::select("select distinct date_format(dia,'%Y') as anio from estadisticas order by anio desc");
+//		  $anios = collect([2015, 2016]);
 		  $vendedores = DB::select ("select id, nombre from usuarios");
 
 		  $dt = new DateTime();
@@ -52,7 +53,7 @@ class EstadisticasController extends Controller
 										group by date_format(dia,'%Y')), 0) as total)");
 			
 			return view('estadisticas.estadisticas', ['title' => 'Home',
-						'page' => 'home', 'rankingVendedores' => $rankingVendedores, 'anios'=> $anios, 'vendedores' => $vendedores,
+						'page' => 'home', 'rankingVendedores' => $rankingVendedores, 'vendedores' => $vendedores,
 						'rankingMarcas'=>$rankingMarcas, 'ventaDelMes' => $ventaDelMes, 'mesFiltro'=>$mesFiltro, 'anioFiltro'=>$anioFiltro, 'vendedorFiltro'=>$vendedorFiltro]
 		);
 			
@@ -73,7 +74,6 @@ class EstadisticasController extends Controller
 		  $vendedorFiltro = $vendedor;
 			
 
-			$anios = DB::select("select distinct date_format(dia,'%Y') as anio from estadisticas order by anio desc");
 			$vendedores = DB::select ("select id, nombre from usuarios");
 
 			$sql = "select usuarios.nombre as nombre, (sum(vendido_fuera_ruta)+sum(vendido_clientes)) as totalVendido 
@@ -118,7 +118,7 @@ class EstadisticasController extends Controller
 			}
 
 						return view('estadisticas.estadisticas', ['title' => 'Home',
-						'page' => 'home', 'rankingVendedores' => $rankingVendedores, 'anios'=> $anios, 'vendedores' => $vendedores,
+						'page' => 'home', 'rankingVendedores' => $rankingVendedores, 'vendedores' => $vendedores,
 						'rankingMarcas'=>$rankingMarcas, 'ventaDelMes' => $ventaDelMes, 'mesFiltro'=>$mesFiltro, 'anioFiltro'=>$anioFiltro, 'vendedorFiltro'=>$vendedorFiltro]
 		);
 
