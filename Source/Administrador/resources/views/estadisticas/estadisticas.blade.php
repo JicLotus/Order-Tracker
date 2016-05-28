@@ -179,7 +179,7 @@
 			  <tr>
 				<td>{{$marca->marca}}</td>
 				<td>{{$marca->cantidad}}</td>
-				<td>$<?php echo str_replace(".", ",","$marca->total") ?></td>
+				<td>${{$marca->total}}</td>
 				<td><?php echo(round($marca->total/$cantidadfinal*100,2))?>% </td>
 			  </tr>
 			@endforeach

@@ -8,7 +8,7 @@
 	$dt = "'".$dt."'";	
 
 	$sql= "(select marcas.nombre as marca, categorias.nombre as categoria, porcentaje, 
-				   id_producto, cantidad, desde, hasta 
+				   id_producto, cantidad, date_format(desde,'%Y-%m-%d') as desde, date_format(hasta,'%Y-%m-%d') as hasta 
 				   from descuentos
 				   left join marcas on descuentos.id_marca = marcas.id 
 				   left join categorias on descuentos.id_categoria = categorias.id 

@@ -209,6 +209,7 @@ public class DetallesPedido extends AppCompatActivity {
         final AlertDialog closedialog= builder.create();
 
         closedialog.show();
+        actualizarEstadisticas();
 
         final Timer timer2 = new Timer();
         timer2.schedule(new TimerTask() {
@@ -221,6 +222,15 @@ public class DetallesPedido extends AppCompatActivity {
             }
         }, 3000); // the timer will count 5 seconds....
     }
+
+    private void actualizarEstadisticas() {
+        try {
+            Request request = new Request("GET", "GetEstadisticas.php?id_usuario=" + vendedor);
+            Response resp = new RequestHandler().sendRequest(request);
+        } catch (Exception e) {
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

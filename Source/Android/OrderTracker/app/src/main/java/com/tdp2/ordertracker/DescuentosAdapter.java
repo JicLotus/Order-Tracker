@@ -48,7 +48,8 @@ public class DescuentosAdapter extends RecyclerView.Adapter<DescuentosAdapter.De
 
     @Override
     public int getItemCount() {
-        return datos.size();
+;
+        ;return datos.size();
     }
 
     public class DescuentosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
