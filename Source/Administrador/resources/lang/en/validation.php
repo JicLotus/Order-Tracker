@@ -14,9 +14,9 @@ return [
     */
 
     'accepted'             => 'Como minimo se deben seleccionar un tipo de descuento.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
+    'active_url'           => 'La password antigua no coincide con la nueva.',
+    'after'                => 'La password nueva y la repeticion no coinciden.',
+    'alpha'                => 'La password nueva no coincide con su repeticion.',
     'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
     'alpha_num'            => 'The :attribute may only contain letters and numbers.',
     'array'                => 'The :attribute must be an array.',
