@@ -70,7 +70,7 @@
 	
 					
 		  var options = {
-			title: 'Mayo de 2016: $5.000.245',
+			title: '{{$mesFiltro}} de {{$anioFiltro}}: ${{$ventaDelMes[0]->total}}',
 			chartArea: {width: '60%'},
 			hAxis: {
 			  title: '',
