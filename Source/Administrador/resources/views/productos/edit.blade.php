@@ -96,7 +96,7 @@
 				<a href="{{app()->make('urls')->getUrlProductos()}}" class="btn btn-default">Atras</a>
 
 				<?php if ($editar ==true){ ?>
-					<button type="submit" class= "col-sm-offset-2 btn btn-primary">Guardar</button>
+					<button type="submit" class= "col-sm-offset-2 btn btn-primary">Publicar</button>
 				<?php }else{?>
 					<a href="{{app()->make('urls')->getUrlEditarProducto($producto->id)}}" class="col-sm-offset-2 btn btn-primary">Editar</a>
 				<?php }?>

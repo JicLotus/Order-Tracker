@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use App\Models\Property as Property;
@@ -23,36 +23,30 @@ class GuardarUsuarioController extends Controller
         'email' => 'required|email|unique:clientes,email',
         'nombre' => 'required',
         'telefono' => 'required',
-        'password' => 'required',
-        'password2' => 'required',
-        'password3' => 'required',
+        'password' => 'exists:usuarios,password,id,'.$id.'|required_with:password2',
+        'password2' => 'required_with:password',
+        'password3' => 'required_with:password2|same:password2',
 		]);
 		
-		if($request->password == $vendedor[0]->password){
-				if ($request->password2 == $request->password3 ){
-					DB::table(Config::get('constants.TABLA_USUARIOS'))->where(Config::get('constants.TABLA_USUARIOS_ID'), $request->idUsuario)
-						->update(array(Config::get('constants.TABLA_USUARIOS_NOMBRE') => ($request->nombre),
-						Config::get('constants.TABLA_USUARIOS_EMAIL') => ($request->email),
-						Config::get('constants.TABLA_USUARIOS_PASSWORD') => ($request->password),
-						Config::get('constants.TABLA_USUARIOS_PRIVILEGIO') => ($request->privilegio),
-						Config::get('constants.TABLA_USUARIOS_TELEFONO') => ($request->telefono)));				
-				}else{
-					$this->validate($request, [
-					'telefono' => 'alpha'
-					]);
-				}
-		}else{
-			$this->validate($request, [
-			'telefono' => 'active_url'
-			]);
+		DB::table(Config::get('constants.TABLA_USUARIOS'))->where(Config::get('constants.TABLA_USUARIOS_ID'), $request->idUsuario)
+		->update(array(Config::get('constants.TABLA_USUARIOS_NOMBRE') => ($request->nombre),
+		Config::get('constants.TABLA_USUARIOS_EMAIL') => ($request->email),
+		Config::get('constants.TABLA_USUARIOS_PRIVILEGIO') => ($request->privilegio),
+		Config::get('constants.TABLA_USUARIOS_TELEFONO') => ($request->telefono)));				
+
+
+		If(Input::has('password2')){
+			DB::table(Config::get('constants.TABLA_USUARIOS'))->where(Config::get('constants.TABLA_USUARIOS_ID'), $request->idUsuario)
+			->update(array(Config::get('constants.TABLA_USUARIOS_PASSWORD') => ($request->password2)));				
 		}
-		
 		
 		$usuarios = DB::table('usuarios')->get();
 
 		 return view('usuarios.usuarios', ['title' => 'Home',
                                 'page' => 'home','usuarios' => $usuarios, 'vendedorAnterior' => "", 'emailAnterior' => "", 'accion' => 2]
         ); 
+			
+		
         
     }
     

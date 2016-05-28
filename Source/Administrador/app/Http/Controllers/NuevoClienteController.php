@@ -28,10 +28,12 @@ class NuevoClienteController extends Controller
     
        public function guardar(Request $request)
     {
+
+
 		$validator = Validator::make($request->all(), [
              
-			'nombre' => 'required',
 			'email' => 'required|email|unique:clientes,email',
+			'nombre' => 'required',
 			'direccion' => 'required',
 			'telefono_movil' => 'required'
 		

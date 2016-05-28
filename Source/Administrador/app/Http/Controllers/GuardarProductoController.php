@@ -48,17 +48,17 @@ class GuardarProductoController extends Controller
 				Config::get('constants.TABLA_PRODUCTOS_CATEGORIA') => ($request->categoria),
 				Config::get('constants.TABLA_PRODUCTOS_PRECIO') => ($request->precio))); 
 		
-		$producto = DB::table(Config::get('constants.TABLA_PRODUCTOS'))
-					->where(Config::get('constants.TABLA_PRODUCTOS_ID'), $request->idProducto)->first();
-		$marcas = DB::select("select nombre,id from marcas order by nombre");
-		$categorias = DB::select("select nombre,id from categorias order by nombre");
-		$imagenes = DB::select("Select id_producto,imagen_base64 from imagenes where id_producto=".$request->idProducto);
+		  $sql = "SELECT u.id, u.nombre, u.codigo, u.stock, u.marca, MIN(t.imagen_base64) AS imagen_base64,m.nombre as nombreMarca, c.nombre as nombreCategoria FROM productos u Left JOIN imagenes t ON t.id_producto = u.id 
+		  Left JOIN marcas m ON m.id = u.marca
+		  Left Join categorias c ON c.id= u.categoria GROUP BY u.id;";
 
-		return view('productos.edit', ['title' => 'Home',
-						'page' => 'home','producto'=>$producto,'marcas' => $marcas, 'categorias' => $categorias, 'imagenes'=>$imagenes,'editar'=>false]
-		);
+		  $productos = DB::select($sql);
+		  $marcas = DB::select("select * from marcas");
 
-	
+        return view('productos.productos', ['title' => 'Home',
+                                'page' => 'home','productos' => $productos,'marcas'=> $marcas, 'idMarca'=>0, 'nombre'=>'','codigo'=>'',
+                                'accion' => 2]
+        );	
         
     }
 }

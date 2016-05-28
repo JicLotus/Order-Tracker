@@ -131,11 +131,8 @@
 		<div class="centerside col-md-3">
 			<label class="control-label" >Año</label>
 			<select name="anio" >
-
-			@foreach($anios as $anio)   
-				<option value = '{{$anio->anio}}' <?php If ($anioFiltro == $anio->anio){?> selected = 'selected'<?php } ?>}> {{$anio->anio}}</option>
-			@endforeach
-			
+				<option value = 2016 <?php If ($anioFiltro == 2016){?> selected = 'selected'<?php } ?>}>2016</option>
+				<option value = 2015 <?php If ($anioFiltro == 2015){?> selected = 'selected'<?php } ?>}>2015</option>
 			</select>
 
 			

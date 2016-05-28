@@ -23,7 +23,8 @@ class ProductosController extends Controller
 		  $marcas = DB::select("select * from marcas");
 
         return view('productos.productos', ['title' => 'Home',
-                                'page' => 'home','productos' => $productos,'marcas'=> $marcas, 'idMarca'=>0, 'nombre'=>'','codigo'=>'']
+                                'page' => 'home','productos' => $productos,'marcas'=> $marcas, 'idMarca'=>0, 'nombre'=>'','codigo'=>'',
+                                'accion' => 0]
         );  
     }
     
@@ -32,7 +33,17 @@ class ProductosController extends Controller
 		DB::delete("delete from productos where id=$id");
 		DB::delete("delete from imagenes where id_producto=$id");
 		
-		return redirect('/productos');
+		  $sql = "SELECT u.id, u.nombre, u.codigo, u.stock, u.marca, MIN(t.imagen_base64) AS imagen_base64,m.nombre as nombreMarca, c.nombre as nombreCategoria FROM productos u Left JOIN imagenes t ON t.id_producto = u.id 
+		  Left JOIN marcas m ON m.id = u.marca
+		  Left Join categorias c ON c.id= u.categoria GROUP BY u.id;";
+
+		  $productos = DB::select($sql);
+		  $marcas = DB::select("select * from marcas");
+
+        return view('productos.productos', ['title' => 'Home',
+                                'page' => 'home','productos' => $productos,'marcas'=> $marcas, 'idMarca'=>0, 'nombre'=>'','codigo'=>'',
+                                'accion' => 1]
+        );  
 	}
 	
 	

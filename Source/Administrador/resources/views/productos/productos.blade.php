@@ -70,6 +70,21 @@
 					</div>
 			</div>	</h4> 
 			 
+			 <?php If ($accion != 0){
+				If ($accion == 1){?>
+					<div class="alert alert-success">
+						<strong>Producto Eliminado exitosamente!</strong>
+					</div>
+			<?php } Else If ($accion == 2){	?> 
+						<div class="alert alert-success">
+							<strong>Producto editado exitosamente!</strong>
+						</div>
+			<?php 	}Else If ($accion == 3){ ?>
+						<div class="alert alert-success">
+							<strong>Producto creado exitosamente!</strong>
+						</div>					
+			<?php	}
+			}?>
 		@foreach($productos as $producto)
 			<p>
 				<div class="well center box-centerside">

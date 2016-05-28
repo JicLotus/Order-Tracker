@@ -16,11 +16,21 @@ class GuardarClienteController extends Controller
     
     public function index(Request $request)
     {
-		$this->validate($request, [
-        'email' => 'required|email',
-        'nombre' => 'required',
-        'direccion' => 'required'
-		]);
+
+		$validaciones = array(
+			'nombre' => 'required',
+			'direccion' => 'required',
+			'telefono_movil' => 'required');
+			
+		$email = DB::table(Config::get('constants.TABLA_CLIENTES'))
+				->where(Config::get('constants.TABLA_CLIENTES_ID'), $request->idCliente)
+				->pluck(Config::get('constants.TABLA_CLIENTES_EMAIL'));
+
+		if ($email!=$request->email){
+			$validaciones = array_add($validaciones, 'email', 'required|email|unique:clientes,email');
+		}
+
+		$this->validate($request, $validaciones);
   
 		DB::table(Config::get('constants.TABLA_CLIENTES'))->where(Config::get('constants.TABLA_CLIENTES_ID'), $request->idCliente)
 				->update(array(Config::get('constants.TABLA_CLIENTES_NOMBRE') => ($request->nombre),
