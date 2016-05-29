@@ -72,7 +72,19 @@ public class Descuentos extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return true;
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.estadisticas:
+                Intent estadisticasActivity = new Intent(this, Estadisticas.class);
+                startActivity(estadisticasActivity);
+                return true;
+            case R.id.descuentos:
+                Intent descuentosActivity = new Intent(this, Descuentos.class);
+                startActivity(descuentosActivity);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private List<DescuentosItem> obtenerDescuentos() {

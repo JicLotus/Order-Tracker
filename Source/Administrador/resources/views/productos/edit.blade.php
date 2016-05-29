@@ -80,7 +80,7 @@
 				<div class="col-md-6">
 					@foreach ($imagenes as $imagen)
 					<div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
-						<img class="img-rounded; img-responsive" src="data:image/png;base64, {{$imagen->imagen_base64}}" alt="Pulpit Rock" >
+						<img class="img-rounded; img-responsive" src="data:image/png;base64, {{$imagen->imagen_base64}}" alt="Pulpit Rock"  style="width:200px;height:150px" >
 					</div>
 					@endforeach
 				</div>

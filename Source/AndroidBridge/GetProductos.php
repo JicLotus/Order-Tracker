@@ -17,7 +17,8 @@
 				   from productos
 				   left join marcas on productos.marca = marcas.id 
 				   left join categorias on productos.categoria = categorias.id 
-				   where stock>0";
+				   where stock>0
+				   and eliminado=0";
 
 		
 	$rs = mysql_query($sql,$con);

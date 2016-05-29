@@ -23,6 +23,7 @@ class CrearTablaProductos extends Migration
 				$table->integer('stock');
 				$table->integer('marca');
 				$table->integer('estado');
+				$table->boolean('eliminado')->default(false);
 				$table->integer('categoria');
 				$table->double('precio',10,2);
         });
