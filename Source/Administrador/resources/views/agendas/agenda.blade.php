@@ -68,35 +68,48 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
     <section id="search-section">
  <a  href="{{app()->make('urls')->getUrlAgendas()}}" class="btn btn-primary btn-block"><h4><b>AGENDAS</b></h4></a>
 		
-
-<h4><form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
+		
+		
+<form action="{{app()->make('urls')->getUrlAgenda()}}" method="GET" class="form-horizontal"   enctype="multipart/form-data">
 		{{ csrf_field() }}
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="ListaVendedores">Lista de vendedores:</label>
-			  <div class="col-sm-8">
-				<select id="idVende" name="idVendedor" onchange= "this.form.submit()" >
+		<h4>
+			
+	 
+	 <div class="row">
+				<div class="col-sm-offset-1 col-md-4">		
+				<label class="control-label col-sm-3" for="ListaVendedores">Vendedor</label>
+				 <div class="col-sm-8">
+					<select id="idVende" name="idVendedor" onchange= "this.form.submit()" >
 					@foreach($vendedores as $vendedor)
-					<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
+						<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
 					@endforeach
 					 <option selected = "selected" value= {{$nombre[0]->id}} > {{$nombre[0]->nombre}}   </option>                   
-				</select>
-			  </div> 
-		</div>	
-		
-		<div class="form-group">
+					</select>
+				</div> 
+				 </div>
+				<div class="centerside col-md-3">
+				<label class="control-label col-sm-3" for="Día">Fecha</label>
+					<div class="col-sm-1">
+						<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}"  onchange= "this.form.submit()" >
+					</div>
+				 </div>
 			
-			<label class="control-label col-sm-2" for="Día">Fecha:</label>
-				<div class="col-sm-1">
-					<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}"  onchange= "this.form.submit()" >
-				</div>
 		</div>
-		<div class="form-group">	
+		<div class="row">	
 			
-			<button type="submit" class="col-sm-2 col-sm-offset-3 btn btn-primary">Buscar</button>
-		</div>	
-</form></h4>
+			<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nuevo Cliente</a> 	
+			
+			<button type="submit" class="col-sm-1 col-sm-offset-4 btn btn-primary">Buscar</button>  
+	
+        
+									
+		</div>
+
+		<h4>
+</form>
 
 <hr width=75%"/>
+
 
    <?php If ($asignado == 1){?>   
 		<div class="alert alert-success">
@@ -163,12 +176,10 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		</div>
 	</div>	
 	@endforeach
+	<br>
+	<div class="row">
 	
-	
-	<hr width=75%"/>
-	
-	<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="btn btn-primary">Agregar Nueva Agenda</a> 
-    <a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class="btn btn-primary">Calcular Ruta</a>     
+    <a href="{{app()->make('urls')->getUrlAsignarHorarios($nombre[0]->id)}}" class=" col-sm-1 col-sm-offset-8 btn btn-primary">Calcular Ruta</a>     
 	</div>	
 	
 	
