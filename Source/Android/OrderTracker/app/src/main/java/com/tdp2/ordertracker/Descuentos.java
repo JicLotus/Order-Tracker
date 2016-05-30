@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,8 +39,9 @@ public class Descuentos extends AppCompatActivity {
         String str_descuentos = ManejadorPersistencia.obtenerDescuentos(this);
         try {
             descuentos = new JSONArray(str_descuentos);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             descuentos = new JSONArray();
+            Toast.makeText(this, "No hay descuentos disponibles", Toast.LENGTH_LONG).show();
         }
 
 
@@ -116,8 +118,9 @@ public class Descuentos extends AppCompatActivity {
         String str_descuentos = ManejadorPersistencia.obtenerDescuentos(this);
         try {
             descuentos = new JSONArray(str_descuentos);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             descuentos = new JSONArray();
+            Toast.makeText(this, "No hay descuentos disponibles", Toast.LENGTH_LONG).show();
         }
         DescuentosAdapter adapter = new DescuentosAdapter(obtenerDescuentos());
         adapter.setJsonArray(descuentos);

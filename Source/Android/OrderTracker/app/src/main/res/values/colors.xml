@@ -7,6 +7,7 @@
     <color name="verde">#00FF00</color>
     <color name="negro">#000000</color>
     <color name="rojo">#E53935</color>
+    <color name="blanco">#FFFFFF</color>
 
     <color name="textColorPrimary">@color/primary_text_material_dark</color>
 </resources>
