@@ -36,7 +36,7 @@ public class ManejadorPersistencia {
         editor.commit();
     }
 
-    public static boolean hayQueActualizacionDescuentos (Context context, String valor){
+    public static boolean hayQueActualizacionDescuentos (Context context){
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         return settings.getBoolean(APIConstantes.PERSISTENCIA_ACTUALIZAR_DESCUENTOS, false);
     }

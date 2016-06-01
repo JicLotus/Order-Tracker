@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -74,7 +76,6 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
 
         adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
         adapter.setJsonArray(productos);
-
         rv.setAdapter(adapter);
 
     }
@@ -95,16 +96,34 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
         }
     }
 
+    public void notificarCambios(){
+        rv.getAdapter().notifyDataSetChanged();
+    }
+
     @Override
     protected void onResume(){
         super.onResume();
         this.obtenerDescuentos();
         this.aplicarDescuentos();
 
-        adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
-        adapter.setJsonArray(productos);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (ManejadorPersistencia.hayQueActualizacionDescuentos(getApplicationContext())){
+                    obtenerDescuentos();
+                    aplicarDescuentos();
+                    notificarCambios();
+                    ManejadorPersistencia.persistirActualizacionDescuentos(getApplicationContext(), false);
+                }
 
-        rv.setAdapter(adapter);
+                handler.postDelayed(this, 10000);
+            }
+        }, 10000);
+//        adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
+//        adapter.setJsonArray(productos);
+
+//        rv.setAdapter(adapter);
 
     }
 
@@ -136,12 +155,15 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
                             double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
                             if (precio*porcentaje < precio_final)
                                 producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
+                                producto.put("leyenda", String.valueOf(100-(int)(porcentaje*100))
+                                        +"% en productos de la marca "+ marcaProducto);
                         }
                         if (categoriaProducto!=null && categoriaProducto.equals(categoriaDescuento)){
                             double precio_final = Double.parseDouble(producto.getString(APIConstantes.PRODUCTO_PRECIO_FINAL));
                             if (precio*porcentaje < precio_final)
                                 producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL, String.valueOf(precio*porcentaje));
-                        }
+                                producto.put("leyenda", String.valueOf(100-(int)(porcentaje*100))
+                                    +"% de la categoria "+ categoriaProducto);                        }
 
                     }
                     catch(Exception e){}

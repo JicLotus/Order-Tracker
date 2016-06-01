@@ -73,10 +73,21 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         try {
             holder.itemId = jsonArray.getJSONObject(position).getInt("id");
         }catch(Exception e){}
+        int valorNP = 0;
 
         try {
+            holder.np.setDisplayedValues(null);
+            holder.np.setMinValue(0);
             holder.np.setMaxValue(jsonArray.getJSONObject(position).getInt("stock"));
-            holder.np.setWrapSelectorWheel(false);
+//            holder.np.setWrapSelectorWheel(false);
+
+//
+//              holder.np.setValue()
+
+            if (pedidos.get(holder.itemId)!= null){
+                valorNP = pedidos.get(holder.itemId).getInt(APIConstantes.PRODUCTO_CANTIDAD);
+            }
+            holder.np.setValue(valorNP);
 
         }catch(Exception e){}
 
@@ -102,6 +113,12 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             holder.precio = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO);
             holder.precio_final = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO_FINAL);
             holder.marca = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_MARCA);
+            holder.leyendaDescuento.setText(jsonArray.getJSONObject(position).getString("leyenda"));
+            if (valorNP==0){
+                holder.subtotal.setText("");
+            }else{
+                holder.subtotal.setText("Subtotal: $"+String.format("%.2f", holder.precio_final*valorNP));
+            }
             holder.categoria = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_CATEGORIA);
         }
         catch(Exception e)
@@ -113,8 +130,10 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else{
             holder.precioFinal.setText("");
+            holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags());
+
         }
-        holder.aplicarDescuentos(0);
+//        holder.aplicarDescuentos(0);
 
     }
 
@@ -158,7 +177,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
             np.setMinValue(0);
             np.setValue(0);
-            np.setWrapSelectorWheel(false);
+            np.setMaxValue(1);
+            np.setWrapSelectorWheel(true);
 
             np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
@@ -176,21 +196,22 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                             producto.put(APIConstantes.PRODUCTO_PRECIO,precio);
                             producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL,precio_final);
                             pedidos.put(itemId, producto);
-                            descripcion.setText("$"+ String.format( "%.2f", precio));
-                            subtotal.setText("Subtotal: $"+String.format("%.2f", precio_final*newVal));
+                            descripcion.setText("$" + String.format("%.2f", precio));
+                            subtotal.setText("Subtotal: $" + String.format("%.2f", precio_final * newVal));
+//                            notifyItemChanged(posicion);
                             if (precio_final<precio){
                                 precioFinal.setText("$"+String.format( "%.2f", precio_final));
                                 descripcion.setPaintFlags(descripcion.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
                             }else{
-                                precioFinal.setText("");
-                                descripcion.setPaintFlags(precioFinal.getPaintFlags());
+   //                             precioFinal.setText("");
+   //                             descripcion.setPaintFlags(precioFinal.getPaintFlags());
 
                             }
 
                         } catch (JSONException e) {
                         }
-
+  //                      notifyDataSetChanged();
                     }
                 }
             });
@@ -225,6 +246,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         if ((cantidadDescuento>0)&&(cantidadComprada >= cantidadDescuento)){
                             if (precio*porcentaje <= precio_final){
                                 precio_final = (precio*porcentaje);
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, precio*porcentaje);
+                                jsonArray.getJSONObject(posicion).put("leyenda", String.valueOf(100-(int)(porcentaje*100))
+                                        +"% llevando más de "+String.valueOf(cantidadDescuento)
+                                        +" unidades");
+
                                 leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
                                             +"% llevando más de "+String.valueOf(cantidadDescuento)
                                             +" unidades");
@@ -232,12 +258,18 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         }else if (cantidadComprada<cantidadDescuento){
                                 precio_final = precio;
                                 leyendaDescuento.setText("");
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, precio);
+                                jsonArray.getJSONObject(posicion).put("leyenda", "");
                         }
                         if (marcaProducto!=null && marcaProducto.equals(marcaDescuento)){
                             if (precio*porcentaje <= precio_final){
                                 precio_final = (precio*porcentaje);
-                                leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
-                                        +"% en productos de la marca "+ marcaProducto);
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, (precio*porcentaje));
+                                jsonArray.getJSONObject(posicion).put("leyenda", String.valueOf(100 - (int) (porcentaje * 100))
+                                        + "% en productos de la marca " + marcaProducto);
+
+                                leyendaDescuento.setText(String.valueOf(100 - (int) (porcentaje * 100))
+                                        + "% en productos de la marca " + marcaProducto);
                             }
                         }
                         if (categoriaProducto!=null && categoriaProducto.equals(categoriaDescuento)){
@@ -245,7 +277,9 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                                 precio_final = (precio*porcentaje);
                                 leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
                                         +"% en productos de la categoría "+ categoriaProducto);
-
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, (precio * porcentaje));
+                                jsonArray.getJSONObject(posicion).put("leyenda", String.valueOf(100-(int)(porcentaje*100))
+                                        +"% en productos de la categoría "+ categoriaProducto);
                             }
                         }
 
