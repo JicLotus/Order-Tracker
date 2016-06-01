@@ -61,11 +61,11 @@ class NuevoDescuentoController extends Controller
 			}
 		}
 		
-		$fecha = $request->desde;
+		$fecha = $request->Desde;
 		$dt = new DateTime($fecha);
 		$desde = "'".$dt->format('Y-m-d')."'";
 		
-		$fecha = $request->hasta;
+		$fecha = $request->Hasta;
 		$dt = new DateTime($fecha);
 		$hasta = "'".$dt->format('Y-m-d')."'";
 		
