@@ -92,11 +92,11 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 			
 <div class="panel-group" id="TiposGeneral">					
 			<label for="from">Desde</label>
-			<input type="text" id="from" name="from" value="<?php echo date("d-m-Y"); ?>">
+			<input type="text" id="from" name="desde" value="<?php If ("" != old('desde')){ echo old('desde'); } Else {echo date("d-m-Y");} ?>">
 			<label for="to">Hasta</label>
-			<input type="text" id="to" name="to">
+			<input type="text" id="to" name="hasta" value="<?php If ("" != old('hasta')){ echo old('hasta'); } Else {echo date("d-m-Y");} ?>">
 			
-			<label>Porcentaje</label> <input name="porcentaje" value=1 type="number" min="1" max="100" /> %
+			<label>Porcentaje</label> <input name="porcentaje" value= "<?php If ("" != old('porcentaje')){ echo old('porcentaje'); } Else {echo "1";} ?>" type="number" min="1" max="100" /> %
 </div>
 			
 <div class="panel-group" id="TiposDescuentos">
@@ -116,10 +116,10 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 							  <div class="col-sm-8">
 								<select name="idCategoria" >
 									
-									<option value=0 selected>Descuento sin categoria</option>
+									<option value=0 >Descuento sin categoria</option>
 									
 									@foreach($categorias as $categoria)
-									<option value = {{$categoria->id}}>{{$categoria->nombre}}</option>  
+									<option value = {{$categoria->id}} <?php If ($categoria->id == "{{ old('idCategoria')}}"){?> selected = 'selected'<?php } ?>>{{$categoria->nombre}}</option>  
 									@endforeach 
 									
 								</select>
@@ -144,7 +144,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 							<div class="col-sm-8">
 							<select name="idMarca" >
-								<option value=0 selected>Descuento sin marca</option>
+								<option value=0 >Descuento sin marca</option>
 								@foreach($marcas as $marca)   
 								<option value= {{$marca->id}}>{{$marca->nombre}}</option>
 								@endforeach
@@ -170,7 +170,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 							  <div class="col-sm-8">
 								<select name="cantidad" >
 									
-									<option value=0 selected>Descuento sin cantidad</option>
+									<option value=0 >Descuento sin cantidad</option>
 									
 									<option value = 10 > Más de 10</option>
 									<option value = 20 > Más de 20</option>

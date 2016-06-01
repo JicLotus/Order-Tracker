@@ -19,7 +19,7 @@ class DescuentosController extends Controller
     {		
 		$sql = "select descuentos.id,id_marca,id_categoria,marcas.nombre as marca, categorias.nombre as categoria, porcentaje,id_producto, cantidad, desde, hasta from descuentos
 		 left join marcas on descuentos.id_marca = marcas.id left join categorias on
-		  descuentos.id_categoria = categorias.id order by desde desc";
+		  descuentos.id_categoria = categorias.id order by desde desc, descuentos.id desc";
 		$descuentos = DB::select($sql);
 		
 		
@@ -63,7 +63,7 @@ class DescuentosController extends Controller
 				if ($cantidad != 0)
 					$sql.= " and cantidad=$cantidad";
 			}
-			$sql .= " order by desde desc";
+			$sql .= " order by desde desc, descuentos.id desc";
 			
 			$descuentos = DB::select($sql);
 			return view('descuentos.descuentos', ['title' => 'Home',
