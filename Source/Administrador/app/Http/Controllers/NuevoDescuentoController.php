@@ -37,6 +37,12 @@ class NuevoDescuentoController extends Controller
 		$porcentaje=$request->porcentaje/100.0;
 		$porcentaje = 1.0 - $porcentaje;
 		
+		$this->validate($request, [
+		'Desde' => 'required',
+		'Hasta' => 'required',
+		'porcentaje' => 'required'
+		]);
+		
 		
 		/*if ($idCategoria==0 & $idMarca==0 & $idProducto==0 & $cantidad==0){
 				$this->validate($request, [
