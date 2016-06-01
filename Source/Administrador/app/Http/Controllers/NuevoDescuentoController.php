@@ -37,6 +37,12 @@ class NuevoDescuentoController extends Controller
 		$porcentaje=$request->porcentaje/100.0;
 		$porcentaje = 1.0 - $porcentaje;
 		
+		$this->validate($request, [
+		'Desde' => 'required',
+		'Hasta' => 'required',
+		'porcentaje' => 'required'
+		]);
+		
 		
 		if ($idCategoria==0 & $idMarca==0 & $idProducto==0 & $cantidad==0){
 				$this->validate($request, [
@@ -44,11 +50,11 @@ class NuevoDescuentoController extends Controller
 				]);
 		}
 		
-		$fecha = $request->from;
+		$fecha = $request->desde;
 		$dt = new DateTime($fecha);
 		$desde = "'".$dt->format('Y-m-d')."'";
 		
-		$fecha = $request->to;
+		$fecha = $request->hasta;
 		$dt = new DateTime($fecha);
 		$hasta = "'".$dt->format('Y-m-d')."'";
 		

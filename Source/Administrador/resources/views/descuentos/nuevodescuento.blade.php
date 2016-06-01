@@ -37,7 +37,7 @@ $.datepicker.regional['es'] = {
 $.datepicker.setDefaults($.datepicker.regional['es']);
 
   $(function() {
-    $( "#from" ).datepicker({
+    $( "#Desde" ).datepicker({
 	
 		minDate: 0,
 		dateFormat: "dd-mm-yy",
@@ -46,10 +46,10 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
       defaultDate: "+1w",
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        $( "#Hasta" ).datepicker( "option", "minDate", selectedDate );
       }
     });
-    $( "#to" ).datepicker({
+    $( "#Hasta" ).datepicker({
 		minDate: 0,
 		dateFormat: "dd-mm-yy",
 		altFormat: "ddmmyy",
@@ -57,7 +57,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
       defaultDate: "+1w",
       numberOfMonths: 1,
       onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        $( "#Desde" ).datepicker( "option", "maxDate", selectedDate );
       }
     });
   });
@@ -90,14 +90,14 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		<form action="guardarnuevodescuento" method="POST" class="form-horizontal"   enctype="multipart/form-data">
 			{{ csrf_field() }}
 			
-<div class="panel-group" id="TiposGeneral">					
-			<label for="from">Desde</label>
-			<input type="text" id="from" name="from" value="<?php echo date("d-m-Y"); ?>">
-			<label for="to">Hasta</label>
-			<input type="text" id="to" name="to">
-			
-			<label>Porcentaje</label> <input name="porcentaje" value=1 type="number" min="1" max="100" /> %
-</div>
+			<div class="panel-group" id="TiposGeneral">					
+				<label for="Desde">Desde</label>
+				<input type="text" id="Desde" name="Desde" value="{{old('Desde',date('d-m-Y'))}}" />
+				<label for="Hasta">Hasta</label>
+				<input type="text" id="Hasta" name="Hasta" value="{{old('Hasta',date('d-m-Y'))}}" />
+				
+				<label>Porcentaje</label> <input name="porcentaje" value="{{old('porcentaje',1)}}" type="number" min="1" max="100" /> %
+			</div>
 			
 <div class="panel-group" id="TiposDescuentos">
 	
