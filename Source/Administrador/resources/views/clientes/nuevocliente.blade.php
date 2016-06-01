@@ -81,7 +81,7 @@
 				<div class="col-sm-12">
 					
 					<button type="submit" class="col-sm-offset-9 btn btn-primary">Publicar</button>
-	  				<a href="{{ URL::previous() }}" class=" btn btn-default">Cancelar</a>
+	  				<a href="{{app()->make('urls')->getUrlClientes()}}" class=" btn btn-default">Cancelar</a>
 					
 
 

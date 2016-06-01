@@ -19,8 +19,7 @@ class GuardarClienteController extends Controller
 
 		$validaciones = array(
 			'nombre' => 'required',
-			'direccion' => 'required',
-			'telefono_movil' => 'required');
+			'direccion' => 'required');
 			
 		$email = DB::table(Config::get('constants.TABLA_CLIENTES'))
 				->where(Config::get('constants.TABLA_CLIENTES_ID'), $request->idCliente)

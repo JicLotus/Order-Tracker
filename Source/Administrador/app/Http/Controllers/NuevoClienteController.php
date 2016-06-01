@@ -34,9 +34,7 @@ class NuevoClienteController extends Controller
              
 			'email' => 'required|email|unique:clientes,email',
 			'nombre' => 'required',
-			'direccion' => 'required',
-			'telefono_movil' => 'required'
-		
+			'direccion' => 'required'		
         ]);
 
         if ($validator->fails()) {

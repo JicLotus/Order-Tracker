@@ -8,8 +8,6 @@
 
 	//Selecciona todos los productos
 
-	
-	
 			
 	$sql= "	select marcas.nombre as marca, categorias.nombre as categoria, 
 				   productos.id, productos.nombre, productos.codigo, productos.imagen, productos.caracteristicas,
