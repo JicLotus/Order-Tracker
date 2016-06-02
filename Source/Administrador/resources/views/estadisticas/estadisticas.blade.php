@@ -15,6 +15,18 @@
 	.centerside  {
 	  margin-top:1%;
 	}
+	
+	.row.vdivide [class*='col-']:not(:last-child):after {
+		  background: #e0e0e0;
+		  width: 1px;
+		  content: "";
+		  display:block;
+		  position: absolute;
+		  top:0;
+		  bottom: 0;
+		  right: 0;
+		  min-height: 70px;
+		}
 	</style>
 
 
@@ -51,6 +63,7 @@
 			var options = {
 				title: 'Top 10 Vendedores {{$anioFiltro}}',
 				is3D: true,
+				titleTextStyle:  {color: 'black', fontSize: 20}, 
 			};
 
 			var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
@@ -110,7 +123,7 @@
 		</div>
 	
 		<div class="centerside col-md-3">
-			<label class="control-label" >Mes</label>
+			<label class="control-label col-md-3" >Mes</label>
 
 			<select  name="mes" >
 				<option value = 01 <?php If ($mesFiltro == "01"){?> selected = 'selected'<?php } ?>}>Enero</option>
@@ -129,7 +142,7 @@
 		</div>
 			
 		<div class="centerside col-md-3">
-			<label class="control-label" >Año</label>
+			<label class="control-label col-md-3" >Año</label>
 			<select name="anio" >
 				<option value = 2016 <?php If ($anioFiltro == 2016){?> selected = 'selected'<?php } ?>}>2016</option>
 				<option value = 2015 <?php If ($anioFiltro == 2015){?> selected = 'selected'<?php } ?>}>2015</option>
@@ -147,19 +160,23 @@
 					
 	</div>
 
-		
 </form></h4>
-	<table class="columns">
-      <tr>
 
-        <td style="padding:0 0px 0 0px;">
-			<h3 style="padding:30 0px 0 120px; 	"><span style="font-weight: bold; background-color:grey">Ventas del mes en curso {{$anioFiltro-1}}-{{$anioFiltro}}</span></h3> 
-			<div id="barchart_material" style="width: 600px; height: 300px;" >
-			</div>
-		</td>
-        
-        <td style="padding:0 0px 0px 0px;"><div id = "tabla" style="width: 500px; height: 300px;"  >
-				<table class="table table-striped">
+<hr width=75%"/>
+<div class="container">
+  <div class="row vdivide">
+    <div class="col-sm-6 text-center">
+		<h3 style="padding:0 0px 0 100px; 	"><span style="font-weight: bold; background-color:grey">Ventas del mes en curso {{$anioFiltro-1}}-{{$anioFiltro}}</span></h3> 
+
+		<div id="barchart_material" style="width: 600px; height: 300px;" > </div>
+    
+    </div>
+    <div class="col-sm-6 text-center">
+
+		<h3><label  class=" control-label col-sm-4" for="Vendedor">Top 5 Marcas</label></h3>
+	
+		
+		<table class="table table-striped">
 			<thead>
 			  <tr>
 				<th>Marca</th>
@@ -195,16 +212,19 @@
 			</div>
 			</div>
         </td>
-      </tr>
-    </table>
 
+    
+    </div>
+  </div>
+</div>	
 
-	<div class = "row">	
+<hr width=75%"/>
+		<div class="col-sm-12 ">
 			<body>
 				<div id="piechart_3d" style="  padding: 0 0px 150 250px; width: 900px; height: 500px;"  >
 			</body>		
-
-	</div>
-
+		</div >
+</div>
+</div>	
 
 @endsection
