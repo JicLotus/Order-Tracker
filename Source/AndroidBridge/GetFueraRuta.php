@@ -19,7 +19,7 @@
 	$lunes = "'".$days[0]->format ('Y-m-d')."'";
 	$viernes = "'".$days[4]->format ('Y-m-d')."'";	
 	
-	$sql= "select distinct(id_cliente), nombre, direccion from agendas, clientes where agendas.id_usuario = $vendedor and agendas.id_cliente=clientes.id
+	$sql= "select distinct(id_cliente), nombre, direccion, razon_social, email, telefono_movil, telefono_laboral from agendas, clientes where agendas.id_usuario = $vendedor and agendas.id_cliente=clientes.id
 		order by agendas.orden asc";
 	
 	$rs = mysql_query($sql,$con);

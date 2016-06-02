@@ -100,7 +100,7 @@
         android:textStyle="bold"
         android:layout_margin="10dp"
         android:layout_height="wrap_content"
-        android:text="+541160581642"/>
+        android:text="-"/>
     <TextView
         android:layout_width="match_parent"
         android:id = "@+id/telLaboral_detalleC"
@@ -109,7 +109,7 @@
         android:textColor="@color/negro"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:text="20717046"/>
+        android:text="-"/>
     <TextView
         android:layout_width="match_parent"
         android:id = "@+id/email_detalleC"

@@ -117,9 +117,9 @@ public class ListadoProductos extends AppCompatActivity implements NumberPicker.
                     ManejadorPersistencia.persistirActualizacionDescuentos(getApplicationContext(), false);
                 }
 
-                handler.postDelayed(this, 10000);
+                handler.postDelayed(this, 3000);
             }
-        }, 10000);
+        }, 3000);
 //        adapter = new ProductoAdapter(obtenerProductos(), DetallesProducto.class, this);
 //        adapter.setJsonArray(productos);
 
