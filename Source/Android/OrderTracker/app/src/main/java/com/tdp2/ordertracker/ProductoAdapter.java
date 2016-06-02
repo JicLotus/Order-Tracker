@@ -67,73 +67,88 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         RecyclerViewItem datoActual = datos.get(position);
+
+        /*
+        Se deben settear
+        icono...Ok
+        titulo...Ok
+        descripcion...Ok
+        subtotal...Ok
+        leyendaDescuento...Ok
+        precioFinal...Ok
+        posicion...Ok
+        itemId...Ok
+        precio...Ok
+        marca...Ok
+        categoria...Ok
+        precio_final...Ok
+        npValues...Ok
+         */
+
+        /*Posicion del producto en el Recycler View*/
         holder.posicion = position;
 
-        try {
-            holder.itemId = jsonArray.getJSONObject(position).getInt("id");
-        }catch(Exception e){}
         int valorNP = 0;
 
         try {
+            /*Item ID*/
+            holder.itemId = jsonArray.getJSONObject(position).getInt("id");
+
+            /*Number Picker*/
             holder.np.setDisplayedValues(null);
             holder.np.setMinValue(0);
             holder.np.setMaxValue(jsonArray.getJSONObject(position).getInt("stock"));
-//            holder.np.setWrapSelectorWheel(false);
-
-//
-//              holder.np.setValue()
 
             if (pedidos.get(holder.itemId)!= null){
                 valorNP = pedidos.get(holder.itemId).getInt(APIConstantes.PRODUCTO_CANTIDAD);
             }
             holder.np.setValue(valorNP);
 
-        }catch(Exception e){}
+            /*Titulo*/
+            holder.titulo.setText(datoActual.titulo);
 
-        holder.titulo.setText(datoActual.titulo);
-
-
-        try {
+            /*Imagen*/
             File f = new File("/mnt/sdcard/Download/", datoActual.idIcono + ".jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             holder.icono.setImageBitmap(b);
 
-        }
-        catch(Exception e){
-            holder.icono.setImageResource(R.drawable.perfil_vacio);
-        }
+            /*Descripcion*/
+            holder.descripcion.setText(datoActual.descripcion);
 
-
-        holder.descripcion.setText(datoActual.descripcion);
-
-
-        try {
-
+            /*Precio y Precio Final*/
             holder.precio = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO);
             holder.precio_final = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO_FINAL);
+
+            /*Marca*/
             holder.marca = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_MARCA);
+
+            /*Leyenda Descuento*/
             holder.leyendaDescuento.setText(jsonArray.getJSONObject(position).getString("leyenda"));
+
+            /*Subtotal, que se calcula como precio_final por el numero de producos seleccionados*/
             if (valorNP==0){
                 holder.subtotal.setText("");
             }else{
                 holder.subtotal.setText("Subtotal: $"+String.format("%.2f", holder.precio_final*valorNP));
             }
+
+            /*Categoria*/
             holder.categoria = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_CATEGORIA);
-        }
-        catch(Exception e)
-        {
-        }
 
-        if (holder.precio_final<holder.precio){
-            holder.precioFinal.setText("$" + String.format("%.2f", holder.precio_final));
-            holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else{
-            holder.precioFinal.setText("");
-            holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags());
+            /*Se valida si el precio debe ser tachado o no, mirando si aplica algun descuento*/
+            if (holder.precio_final<holder.precio){
+                holder.precioFinal.setText("$" + String.format("%.2f", holder.precio_final));
+                holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }else{
+                holder.precioFinal.setText("");
+                holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags());
+            }
 
+        } catch (Exception e) {
+            holder.icono.setImageResource(R.drawable.perfil_vacio);
         }
-//        holder.aplicarDescuentos(0);
 
     }
 
@@ -147,7 +162,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView icono;
         TextView titulo;
-
         TextView descripcion;
         TextView subtotal;
         TextView leyendaDescuento;
@@ -198,20 +212,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                             pedidos.put(itemId, producto);
                             descripcion.setText("$" + String.format("%.2f", precio));
                             subtotal.setText("Subtotal: $" + String.format("%.2f", precio_final * newVal));
-//                            notifyItemChanged(posicion);
+
                             if (precio_final<precio){
                                 precioFinal.setText("$"+String.format( "%.2f", precio_final));
                                 descripcion.setPaintFlags(descripcion.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
-                            }else{
-   //                             precioFinal.setText("");
-   //                             descripcion.setPaintFlags(precioFinal.getPaintFlags());
-
                             }
 
                         } catch (JSONException e) {
                         }
-  //                      notifyDataSetChanged();
                     }
                 }
             });
