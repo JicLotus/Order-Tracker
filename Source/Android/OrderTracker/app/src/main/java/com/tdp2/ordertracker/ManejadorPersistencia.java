@@ -22,6 +22,11 @@ public class ManejadorPersistencia {
         editor.commit();
     }
 
+    public static void eliminarTodo(Context context){
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        settings.edit().clear().commit();
+    }
+
     public static void persistirVendedor(Context context, String valor) {
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         SharedPreferences.Editor editor = settings.edit();

@@ -111,15 +111,15 @@
 					<div class="control-group">
 						<span class="control-label dimgray">Codigo: {{$producto->codigo}}</span>
 					</div>
-					<div class="row">
-						<div class="col-sm-offset-8 col-sm-1 col-md-2 ">
-							<a href="{{app()->make('urls')->getUrlVerProducto($producto->id)}}" class="btn-xs btn-primary">Ver más</a>                                
+					
+						<div class="col-sm-offset-4 col-sm-1 col-md-2 ">
+							<a href="{{app()->make('urls')->getUrlVerProducto($producto->id)}}" class="btn btn-primary">Ver más</a>                                
 						</div>
 						
 						<div class="col-sm-2">
-							<a href="{{app()->make('urls')->getUrlEliminarProducto($producto->id)}}" class="btn-xs btn-danger">Eliminar</a>
+							<a href="{{app()->make('urls')->getUrlEliminarProducto($producto->id)}}" class="btn btn-danger">Eliminar</a>
 						</div>
-					</div>
+					
 				</div>
 				
 			</p>
