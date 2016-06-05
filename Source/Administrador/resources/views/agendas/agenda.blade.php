@@ -79,7 +79,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 				<div class="col-sm-offset-1 col-md-4">		
 				<label class="control-label col-sm-3" for="ListaVendedores">Vendedor</label>
 				 <div class="col-sm-8">
-					<select id="idVende" name="idVendedor" onchange= "this.form.submit()" >
+					<select id="idVende" name="idVendedor">
 					@foreach($vendedores as $vendedor)
 						<option value= {{$vendedor->id}} > {{$vendedor->nombre}}</option>  
 					@endforeach
@@ -90,14 +90,14 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 				<div class="centerside col-md-3">
 				<label class="control-label col-sm-3" for="Día">Fecha</label>
 					<div class="col-sm-1">
-						<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}"  onchange= "this.form.submit()" >
+						<input type="text" id="datepicker" name = "datepicker" value= "{{$hoy}}"   >
 					</div>
 				 </div>
 			
 		</div>
 		<div class="row">	
 			
-			<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nuevo Cliente</a> 	
+			<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nueva Agenda</a> 	
 			
 			<button type="submit" class="col-sm-1 col-sm-offset-4 btn btn-primary">Buscar</button>  
 	

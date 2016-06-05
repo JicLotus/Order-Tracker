@@ -91,7 +91,7 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 		</div>
 		<div class="row">	
 			
-			<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nuevo Cliente</a> 	
+			<a href="{{app()->make('urls')->getUrlAgregarAgenda()}}" class="col-sm-2 col-sm-offset-2 btn btn-primary">Agregar Nueva Agenda</a> 	
 						<button type="submit" class="col-sm-1 col-sm-offset-4 btn btn-primary">Buscar</button>
         
 									

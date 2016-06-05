@@ -107,11 +107,11 @@ class AgendaController extends Controller
 					$middle = strtotime($old_date);             
 					$fecha = date('Y-m-d H:i:s', $middle); 
 					
-					DB::table('agendas')->insertGetId(array('id_usuario' => ($request->idVendedor),'id_cliente' => ($agenda->id_cliente), 'fecha' => $fecha, 'dia' => $agenda->dia));
+					DB::table('agendas')->insertGetId(array('id_usuario' => ($request->idVendedor),'id_cliente' => ($agenda->id_cliente), 'fecha' => $fecha, 'dia' => ($agenda->dia), 'orden' => ($agenda->orden)));
 
 				}
 			}
-
+			$agendas = agendaFecha($request, $fecha0);
 			$vendedores = DB::select("select nombre,id from usuarios where privilegio = 2");
 			$nombre =  DB::select("select nombre,id from usuarios where id = " .$request->idVendedor);
 			
