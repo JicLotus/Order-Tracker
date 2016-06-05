@@ -64,8 +64,10 @@ public class ServicioDeNotificaciones extends Service {
         Request request = new Request("GET", "GetDescuentos.php");
         Response resp = new RequestHandler().sendRequest(request);
 
-        if (resp.getStatus())
+        if (resp.getStatus()){
             ManejadorPersistencia.persistirDescuentos(this,resp.getJsonArray().toString());
+            ManejadorPersistencia.persistirActualizacionDescuentos(this, true);
+        }
         else{
             ManejadorPersistencia.persistirDescuentos(this, new JSONArray().toString());
         }

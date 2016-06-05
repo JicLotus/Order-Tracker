@@ -56,29 +56,6 @@ public class DetallesCliente extends AppCompatActivity implements OnMapReadyCall
 
     }
 
-    private void scanQRCode() {
-        Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-        startActivityForResult(intent, 0);
-    }
-
-
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
-        if (requestCode == 0) {
-            if (resultCode == RESULT_OK) {
-                String contents = intent.getStringExtra("SCAN_RESULT");
-                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                // Handle successful scan
-            } else if (resultCode == RESULT_CANCELED) {
-                // Handle cancel
-            }
-        }
-    }
-
-
-
     public ArrayList<String> getListaDetalles()
     {
 
@@ -94,7 +71,6 @@ public class DetallesCliente extends AppCompatActivity implements OnMapReadyCall
 
         }
         catch(Exception e){}
-
         return datos;
     }
 

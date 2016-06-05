@@ -13,8 +13,6 @@ class EstadisticasController extends Controller
     public function index()
     {		
 
-//		  $anios = DB::select("select distinct date_format(dia,'%Y') as anio from estadisticas order by anio desc");
-//		  $anios = collect([2015, 2016]);
 		  $vendedores = DB::select ("select id, nombre from usuarios");
 
 		  $dt = new DateTime();
@@ -92,6 +90,7 @@ class EstadisticasController extends Controller
 			if ($vendedor == ''){
 				$vendedor = 'null';
 			}
+
 	
 			
 			
@@ -107,6 +106,7 @@ class EstadisticasController extends Controller
 												sum(precio_final*cantidad) as total 
 										from pedidos, productos, marcas, compras 
 										where pedidos.id_producto = productos.id 
+										and compras.id_usuario like ifnull($vendedor, '%%')
 										and compras.id_compra = pedidos.id_compra 
 										and date_format(fecha, '%m') = $mesFiltro 
 										and date_format(fecha,'%Y')= $anioFiltro 

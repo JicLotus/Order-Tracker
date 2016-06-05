@@ -30,14 +30,12 @@ class NuevoUsuarioController extends Controller
         public function guardar(Request $request)
     {
 
-		$validator = Validator::make($request->all(), [
-             
+		$validator = Validator::make($request->all(), [           
 			'nombre' => 'required',
-			'email' => 'required|email|unique:clientes,email',
+			'email' => 'required|email|unique:usuarios,email',
 			'password' => 'required',
 			'privilegio' => 'required',
 			'telefono' => 'required'
-		
         ]);
 
         if ($validator->fails()) {

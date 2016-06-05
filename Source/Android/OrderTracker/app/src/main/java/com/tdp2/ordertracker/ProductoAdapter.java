@@ -67,54 +67,91 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         RecyclerViewItem datoActual = datos.get(position);
+
+        /*
+        Se deben settear
+        icono...Ok
+        titulo...Ok
+        descripcion...Ok
+        subtotal...Ok
+        leyendaDescuento...Ok
+        precioFinal...Ok
+        posicion...Ok
+        itemId...Ok
+        precio...Ok
+        marca...Ok
+        categoria...Ok
+        precio_final...Ok
+        npValues...Ok
+         */
+
+        /*Posicion del producto en el Recycler View*/
         holder.posicion = position;
 
+        int valorNP = 0;
+
         try {
+            /*Item ID*/
             holder.itemId = jsonArray.getJSONObject(position).getInt("id");
-        }catch(Exception e){}
 
-        try {
+            /*Number Picker*/
+            holder.np.setDisplayedValues(null);
+
             holder.np.setMaxValue(jsonArray.getJSONObject(position).getInt("stock"));
-            holder.np.setWrapSelectorWheel(false);
 
-        }catch(Exception e){}
+            if (pedidos.get(holder.itemId)!= null){
+                valorNP = pedidos.get(holder.itemId).getInt(APIConstantes.PRODUCTO_CANTIDAD);
+            }
 
-        holder.titulo.setText(datoActual.titulo);
+            holder.np.setValue(valorNP);
 
 
-        try {
+            /*Titulo*/
+
+            holder.titulo.setText(datoActual.titulo);
+
+            /*Imagen*/
             File f = new File("/mnt/sdcard/Download/", datoActual.idIcono + ".jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             holder.icono.setImageBitmap(b);
 
-        }
-        catch(Exception e){
-            holder.icono.setImageResource(R.drawable.perfil_vacio);
-        }
+            /*Descripcion*/
+            holder.descripcion.setText(datoActual.descripcion);
 
-
-        holder.descripcion.setText(datoActual.descripcion);
-
-
-        try {
-
+            /*Precio y Precio Final*/
             holder.precio = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO);
             holder.precio_final = jsonArray.getJSONObject(position).getDouble(APIConstantes.PRODUCTO_PRECIO_FINAL);
-            holder.marca = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_MARCA);
-            holder.categoria = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_CATEGORIA);
-        }
-        catch(Exception e)
-        {
-        }
 
-        if (holder.precio_final<holder.precio){
-            holder.precioFinal.setText("$" + String.format("%.2f", holder.precio_final));
-            holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }else{
-            holder.precioFinal.setText("");
+            /*Marca*/
+            holder.marca = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_MARCA);
+
+            /*Leyenda Descuento*/
+            holder.leyendaDescuento.setText(jsonArray.getJSONObject(position).getString("leyenda"));
+
+            /*Subtotal, que se calcula como precio_final por el numero de producos seleccionados*/
+            if (valorNP==0){
+                holder.subtotal.setText("");
+            }else{
+                holder.subtotal.setText("Subtotal: $"+String.format("%.2f", holder.precio_final*valorNP));
+            }
+
+            /*Categoria*/
+            holder.categoria = jsonArray.getJSONObject(position).getString(APIConstantes.PRODUCTO_CATEGORIA);
+
+            /*Se valida si el precio debe ser tachado o no, mirando si aplica algun descuento*/
+            if (holder.precio_final<holder.precio){
+                holder.precioFinal.setText("$" + String.format("%.2f", holder.precio_final));
+                holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }else{
+                holder.precioFinal.setText("");
+                holder.descripcion.setPaintFlags(holder.precioFinal.getPaintFlags());
+            }
+
+        } catch (Exception e) {
+            holder.icono.setImageResource(R.drawable.perfil_vacio);
         }
-        holder.aplicarDescuentos(0);
 
     }
 
@@ -128,7 +165,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView icono;
         TextView titulo;
-
         TextView descripcion;
         TextView subtotal;
         TextView leyendaDescuento;
@@ -140,7 +176,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         String categoria;
         double precio_final;
 
-        NumberPicker np;
+        final NumberPicker np;
 
         public ViewHolder(View view) {
             super(view);
@@ -157,9 +193,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             np = (NumberPicker) itemView.findViewById(R.id.nPicker);
 
             np.setMinValue(0);
-            np.setValue(0);
+
             np.setWrapSelectorWheel(false);
 
+/*            np.setMinValue(0);
+            np.setValue(0);
+            np.setMaxValue(1);
+            np.setWrapSelectorWheel(true);
+*/
             np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -176,21 +217,16 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                             producto.put(APIConstantes.PRODUCTO_PRECIO,precio);
                             producto.put(APIConstantes.PRODUCTO_PRECIO_FINAL,precio_final);
                             pedidos.put(itemId, producto);
-                            descripcion.setText("$"+ String.format( "%.2f", precio));
-                            subtotal.setText("Subtotal: $"+String.format("%.2f", precio_final*newVal));
+                            descripcion.setText("$" + String.format("%.2f", precio));
+                            subtotal.setText("Subtotal: $" + String.format("%.2f", precio_final * newVal));
+
                             if (precio_final<precio){
                                 precioFinal.setText("$"+String.format( "%.2f", precio_final));
                                 descripcion.setPaintFlags(descripcion.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
-                            }else{
-                                precioFinal.setText("");
-                                descripcion.setPaintFlags(precioFinal.getPaintFlags());
-
                             }
 
                         } catch (JSONException e) {
                         }
-
                     }
                 }
             });
@@ -225,6 +261,11 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         if ((cantidadDescuento>0)&&(cantidadComprada >= cantidadDescuento)){
                             if (precio*porcentaje <= precio_final){
                                 precio_final = (precio*porcentaje);
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, precio*porcentaje);
+                                jsonArray.getJSONObject(posicion).put("leyenda", String.valueOf(100-(int)(porcentaje*100))
+                                        +"% llevando más de "+String.valueOf(cantidadDescuento)
+                                        +" unidades");
+
                                 leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
                                             +"% llevando más de "+String.valueOf(cantidadDescuento)
                                             +" unidades");
@@ -232,12 +273,18 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         }else if (cantidadComprada<cantidadDescuento){
                                 precio_final = precio;
                                 leyendaDescuento.setText("");
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, precio);
+                                jsonArray.getJSONObject(posicion).put("leyenda", "");
                         }
                         if (marcaProducto!=null && marcaProducto.equals(marcaDescuento)){
                             if (precio*porcentaje <= precio_final){
                                 precio_final = (precio*porcentaje);
-                                leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
-                                        +"% en productos de la marca "+ marcaProducto);
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, (precio*porcentaje));
+                                jsonArray.getJSONObject(posicion).put("leyenda", String.valueOf(100 - (int) (porcentaje * 100))
+                                        + "% en productos de la marca " + marcaProducto);
+
+                                leyendaDescuento.setText(String.valueOf(100 - (int) (porcentaje * 100))
+                                        + "% en productos de la marca " + marcaProducto);
                             }
                         }
                         if (categoriaProducto!=null && categoriaProducto.equals(categoriaDescuento)){
@@ -245,7 +292,9 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                                 precio_final = (precio*porcentaje);
                                 leyendaDescuento.setText(String.valueOf(100-(int)(porcentaje*100))
                                         +"% en productos de la categoría "+ categoriaProducto);
-
+                                jsonArray.getJSONObject(posicion).put(APIConstantes.PRODUCTO_PRECIO_FINAL, (precio * porcentaje));
+                                jsonArray.getJSONObject(posicion).put("leyenda", String.valueOf(100-(int)(porcentaje*100))
+                                        +"% en productos de la categoría "+ categoriaProducto);
                             }
                         }
 
