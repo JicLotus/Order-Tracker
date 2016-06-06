@@ -89,7 +89,9 @@ class NuevoProductoController extends Controller
 		
 		  $sql = "SELECT u.id, u.nombre, u.codigo, u.stock, u.marca, MIN(t.imagen_base64) AS imagen_base64,m.nombre as nombreMarca, c.nombre as nombreCategoria FROM productos u Left JOIN imagenes t ON t.id_producto = u.id 
 		  Left JOIN marcas m ON m.id = u.marca
-		  Left Join categorias c ON c.id= u.categoria GROUP BY u.id;";
+		  Left Join categorias c ON c.id= u.categoria 
+		  where u.eliminado = 0
+		  GROUP BY u.id;";
 
 		  $productos = DB::select($sql);
 		  $marcas = DB::select("select * from marcas");
