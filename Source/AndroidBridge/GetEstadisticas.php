@@ -9,7 +9,6 @@
 	
 	$fecha_hoy = date("Y-m-d");
 	$fecha_hoy = "'".$fecha_hoy."'";
-//	$fecha_hoy = "'2016-05-09'";
 
 	//obtengo cantidad de visitados hoy
 	$rs = mysql_query("Select count(*) as cantidad from agendas where id_usuario = $vendedor

@@ -98,15 +98,18 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
             /*Number Picker*/
             holder.np.setDisplayedValues(null);
-            holder.np.setMinValue(0);
+
             holder.np.setMaxValue(jsonArray.getJSONObject(position).getInt("stock"));
 
             if (pedidos.get(holder.itemId)!= null){
                 valorNP = pedidos.get(holder.itemId).getInt(APIConstantes.PRODUCTO_CANTIDAD);
             }
+
             holder.np.setValue(valorNP);
 
+
             /*Titulo*/
+
             holder.titulo.setText(datoActual.titulo);
 
             /*Imagen*/
@@ -173,7 +176,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         String categoria;
         double precio_final;
 
-        NumberPicker np;
+        final NumberPicker np;
 
         public ViewHolder(View view) {
             super(view);
@@ -190,10 +193,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             np = (NumberPicker) itemView.findViewById(R.id.nPicker);
 
             np.setMinValue(0);
+
+            np.setWrapSelectorWheel(false);
+
+/*            np.setMinValue(0);
             np.setValue(0);
             np.setMaxValue(1);
             np.setWrapSelectorWheel(true);
-
+*/
             np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {

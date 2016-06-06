@@ -112,8 +112,8 @@
 
 	<div class="row">
 
-		<div class="col-sm-offset-1 centerside col-md-3">
-			<label class="control-label" >Vendedor</label>
+		<div class="col-sm-offset-1 centerside col-md-4">
+			<label class="control-label col-md-4" >Vendedor</label>
 			<select name="vendedor" >
 				<option value = '' <?php If ($vendedorFiltro == ''){?> selected = 'selected'<?php } ?>}>Todos</option>
 				@foreach($vendedores as $vendedor)   
@@ -155,7 +155,7 @@
 	</div>	
 	
 	<div class="row">	
-		<button type="submit" class="col-sm-1 col-sm-offset-8 btn btn-primary">Buscar</button>
+		<button type="submit" class="col-sm-1 col-sm-offset-9 btn btn-primary">Buscar</button>
            						
 					
 	</div>
